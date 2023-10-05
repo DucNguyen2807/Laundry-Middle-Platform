@@ -26,10 +26,10 @@
                         
                         <form class="form-login-content" action="MainController" method="POST">
                             <label for="username" >User name</label><br>
-                            <input class="text" type="text" name="txtUsername" required><br>
+                            <input class="text" type="text" name="txtUsername" value="" required><br>
                             <br>
                             <label for="password">Password</label><br>
-                            <input class="text" type="password" name="txtPassword" required><br>
+                            <input class="text" type="password" name="txtPassword" value="" required><br>
                             <br>
                             
                             <input type="checkbox" name="" value="1">Remember me
