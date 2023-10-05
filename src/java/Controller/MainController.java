@@ -34,7 +34,7 @@ public class MainController extends HttpServlet {
                 url = LOGINPAGE;
             } else if (button.equals("Login")) {
                 url = LOGINCONTROLLER;
-            } 
+            }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }

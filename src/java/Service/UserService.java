@@ -23,7 +23,7 @@ public class UserService {
         try {
             con = ConnectDB.getConnection();
             if (con != null) {
-                String sql = "Select * From User Where Username = ? And Password = ?";
+                String sql = "Select * From [Laundry-Middle-Platform].[dbo].[User] Where Username = ? And Password = ?";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, username);
                 stm.setString(2, password);

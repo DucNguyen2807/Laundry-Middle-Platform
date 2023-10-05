@@ -45,7 +45,7 @@ public class ConnectDB {
 //    }
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=Laundry_Platform;user=sa;password=12345";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=Laundry-Middle-Platform;user=sa;password=123456";
             Connection conn = DriverManager.getConnection(url);
             return conn;
         } catch (ClassNotFoundException | SQLException ex) {
