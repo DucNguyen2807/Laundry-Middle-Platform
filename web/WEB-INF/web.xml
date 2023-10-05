@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>MainController</servlet-name>
-        <servlet-class>pe.controllers.MainController</servlet-class>
+        <servlet-class>Controller.MainController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -13,6 +14,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>landing.jsp</welcome-file>
+        <welcome-file>views/jsp/landingpage.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
