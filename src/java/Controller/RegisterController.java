@@ -33,7 +33,7 @@ public class RegisterController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     private final String CREATENEWACCOUNT = "register.jsp";
-    private final String LOGINPAGE = "index.html";
+    private final String LOGINPAGE = "homepage.html";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");

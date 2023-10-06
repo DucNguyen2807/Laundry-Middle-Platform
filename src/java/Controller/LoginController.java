@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginController extends HttpServlet {
 
     private final String LOGINPAGE = "login.jsp";
-    private final String HOMEPAGE = "homepage.jsp";
+    private final String HOMEPAGE = "homepage.html";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
