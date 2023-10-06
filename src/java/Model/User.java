@@ -16,14 +16,16 @@ public class User {
     private String password;
     private String Address;
     private String fullname;
-    private int phone;
+    private String phone;
     private String email;
-    private Date birthday;
-    private char gender;
     private int roleId;
     private int statusId;
 
-    public User() {
+   
+    
+
+    public int getUserId() {
+        return userId;
     }
 
     public User(int userId, String username, String password, int roleId) {
@@ -33,17 +35,15 @@ public class User {
         this.roleId = roleId;
     }
 
-    public User(String Address, String fullname, int phone, String email, Date birthday, char gender, int statusId) {
+    public User(String Address, String fullname, String phone, String email, int statusId) {
         this.Address = Address;
         this.fullname = fullname;
         this.phone = phone;
         this.email = email;
-        this.birthday = birthday;
-        this.gender = gender;
         this.statusId = statusId;
     }
 
-    public User(int userId, String username, String password, String Address, String fullname, int phone, String email, Date birthday, char gender, int roleId, int statusId) {
+    public User(int userId, String username, String password, String Address, String fullname, String phone, String email, int roleId, int statusId) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -51,16 +51,12 @@ public class User {
         this.fullname = fullname;
         this.phone = phone;
         this.email = email;
-        this.birthday = birthday;
-        this.gender = gender;
         this.roleId = roleId;
         this.statusId = statusId;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
+    
+    
     public String getUsername() {
         return username;
     }
@@ -77,20 +73,12 @@ public class User {
         return fullname;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
     public String getEmail() {
         return email;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public char getGender() {
-        return gender;
     }
 
     public int getRoleId() {
@@ -121,22 +109,14 @@ public class User {
         this.fullname = fullname;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public void setGender(char gender) {
-        this.gender = gender;
-    }
-
+    
     public void setRoleId(int roleId) {
         this.roleId = roleId;
     }

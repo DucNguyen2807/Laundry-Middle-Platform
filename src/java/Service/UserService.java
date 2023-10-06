@@ -27,7 +27,7 @@ public class UserService implements Serializable{
         try {
             con = ConnectDB.getConnection();
             if (con != null) {
-                String sql = "Select * From [Laundry-Middle-Platform].[dbo].[User] Where Username = ? And Password = ?";
+                String sql = "Select * From [User] Where Username = ? And Password = ?";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, username);
                 stm.setString(2, password);
@@ -49,6 +49,7 @@ public class UserService implements Serializable{
         }
         return false;
     }
+    
     public int CheckRoleID(String usernameString, String password){
         return 1;
     }

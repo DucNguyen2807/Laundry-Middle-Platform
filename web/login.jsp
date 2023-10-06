@@ -9,14 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="views/css/login.css"/>
+        <title>Login Page</title>
+        <link rel="stylesheet" href="css/login.css"/>
     </head>
     <body>
-        <div class="landing-page">
+        <div class="login-page">
             <div class="container">
                 <div class="thumnail">
-                    <img src="views/image/thumnail.png"  alt="thumnail"></img>
+                    <img src="image/thumnail.png"  alt="thumnail"></img>
                 </div>
                 <div class="form">
                     <div class="form-login">
@@ -41,7 +41,7 @@
                             
                             <a href="url" class="btn-login-gg"> Đăng nhập với Google </a><br><br>
                             
-                            <a href="url" style="text-decoration: none; margin-left: 30px; color: darkgrey">
+                            <a href="register.jsp" style="text-decoration: none; margin-left: 30px; color: darkgrey">
                                 Don't have an account? <b style="color: black">Register</b>
                             </a>
                         </form>

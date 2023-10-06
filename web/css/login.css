@@ -28,8 +28,7 @@ body {
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding-top: 70px;
 }
 .form{
     border-radius: 25px;
