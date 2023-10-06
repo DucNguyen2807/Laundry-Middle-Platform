@@ -10,13 +10,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
-        <link rel="stylesheet" href="css/login.css"/>
+        <link rel="stylesheet" href="views/css/login.css"/>
     </head>
     <body>
         <div class="login-page">
             <div class="container">
                 <div class="thumnail">
-                    <img src="image/thumnail.png"  alt="thumnail"></img>
+                    <img src="views/image/thumnail.png"  alt="thumnail"></img>
                 </div>
                 <div class="form">
                     <div class="form-login">

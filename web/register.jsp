@@ -10,13 +10,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register Page</title>
-        <link rel="stylesheet" href="css/register.css"/>
+        <link rel="stylesheet" href="views/css/register.css"/>
     </head>
     <body>
         <div class="register-page">
             <div class="container">
                 <div class="thumnail">
-                    <img src="image/thumnail.png"  alt="thumnail"></img>
+                    <img src="views/image/thumnail.png"  alt="thumnail"></img>
                 </div>
                 <div class="form">
                     <div class="form-register">
