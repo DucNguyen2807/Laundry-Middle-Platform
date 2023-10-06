@@ -25,34 +25,36 @@ public class LoginController extends HttpServlet {
 
     private final String LOGINPAGE = "login.jsp";
     private final String HOMEPAGE = "homepage.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            String username= request.getParameter("txtUsername");
-            String password= request.getParameter("txtPassword");
+
+            String username = request.getParameter("txtUsername");
+            String password = request.getParameter("txtPassword");
 
             UserService userService = new UserService();
             boolean result = userService.CheckLogin(username, password);
             String url = LOGINPAGE;
-            if(result == false){
+            if (result == false) {
                 request.setAttribute("ERROR", "Incorrect Username or Password!");
-            } else if (result){
+            } else if (result) {
                 Cookie user = new Cookie("user", username);
                 Cookie pass = new Cookie("pass", password);
-                
-                user.setMaxAge((60*1));
-                pass.setMaxAge((60*1));
-                
-                response.addCookie(user);
-                response.addCookie(pass);
-          
+
+                if (request.getAttribute("check") != null) {
+                    user.setMaxAge((60 * 43200));
+                    pass.setMaxAge((60 * 43200));
+
+                    response.addCookie(user);
+                    response.addCookie(pass);
+                }
                 url = HOMEPAGE;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }

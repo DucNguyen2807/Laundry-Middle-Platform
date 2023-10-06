@@ -14,7 +14,7 @@ public class User {
     private int userId;
     private String username;
     private String password;
-    private String Address;
+    private String address;
     private String fullname;
     private String phone;
     private String email;
@@ -35,19 +35,19 @@ public class User {
         this.roleId = roleId;
     }
 
-    public User(String Address, String fullname, String phone, String email, int statusId) {
-        this.Address = Address;
+    public User(String address, String fullname, String phone, String email, int statusId) {
+        this.address = address;
         this.fullname = fullname;
         this.phone = phone;
         this.email = email;
         this.statusId = statusId;
     }
 
-    public User(int userId, String username, String password, String Address, String fullname, String phone, String email, int roleId, int statusId) {
+    public User(int userId, String username, String password, String address, String fullname, String phone, String email, int roleId, int statusId) {
         this.userId = userId;
         this.username = username;
         this.password = password;
-        this.Address = Address;
+        this.address = address;
         this.fullname = fullname;
         this.phone = phone;
         this.email = email;
@@ -65,8 +65,8 @@ public class User {
         return password;
     }
 
-    public String getAddress() {
-        return Address;
+    public String getaddress() {
+        return address;
     }
 
     public String getFullname() {
@@ -101,8 +101,8 @@ public class User {
         this.password = password;
     }
 
-    public void setAddress(String Address) {
-        this.Address = Address;
+    public void setaddress(String address) {
+        this.address = address;
     }
 
     public void setFullname(String fullname) {

@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author khait
  */
-public class UserService implements Serializable{
+public class UserService implements Serializable {
 
     public boolean CheckLogin(String username, String password) throws SQLException, ClassNotFoundException {
         Connection con = null;
@@ -49,16 +49,17 @@ public class UserService implements Serializable{
         }
         return false;
     }
-    
-    public int CheckRoleID(String usernameString, String password){
-        return 1;
-    }
- 
-        private List<Order> listOrder;
+
+//    public int CheckRoleID(String usernameString, String password) {
+//        return 1;
+//    }
+
+    private List<Order> listOrder;
 
     public List<Order> getListOrder() {
         return listOrder;
     }
+
     public void searchByOrderID(String searchValue) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -67,36 +68,35 @@ public class UserService implements Serializable{
             con = ConnectDB.getConnection();
             if (con != null) {
 
-String sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n" +
-             " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n" +
-             " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n" +
-             " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n" +
-             " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n" +
-             " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n" +
-             " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n" +
-             " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n" +
-             " WHERE OrderID = ?";
+                String sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                        + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
+                        + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
+                        + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
+                        + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
+                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
+                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
+                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
+                        + " WHERE OrderID = ?";
 
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, Integer.parseInt(searchValue));
                 rs = stm.executeQuery();
                 while (rs.next()) {
-    
-                String orderID = String.valueOf(rs.getInt("OrderID"));
-                String serviceDetail = rs.getString("ServiceDetail");
-                String weight = String.valueOf(rs.getDouble("Weight"));
-                String totalPrice = String.valueOf(rs.getDouble("TotalPrice"));
-                String note = rs.getString("Note");
-                String dateApprove = rs.getDate("DateApprove").toString();
-                String dateComplete = rs.getDate("DateComplete").toString();
-                String timeComplete = rs.getTime("TimeComplete").toString();
-                String customerName = rs.getString("CustomerName");
-                String storeName = rs.getString("StoreName");
-                String staffName = rs.getString("StaffName");
-                String stOrderDetail = rs.getString("StOrderDetail");
-                    
-                
-                Order order = new Order(orderID, serviceDetail, weight, totalPrice, note, dateApprove, dateComplete,timeComplete, customerName, storeName, staffName, stOrderDetail);
+
+                    String orderID = String.valueOf(rs.getInt("OrderID"));
+                    String serviceDetail = rs.getString("ServiceDetail");
+                    String weight = String.valueOf(rs.getDouble("Weight"));
+                    String totalPrice = String.valueOf(rs.getDouble("TotalPrice"));
+                    String note = rs.getString("Note");
+                    String dateApprove = rs.getDate("DateApprove").toString();
+                    String dateComplete = rs.getDate("DateComplete").toString();
+                    String timeComplete = rs.getTime("TimeComplete").toString();
+                    String customerName = rs.getString("CustomerName");
+                    String storeName = rs.getString("StoreName");
+                    String staffName = rs.getString("StaffName");
+                    String stOrderDetail = rs.getString("StOrderDetail");
+
+                    Order order = new Order(orderID, serviceDetail, weight, totalPrice, note, dateApprove, dateComplete, timeComplete, customerName, storeName, staffName, stOrderDetail);
 
                     if (listOrder == null) {
                         listOrder = new ArrayList<>();
@@ -116,7 +116,78 @@ String sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note,
                 con.close();
             }
         }
+    }
 
+    public static boolean insert(String username, String password, String phone, String fullname, String roleid) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "INSERT INTO [User](Username, Password, Phone, Fullname, RoleID) VALUES (?,?,?,?,?)";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, username);
+                ps.setString(2, password);
+                ps.setString(3, phone);
+                ps.setString(4, fullname);
+                ps.setString(5, roleid);
+
+                int row = ps.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkExistEmail(String email) throws SQLException, ClassNotFoundException {
+        boolean duplicate = false;
+        Connection con = ConnectDB.getConnection();
+        try {
+            String query = "select * from [User] where email =?";
+
+            PreparedStatement psmt = con.prepareStatement(query);
+            psmt.setString(1, email);
+            ResultSet resultSet = psmt.executeQuery();
+            if (resultSet.next()) {
+                duplicate = true;
+            }
+            psmt.close();
+            con.close();
+        } catch (SQLException e) {
+
+        }
+        return duplicate;
+    }
+    public static boolean checkExistUsername(String username) throws ClassNotFoundException, SQLException {
+        boolean duplicate = false;
+        Connection conn = ConnectDB.getConnection();
+        try {
+            String query = "select * from [User] where username = ?";
+
+            PreparedStatement psmt = conn.prepareStatement(query);
+
+            psmt.setString(1, username);
+
+            ResultSet resultSet = psmt.executeQuery();
+
+            if (resultSet.next()) {
+                duplicate = true;
+            }
+            psmt.close();
+            conn.close();
+        } catch (SQLException ex) {
+        }
+        return duplicate;
     }
 }
-

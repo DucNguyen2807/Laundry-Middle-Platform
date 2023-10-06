@@ -21,6 +21,7 @@ public class MainController extends HttpServlet {
     private static final String LOGINPAGE = "login.jsp";
     private static final String HOMEPAGE = "homepage.jsp";
     private static final String LOGINCONTROLLER = "LoginController";
+    private static final String REGISTERCONTROLLER = "RegisterController";
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -34,6 +35,8 @@ public class MainController extends HttpServlet {
                 url = LOGINPAGE;
             } else if (button.equals("Login")) {
                 url = LOGINCONTROLLER;
+            } else if (button.equals("Register")) {
+                url = REGISTERCONTROLLER;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
