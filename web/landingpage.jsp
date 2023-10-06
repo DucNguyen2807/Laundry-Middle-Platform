@@ -21,6 +21,7 @@
             <ul class="links">
               <li>Register</li>
               <li>Login</li>
+              <li><a href="viewhistory.jsp" class="no-underline">View history</a></li>
             </ul>
           </div>
         </header>
