@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register Page</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <link rel="stylesheet" href="css/register.css"/>
     </head>
     <body>
@@ -25,10 +26,11 @@
                         <h5>Laudry middle platform</h5>
 
                         <form class="form-register-content" action="MainController" method="POST">
-                            <label for="username" >User name</label><br>
-                            <input class="text" type="text" name="username" value="" required><br>
-                            <br>
+
                             <td>
+                                <label for="username" >User name</label><br>
+                                <input class="text" type="text" name="username" value="" required>
+                                <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.usernameDuplicateErr}">
                                     <font color="red">
@@ -37,9 +39,11 @@
                                 </c:if>
                             </c:if>
                             </td>
-                            <label for="password">Password</label><br>
-                            <input class="text" type="password" name="password" value="" required><br>
-                            <br>
+
+                            <td>
+                                <label for="password">Password</label><br>
+                                <input class="text" type="password" name="password" value="" required>
+                                <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.passwordLengthErr}">
                                     <font color="red">
@@ -47,9 +51,12 @@
                                     </font>
                                 </c:if>
                             </c:if>
-                            <label for="confirm">Confirm password</label><br>
-                            <input class="text" type="password" name="cfpassword" value="" required><br>
-                            <br>
+                            </td>
+
+                            <td>
+                                <label for="confirm">Confirm password</label><br>
+                                <input class="text" type="password" name="cfpassword" value="" required>
+                                <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.confirmNotMatch}">
                                     <font color="red">
@@ -57,8 +64,11 @@
                                     </font>
                                 </c:if>
                             </c:if>
-                            <label for="fullname">Fullname</label><br>
-                            <input class="text" type="text" name="fname" value="" required><br>
+                            </td>
+                            
+                            <td>
+                                <label for="fullname">Fullname</label><br>
+                            <input class="text" type="text" name="fname" value="" required>
                             <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.fullNameLengthErr}">
@@ -67,8 +77,11 @@
                                     </font>
                                 </c:if>
                             </c:if>
-                            <label for="phone">Phone number</label><br>
-                            <input class="text" type="text" name="phone" value="" required><br>
+                            </td>
+                            
+                            <td>
+                                <label for="phone">Phone number</label><br>
+                            <input class="text" type="text" name="phone" value="" required>
                             <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.phoneDuplicateErr}">
@@ -77,13 +90,15 @@
                                     </font>
                                 </c:if>
                             </c:if>
-                            <label for="role">
+                            </td>
+                            
+                            <td>
+                                <label for="role">
                                 <input type="radio" name="roleid" value="1"> Customer
-                                <input type="radio" name="roleid" value="2"> Staff
-                                <input type="radio" name="roleid" value="3"> Store<br>
+                                <input type="radio" name="roleid" value="2"> Store
                             </label>
-
-                            <label style="color: red">${ERROR}</label><br>
+                            </td>   
+                            <br>
                             <br>
                             <input class="btn-register" type="submit" value="Register"  name="btAction"/><br>
 
