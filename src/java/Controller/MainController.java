@@ -22,6 +22,7 @@ public class MainController extends HttpServlet {
     private static final String HOMEPAGE = "homepage.html";
     private static final String LOGINCONTROLLER = "LoginController";
     private static final String REGISTERCONTROLLER = "RegisterController";
+    private static final String VIEWHISORYCONTROLLER = "ViewHistoryController";
 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -37,6 +38,8 @@ public class MainController extends HttpServlet {
                 url = LOGINCONTROLLER;
             } else if (button.equals("Register")) {
                 url = REGISTERCONTROLLER;
+            } else if (button.equals("Search")) {
+                url = VIEWHISORYCONTROLLER;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

@@ -23,36 +23,36 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ViewHistoryController", urlPatterns = {"/ViewHistoryController"})
 public class ViewHistoryController extends HttpServlet {
-//    List<Order> listOrder = new ArrayList<>();
-//
-//    
-//    private final String SHOWSEARCHCONTROLLER = "viewhistory.jsp";
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//
-//        try (PrintWriter out = response.getWriter()) {
-//            String url = SHOWSEARCHCONTROLLER;
-//            String searchValue = request.getParameter("txtSearchValue");
-//            try {
-//                if (!searchValue.isEmpty()) {
-//                    UserService ord = new UserService();
-//                    ord.searchByOrderID(searchValue);
-//                    List<Order> result = ord.getListOrder();
-//                    System.out.println(result);
-//                    request.setAttribute("SEARCHRESULT", result);
-//                    url = SHOWSEARCHCONTROLLER;
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            } finally {
-//                RequestDispatcher rd = request.getRequestDispatcher(url);
-//                rd.forward(request, response);
-//                out.close();
-//            }
-//
-//        }
-//    }
+    List<Order> listOrder = new ArrayList<>();
+
+    
+    private final String SHOWSEARCHCONTROLLER = "viewhistory.jsp";
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+
+        try (PrintWriter out = response.getWriter()) {
+            String url = SHOWSEARCHCONTROLLER;
+            String searchValue = request.getParameter("txtSearchValue");
+            try {
+                if (!searchValue.isEmpty()) {
+                    UserService ord = new UserService();
+                    ord.searchByOrderID(searchValue);
+                    List<Order> result = ord.getListOrder();
+                    System.out.println(result);
+                    request.setAttribute("SEARCHRESULT", result);
+                    url = SHOWSEARCHCONTROLLER;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
+                out.close();
+            }
+
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -93,8 +93,5 @@ public class ViewHistoryController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
 }

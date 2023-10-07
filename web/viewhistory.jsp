@@ -42,8 +42,6 @@
                     <th>StoreID</th>
                     <th>StaffID</th>
                     <th>StOrderDetail</th>
-                    <th>Update</th>
-                    <th>Delete</th>
                 </tr>
             </thead>
 
@@ -92,14 +90,6 @@
                     </td>
                     <td>
                         <%= ord.getStOrderDetail()%>
-                    </td>
-                    <td>
-                        <!-- Nút cập nhật -->
-                        <!--                    <input type="submit" name="btnUpdate" value="Cập nhật" />-->
-                    </td>
-                    <td>
-                        <!-- Nút xóa -->
-                        <!--                    <input type="submit" name="btnDelete" value="Xóa" />-->
                     </td>
                 </tr>
             </form>

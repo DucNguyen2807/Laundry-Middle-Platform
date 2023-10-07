@@ -8,9 +8,11 @@ import DBConnect.ConnectDB;
 import Model.Order;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +55,6 @@ public class UserService implements Serializable {
 //    public int CheckRoleID(String usernameString, String password) {
 //        return 1;
 //    }
-
     private List<Order> listOrder;
 
     public List<Order> getListOrder() {
@@ -86,14 +87,34 @@ public class UserService implements Serializable {
                     String orderID = String.valueOf(rs.getInt("OrderID"));
                     String serviceDetail = rs.getString("ServiceDetail");
                     String weight = String.valueOf(rs.getDouble("Weight"));
-                    String totalPrice = String.valueOf(rs.getDouble("TotalPrice"));
+                    String totalPrice = String.valueOf(rs.getDouble("TotaPrice"));
                     String note = rs.getString("Note");
                     String dateApprove = rs.getDate("DateApprove").toString();
-                    String dateComplete = rs.getDate("DateComplete").toString();
-                    String timeComplete = rs.getTime("TimeComplete").toString();
+                    String dateComplete;
+                    Date dateCompleteValue = rs.getDate("DateCompleted");
+                    if (rs.wasNull()) {
+                        dateComplete = "NULL";
+                    } else {
+                        dateComplete = dateCompleteValue.toString();
+                    }
+
+                    String timeComplete;
+                    Time timeCompleteValue = rs.getTime("TimeComplete");
+                    if (rs.wasNull()) {
+                        timeComplete = "NULL";
+                    } else {
+                        timeComplete = timeCompleteValue.toString();
+                    }
                     String customerName = rs.getString("CustomerName");
                     String storeName = rs.getString("StoreName");
-                    String staffName = rs.getString("StaffName");
+                    String staffName;
+                    String staffNameValue = rs.getString("StaffName");
+                    if (rs.wasNull()) {
+                        staffName = "NULL";
+                    } else {
+                        staffName = staffNameValue;
+                    }
+
                     String stOrderDetail = rs.getString("StOrderDetail");
 
                     Order order = new Order(orderID, serviceDetail, weight, totalPrice, note, dateApprove, dateComplete, timeComplete, customerName, storeName, staffName, stOrderDetail);
@@ -169,6 +190,7 @@ public class UserService implements Serializable {
         }
         return duplicate;
     }
+
     public static boolean checkExistUsername(String username) throws ClassNotFoundException, SQLException {
         boolean duplicate = false;
         Connection conn = ConnectDB.getConnection();
