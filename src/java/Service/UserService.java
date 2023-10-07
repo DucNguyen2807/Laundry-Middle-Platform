@@ -150,14 +150,14 @@ public class UserService implements Serializable {
         return false;
     }
 
-    public static boolean checkExistEmail(String email) throws SQLException, ClassNotFoundException {
+    public static boolean checkExisPhone(String Phone) throws SQLException, ClassNotFoundException {
         boolean duplicate = false;
         Connection con = ConnectDB.getConnection();
         try {
-            String query = "select * from [User] where email =?";
+            String query = "select * from [User] where Phone =?";
 
             PreparedStatement psmt = con.prepareStatement(query);
-            psmt.setString(1, email);
+            psmt.setString(1, Phone);
             ResultSet resultSet = psmt.executeQuery();
             if (resultSet.next()) {
                 duplicate = true;

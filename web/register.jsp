@@ -26,20 +26,57 @@
 
                         <form class="form-register-content" action="MainController" method="POST">
                             <label for="username" >User name</label><br>
-                            <input class="text" type="text" name="txtUsername" value="" required><br>
+                            <input class="text" type="text" name="username" value="" required><br>
                             <br>
+                            <td>
+                            <c:if test="${not empty requestScope.INSERTERROR}">
+                                <c:if test="${not empty requestScope.INSERTERROR.usernameDuplicateErr}">
+                                    <font color="red">
+                                    ${requestScope.INSERTERROR.usernameDuplicateErr}<br/>
+                                    </font>
+                                </c:if>
+                            </c:if>
+                            </td>
                             <label for="password">Password</label><br>
-                            <input class="text" type="password" name="txtPassword" value="" required><br>
+                            <input class="text" type="password" name="password" value="" required><br>
                             <br>
+                            <c:if test="${not empty requestScope.INSERTERROR}">
+                                <c:if test="${not empty requestScope.INSERTERROR.passwordLengthErr}">
+                                    <font color="red">
+                                    ${requestScope.INSERTERROR.passwordLengthErr}<br/>
+                                    </font>
+                                </c:if>
+                            </c:if>
                             <label for="confirm">Confirm password</label><br>
-                            <input class="text" type="password" name="txtCofirm" value="" required><br>
+                            <input class="text" type="password" name="cfpassword" value="" required><br>
                             <br>
+                            <c:if test="${not empty requestScope.INSERTERROR}">
+                                <c:if test="${not empty requestScope.INSERTERROR.confirmNotMatch}">
+                                    <font color="red">
+                                    ${requestScope.INSERTERROR.confirmNotMatch}<br/>
+                                    </font>
+                                </c:if>
+                            </c:if>
                             <label for="fullname">Fullname</label><br>
-                            <input class="text" type="text" name="txtFullname" value="" required><br>
+                            <input class="text" type="text" name="fname" value="" required><br>
                             <br>
+                            <c:if test="${not empty requestScope.INSERTERROR}">
+                                <c:if test="${not empty requestScope.INSERTERROR.fullNameLengthErr}">
+                                    <font color="red">
+                                    ${requestScope.INSERTERROR.fullNameLengthErr}<br/>
+                                    </font>
+                                </c:if>
+                            </c:if>
                             <label for="phone">Phone number</label><br>
-                            <input class="text" type="text" name="txtphone" value="" required><br>
+                            <input class="text" type="text" name="phone" value="" required><br>
                             <br>
+                            <c:if test="${not empty requestScope.INSERTERROR}">
+                                <c:if test="${not empty requestScope.INSERTERROR.phoneDuplicateErr}">
+                                    <font color="red">
+                                    ${requestScope.INSERTERROR.phoneDuplicateErr}<br/>
+                                    </font>
+                                </c:if>
+                            </c:if>
                             <label for="role">
                                 <input type="radio" name="roleid" value="1"> Customer
                                 <input type="radio" name="roleid" value="2"> Staff
