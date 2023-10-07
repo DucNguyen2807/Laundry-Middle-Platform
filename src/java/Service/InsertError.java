@@ -17,8 +17,9 @@ public class InsertError {
     private String fullNameLengthErr;
     private String passwordLengthErr;
     private String PhoneDuplicateErr;
+private String PhoneLengthErr;
 
-    public InsertError(String confirmNotMatch, String UsernameDuplicateErr, String EmailDuplicateErr, String email, String setInsertError, String fullNameLengthErr, String passwordLengthErr, String PhoneDuplicateErr) {
+    public InsertError(String confirmNotMatch, String UsernameDuplicateErr, String EmailDuplicateErr, String email, String setInsertError, String fullNameLengthErr, String passwordLengthErr, String PhoneDuplicateErr, String PhoneLengthErr) {
         this.confirmNotMatch = confirmNotMatch;
         this.UsernameDuplicateErr = UsernameDuplicateErr;
         this.EmailDuplicateErr = EmailDuplicateErr;
@@ -27,7 +28,17 @@ public class InsertError {
         this.fullNameLengthErr = fullNameLengthErr;
         this.passwordLengthErr = passwordLengthErr;
         this.PhoneDuplicateErr = PhoneDuplicateErr;
+        this.PhoneLengthErr = PhoneLengthErr;
     }
+
+    public String getPhoneLengthErr() {
+        return PhoneLengthErr;
+    }
+
+    public void setPhoneLengthErr(String PhoneLengthErr) {
+        this.PhoneLengthErr = PhoneLengthErr;
+    }
+
 
     public String getPasswordLengthErr() {
         return passwordLengthErr;

@@ -102,3 +102,20 @@ body {
 .btn-login-gg:hover{
     color: red;
 }
+/* Định dạng cho màn hình có chiều rộng dưới 768px (màn hình di động) */
+@media screen and (max-width: 768px) {
+    /* Thực hiện điều chỉnh kiểu dáng, bố trí, kích thước phần tử tại đây */
+    .container {
+        width: 100%; /* Chiếm toàn bộ chiều rộng */
+    }
+    /* Các điều chỉnh khác... */
+}
+
+/* Định dạng cho màn hình có chiều rộng từ 769px trở lên (màn hình máy tính) */
+@media screen and (min-width: 769px) {
+    /* Thực hiện điều chỉnh kiểu dáng, bố trí, kích thước phần tử tại đây */
+    .container {
+        width: 70%; /* Chiếm 70% chiều rộng */
+    }
+    /* Các điều chỉnh khác... */
+}

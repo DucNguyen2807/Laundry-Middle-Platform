@@ -12,6 +12,7 @@
         <title>Register Page</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <link rel="stylesheet" href="css/register.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div class="register-page">
@@ -30,7 +31,7 @@
                             <td>
                                 <label for="username" >Username</label><br>
                                 <input class="text" type="text" name="username" 
-                                       value="<%= (request.getParameter("username") == null) ? "" : request.getParameter("username") %>" required>
+                                       value="<%= (request.getParameter("username") == null) ? "" : request.getParameter("username")%>" required>
                                 <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.usernameDuplicateErr}">
@@ -44,7 +45,7 @@
                             <td>
                                 <label for="password">Password</label><br>
                                 <input class="text" type="password" name="password" 
-                                       value="<%= (request.getParameter("password") == null) ? "" : request.getParameter("password") %>" required>
+                                       value="<%= (request.getParameter("password") == null) ? "" : request.getParameter("password")%>" required>
                                 <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.passwordLengthErr}">
@@ -58,7 +59,7 @@
                             <td>
                                 <label for="confirm">Confirm password</label><br>
                                 <input class="text" type="password" name="cfpassword" \
-                                        value="<%= (request.getParameter("cfpassword") == null) ? "" : request.getParameter("cfpassword") %>" required>
+                                       value="<%= (request.getParameter("cfpassword") == null) ? "" : request.getParameter("cfpassword")%>" required>
                                 <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.confirmNotMatch}">
@@ -68,12 +69,12 @@
                                 </c:if>
                             </c:if>
                             </td>
-                            
+
                             <td>
                                 <label for="fullname">Fullname</label><br>
-                            <input class="text" type="text" name="fname" 
-                                   value="<%= (request.getParameter("fname") == null) ? "" : request.getParameter("fname") %>" required>
-                            <br>
+                                <input class="text" type="text" name="fname" 
+                                       value="<%= (request.getParameter("fname") == null) ? "" : request.getParameter("fname")%>" required>
+                                <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.fullNameLengthErr}">
                                     <font color="red">
@@ -85,27 +86,32 @@
 
                             <td>
                                 <label for="phone">Phone number</label><br>
-                            <input class="text" type="text" name="phone" 
-                                   value="<%= (request.getParameter("phone") == null) ? "" : request.getParameter("phone") %>" required>
-                            <br>
+                                <input class="text" type="text" name="phone" 
+                                       value="<%= (request.getParameter("phone") == null) ? "" : request.getParameter("phone")%>" required>
+                                <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.phoneDuplicateErr}">
                                     <font color="red">
-                                    ${requestScope.INSERTERROR.phoneDuplicateErr}<br/>
+                                    ${requestScope.INSERTERROR.phoneDuplicateErr}
                                     </font>
                                 </c:if>
                             </c:if>
-                            </td>
-                            
+                            <c:if test="${not empty requestScope.INSERTERROR.phoneLengthErr}">
+                                <font color="red">
+                                ${requestScope.INSERTERROR.phoneLengthErr}<br/>
+                                </font>
+                            </c:if>
+                            </td>       
+
                             <td>
                                 <label for="role">
-                                <input type="radio" name="roleid" value="1"> Customer
-                                <input type="radio" name="roleid" value="2"> Store
-                            </label>
+                                    <input type="radio" name="roleid" value="1"> Customer
+                                    <input type="radio" name="roleid" value="2"> Store
+                                </label>
                             </td>   
                             <br>
                             <br>
-                            <input class="btn-register" type="submit" value="Register"  name="btAction"/><br>
+                            <input class="btn-register" type="submit" value="Register" name="btAction"/><br>
 
                             <a href="url" class="btn-register-gg">Đăng kí với Google</a><br><br>
 

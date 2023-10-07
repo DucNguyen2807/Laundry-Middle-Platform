@@ -63,6 +63,13 @@ public class RegisterController extends HttpServlet {
                     err.setFullNameLengthErr("Full name must be > 2 &&& < 30 chars!!!");
                     bErrors = true;
                 }
+                 if (phone.matches("[0-9]{10,13}")) {
+                    // Đúng, chuỗi chỉ chứa số và có độ dài hợp lệ
+                } else {
+                    // Sai, chuỗi chứa ký tự đặc biệt hoặc chữ cái hoặc có độ dài không hợp lệ
+                    err.setPhoneLengthErr("Invalid phone number!");
+                    bErrors = true;
+                }
                 if (!bErrors) {
                     try {
                         if (UserService.checkExisPhone(phone)) {
