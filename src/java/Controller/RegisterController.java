@@ -44,7 +44,7 @@ public class RegisterController extends HttpServlet {
                 if (!bErrors) {
                     try {
                         if (UserService.checkExistUsername(username)) {
-                            err.setUsernameDuplicateErr("Username đã tồn tại!!!");
+                            err.setUsernameDuplicateErr("Đã tồn tại");
                             bErrors = true;
                         }
                     } catch (SQLException | ClassNotFoundException e) {
@@ -52,28 +52,28 @@ public class RegisterController extends HttpServlet {
                     }
                 }
                 if(password.trim().length()<6 || username.trim().length() >24){
-                    err.setPasswordLengthErr("Password must be > 6 &&& < 24 chars!!!");
+                    err.setPasswordLengthErr("Độ dài từ 6 đến 20 kí tự");
                     bErrors = true;
                 }
                 if(!confirmPassword.trim().equals(password)){
-                    err.setConfirmNotMatch("Not match!!!");
+                    err.setConfirmNotMatch("Not match");
                     bErrors = true;
                 }
                 if(fullName.trim().length()<6 || fullName.trim().length() >30){
-                    err.setFullNameLengthErr("Full name must be > 2 &&& < 30 chars!!!");
+                    err.setFullNameLengthErr("Độ dài từ 2 đến 30 kí tự");
                     bErrors = true;
                 }
-                 if (phone.matches("[0-9]{10,13}")) {
+                 if (phone.matches("^0[0-9]{9,12}")) {
                     // Đúng, chuỗi chỉ chứa số và có độ dài hợp lệ
                 } else {
                     // Sai, chuỗi chứa ký tự đặc biệt hoặc chữ cái hoặc có độ dài không hợp lệ
-                    err.setPhoneLengthErr("Invalid phone number!");
+                    err.setPhoneLengthErr("Số điện thoại không hợp lệ");
                     bErrors = true;
                 }
                 if (!bErrors) {
                     try {
                         if (UserService.checkExisPhone(phone)) {
-                            err.setPhoneDuplicateErr("đã tồn tại!!!");
+                            err.setPhoneDuplicateErr("Đã tồn tại");
                             bErrors = true;
                         }
                     } catch (SQLException | ClassNotFoundException e) {
@@ -86,10 +86,6 @@ public class RegisterController extends HttpServlet {
                     boolean result = UserService.insert(username, password, phone, fullName, roleid);
                     if (result) {
                         url = LOGINPAGE;
-                    } else {
-                        // Xử lý lỗi nếu có lỗi xảy ra trong quá trình insert
-                        err.setSetInsertError("Có lỗi xảy ra trong quá trình đăng ký!!!");
-                        request.setAttribute("INSERTERROR", err);
                     }
                 }
             } catch (SQLException e) {

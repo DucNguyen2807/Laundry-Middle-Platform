@@ -28,89 +28,89 @@
 
                         <form class="form-register-content" action="MainController" method="POST">
 
-                            <td>
+                            <div>
                                 <label for="username" >Username</label><br>
                                 <input class="text" type="text" name="username" 
                                        value="<%= (request.getParameter("username") == null) ? "" : request.getParameter("username")%>" required>
                                 <br>
-                            <c:if test="${not empty requestScope.INSERTERROR}">
-                                <c:if test="${not empty requestScope.INSERTERROR.usernameDuplicateErr}">
-                                    <font color="red">
-                                    ${requestScope.INSERTERROR.usernameDuplicateErr}<br/>
-                                    </font>
+                                <c:if test="${not empty requestScope.INSERTERROR}">
+                                    <c:if test="${not empty requestScope.INSERTERROR.usernameDuplicateErr}">
+                                        <font  size="2px" color="red">
+                                        ${requestScope.INSERTERROR.usernameDuplicateErr}<br/>
+                                        </font>
+                                    </c:if>
                                 </c:if>
-                            </c:if>
-                            </td>
+                            </div>
 
-                            <td>
+                            <div>
                                 <label for="password">Password</label><br>
                                 <input class="text" type="password" name="password" 
                                        value="<%= (request.getParameter("password") == null) ? "" : request.getParameter("password")%>" required>
                                 <br>
-                            <c:if test="${not empty requestScope.INSERTERROR}">
-                                <c:if test="${not empty requestScope.INSERTERROR.passwordLengthErr}">
-                                    <font color="red">
-                                    ${requestScope.INSERTERROR.passwordLengthErr}<br/>
-                                    </font>
+                                <c:if test="${not empty requestScope.INSERTERROR}">
+                                    <c:if test="${not empty requestScope.INSERTERROR.passwordLengthErr}">
+                                        <font  size="2px" color="red">
+                                        ${requestScope.INSERTERROR.passwordLengthErr}<br/>
+                                        </font>
+                                    </c:if>
                                 </c:if>
-                            </c:if>
-                            </td>
+                            </div>
 
-                            <td>
+                            <div>
                                 <label for="confirm">Confirm password</label><br>
                                 <input class="text" type="password" name="cfpassword" \
                                        value="<%= (request.getParameter("cfpassword") == null) ? "" : request.getParameter("cfpassword")%>" required>
                                 <br>
-                            <c:if test="${not empty requestScope.INSERTERROR}">
-                                <c:if test="${not empty requestScope.INSERTERROR.confirmNotMatch}">
-                                    <font color="red">
-                                    ${requestScope.INSERTERROR.confirmNotMatch}<br/>
-                                    </font>
+                                <c:if test="${not empty requestScope.INSERTERROR}">
+                                    <c:if test="${not empty requestScope.INSERTERROR.confirmNotMatch}">
+                                        <font size="2px" color="red">
+                                        ${requestScope.INSERTERROR.confirmNotMatch}<br/>
+                                        </font>
+                                    </c:if>
                                 </c:if>
-                            </c:if>
-                            </td>
+                            </div>
 
-                            <td>
+                            <div>
                                 <label for="fullname">Fullname</label><br>
                                 <input class="text" type="text" name="fname" 
                                        value="<%= (request.getParameter("fname") == null) ? "" : request.getParameter("fname")%>" required>
                                 <br>
-                            <c:if test="${not empty requestScope.INSERTERROR}">
-                                <c:if test="${not empty requestScope.INSERTERROR.fullNameLengthErr}">
-                                    <font color="red">
-                                    ${requestScope.INSERTERROR.fullNameLengthErr}<br/>
-                                    </font>
+                                <c:if test="${not empty requestScope.INSERTERROR}">
+                                    <c:if test="${not empty requestScope.INSERTERROR.fullNameLengthErr}">
+                                        <font  size="2px" color="red">
+                                        ${requestScope.INSERTERROR.fullNameLengthErr}<br/>
+                                        </font>
+                                    </c:if>
                                 </c:if>
-                            </c:if>
-                            </td>
+                            </div>
 
-                            <td>
+                            <div>
                                 <label for="phone">Phone number</label><br>
                                 <input class="text" type="text" name="phone" 
                                        value="<%= (request.getParameter("phone") == null) ? "" : request.getParameter("phone")%>" required>
                                 <br>
-                            <c:if test="${not empty requestScope.INSERTERROR}">
-                                <c:if test="${not empty requestScope.INSERTERROR.phoneDuplicateErr}">
-                                    <font color="red">
-                                    ${requestScope.INSERTERROR.phoneDuplicateErr}
+                                <c:if test="${not empty requestScope.INSERTERROR}">
+                                    <c:if test="${not empty requestScope.INSERTERROR.phoneDuplicateErr}">
+                                        <font  size="2px" color="red">
+                                        ${requestScope.INSERTERROR.phoneDuplicateErr}
+                                        </font>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${not empty requestScope.INSERTERROR.phoneLengthErr}">
+                                    <font  size="2px" color="red">
+                                    ${requestScope.INSERTERROR.phoneLengthErr}<br/>
                                     </font>
                                 </c:if>
-                            </c:if>
-                            <c:if test="${not empty requestScope.INSERTERROR.phoneLengthErr}">
-                                <font color="red">
-                                ${requestScope.INSERTERROR.phoneLengthErr}<br/>
-                                </font>
-                            </c:if>
-                            </td>       
+                            </div>       
 
-                            <td>
+                            <div>
                                 <label for="role">
                                     <input type="radio" name="roleid" value="1"> Customer
                                     <input type="radio" name="roleid" value="2"> Store
                                 </label>
-                            </td>   
+                            </div>   
                             <br>
-                            <br>
+
                             <input class="btn-register" type="submit" value="Register" name="btAction"/><br>
 
                             <a href="url" class="btn-register-gg">Đăng kí với Google</a><br><br>
