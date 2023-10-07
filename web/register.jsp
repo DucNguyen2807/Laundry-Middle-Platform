@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register Page</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <link rel="stylesheet" href="css/register.css"/>
     </head>
     <body>
@@ -25,10 +26,12 @@
                         <h5>Laudry middle platform</h5>
 
                         <form class="form-register-content" action="MainController" method="POST">
-                            <label for="username" >User name</label><br>
-                            <input class="text" type="text" name="username" value="" required><br>
-                            <br>
+
                             <td>
+                                <label for="username" >Username</label><br>
+                                <input class="text" type="text" name="username" 
+                                       value="<%= (request.getParameter("username") == null) ? "" : request.getParameter("username") %>" required>
+                                <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.usernameDuplicateErr}">
                                     <font color="red">
@@ -37,9 +40,12 @@
                                 </c:if>
                             </c:if>
                             </td>
-                            <label for="password">Password</label><br>
-                            <input class="text" type="password" name="password" value="" required><br>
-                            <br>
+
+                            <td>
+                                <label for="password">Password</label><br>
+                                <input class="text" type="password" name="password" 
+                                       value="<%= (request.getParameter("password") == null) ? "" : request.getParameter("password") %>" required>
+                                <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.passwordLengthErr}">
                                     <font color="red">
@@ -47,9 +53,13 @@
                                     </font>
                                 </c:if>
                             </c:if>
-                            <label for="confirm">Confirm password</label><br>
-                            <input class="text" type="password" name="cfpassword" value="" required><br>
-                            <br>
+                            </td>
+
+                            <td>
+                                <label for="confirm">Confirm password</label><br>
+                                <input class="text" type="password" name="cfpassword" \
+                                        value="<%= (request.getParameter("cfpassword") == null) ? "" : request.getParameter("cfpassword") %>" required>
+                                <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.confirmNotMatch}">
                                     <font color="red">
@@ -57,8 +67,12 @@
                                     </font>
                                 </c:if>
                             </c:if>
-                            <label for="fullname">Fullname</label><br>
-                            <input class="text" type="text" name="fname" value="" required><br>
+                            </td>
+                            
+                            <td>
+                                <label for="fullname">Fullname</label><br>
+                            <input class="text" type="text" name="fname" 
+                                   value="<%= (request.getParameter("fname") == null) ? "" : request.getParameter("fname") %>" required>
                             <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.fullNameLengthErr}">
@@ -67,8 +81,12 @@
                                     </font>
                                 </c:if>
                             </c:if>
-                            <label for="phone">Phone number</label><br>
-                            <input class="text" type="text" name="phone" value="" required><br>
+                            </td>
+
+                            <td>
+                                <label for="phone">Phone number</label><br>
+                            <input class="text" type="text" name="phone" 
+                                   value="<%= (request.getParameter("phone") == null) ? "" : request.getParameter("phone") %>" required>
                             <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.phoneDuplicateErr}">
@@ -77,19 +95,21 @@
                                     </font>
                                 </c:if>
                             </c:if>
-                            <label for="role">
+                            </td>
+                            
+                            <td>
+                                <label for="role">
                                 <input type="radio" name="roleid" value="1"> Customer
-                                <input type="radio" name="roleid" value="2"> Staff
-                                <input type="radio" name="roleid" value="3"> Store<br>
+                                <input type="radio" name="roleid" value="2"> Store
                             </label>
-
-                            <label style="color: red">${ERROR}</label><br>
+                            </td>   
+                            <br>
                             <br>
                             <input class="btn-register" type="submit" value="Register"  name="btAction"/><br>
 
                             <a href="url" class="btn-register-gg">Đăng kí với Google</a><br><br>
 
-                            <a href="login.jsp" style="text-decoration: none; margin-left: 40px; color: darkgrey">
+                            <a href="login.jsp" style="text-decoration: none; margin-left: 25px; margin-right: 20px; color: darkgrey">
                                 Already have an account? <b style="color: black">Login</b>
                             </a>
                         </form>

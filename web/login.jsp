@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <link rel="stylesheet" href="css/login.css"/>
     </head>
     <body>
@@ -26,10 +27,12 @@
 
                         <form class="form-login-content" action="MainController" method="POST">
                             <label for="username" >User name</label><br>
-                            <input class="text" type="text" name="txtUsername" value="" required><br>
+                            <input class="text" type="text" name="txtUsername" 
+                                   value="<%= (request.getParameter("txtUsername") == null) ? "" : request.getParameter("txtUsername") %>"   required><br>
                             <br>
                             <label for="password">Password</label><br>
-                            <input class="text" type="password" name="txtPassword" value="" required><br>
+                            <input class="text" type="password" name="txtPassword"
+                                   value="<%= (request.getParameter("txtPassword") == null) ? "" : request.getParameter("txtPassword")%>" required><br>
                             <br>
 
                             <input type="checkbox" name="check" value="1">Remember me
