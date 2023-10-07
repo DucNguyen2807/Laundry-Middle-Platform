@@ -28,8 +28,9 @@
                         <form class="form-register-content" action="MainController" method="POST">
 
                             <td>
-                                <label for="username" >User name</label><br>
-                                <input class="text" type="text" name="username" value="" required>
+                                <label for="username" >Username</label><br>
+                                <input class="text" type="text" name="username" 
+                                       value="<%= (request.getParameter("username") == null) ? "" : request.getParameter("username") %>" required>
                                 <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.usernameDuplicateErr}">
@@ -42,7 +43,8 @@
 
                             <td>
                                 <label for="password">Password</label><br>
-                                <input class="text" type="password" name="password" value="" required>
+                                <input class="text" type="password" name="password" 
+                                       value="<%= (request.getParameter("password") == null) ? "" : request.getParameter("password") %>" required>
                                 <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.passwordLengthErr}">
@@ -55,7 +57,8 @@
 
                             <td>
                                 <label for="confirm">Confirm password</label><br>
-                                <input class="text" type="password" name="cfpassword" value="" required>
+                                <input class="text" type="password" name="cfpassword" \
+                                        value="<%= (request.getParameter("cfpassword") == null) ? "" : request.getParameter("cfpassword") %>" required>
                                 <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.confirmNotMatch}">
@@ -68,7 +71,8 @@
                             
                             <td>
                                 <label for="fullname">Fullname</label><br>
-                            <input class="text" type="text" name="fname" value="" required>
+                            <input class="text" type="text" name="fname" 
+                                   value="<%= (request.getParameter("fname") == null) ? "" : request.getParameter("fname") %>" required>
                             <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.fullNameLengthErr}">
@@ -78,10 +82,11 @@
                                 </c:if>
                             </c:if>
                             </td>
-                            
+
                             <td>
                                 <label for="phone">Phone number</label><br>
-                            <input class="text" type="text" name="phone" value="" required>
+                            <input class="text" type="text" name="phone" 
+                                   value="<%= (request.getParameter("phone") == null) ? "" : request.getParameter("phone") %>" required>
                             <br>
                             <c:if test="${not empty requestScope.INSERTERROR}">
                                 <c:if test="${not empty requestScope.INSERTERROR.phoneDuplicateErr}">
@@ -104,7 +109,7 @@
 
                             <a href="url" class="btn-register-gg">Đăng kí với Google</a><br><br>
 
-                            <a href="login.jsp" style="text-decoration: none; margin-left: 40px; color: darkgrey">
+                            <a href="login.jsp" style="text-decoration: none; margin-left: 25px; margin-right: 20px; color: darkgrey">
                                 Already have an account? <b style="color: black">Login</b>
                             </a>
                         </form>

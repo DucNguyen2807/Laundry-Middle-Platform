@@ -28,7 +28,7 @@
                         <form class="form-login-content" action="MainController" method="POST">
                             <label for="username" >User name</label><br>
                             <input class="text" type="text" name="txtUsername" 
-                                   value="<%= (request.getParameter("txtUsername") == null) ? "" : request.getParameter("txtUsername") %>" required><br>
+                                   value="<%= (request.getParameter("txtUsername") == null) ? "" : request.getParameter("txtUsername") %>"   required><br>
                             <br>
                             <label for="password">Password</label><br>
                             <input class="text" type="password" name="txtPassword"
