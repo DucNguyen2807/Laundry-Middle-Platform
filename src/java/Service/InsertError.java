@@ -14,14 +14,47 @@ public class InsertError {
     private String EmailDuplicateErr;
     private String email;
     private String setInsertError;
+    private String fullNameLengthErr;
+    private String passwordLengthErr;
+    private String PhoneDuplicateErr;
 
-    public InsertError(String confirmNotMatch, String UsernameDuplicateErr, String EmailDuplicateErr, String email, String setInsertError) {
+    public InsertError(String confirmNotMatch, String UsernameDuplicateErr, String EmailDuplicateErr, String email, String setInsertError, String fullNameLengthErr, String passwordLengthErr, String PhoneDuplicateErr) {
         this.confirmNotMatch = confirmNotMatch;
         this.UsernameDuplicateErr = UsernameDuplicateErr;
         this.EmailDuplicateErr = EmailDuplicateErr;
         this.email = email;
         this.setInsertError = setInsertError;
+        this.fullNameLengthErr = fullNameLengthErr;
+        this.passwordLengthErr = passwordLengthErr;
+        this.PhoneDuplicateErr = PhoneDuplicateErr;
     }
+
+    public String getPasswordLengthErr() {
+        return passwordLengthErr;
+    }
+
+    public void setPasswordLengthErr(String passwordLengthErr) {
+        this.passwordLengthErr = passwordLengthErr;
+    }
+
+    public String getPhoneDuplicateErr() {
+        return PhoneDuplicateErr;
+    }
+
+    public void setPhoneDuplicateErr(String PhoneDuplicateErr) {
+        this.PhoneDuplicateErr = PhoneDuplicateErr;
+    }
+    
+
+    public String getFullNameLengthErr() {
+        return fullNameLengthErr;
+    }
+
+    public void setFullNameLengthErr(String fullNameLengthErr) {
+        this.fullNameLengthErr = fullNameLengthErr;
+    }
+
+    
 
     public String getSetInsertError() {
         return setInsertError;

@@ -23,15 +23,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class RegisterController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     private final String CREATENEWACCOUNT = "register.jsp";
     private final String LOGINPAGE = "homepage.html";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -49,14 +40,7 @@ public class RegisterController extends HttpServlet {
                 String confirmPassword = request.getParameter("cfpassword");
                 String phone = request.getParameter("phone");
                 String roleid = request.getParameter("role_id");
-
-                // Kiểm tra mật khẩu xác nhận
-                if (!confirmPassword.trim().equals(password)) {
-                    err.setConfirmNotMatch("Mật khẩu không khớp!!!");
-                    bErrors = true;
-                }
-
-                // Kiểm tra sự tồn tại của username
+                
                 if (!bErrors) {
                     try {
                         if (UserService.checkExistUsername(username)) {
@@ -65,7 +49,28 @@ public class RegisterController extends HttpServlet {
                         }
                     } catch (SQLException | ClassNotFoundException e) {
                         e.printStackTrace();
-                        // Xử lý lỗi kết nối đến cơ sở dữ liệu nếu cần
+                    }
+                }
+                if(password.trim().length()<6 || username.trim().length() >24){
+                    err.setPasswordLengthErr("Password must be > 6 &&& < 24 chars!!!");
+                    bErrors = true;
+                }
+                if(!confirmPassword.trim().equals(password)){
+                    err.setConfirmNotMatch("Not match!!!");
+                    bErrors = true;
+                }
+                if(fullName.trim().length()<6 || fullName.trim().length() >30){
+                    err.setFullNameLengthErr("Full name must be > 2 &&& < 30 chars!!!");
+                    bErrors = true;
+                }
+                if (!bErrors) {
+                    try {
+                        if (UserService.checkExisPhone(phone)) {
+                            err.setPhoneDuplicateErr("đã tồn tại!!!");
+                            bErrors = true;
+                        }
+                    } catch (SQLException | ClassNotFoundException e) {
+                        e.printStackTrace();
                     }
                 }
                 if (bErrors) {
