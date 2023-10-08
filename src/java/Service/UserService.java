@@ -138,6 +138,81 @@ public class UserService implements Serializable {
             }
         }
     }
+    public void getAllOrders() throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = ConnectDB.getConnection();
+            if (con != null) {
+
+                String sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                        + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
+                        + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
+                        + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
+                        + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
+                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
+                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
+                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n";
+
+                 stm = con.prepareStatement(sql);
+            rs = stm.executeQuery();
+                while (rs.next()) {
+
+                    String orderID = String.valueOf(rs.getInt("OrderID"));
+                    String serviceDetail = rs.getString("ServiceDetail");
+                    String weight = String.valueOf(rs.getDouble("Weight"));
+                    String totalPrice = String.valueOf(rs.getDouble("TotaPrice"));
+                    String note = rs.getString("Note");
+                    String dateApprove = rs.getDate("DateApprove").toString();
+                    String dateComplete;
+                    Date dateCompleteValue = rs.getDate("DateCompleted");
+                    if (rs.wasNull()) {
+                        dateComplete = "NULL";
+                    } else {
+                        dateComplete = dateCompleteValue.toString();
+                    }
+
+                    String timeComplete;
+                    Time timeCompleteValue = rs.getTime("TimeComplete");
+                    if (rs.wasNull()) {
+                        timeComplete = "NULL";
+                    } else {
+                        timeComplete = timeCompleteValue.toString();
+                    }
+                    String customerName = rs.getString("CustomerName");
+                    String storeName = rs.getString("StoreName");
+                    String staffName;
+                    String staffNameValue = rs.getString("StaffName");
+                    if (rs.wasNull()) {
+                        staffName = "NULL";
+                    } else {
+                        staffName = staffNameValue;
+                    }
+
+                    String stOrderDetail = rs.getString("StOrderDetail");
+
+                    Order order = new Order(orderID, serviceDetail, weight, totalPrice, note, dateApprove, dateComplete, timeComplete, customerName, storeName, staffName, stOrderDetail);
+
+                    if (listOrder == null) {
+                        listOrder = new ArrayList<>();
+                    }
+                    this.listOrder.add(order);
+                }
+
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
 
     public static boolean insert(String username, String password, String phone, String fullname, String roleid) throws ClassNotFoundException, SQLException {
         Connection con = null;
@@ -212,4 +287,5 @@ public class UserService implements Serializable {
         }
         return duplicate;
     }
+    
 }
