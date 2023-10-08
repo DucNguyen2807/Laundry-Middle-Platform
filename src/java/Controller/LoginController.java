@@ -4,7 +4,9 @@
  */
 package Controller;
 
+import Model.User;
 import Service.UserService;
+import static Service.UserService.getUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -16,6 +18,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -67,8 +70,9 @@ public class LoginController extends HttpServlet {
                     default:
                         break;
                 }
-
             }
+            User user = UserService.getUser(username);// Lấy thông tin người dùng từ cơ sở dữ liệu
+            request.getSession().setAttribute("user", user);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (SQLException ex) {

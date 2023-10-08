@@ -6,6 +6,7 @@ package Service;
 
 import DBConnect.ConnectDB;
 import Model.Order;
+import Model.User;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.Date;
@@ -315,6 +316,46 @@ public class UserService implements Serializable {
         } catch (SQLException ex) {
         }
         return duplicate;
+    }
+
+    public static User getUser(String username) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        User user = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT * FROM [User] WHERE Username = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, username);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    user = new User();
+                    user.setUsername(rs.getString("Username"));
+                    user.setPhone(rs.getString("Phone"));
+                    user.setFullname(rs.getString("Fullname"));
+                    user.setEmail(rs.getString("Email"));
+                    user.setaddress(rs.getString("address"));
+                    
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return user;
     }
 
 }

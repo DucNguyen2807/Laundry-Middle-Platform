@@ -18,7 +18,7 @@
     <body>
         <header class="header">
             <nav class="menu">
-                <a href="#">Profile</a>
+                <a href="updateacc.jsp">Profile</a>
                 <a href="#">Order</a>
                 <a href="#">Store</a>
             </nav>

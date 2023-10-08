@@ -28,6 +28,9 @@ public class User {
         return userId;
     }
 
+    public User() {
+    }
+    
     public User(int userId, String username, String password, int roleId) {
         this.userId = userId;
         this.username = username;
