@@ -52,9 +52,37 @@ public class UserService implements Serializable {
         return false;
     }
 
-//    public int CheckRoleID(String usernameString, String password) {
-//        return 1;
-//    }
+    /*check role id*/
+    public int CheckRole(String username, String password) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        try {
+            con = ConnectDB.getConnection();
+            if (con != null) {
+                String sql = "Select RoleID From [User] Where Username = ? And Password = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, username);
+                stm.setString(2, password);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("RoleID");
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return -1;
+    }
+
     private List<Order> listOrder;
 
     public List<Order> getListOrder() {
@@ -138,6 +166,7 @@ public class UserService implements Serializable {
             }
         }
     }
+
     public void getAllOrders() throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -155,8 +184,8 @@ public class UserService implements Serializable {
                         + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
                         + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n";
 
-                 stm = con.prepareStatement(sql);
-            rs = stm.executeQuery();
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
                 while (rs.next()) {
 
                     String orderID = String.valueOf(rs.getInt("OrderID"));
@@ -287,5 +316,5 @@ public class UserService implements Serializable {
         }
         return duplicate;
     }
-    
+
 }

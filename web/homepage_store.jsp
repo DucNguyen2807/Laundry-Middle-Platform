@@ -1,6 +1,6 @@
 <%-- 
-    Document   : homepage
-    Created on : Oct 5, 2023, 9:59:40 PM
+    Document   : homepage_store
+    Created on : Oct 8, 2023, 2:29:13 PM
     Author     : khait
 --%>
 
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>home page store</h1>
     </body>
 </html>

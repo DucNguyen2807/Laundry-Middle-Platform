@@ -24,7 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginController extends HttpServlet {
 
     private final String LOGINPAGE = "login.jsp";
-    private final String HOMEPAGE = "homepage.html";
+    private final String HOMEPAGEADMIN = "homepage_admin.jsp";
+    private final String HOMEPAGESTORE = "homepage_store.jsp";
+    private final String HOMEPAGECUSTOMER = "homepage_customer.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
@@ -50,7 +52,22 @@ public class LoginController extends HttpServlet {
                     response.addCookie(user);
                     response.addCookie(pass);
                 }
-                url = HOMEPAGE;
+
+                int roleid = userService.CheckRole(username, password);
+                switch (roleid) {
+                    case 1:
+                        url = HOMEPAGECUSTOMER;
+                        break;
+                    case 3:
+                        url = HOMEPAGESTORE;
+                        break;
+                    case 4:
+                        url = HOMEPAGEADMIN;
+                        break;
+                    default:
+                        break;
+                }
+
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
