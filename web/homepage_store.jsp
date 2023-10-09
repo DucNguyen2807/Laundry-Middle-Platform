@@ -13,6 +13,10 @@
     </head>
     <body>
         <h1>home page store</h1>
-        <a href="LogoutConntroller">Log out</a>
+                        <form action="MainController" method="post">
+        <input type="hidden" name="txtSearchValue" value="" />
+        <input type="submit" value="Search" name="btAction" />
+    </form>
+
     </body>
 </html>

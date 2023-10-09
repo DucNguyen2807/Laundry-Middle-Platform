@@ -149,10 +149,12 @@ public class UserService implements Serializable {
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
-                            + " WHERE OrderID = ? AND CustomerID = ?";
+                            + " WHERE OrderID = ? AND CustomerID = ? OR o.StoreID = ? OR o.StaffID = ?\";";
                     stm = con.prepareStatement(sql);
                     stm.setInt(1, Integer.parseInt(searchValue));
                     stm.setInt(2, userId);
+                    stm.setInt(3, userId);
+                    stm.setInt(4, userId);
                 } else if (userRole >= 4) {
                     // Nếu vai trò của người dùng là lớn hơn hoặc bằng 4 (quản trị viên)
                     sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
@@ -209,9 +211,11 @@ public class UserService implements Serializable {
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
-                            + " WHERE CustomerID = ?";
+                            + " WHERE CustomerID = ? OR o.StoreID = ? OR o.StaffID = ?";
                     stm = con.prepareStatement(sql);
                     stm.setInt(1, userId);
+                    stm.setInt(2, userId);
+                    stm.setInt(3, userId);
                 } else if (userRole >= 4) {
                     sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
                             + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"

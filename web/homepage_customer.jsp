@@ -22,6 +22,11 @@
                 <a href="#">Order</a>
                 <a href="#">Store</a>
             </nav>
+                <form action="MainController" method="post">
+        <input type="hidden" name="txtSearchValue" value="" />
+        <input type="submit" value="Search" name="btAction" />
+    </form>
+
             <section>
                 <img class="logo"src="image/logo.png" alt="logo"/>
             </section>
