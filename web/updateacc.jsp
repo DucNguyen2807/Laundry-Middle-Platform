@@ -40,6 +40,11 @@
                     <div class="py-2">
                         <label for="fullname">Full Name</label>
                         <input type="text" class="bg-light form-control" name="fullname" value="${user.fullname}" >
+                        <c:if test="${not empty errorMessage}">
+                            <div class="alert alert-danger">
+                                <strong>Lỗi:</strong> <c:out value="${errorMessage}" />
+                            </div>
+                        </c:if>
                     </div>
                     <div class="py-2">
 
@@ -63,10 +68,20 @@
                     <div class="py-2">
                         <label for="curPassword">Password</label>
                         <input type="password" class="bg-light form-control" name="curpassword">
+                        <c:if test="${not empty errorMessage1}">
+                            <div class="alert alert-danger">
+                                <strong>Lỗi:</strong> <c:out value="${errorMessage1}" />
+                            </div>
+                        </c:if>
                     </div>
                     <div class="py-2">
                         <label for="Password">New Password</label>
                         <input type="password" class="bg-light form-control" name="password">
+                        <c:if test="${not empty errorMessage2}">
+                            <div class="alert alert-danger">
+                                <strong>Lỗi:</strong> <c:out value="${errorMessage2}" />
+                            </div>
+                        </c:if>
                     </div>
 
                     <div class="py-3 pb-4 border-bottom">
