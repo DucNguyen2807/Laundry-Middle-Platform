@@ -41,17 +41,17 @@
                     <tr>
                         <th scope="col">No.</th>
                         <th scope="col">OrderID</th>
-                        <th scope="col">ServiceID</th>
+                        <th scope="col">Service</th>
                         <th scope="col">Weight</th>
                         <th scope="col">TotalPrice</th>
                         <th scope="col">Note</th>
                         <th scope="col">DateApprove</th>
                         <th scope="col">DateCompleted</th>
                         <th scope="col">TimeComplete</th>
-                        <th scope="col">CustomerID</th>
-                        <th scope="col">StoreID</th>
-                        <th scope="col">StaffID</th>
-                        <th scope="col">StOrderDetail</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Store</th>
+                        <th scope="col">Staff</th>
+                        <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
