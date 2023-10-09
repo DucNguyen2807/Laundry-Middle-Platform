@@ -1,0 +1,34 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 10, 2023, 2:02:04 AM
+    Author     : acer
+*/
+
+/* Tùy chỉnh màu nền của bảng */
+.table {
+    background-color: #f8f9fa;
+}
+
+/* Tùy chỉnh màu nền của tiêu đề cột */
+.table thead th {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+/* Tùy chỉnh màu nền của hàng chẵn */
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Tùy chỉnh màu nền của hàng lẻ */
+.table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* Tùy chỉnh màu nền khi di chuột qua hàng */
+.table tbody tr:hover {
+    background-color: #cce5ff;
+}
