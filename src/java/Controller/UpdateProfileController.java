@@ -38,21 +38,26 @@ public class UpdateProfileController extends HttpServlet {
             HttpSession session = request.getSession();
             User user = (User) request.getSession().getAttribute("user");
             String username = user.getUsername();
-            
-            String passwordFromDatabase = UserService.getPasswordByUsername(username);
 
-            if (!curPassword.equals(passwordFromDatabase)) {
-                String errorMessage = "Mật khẩu hiện tại không đúng. Vui lòng thử lại.";
-                request.setAttribute("errorMessage", errorMessage);
-                request.getRequestDispatcher("updateacc.jsp").forward(request, response);
-            } else if (newPassword.length() < 6) {
-                String errorMessage = "Mật khẩu mới phải có ít nhất 6 ký tự.";
+            if (fullname.length() < 6 || fullname.length() > 30) {
+                String errorMessage = "Tên đầy đủ phải có từ 6 đến 30 ký tự.";
                 request.setAttribute("errorMessage", errorMessage);
                 request.getRequestDispatcher("updateacc.jsp").forward(request, response);
             } else {
-                // Update user information in the database (you can add your code here)
-                UserService.UpdateUser(fullname, email, phone, address, newPassword, username);
-                response.sendRedirect("homepage_customer.jsp");
+                String passwordFromDatabase = UserService.getPasswordByUsername(username);
+                if (!curPassword.equals(passwordFromDatabase)) {
+                    String errorMessage1 = "Mật khẩu hiện tại không đúng. Vui lòng thử lại.";
+                    request.setAttribute("errorMessage1", errorMessage1);
+                    request.getRequestDispatcher("updateacc.jsp").forward(request, response);
+                } else if (newPassword.length() < 6) {
+                    String errorMessage2 = "Mật khẩu mới phải có ít nhất 6 ký tự.";
+                    request.setAttribute("errorMessage2", errorMessage2);
+                    request.getRequestDispatcher("updateacc.jsp").forward(request, response);
+                } else {
+                    // Update user information in the database (you can add your code here)
+                    UserService.UpdateUser(fullname, email, phone, address, newPassword, username);
+                    response.sendRedirect("homepage_customer.jsp");
+                }
             }
         }
     }
