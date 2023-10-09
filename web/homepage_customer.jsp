@@ -31,7 +31,7 @@
                 <img class="logo"src="image/logo.png" alt="logo"/>
             </section>
             <nav class="logout">
-                <a href="#">Log out</a>
+                <a href="LogoutConntroller">Log out</a>
             </nav>
         </header>
         
