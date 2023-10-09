@@ -21,6 +21,11 @@ public class User {
     private int roleId;
     private int statusId;
 
+    public User(int userId, int roleId) {
+        this.userId = userId;
+        this.roleId = roleId;
+    }
+
    
     
 

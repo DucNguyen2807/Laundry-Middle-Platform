@@ -1,0 +1,36 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 9, 2023, 3:28:46 PM
+    Author     : nguye
+*/
+
+/* Tùy chỉnh kích thước của ô tìm kiếm */
+.search-input {
+    width: 150px;
+    height: 25px;
+}
+
+/* Tùy chỉnh kích thước của nút tìm kiếm */
+.search-button {
+    width: 80px;
+    height: 30px;
+}
+/* Tùy chỉnh kích thước của nút tìm kiếm */
+.btn-search {
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+}
+
+/* Tùy chỉnh màu nền của nút tìm kiếm */
+.btn-search {
+    background-color: #FF5733;
+}
+
+/* Tùy chỉnh màu chữ trên nút tìm kiếm */
+.btn-search {
+    color: white;
+}

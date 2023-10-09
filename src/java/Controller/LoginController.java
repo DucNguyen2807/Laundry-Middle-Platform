@@ -71,7 +71,7 @@ public class LoginController extends HttpServlet {
                         break;
                 }
             }
-            User user = UserService.getUser(username);// Lấy thông tin người dùng từ cơ sở dữ liệu
+            User user = UserService.getUser(username);
             request.getSession().setAttribute("user", user);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);

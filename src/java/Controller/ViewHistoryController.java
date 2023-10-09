@@ -5,6 +5,7 @@
 package Controller;
 
 import Model.Order;
+import Model.User;
 import Service.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,19 +38,18 @@ public class ViewHistoryController extends HttpServlet {
             String url = SHOWSEARCHCONTROLLER;
             String searchValue = request.getParameter("txtSearchValue");
             HttpSession session = request.getSession();
-
-
-            int userId = (int) session.getAttribute("UserID");
-            int roleid = (int) session.getAttribute("RoleID"); 
+            User user = (User) request.getSession().getAttribute("user");
+            int userId = user.getUserId();
+            int roleId = user.getRoleId();
             UserService ord = new UserService();
-            
+
             try {
                 if (!searchValue.isEmpty()) {
                     // Nếu có giá trị tìm kiếm, thực hiện tìm kiếm theo OrderID
-                    ord.searchByOrderID(searchValue, userId, roleid);
+                    ord.searchByOrderID(searchValue, userId, roleId);
                 } else {
                     // Nếu không có giá trị tìm kiếm, thực hiện truy vấn để lấy tất cả đơn đặt hàng
-                    ord.getAllOrders(userId, roleid);
+                    ord.getAllOrders(userId, roleId);
                 }
 
                 List<Order> result = ord.getListOrder();
@@ -62,19 +62,19 @@ public class ViewHistoryController extends HttpServlet {
                 rd.forward(request, response);
             }
         }
-}
+    }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-/**
- * Handles the HTTP <code>GET</code> method.
- *
- * @param request servlet request
- * @param response servlet response
- * @throws ServletException if a servlet-specific error occurs
- * @throws IOException if an I/O error occurs
- */
-@Override
-protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -88,7 +88,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response)
      * @throws IOException if an I/O error occurs
      */
     @Override
-protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -99,9 +99,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
      * @return a String containing servlet description
      */
     @Override
-public String getServletInfo() {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 
 }

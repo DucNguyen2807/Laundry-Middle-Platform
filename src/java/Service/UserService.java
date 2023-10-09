@@ -127,8 +127,6 @@ public class UserService implements Serializable {
                     Order order = new Order(orderID, serviceDetail, weight, totalPrice, note, dateApprove, dateComplete, timeComplete, customerName, storeName, staffName, stOrderDetail);
                     return order;
 }
-
-    
     public void searchByOrderID(String searchValue, int userId, int userRole) throws SQLException, ClassNotFoundException {
     Connection con = null;
     PreparedStatement stm = null;
@@ -341,6 +339,9 @@ public void getAllOrders(int userId, int userRole) throws SQLException, ClassNot
                     user.setFullname(rs.getString("Fullname"));
                     user.setEmail(rs.getString("Email"));
                     user.setaddress(rs.getString("address"));
+                    user.setRoleId(Integer.parseInt(rs.getString("RoleID")));
+                    user.setUserId(Integer.parseInt(rs.getString("UserID")));
+
                 }
             }
         } finally {
