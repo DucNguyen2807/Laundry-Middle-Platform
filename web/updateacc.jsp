@@ -74,7 +74,6 @@
                             <button class="btn btn-primary mr-3" value="Update" name="btAction">Save Changes</button>
                             <button class="btn border button">Cancel</button>
                         </form>
-
                     </div>
                 </div>
             </div>
