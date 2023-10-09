@@ -22,58 +22,62 @@
         <title>Cập nhật thông tin tài khoản</title>
     </head>
     <body>
+
         <h1 style="text-align: center">Update account</h1>
-            <form action="UpdateProfileController" method="POST">
-                <div class="wrapper bg-white mt-sm-5">
-                    <h4 class="pb-4 border-bottom">Account settings</h4>
-                    <div class="d-flex align-items-start py-3 border-bottom">
-                        <img src="image/Profile.jpg"
-                             class="img" alt="Tienngu">
-                        <div class="pl-sm-4 pl-2" id="img-section">
-                            <input style="border: none" type="text" name="username" value="${user.username}" readonly=""/>
-                            <p>Accepted file type .png. Less than 1MB</p>
-                            <button class="btn button border"><b>Upload</b></button>
-                        </div>
-                    </div>
-                    <div class="py-2">
-                        <div class="py-2">
-                            <label for="fullname">Full Name</label>
-                            <input type="text" class="bg-light form-control" name="fullname" value="${user.fullname}" >
-                        </div>
-                        <div class="py-2">
-
-                        </div>
-                        <div class="row py-2">
-                            <div class="col-md-6">
-                                <label for="email">Email Address</label>
-                                <input type="text" class="bg-light form-control" name="email" value="${user.email}">
-                            </div>
-                            <div class="col-md-6 pt-md-0 pt-3">
-                                <label for="phone">Phone Number</label>
-                                <input type="tel" class="bg-light form-control" name="phone" value="${user.phone}">
-                            </div>
-                        </div>
-
-                        <div class="py-2">
-                            <label for="Address">Address</label>
-                            <input type="address" class="bg-light form-control" name="address" value="${user.address}">
-                        </div>
-
-                        <div class="py-2">
-                            <label for="curPassword">Password</label>
-                            <input type="password" class="bg-light form-control" name="curpassword">
-                        </div>
-                        <div class="py-2">
-                            <label for="Password">New Password</label>
-                            <input type="password" class="bg-light form-control" name="password">
-                        </div>
-
-                        <div class="py-3 pb-4 border-bottom">
-                            <button class="btn btn-primary mr-3" name="btAction">Save Changes</button>
-                            <button class="btn border button">Cancel</button>
-                        </div>
+        <form action="UpdateProfileController" method="POST">
+            <div class="wrapper bg-white mt-sm-5">
+                <h4 class="pb-4 border-bottom">Account settings</h4>
+                <div class="d-flex align-items-start py-3 border-bottom">
+                    <img src="image/Profile.jpg"
+                         class="img" alt="Tienngu">
+                    <div class="pl-sm-4 pl-2" id="img-section">
+                        <input style="border: none" type="text" name="username" value="${user.username}" readonly=""/>
+                        <p>Accepted file type .png. Less than 1MB</p>
+                        <button class="btn button border"><b>Upload</b></button>
                     </div>
                 </div>
-            </form>
+                <div class="py-2">
+                    <div class="py-2">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" class="bg-light form-control" name="fullname" value="${user.fullname}" >
+                    </div>
+                    <div class="py-2">
+
+                    </div>
+                    <div class="row py-2">
+                        <div class="col-md-6">
+                            <label for="email">Email Address</label>
+                            <input type="text" class="bg-light form-control" name="email" value="${user.email}">
+                        </div>
+                        <div class="col-md-6 pt-md-0 pt-3">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" class="bg-light form-control" name="phone" value="${user.phone}">
+                        </div>
+                    </div>
+
+                    <div class="py-2">
+                        <label for="Address">Address</label>
+                        <input type="address" class="bg-light form-control" name="address" value="${user.address}">
+                    </div>
+
+                    <div class="py-2">
+                        <label for="curPassword">Password</label>
+                        <input type="password" class="bg-light form-control" name="curpassword">
+                    </div>
+                    <div class="py-2">
+                        <label for="Password">New Password</label>
+                        <input type="password" class="bg-light form-control" name="password">
+                    </div>
+
+                    <div class="py-3 pb-4 border-bottom">
+                        <form action="MainController" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn lưu thay đổi?');">
+                            <button class="btn btn-primary mr-3" value="Update" name="btAction">Save Changes</button>
+                            <button class="btn border button">Cancel</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </form>
     </body>
 </html>

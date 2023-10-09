@@ -368,14 +368,14 @@ public class UserService implements Serializable {
             con = ConnectDB.getConnection();
 
             if (con != null) {
-                String sql = "UPDATE users SET fullname=?, email=?, phone=?, address=?, password=? WHERE username=?";
+                String sql = "UPDATE [User] SET fullname=?, email=?, phone=?, address=?, password=? WHERE username=?";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, fullname);
                 ps.setString(2, email);
                 ps.setString(3, phone);
                 ps.setString(4, address);
                 ps.setString(5, password);
-                ps.setString(5, username);
+                ps.setString(6, username);
 
                 int row = ps.executeUpdate();
                 if (row > 0) {
@@ -402,10 +402,9 @@ public class UserService implements Serializable {
         try {
             con = ConnectDB.getConnection();
             if (con != null) {
-                String sql = "SELECT password FROM User WHERE username = ?";
+                String sql = "SELECT Password FROM [User] WHERE Username = ?";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, username);
-
                 rs = ps.executeQuery();
                 if (rs.next()) {
                     password = rs.getString("password");

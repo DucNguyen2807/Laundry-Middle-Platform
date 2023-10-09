@@ -23,7 +23,7 @@ public class MainController extends HttpServlet {
     private static final String LOGINCONTROLLER = "LoginController";
     private static final String REGISTERCONTROLLER = "RegisterController";
     private static final String VIEWHISORYCONTROLLER = "ViewHistoryController";
-
+    private static final String UPDATEPROFILECONTROLLER = "UpdateProfileController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,6 +40,8 @@ public class MainController extends HttpServlet {
                 url = REGISTERCONTROLLER;
             } else if (button.equals("Search")) {
                 url = VIEWHISORYCONTROLLER;
+            }else if (button.equals("Update")) {
+                url = UPDATEPROFILECONTROLLER;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
