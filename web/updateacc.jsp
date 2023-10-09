@@ -68,7 +68,7 @@
                     <div class="py-2">
                         <label for="curPassword">Password</label>
                         <input type="password" class="bg-light form-control" name="curpassword">
-                        <c:if test="${not empty errorMessage}">
+                        <c:if test="${not empty errorMessage1}">
                             <div class="alert alert-danger">
                                 <strong>Lỗi:</strong> <c:out value="${errorMessage1}" />
                             </div>
@@ -77,7 +77,7 @@
                     <div class="py-2">
                         <label for="Password">New Password</label>
                         <input type="password" class="bg-light form-control" name="password">
-                        <c:if test="${not empty errorMessage}">
+                        <c:if test="${not empty errorMessage2}">
                             <div class="alert alert-danger">
                                 <strong>Lỗi:</strong> <c:out value="${errorMessage2}" />
                             </div>
