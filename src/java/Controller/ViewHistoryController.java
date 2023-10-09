@@ -39,17 +39,17 @@ public class ViewHistoryController extends HttpServlet {
             HttpSession session = request.getSession();
 
 
-            int userId = (int) session.getAttribute("userId");
-            int userRole = (int) session.getAttribute("userRole"); 
+            int userId = (int) session.getAttribute("UserID");
+            int roleid = (int) session.getAttribute("RoleID"); 
             UserService ord = new UserService();
             
             try {
                 if (!searchValue.isEmpty()) {
                     // Nếu có giá trị tìm kiếm, thực hiện tìm kiếm theo OrderID
-                    ord.searchByOrderID(searchValue, userId, userRole);
+                    ord.searchByOrderID(searchValue, userId, roleid);
                 } else {
                     // Nếu không có giá trị tìm kiếm, thực hiện truy vấn để lấy tất cả đơn đặt hàng
-                    ord.getAllOrders(userId, userRole);
+                    ord.getAllOrders(userId, roleid);
                 }
 
                 List<Order> result = ord.getListOrder();
