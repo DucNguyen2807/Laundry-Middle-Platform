@@ -21,6 +21,7 @@
                 <a href="updateacc.jsp">Profile</a>
                 <a href="#">Order</a>
                 <a href="#">Store</a>
+                
             </nav>
             <section>
                 <img class="logo"src="image/logo.png" alt="logo"/>

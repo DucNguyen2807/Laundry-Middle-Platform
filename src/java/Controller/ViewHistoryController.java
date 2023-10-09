@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,16 +36,20 @@ public class ViewHistoryController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String url = SHOWSEARCHCONTROLLER;
             String searchValue = request.getParameter("txtSearchValue");
+            HttpSession session = request.getSession();
 
+
+            int userId = (int) session.getAttribute("userId");
+            int userRole = (int) session.getAttribute("userRole"); 
             UserService ord = new UserService();
-
+            
             try {
                 if (!searchValue.isEmpty()) {
                     // Nếu có giá trị tìm kiếm, thực hiện tìm kiếm theo OrderID
-                    ord.searchByOrderID(searchValue);
+                    ord.searchByOrderID(searchValue, userId, userRole);
                 } else {
                     // Nếu không có giá trị tìm kiếm, thực hiện truy vấn để lấy tất cả đơn đặt hàng
-                    ord.getAllOrders();
+                    ord.getAllOrders(userId, userRole);
                 }
 
                 List<Order> result = ord.getListOrder();
