@@ -44,11 +44,11 @@ public class UpdateProfileController extends HttpServlet {
             if (!curPassword.equals(passwordFromDatabase)) {
                 String errorMessage = "Mật khẩu hiện tại không đúng. Vui lòng thử lại.";
                 request.setAttribute("errorMessage", errorMessage);
-                request.getRequestDispatcher("updateuser.jsp").forward(request, response);
+                request.getRequestDispatcher("updateacc.jsp").forward(request, response);
             } else if (newPassword.length() < 6) {
                 String errorMessage = "Mật khẩu mới phải có ít nhất 6 ký tự.";
                 request.setAttribute("errorMessage", errorMessage);
-                request.getRequestDispatcher("updateuser.jsp").forward(request, response);
+                request.getRequestDispatcher("updateacc.jsp").forward(request, response);
             } else {
                 // Update user information in the database (you can add your code here)
                 UserService.UpdateUser(fullname, email, phone, address, newPassword, username);

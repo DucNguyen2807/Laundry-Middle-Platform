@@ -1,0 +1,130 @@
+.footer{
+    background-color: #31b0d5;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+.container-fluid .anh1 img{
+    width: 100%;
+    height: 100%;
+}
+.mybody{
+    text-align: center;
+}
+.mybody .sanpham{
+    text-align: left;
+}
+.mybody .sanpham img{
+    width: 100%;
+    height: 100%;
+}
+.mybody .combo p{
+    font-size: 20px;
+    color: #C9C9CA;
+}
+#sanpham1{
+    background-color: #DADADA ;
+}
+#sanpham1 p{
+    padding: 3px 0px;
+    margin: 10px;
+}
+#sanpham1 #first_line1{
+    border-bottom: 2px dashed gray;
+}
+#sanpham2{
+    background-color: #DADADA ;
+}
+#sanpham2 p{
+    padding: 3px 0px;
+    margin: 10px;
+}
+#sanpham2 #first_line2{
+    border-bottom: 2px dashed gray;
+}
+#sanpham3{
+    background-color: #DADADA ;
+}
+#sanpham3 p{
+    padding: 3px 0px;
+    margin: 10px;
+}
+#sanpham3 #first_line3{
+    border-bottom: 2px dashed gray;
+}
+.mybody .orderonline p{
+    font-size: 23px;
+    color: #C9C9CA;
+
+}
+#image1{
+    width: 100%;
+    height: 100%;
+}
+#image2{
+    width: 100%;
+    height: 100%;
+}
+#image3{
+    width: 100%;
+    height: 100%;
+}
+.mybody .order{
+    margin: 20px 0px;
+}
+#class2{
+    background-color: #DADADA;
+    text-align: left;
+}
+#class3{
+    background-color: #DADADA;
+    text-align: left;
+}
+#class2 p{
+    padding: 3px 0px;
+    margin: 10px;
+}
+#class3 p{
+    padding: 3px 0px;
+    margin: 10px;
+}
+#first_one1{
+    border-bottom: 2px dashed gray;
+}
+#first_one2{
+    border-bottom: 2px dashed gray;
+}
+.col-md-3{
+    box-sizing: border-box;
+    /* padding: 10px; */
+    margin: 0px;
+    /* width; */
+}
+.col-md-3 > div{
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+.mybody .task1 .relative{
+    position: absolute;
+    bottom: 0px;
+    color: white;
+    text-align: left;
+    padding-left: 20px;
+    /* width: inherit; */
+    background-color: rgba(0,0,0,0.5);
+    height: auto;
+    width: 100%;
+}
+.mybody .task1 .relative h3{
+    font-size: 20px;
+}
+.mybody .task1 .relative p{
+    font-size: 14px;
+}
+
+.mybody .task1 img{
+    height: 100%;
+    width: 100%;
+    /* padding: 10px; */
+}
