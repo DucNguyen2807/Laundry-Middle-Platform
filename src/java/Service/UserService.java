@@ -89,159 +89,160 @@ public class UserService implements Serializable {
     public List<Order> getListOrder() {
         return listOrder;
     }
-    
+
     private Order createOrderFromResultSet(ResultSet rs) throws SQLException {
-    String orderID = String.valueOf(rs.getInt("OrderID"));
-                    String serviceDetail = rs.getString("ServiceDetail");
-                    String weight = String.valueOf(rs.getDouble("Weight"));
-                    String totalPrice = String.valueOf(rs.getDouble("TotaPrice"));
-                    String note = rs.getString("Note");
-                    String dateApprove = rs.getDate("DateApprove").toString();
-                    String dateComplete;
-                    Date dateCompleteValue = rs.getDate("DateCompleted");
-                    if (rs.wasNull()) {
-                        dateComplete = "NULL";
-                    } else {
-                        dateComplete = dateCompleteValue.toString();
-                    }
+        String orderID = String.valueOf(rs.getInt("OrderID"));
+        String serviceDetail = rs.getString("ServiceDetail");
+        String weight = String.valueOf(rs.getDouble("Weight"));
+        String totalPrice = String.valueOf(rs.getDouble("TotaPrice"));
+        String note = rs.getString("Note");
+        String dateApprove = rs.getDate("DateApprove").toString();
+        String dateComplete;
+        Date dateCompleteValue = rs.getDate("DateCompleted");
+        if (rs.wasNull()) {
+            dateComplete = "NULL";
+        } else {
+            dateComplete = dateCompleteValue.toString();
+        }
 
-                    String timeComplete;
-                    Time timeCompleteValue = rs.getTime("TimeComplete");
-                    if (rs.wasNull()) {
-                        timeComplete = "NULL";
-                    } else {
-                        timeComplete = timeCompleteValue.toString();
-                    }
-                    String customerName = rs.getString("CustomerName");
-                    String storeName = rs.getString("StoreName");
-                    String staffName;
-                    String staffNameValue = rs.getString("StaffName");
-                    if (rs.wasNull()) {
-                        staffName = "NULL";
-                    } else {
-                        staffName = staffNameValue;
-                    }
+        String timeComplete;
+        Time timeCompleteValue = rs.getTime("TimeComplete");
+        if (rs.wasNull()) {
+            timeComplete = "NULL";
+        } else {
+            timeComplete = timeCompleteValue.toString();
+        }
+        String customerName = rs.getString("CustomerName");
+        String storeName = rs.getString("StoreName");
+        String staffName;
+        String staffNameValue = rs.getString("StaffName");
+        if (rs.wasNull()) {
+            staffName = "NULL";
+        } else {
+            staffName = staffNameValue;
+        }
 
-                    String stOrderDetail = rs.getString("StOrderDetail");
+        String stOrderDetail = rs.getString("StOrderDetail");
 
-                    Order order = new Order(orderID, serviceDetail, weight, totalPrice, note, dateApprove, dateComplete, timeComplete, customerName, storeName, staffName, stOrderDetail);
-                    return order;
-}
+        Order order = new Order(orderID, serviceDetail, weight, totalPrice, note, dateApprove, dateComplete, timeComplete, customerName, storeName, staffName, stOrderDetail);
+        return order;
+    }
+
     public void searchByOrderID(String searchValue, int userId, int userRole) throws SQLException, ClassNotFoundException {
-    Connection con = null;
-    PreparedStatement stm = null;
-    ResultSet rs = null;
-    listOrder = new ArrayList<>(); // Đảm bảo listOrder là một danh sách rỗng
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        listOrder = new ArrayList<>(); // Đảm bảo listOrder là một danh sách rỗng
 
-    try {
-        con = ConnectDB.getConnection();
-        if (con != null) {
-            String sql;
+        try {
+            con = ConnectDB.getConnection();
+            if (con != null) {
+                String sql;
 
-            if (userRole < 4) {
-                // Nếu vai trò của người dùng là nhỏ hơn 4 (có quyền xem đơn hàng của chính họ)
+                if (userRole < 4) {
+                    // Nếu vai trò của người dùng là nhỏ hơn 4 (có quyền xem đơn hàng của chính họ)
                     sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
-                        + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
-                        + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
-                        + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
-                        + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
-                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
-                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
-                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
-                        + " WHERE OrderID = ? AND CustomerID = ?";
-                stm = con.prepareStatement(sql);
-                stm.setInt(1, Integer.parseInt(searchValue));
-                stm.setInt(2, userId);
-            } else if (userRole >= 4) {
-                // Nếu vai trò của người dùng là lớn hơn hoặc bằng 4 (quản trị viên)
-                sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
-                        + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
-                        + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
-                        + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
-                        + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
-                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
-                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
-                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
-                        + " WHERE OrderID = ?";
-                stm = con.prepareStatement(sql);
-                stm.setInt(1, Integer.parseInt(searchValue));
-            }
+                            + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
+                            + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
+                            + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
+                            + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
+                            + " WHERE OrderID = ? AND CustomerID = ?";
+                    stm = con.prepareStatement(sql);
+                    stm.setInt(1, Integer.parseInt(searchValue));
+                    stm.setInt(2, userId);
+                } else if (userRole >= 4) {
+                    // Nếu vai trò của người dùng là lớn hơn hoặc bằng 4 (quản trị viên)
+                    sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                            + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
+                            + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
+                            + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
+                            + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
+                            + " WHERE OrderID = ?";
+                    stm = con.prepareStatement(sql);
+                    stm.setInt(1, Integer.parseInt(searchValue));
+                }
 
-            rs = stm.executeQuery();
-            while (rs.next()) {
-                // Xử lý kết quả và tạo danh sách đơn hàng
-                Order order = createOrderFromResultSet(rs);
-                listOrder.add(order);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    // Xử lý kết quả và tạo danh sách đơn hàng
+                    Order order = createOrderFromResultSet(rs);
+                    listOrder.add(order);
+                }
             }
-        }
-    } finally {
-        // Đóng tài nguyên
-        if (rs != null) {
-            rs.close();
-        }
-        if (stm != null) {
-            stm.close();
-        }
-        if (con != null) {
-            con.close();
+        } finally {
+            // Đóng tài nguyên
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         }
     }
-}
 
-public void getAllOrders(int userId, int userRole) throws SQLException, ClassNotFoundException {
-    Connection con = null;
-    PreparedStatement stm = null;
-    ResultSet rs = null;
-    listOrder = new ArrayList<>(); 
+    public void getAllOrders(int userId, int userRole) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        listOrder = new ArrayList<>();
 
-    try {
-        con = ConnectDB.getConnection();
-        if (con != null) {
-            String sql;
+        try {
+            con = ConnectDB.getConnection();
+            if (con != null) {
+                String sql;
 
-            if (userRole < 4) {
-                sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
-                        + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
-                        + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
-                        + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
-                        + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
-                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
-                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
-                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
-                        + " WHERE CustomerID = ?";
-                stm = con.prepareStatement(sql);
-                stm.setInt(1, userId);
-            } else if (userRole >= 4) {
-                sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
-                        + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
-                        + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
-                        + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
-                        + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
-                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
-                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
-                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n";
-                stm = con.prepareStatement(sql);
+                if (userRole < 4) {
+                    sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                            + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
+                            + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
+                            + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
+                            + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
+                            + " WHERE CustomerID = ?";
+                    stm = con.prepareStatement(sql);
+                    stm.setInt(1, userId);
+                } else if (userRole >= 4) {
+                    sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                            + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
+                            + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
+                            + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
+                            + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n";
+                    stm = con.prepareStatement(sql);
+                }
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    // Xử lý kết quả và tạo danh sách đơn hàng
+                    Order order = createOrderFromResultSet(rs);
+                    listOrder.add(order);
+                }
             }
-            rs = stm.executeQuery();
-            while (rs.next()) {
-                // Xử lý kết quả và tạo danh sách đơn hàng
-                Order order = createOrderFromResultSet(rs);
-                listOrder.add(order);
+        } finally {
+            // Đóng tài nguyên
+            if (rs != null) {
+                rs.close();
             }
-        }
-    } finally {
-        // Đóng tài nguyên
-        if (rs != null) {
-            rs.close();
-        }
-        if (stm != null) {
-            stm.close();
-        }
-        if (con != null) {
-            con.close();
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         }
     }
-}
 
     public static boolean insert(String username, String password, String phone, String fullname, String roleid) throws ClassNotFoundException, SQLException {
         Connection con = null;
@@ -357,6 +358,73 @@ public void getAllOrders(int userId, int userRole) throws SQLException, ClassNot
         }
 
         return user;
+    }
+
+    public static boolean UpdateUser(String fullname, String email, String phone, String address, String password, String username) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "UPDATE users SET fullname=?, email=?, phone=?, address=?, password=? WHERE username=?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, fullname);
+                ps.setString(2, email);
+                ps.setString(3, phone);
+                ps.setString(4, address);
+                ps.setString(5, password);
+                ps.setString(5, username);
+
+                int row = ps.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public static String getPasswordByUsername(String username) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String password = null;
+
+        try {
+            con = ConnectDB.getConnection();
+            if (con != null) {
+                String sql = "SELECT password FROM User WHERE username = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, username);
+
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    password = rs.getString("password");
+                }
+            }
+        } finally {
+            // Close database resources in the reverse order of their creation
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return password;
     }
 
 }
