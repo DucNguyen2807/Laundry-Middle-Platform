@@ -13,5 +13,6 @@
     </head>
     <body>
         <h1>home page store</h1>
+        <a href="LogoutConntroller">Log out</a>
     </body>
 </html>

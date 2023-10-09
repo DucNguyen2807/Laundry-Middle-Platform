@@ -13,5 +13,6 @@
     </head>
     <body>
         <h1>Home page admin</h1>
+        <a href="LogoutConntroller">Log out</a>
     </body>
 </html>
