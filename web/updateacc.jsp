@@ -52,11 +52,16 @@
                     <div class="row py-2">
                         <div class="col-md-6">
                             <label for="email">Email Address</label>
-                            <input type="text" class="bg-light form-control" name="email" value="${user.email}">
+                            <input type="text" class="bg-light form-control" name="email" value="${user.email}" pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$" required>
                         </div>
                         <div class="col-md-6 pt-md-0 pt-3">
                             <label for="phone">Phone Number</label>
                             <input type="tel" class="bg-light form-control" name="phone" value="${user.phone}">
+                            <c:if test="${not empty errorMessage3}">
+                                <div class="alert alert-danger">
+                                    <strong>Lỗi:</strong> <c:out value="${errorMessage3}" />
+                                </div>
+                            </c:if>
                         </div>
                     </div>
 

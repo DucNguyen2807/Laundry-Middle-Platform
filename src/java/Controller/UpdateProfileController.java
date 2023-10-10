@@ -53,6 +53,10 @@ public class UpdateProfileController extends HttpServlet {
                     String errorMessage2 = "Mật khẩu mới phải có ít nhất 6 ký tự.";
                     request.setAttribute("errorMessage2", errorMessage2);
                     request.getRequestDispatcher("updateacc.jsp").forward(request, response);
+                } else if (!phone.matches("^0[0-9]{9,12}")) {
+                    String errorMessage3 = "Số điện thoại không hợp lệ";
+                    request.setAttribute("errorMessage3", errorMessage3);
+                    request.getRequestDispatcher("updateacc.jsp").forward(request, response);
                 } else {
                     // Update user information in the database (you can add your code here)
                     UserService.UpdateUser(fullname, email, phone, address, newPassword, username);
