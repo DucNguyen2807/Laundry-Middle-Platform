@@ -40,7 +40,6 @@
                 <thead>
                     <tr>
                         <th scope="col">No.</th>
-                        <th scope="col">OrderID</th>
                         <th scope="col">Service</th>
                         <th scope="col">Weight</th>
                         <th scope="col">TotalPrice</th>
@@ -62,7 +61,6 @@
                 <form action="MainController" method="post">
                     <tr>
                         <td><%= ++count%></td>
-                        <td><%= ord.getOrderID()%><input type="hidden" name="txtOrderID" value="<%= ord.getOrderID()%>"></td>
                         <td><%= ord.getServiceDetail()%></td>
                         <td><%= ord.getWeight()%></td>
                         <td><%= ord.getTotalPrice()%></td>
