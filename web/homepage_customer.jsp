@@ -20,7 +20,7 @@
             <nav class="menu">
                 <a href="updateacc.jsp">Profile</a>
                 <a href="#">Order</a>
-                <a href="#">Store</a>
+                <a href="admin.jsp">Store</a>
             </nav>
             <section>
                 <img class="logo"src="image/logo.png" alt="logo"/>

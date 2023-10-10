@@ -4,50 +4,65 @@
  */
 package Controller;
 
+import Model.Staff;
+import Service.StaffService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author khait
  */
-public class MainController extends HttpServlet {
+public class ViewStaffController extends HttpServlet {
 
-    private static final String LOGINPAGE = "login.jsp";
-    //private static final String HOMEPAGE = "homepage.html";
-    private static final String LOGINCONTROLLER = "LoginController";
-    private static final String REGISTERCONTROLLER = "RegisterController";
-    private static final String VIEWHISORYCONTROLLER = "ViewHistoryController";
-    private static final String UPDATEPROFILECONTROLLER = "UpdateProfileController";
-    private static final String VIEWSTAFFCONTROLLER = "ViewStaffController";
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    private final String VIEWSTAFF = "viewstaff.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String url = "";
-            String button = request.getParameter("btAction");
-            if (button == null) {
-                url = LOGINPAGE;
-            } else if (button.equals("Login")) {
-                url = LOGINCONTROLLER;
-            } else if (button.equals("Register")) {
-                url = REGISTERCONTROLLER;
-            } else if (button.equals("Search")) {
-                url = VIEWHISORYCONTROLLER;
-            } else if (button.equals("Update")) {
-                url = UPDATEPROFILECONTROLLER;
-            } else if (button.equals("StaffSearch")) {
-                url = VIEWSTAFFCONTROLLER;
+
+            String url = VIEWSTAFF;
+            String searchValue = request.getParameter("txtSearchStaff");
+            //HttpSession session = request.getSession();
+            //Staff staff = (Staff) request.getSession().getAttribute("staff");
+            //String name = staff.getFullname();
+
+            StaffService staffSer = new StaffService();
+
+            try {
+                if (!searchValue.isEmpty()) {
+                    staffSer.searchStaffByName(searchValue);
+                } else {
+                    staffSer.getStaff();
+                }
+
+                List<Staff> result = staffSer.getListStaff();
+                request.setAttribute("SEARCHRESULT", result);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             }
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
         }
     }
 
