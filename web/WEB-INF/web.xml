@@ -12,6 +12,14 @@
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>Controller.RegisterController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewStaffController</servlet-name>
+        <servlet-class>Controller.ViewStaffController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewStoreController</servlet-name>
+        <servlet-class>Controller.ViewStoreController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -23,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/RegisterController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewStaffController</servlet-name>
+        <url-pattern>/ViewStaffController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewStoreController</servlet-name>
+        <url-pattern>/ViewStoreController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

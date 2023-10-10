@@ -343,7 +343,7 @@ public class UserService implements Serializable {
                     user.setPhone(rs.getString("Phone"));
                     user.setFullname(rs.getString("Fullname"));
                     user.setEmail(rs.getString("Email"));
-                    user.setaddress(rs.getString("address"));
+                    user.setaddress(rs.getString("Address"));
                     user.setRoleId(Integer.parseInt(rs.getString("RoleID")));
                     user.setUserId(Integer.parseInt(rs.getString("UserID")));
 
