@@ -37,23 +37,15 @@
                             <ul class="nav navbar-nav" >
 
                                 <li class="active"> <a href="homepage1.html" > <span class="glyphicon glyphicon-home"></span>
-                                        Home</a> </li>
-
-                                <li><a href="#" style="color: #ffffff">Home</a></li>
+                                        Home</a></li>
                                 <li><a href="#" style="color: #ffffff">Profile</a></li>
                                 <li><a href="admin.jsp" style="color: #ffffff">Manage</a></li>
                                 <li> <a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope" ></span> Contact</a>
                                 </li>
                             </ul>
-
-
-                            <form class="navbar-form navbar-right" role="search">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                </div>
-                                <button type="submit" class="btn btn-default">Search</button>
-                            </form>
-
+                            <ul class="nav navbar-nav" >
+                            <li><a href="login.jsp" style="color: #ffffff">Logout</a></li>
+                            </ul>
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
                 </nav>
@@ -79,19 +71,113 @@
 
             <div class="row">
 
-                <div class="col-md-12">
+<!--                <div class="col-md-12" >
 
-                    <h2>Services</h2>
-
-                </div>
+                    <form class="navbar-form navbar-right" role="search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                </div>
+                        
+                                <button type="submit" class="btn btn-default">Search</button>
+                            </form> 
+                </div>-->
 
             </div>
 
-            <div class="row task1">	
+                        <div class="row combo">
+
+                <div class="col-md-12">
+
+                    <h2>Quy trinh 4 buoc</h2>
+                    <p>During the promotion period, let's wash your shoes!</p>
+                </div>
+
+            </div>
+            
+            <div class="row sanpham">
+
+                <div class="col-md-3 ">
+
+                    <div id="sanpham1">
+
+                        <img src="image/b1.jpg" />
+                        <p id="first_line1">COMBO laundry 3 get 1 free</p>
+                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
+                                Branch</span> </p>
+                        <p>Price: <del> 200.000 vnd </del> <span style="color: #F72B2F; margin-left:10px; ">150.000
+                                vn?</span></p>
+
+
+                    </div>
+
+                </div>
 
                 <div class="col-md-3">
-                    <div>
 
+                    <div id="sanpham2">
+
+                        <img src="image/b2.png" />
+                        <p id="first_line2">COMBO laundry 3 get 1 free</p>
+                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
+                                Branch</span> </p>
+                        <p>Price: <del>500.000 vnd </del> <span style="color: #F72B2F; margin-left:10px; ">450.000
+                                vn?</span></p>
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div id="sanpham3">
+
+                        <img src="image/b3.jpg"/>
+                        <p id="first_line3">COMBO laundry 3 get 1 free</p>
+                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
+                                Branch</span> </p>
+                        <p>Price: <del>150.000 vnd </del> <span style="color: #F72B2F; margin-left:10px; ">100.000
+                                vn?</span></p>
+
+
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+
+                    <div id="sanpham3">
+
+                        <img src="image/b4.jpg" />
+                        <p id="first_line3">COMBO laundry 3 get 1 free</p>
+                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
+                                Branch</span> </p>
+                        <p>Price: <del>150.000 vnd </del> <span style="color: #F72B2F; margin-left:10px; ">100.000
+                                vn?</span></p>
+
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+               
+            
+            <div class="row task1">	
+
+                            <div class="row combo">
+
+                <div class="col-md-12">
+
+                    <h2>Quy trinh 4 buoc</h2>
+                    <p>During the promotion period, let's wash your shoes!</p>
+                </div>
+
+            </div>
+                
+                <div class="col-md-3">
+                    <div>
                         <img src="image/service.jpg" />
                         <div class="relative">
                             <h3>Cheap Shoe Washing</h3>
@@ -148,87 +234,6 @@
 
 
             </div>
-
-            <div class="row combo">
-
-                <div class="col-md-12">
-
-                    <h2>Quy tri?nh 4 b???c</h2>
-                    <p>During the promotion period, let's wash your shoes!</p>
-                </div>
-
-            </div>
-
-            <div class="row sanpham">
-
-                <div class="col-md-3 ">
-
-                    <div id="sanpham1">
-
-                        <img src="image/b1.jpg" />
-                        <p id="first_line1">COMBO laundry 3 get 1 free</p>
-                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
-                                Branch</span> </p>
-                        <p>Price: <del> 200.000 vn? </del> <span style="color: #F72B2F; margin-left:10px; ">150.000
-                                vn?</span></p>
-
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <div id="sanpham2">
-
-                        <img src="image/b2.png" />
-                        <p id="first_line2">COMBO laundry 3 get 1 free</p>
-                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
-                                Branch</span> </p>
-                        <p>Price: <del>500.000 vn? </del> <span style="color: #F72B2F; margin-left:10px; ">450.000
-                                vn?</span></p>
-
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <div id="sanpham3">
-
-                        <img src="image/b3.jpg"/>
-                        <p id="first_line3">COMBO laundry 3 get 1 free</p>
-                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
-                                Branch</span> </p>
-                        <p>Price: <del>150.000 vn? </del> <span style="color: #F72B2F; margin-left:10px; ">100.000
-                                vn?</span></p>
-
-
-                    </div>
-
-                </div>
-                <div class="col-md-3">
-
-                    <div id="sanpham3">
-
-                        <img src="image/b4.jpg" />
-                        <p id="first_line3">COMBO laundry 3 get 1 free</p>
-                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
-                                Branch</span> </p>
-                        <p>Price: <del>150.000 vn? </del> <span style="color: #F72B2F; margin-left:10px; ">100.000
-                                vn?</span></p>
-
-
-                    </div>
-
-                </div>
-
-
-
-            </div>
-
-
             <div class="row orderonline">
 
                 <div class="col-md-12">
