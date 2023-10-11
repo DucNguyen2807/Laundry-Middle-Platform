@@ -13,9 +13,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <!-- Đường dẫn đến Bootstrap CSS -->
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Đường dẫn đến tệp CSS tùy chỉnh -->
-        <link href="css/custom.css" rel="stylesheet" type="text/css">
+                <link href="css/custom.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <div class="container mt-5">
@@ -88,5 +88,7 @@
                 }
             %>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </body>
 </html>
