@@ -1,101 +1,311 @@
-<%-- 
-    Document   : homepage_customer
-    Created on : Oct 8, 2023, 3:12:53 PM
-    Author     : khait
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home Page</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <link rel="stylesheet" href="css/homepagecus.css"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <header class="header">
-            <nav class="menu">
-                <a href="updateacc.jsp">Profile</a>
-                <a href="#">Order</a>
-                <a href="admin.jsp">Store</a>
-            </nav>
-                <form action="MainController" method="post">
-        <input type="hidden" name="txtSearchValue" value="" />
-        <input type="submit" value="Search" name="btAction" />
-    </form>
 
-            <section>
-                <img class="logo"src="image/logo.png" alt="logo"/>
-            </section>
-            <nav class="logout">
-                <a href="LogoutConntroller">Log out</a>
-            </nav>
-        </header>
-        
-        <main>
-                <div class="banner">
-                    <img src="image/banner.jpg" alt="banner">
+    <head>
+        <title>Laundry Middle Platform</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/styleindex.css" rel="stylesheet" >
+        <style>
+        </style>
+    </head>
+
+    <body>
+
+        <div class="container-fluid">
+
+            <div class="row" style="background-color: #22638f">
+
+                <nav class="navbar navbar-inverse bg-primary" role="navigation">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav" >
+
+                                <li class="active"> <a href="homepage1.html" > <span class="glyphicon glyphicon-home"></span>
+                                        Home</a> </li>
+
+                                <li><a href="#" style="color: #ffffff">Home</a></li>
+                                <li><a href="#" style="color: #ffffff">Profile</a></li>
+                                <li><a href="admin.jsp" style="color: #ffffff">Manage</a></li>
+                                <li> <a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope" ></span> Contact</a>
+                                </li>
+                            </ul>
+
+
+                            <form class="navbar-form navbar-right" role="search">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Search">
+                                </div>
+                                <button type="submit" class="btn btn-default">Search</button>
+                            </form>
+
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+
+            </div>
+
+
+            <div class="row anh1">
+
+                <div class="col-md-12">
+
+                    <img src="image/banner.jpg" />
+
                 </div>
-            
-            <h2>Sản phẩm mới</h2>
-            <section class="store">
-                <ul>
-                    <li>
-                        <a href="#">
-                            <img src="image/product1.jpg" alt="product1">
-                            <h3>Sản phẩm 1</h3>
-                            <p>Mô tả sản phẩm 1</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="image/product2.jpg" alt="product2">
-                            <h3>Sản phẩm 2</h3>
-                            <p>Mô tả sản phẩm 2</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="image/product3.jpg" alt="product3">
-                            <h3>Sản phẩm 3</h3>
-                            <p>Mô tả sản phẩm 3</p>
-                        </a>
-                    </li>
-                </ul>
-            </section>
-            
-            <section class="promotions">
-                <h2>Khuyến mãi</h2>
-                <ul>
-                    <li>
-                        <a href="#">
-                            <img src="image/promotion1.jpg" alt="promotion1">
-                            <h3>Khuyến mãi 1</h3>
-                            <p>Thông tin khuyến mãi 1</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="image/promotion2.jpg" alt="promotion2">
-                            <h3>Khuyến mãi 2</h3>
-                            <p>Thông tin khuyến mãi 2</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="image/promotion3.jpg" alt="promotion3">
-                            <h3>Khuyến mãi 3</h3>
-                            <p>Thông tin khuyến mãi 3</p>
-                        </a>
-                    </li>
-                </ul>
-            </section>
-        </main>
-        <footer>
-            Copyright &copy; 2023
-        </footer>
+
+            </div>
+
+
+        </div>
+        <!--K?t th�c container-fluid-->
+
+        <div class="container mybody">
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <h2>Services</h2>
+
+                </div>
+
+            </div>
+
+            <div class="row task1">	
+
+                <div class="col-md-3">
+                    <div>
+
+                        <img src="image/service.jpg" />
+                        <div class="relative">
+                            <h3>Cheap Shoe Washing</h3>
+                            <p>Perfect quality</p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-3">
+                    <div>
+                        <img src="image/service.jpg" />
+                        <div class="relative">
+                            <h3>Cheap Repaint</h3>
+                            <p>The best quality</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+                    <div >
+
+                        <img src="image/service.jpg" />
+                        <div class="relative">
+                            <h3>Cheap shoe sole stickers</h3>
+                            <p>Absolute shoe sole protection</p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="col-md-3">
+                    <div >
+
+                        <img src="image/service.jpg" />
+                        <div class="relative">
+                            <h3>Glue Shoes</h3>
+                            <p>Reliable quality</p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+            <div class="row combo">
+
+                <div class="col-md-12">
+
+                    <h2>Quy tri?nh 4 b???c</h2>
+                    <p>During the promotion period, let's wash your shoes!</p>
+                </div>
+
+            </div>
+
+            <div class="row sanpham">
+
+                <div class="col-md-3 ">
+
+                    <div id="sanpham1">
+
+                        <img src="image/b1.jpg" />
+                        <p id="first_line1">COMBO laundry 3 get 1 free</p>
+                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
+                                Branch</span> </p>
+                        <p>Price: <del> 200.000 vn? </del> <span style="color: #F72B2F; margin-left:10px; ">150.000
+                                vn?</span></p>
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div id="sanpham2">
+
+                        <img src="image/b2.png" />
+                        <p id="first_line2">COMBO laundry 3 get 1 free</p>
+                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
+                                Branch</span> </p>
+                        <p>Price: <del>500.000 vn? </del> <span style="color: #F72B2F; margin-left:10px; ">450.000
+                                vn?</span></p>
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div id="sanpham3">
+
+                        <img src="image/b3.jpg"/>
+                        <p id="first_line3">COMBO laundry 3 get 1 free</p>
+                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
+                                Branch</span> </p>
+                        <p>Price: <del>150.000 vn? </del> <span style="color: #F72B2F; margin-left:10px; ">100.000
+                                vn?</span></p>
+
+
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+
+                    <div id="sanpham3">
+
+                        <img src="image/b4.jpg" />
+                        <p id="first_line3">COMBO laundry 3 get 1 free</p>
+                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
+                                Branch</span> </p>
+                        <p>Price: <del>150.000 vn? </del> <span style="color: #F72B2F; margin-left:10px; ">100.000
+                                vn?</span></p>
+
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+            <div class="row orderonline">
+
+                <div class="col-md-12">
+
+                    <h2>SPECIAL ORDER ONLINE</h2>
+                    <p>Surprisingly cheap and freeship</p>
+                </div>
+
+            </div>
+
+            <div class="row order">
+
+                <div class="col-md-6">
+
+                    <div>
+
+                        <img id="image1" src="image/logo.png" />
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div id="class2">
+
+                        <img id="image2" src="image/sale20.png"  />
+                        <p id="first_one1">Order online 20% off</p>
+                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
+                                Branch</span> </p>
+                        <p><del>100% </del> <span style="color: #F72B2F; margin-left:10px; ">80%</span></p>
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div id="class3">
+
+                        <img id="image3" src="image/camau.jpg" />
+                        <p id="first_one2">Free shipping under 3km</p>
+                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
+                                Branch</span> </p>
+                        <p><del>60.000 vn? </del> <span style="color: #F72B2F; margin-left:10px; ">0 vn?</span></p>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+        <div class="container-fluid" >
+
+            <div class="row footer">
+
+                <div>
+
+                    <p>Email : Tiennvse171676</p>
+                    <p>Address: 100 Vuon Lai, Tan Phu District, HCMC</p>
+                    <h5>&copy; Copyright 2023. Laundry Middle Platform</h5>
+                </div>
+
+            </div>
+
+        </div>
+
+        <script src="js/Jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
     </body>
+
 </html>
