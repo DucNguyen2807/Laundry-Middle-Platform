@@ -1,0 +1,218 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 11, 2023, 8:49:16 PM
+    Author     : acer
+*/
+:root {
+    --body-color: #e4e9f7;
+    --sidebar-color: #fff;
+    --fui-sidebar-primary-color: #1dc071;
+    --fui-sidebar-primary-color-light: #f1fbf7;
+    --toggle-color: #ddd;
+    --text-color: #808191;
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+}
+.fui-sidbar-navigiation .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    padding: 10px 14px;
+    background: var(--sidebar-color);
+    transition: var(--tran-05);
+    z-index: 100;
+    box-shadow: 10px 10px 20px rgba(218, 213, 213, 0.15);
+}
+.fui-sidbar-navigiation .sidebar.close {
+    width: 88px;
+}
+.fui-sidbar-navigiation .sidebar li {
+    height: 50px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.fui-sidbar-navigiation .image,
+.fui-sidbar-navigiation .sidebar .icon {
+    min-width: 60px;
+    border-radius: 6px;
+}
+.fui-sidbar-navigiation .sidebar .icon {
+    min-width: 60px;
+    border-radius: 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+.fui-sidbar-navigiation .sidebar .text,
+.fui-sidbar-navigiation .sidebar .icon {
+    color: var(--text-color);
+    transition: var(--tran-03);
+}
+.fui-sidbar-navigiation .sidebar .text {
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 1;
+}
+.fui-sidbar-navigiation .sidebar.close .text {
+    opacity: 0;
+}
+.fui-sidbar-navigiation header {
+    position: relative;
+}
+.fui-sidbar-navigiation .image-text {
+    display: flex;
+    align-items: center;
+}
+.fui-sidbar-navigiation .logo-text {
+    display: flex;
+    flex-direction: column;
+}
+.fui-sidbar-navigiation header .image-text .name {
+    margin-top: 2px;
+    font-size: 18px;
+    font-weight: 600;
+}
+.fui-sidbar-navigiation header .image-text .profession {
+    font-size: 16px;
+    margin-top: -2px;
+    display: block;
+}
+.fui-sidbar-navigiation .image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.fui-sidbar-navigiation .image img {
+    width: 40px;
+    border-radius: 6px;
+}
+.fui-sidbar-navigiation .toggle {
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%) rotate(180deg);
+    height: 25px;
+    width: 25px;
+    background-color: var(--fui-sidebar-primary-color);
+    color: var(--sidebar-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+.fui-sidbar-navigiation .sidebar.close .toggle {
+    transform: translateY(-50%) rotate(0deg);
+}
+.fui-sidbar-navigiation .sidebar .menu {
+    margin-top: 40px;
+}
+.fui-sidbar-navigiation .sidebar li.search-box {
+    border-radius: 6px;
+    background-color: var(--fui-sidebar-primary-color-light);
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+.fui-sidbar-navigiation .sidebar li.search-box input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: var(--fui-sidebar-primary-color-light);
+    color: var(--text-color);
+    border-radius: 6px;
+    font-weight: 500;
+    transition: var(--tran-05);
+}
+.fui-sidbar-navigiation .sidebar li a {
+    list-style: none;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--tran-03);
+}
+.fui-sidbar-navigiation .nav-text {
+    font-weight: 500;
+}
+.fui-sidbar-navigiation .sidebar li a:hover {
+    background-color: var(--fui-sidebar-primary-color-light);
+}
+.fui-sidbar-navigiation .sidebar li a:hover .icon,
+.fui-sidbar-navigiation .sidebar li a:hover .text {
+    color: var(--fui-sidebar-primary-color);
+}
+.fui-sidbar-navigiation .sidebar .menu-bar {
+    height: calc(100% - 55px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+}
+.fui-sidbar-navigiation .menu-bar::-webkit-scrollbar {
+    display: none;
+}
+.fui-sidbar-navigiation .sidebar .menu-bar .mode {
+    border-radius: 6px;
+    background-color: var(--fui-sidebar-primary-color-light);
+    position: relative;
+    transition: var(--tran-05);
+}
+.fui-sidbar-navigiation .menu-bar .mode .sun-moon {
+    height: 50px;
+    width: 60px;
+}
+.fui-sidbar-navigiation .mode .sun-moon i {
+    position: absolute;
+}
+.fui-sidbar-navigiation .mode .sun-moon i.sun {
+    opacity: 0;
+}
+.fui-sidbar-navigiation .menu-bar .bottom-content .toggle-switch {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.fui-sidbar-navigiation .toggle-switch .switch {
+    position: relative;
+    height: 22px;
+    width: 40px;
+    border-radius: 25px;
+    background-color: var(--toggle-color);
+    transition: var(--tran-05);
+}
+.fui-sidbar-navigiation .switch::before {
+    content: "";
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background-color: var(--sidebar-color);
+    transition: var(--tran-04);
+}
