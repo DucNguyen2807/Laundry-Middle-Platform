@@ -43,7 +43,7 @@ public class MainController extends HttpServlet {
                 url = VIEWHISORYCONTROLLER;
             } else if (button.equals("Update")) {
                 url = UPDATEPROFILECONTROLLER;
-            } else if (button.equals("StaffSearch")) {
+            } else if (button.equals("ViewStaff")) {
                 url = VIEWSTAFFCONTROLLER;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);

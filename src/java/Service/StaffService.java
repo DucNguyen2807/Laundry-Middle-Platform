@@ -77,7 +77,7 @@ public class StaffService implements Serializable {
             }
         }
     }
-    
+
     public void searchStaffByName(String name) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
@@ -90,12 +90,12 @@ public class StaffService implements Serializable {
             if (con != null) {
                 String sql = "SELECT u.UserID, u.Username, u.Password, u.Address, u.Fullname,\n"
                         + " u.Phone, u.Email, st.StStaffDetail\n"
-                        + " FROM [Laundry-Middle-Platform] .[dbo].[User] u\n"
+                        + " FROM [Laundry-Middle-Platform].[dbo].[User] u\n"
                         + " LEFT JOIN StatusStaff st ON st.StStaffID = u.Status\n"
-                        + " WHERE u.RoleID = 2 AND u.Fullname LIKE N'%?%'";
+                        + " WHERE u.RoleID = 2 AND u.Fullname LIKE ?";
 
                 ps = con.prepareStatement(sql);
-                ps.setString(1, name);
+                ps.setString(1, "%" + name + "%"); 
                 rs = ps.executeQuery();
 
                 while (rs.next()) {
