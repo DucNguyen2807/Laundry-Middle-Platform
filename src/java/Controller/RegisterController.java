@@ -23,8 +23,8 @@ import jakarta.servlet.http.HttpServletResponse;
  */
 public class RegisterController extends HttpServlet {
 
-    private final String CREATENEWACCOUNT = "register.jsp";
-    private final String LOGINPAGE = "homepage.html";
+    private final String CREATENEWACCOUNT = "register2.jsp";
+    private final String LOGINPAGE = "login.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");

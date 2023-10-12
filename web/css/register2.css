@@ -1,0 +1,251 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 12, 2023, 5:13:19 PM
+    Author     : nguye
+*/
+
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 12, 2023, 12:08:25 AM
+    Author     : nguye
+*/
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Roboto, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #62B7DE;
+
+}
+.image-background {
+    background-image: url(https://cdn.discordapp.com/attachments/1052217670382141472/1161875416173264926/Pngtreecartoon_clothes_pants_laundry_liquid_1030097.jpg?ex=6539e3cd&is=65276ecd&hm=c96db87b8370e09dbb4e4b9a1d0430db2eb477b042186e43f2de4ecaf7d6f81f&);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container {
+    background-color: rgba(117, 162, 194, 0.7);
+    padding: 20px 20px 20px 0;
+    border-radius: 25px;
+    display: flex;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.title p {
+    margin: 0;
+}
+
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    justify-content: space-around;
+}
+.sign-in {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.larger-text {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+
+.main-img {
+    background-image: url(https://cdn.discordapp.com/attachments/933987671930466308/1161745421358616576/s3fh39fk.png?ex=65396abc&is=6526f5bc&hm=054599ebb9b54cfa4c96208b14efd77ac4e7d043435818632f5ca72523772fe3&);
+    background-size: cover;
+    width: 450px;
+    height: 600px;
+    border-radius: 25px;
+}
+
+h1 {
+    color: #2b2684;
+    margin-bottom: 20px;
+}
+
+.wrapper p {
+    font-size: 0.75rem;
+    color: #2b2684;
+    margin-bottom: 40px;
+}
+.pass-icon {
+    display: flex;
+    position: relative;
+    width: 250px;
+}
+#username, #password {
+    height: 40px;
+    width: 250px;
+    border-radius: 15px;
+    padding-left: 15px;
+    border: 1px solid #2b2684;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.pass-icon img {
+    width: 25px;
+    position: absolute;
+    align-self: center;
+    top: 27%;
+    right: 0;
+    margin-right: 10px;
+    filter: opacity(0.3);
+}
+
+a {
+    text-decoration: none;
+    color: #2b2684;
+    font-size: 0.75rem;
+    text-align: right;
+    margin-right: 15px;
+}
+
+label {
+    color: #2b2684;
+    display: flex;
+    align-items: center;
+}
+
+label a {
+    margin-left: 10px;
+}
+.forgot-password-link {
+    margin-right: -10px;
+}
+
+.centered-link {
+    display: block;
+    text-align: center;
+    font-size: 0.75rem;
+}
+
+.error-label {
+    color: red;
+    font-size: 1rem;
+    font-family: Roboto, sans-serif;
+}
+
+
+#login-btn {
+    margin: 20px 0;
+    height: 40px;
+    border-radius: 15px;
+    border: none;
+    background-color: #2b2684;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: 0.5s;
+
+}
+
+span {
+    text-align: center;
+    position: relative;
+}
+
+.or {
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    color: #2b2684;
+    margin-bottom: 20px;
+    font-size: 0.8rem;
+}
+
+.or hr {
+    width: 40%;
+    height: 1px;
+    background-color: #2b2684;
+    border: none;
+    align-self: center;
+}
+
+.google-btn {
+    height: 40px;
+    border: 1px solid #2b2684;
+    border-radius: 15px;
+    font-weight: bold;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    background-color: white;
+    margin-bottom: 20px;
+    color: #2b2684;
+    transition: 0.5s;
+
+}
+
+.google-btn svg {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.register {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-btn {
+    height: 25px;
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    background-color: white;
+    border: 1px solid #2b2684;
+    border-radius: 10px;
+    color: #2b2684;
+    transition: 0.5s;
+}
+
+.register p {
+    margin: 0 11px 0;
+}
+
+.radio-options input[type="radio"],
+.radio-options label {
+    display: inline;
+    margin-right: 10px;
+}
+
+

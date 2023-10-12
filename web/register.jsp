@@ -106,7 +106,7 @@
                             <div>
                                 <label for="role">
                                     <input type="radio" name="roleid" value="1"> Customer
-                                    <input type="radio" name="roleid" value="2"> Store
+                                    <input type="radio" name="roleid" value="3"> Store
                                 </label>
                             </div>   
                             <br>
