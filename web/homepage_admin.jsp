@@ -43,7 +43,7 @@
                                 <li> <a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope" ></span> Contact</a>
                                 </li>
                             </ul>
-                            <ul class="nav navbar-nav" >
+                            <ul class="nav navbar-nav"  >
                             <li><a href="login.jsp" style="color: #ffffff">Logout</a></li>
                             </ul>
                         </div><!-- /.navbar-collapse -->
