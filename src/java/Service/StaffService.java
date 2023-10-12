@@ -95,7 +95,7 @@ public class StaffService implements Serializable {
                         + " WHERE u.RoleID = 2 AND u.Fullname LIKE ?";
 
                 ps = con.prepareStatement(sql);
-                ps.setString(1, "%" + name + "%"); 
+                ps.setString(1, "%" + name + "%");
                 rs = ps.executeQuery();
 
                 while (rs.next()) {
@@ -114,6 +114,31 @@ public class StaffService implements Serializable {
                 con.close();
             }
         }
+    }
+
+    public boolean deleteStaff(String id) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = ConnectDB.getConnection();
+            if (con != null) {
+                String sql = "DELETE FROM [Laundry-Middle-Platform].[dbo].[User] WHERE UserID = ?";
+                stm = con.prepareStatement(sql);
+                stm.setString(1, id);
+                int row = stm.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
     }
 
 }
