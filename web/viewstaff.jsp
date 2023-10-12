@@ -63,9 +63,13 @@
                         int count = 0;
                         for (Staff staff : result) {
                     %>
+                <form action="MainController">
                     <tr>
                         <td><%= ++count%></td>
-                        <td><%= staff.getstaffID()%></td>
+                        <td>
+                            <%= staff.getstaffID()%>
+                            <input type="hidden" name="txtStaffID" value="<%= staff.getstaffID()%>" />
+                        </td>
                         <td><%= staff.getUsername()%></td>
                         <td><%= staff.getPassword()%></td>
                         <td><%= staff.getAddress()%></td>
@@ -80,6 +84,8 @@
                             </form>
                         </td>
                     </tr>
+                </form>
+                    
                     <%
                         }
                     %>
