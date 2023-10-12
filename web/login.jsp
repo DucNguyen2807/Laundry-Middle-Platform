@@ -68,7 +68,7 @@
                     <!--                    <div class="register">
                                             <p>If you don't have an account</p>
                                             <button  class="register-btn">Register</button>-->
-                    <a href="register.jsp" class="centered-link">
+                    <a href="register2.jsp" class="centered-link">
                         Don't have an account? <b>Register</b>
                     </a>
             </div>
