@@ -10,11 +10,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.io.PrintWriter;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
@@ -41,7 +41,7 @@ public class LoginGoogleHandler extends HttpServlet {
         String accessToken = getToken(code);
         UserGoogleDto user = getUserInfo(accessToken);
         System.out.println(user);
-        response.sendRedirect("homepage1.html");
+        response.sendRedirect("homepage_customer.jsp");
     }
 
     public static String getToken(String code) throws ClientProtocolException, IOException {
