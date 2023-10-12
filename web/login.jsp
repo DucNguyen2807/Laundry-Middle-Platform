@@ -1,7 +1,7 @@
 <%-- 
-    Document   : landingpage
-    Created on : Oct 5, 2023, 2:45:47 AM
-    Author     : khait
+    Document   : testlog
+    Created on : Oct 12, 2023, 12:07:51 AM
+    Author     : nguye
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,57 +9,77 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login Page</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <link rel="stylesheet" href="css/login.css"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JSP Page</title>
     </head>
-    <body>
-        <div class="login-page">
-            <div class="container">
-                <div class="thumnail">
-                    <img src="image/thumnail.png"  alt="thumnail"></img>
-                </div>
-                <div class="form">
-                    <div class="form-login">
-                        <h1>WELCOME</h1>
-                        <h2>Sign in to</h2>
-                        <h5>Laudry middle platform</h5>
-
-                        <form class="form-login-content" action="MainController" method="POST">
-                            <label for="username" >User name</label><br>
-                            <input class="text" type="text" name="txtUsername" 
-                                   value="<%= (request.getParameter("txtUsername") == null) ? "" : request.getParameter("txtUsername") %>"   required><br>
-                            <br>
-                            <label for="password">Password</label><br>
-                            <input class="text" type="password" name="txtPassword"
-                                   value="<%= (request.getParameter("txtPassword") == null) ? "" : request.getParameter("txtPassword")%>" required><br>
-                            <br>
-
-                            <input type="checkbox" name="check" value="1">Remember me
-                            <%
-                                // Lấy giá trị của thẻ radio đã được chọn
-                                if (request.getParameter("check") != null) {
-                                    int check = 1;
-                                    request.setAttribute("check", check);
-                                }
-                            %>
-                            <a href="url" style="text-decoration: none; margin-left: 40px; color:black">Forgot password?</a></li><br>
-                            <br>
-                            <label style="color: red">${ERROR}</label><br>
-                            <br>
-                            <input class="btn-login" type="submit" value="Login"  name="btAction"/><br>
-
-                            <a href="url" class="btn-login-gg"> Đăng nhập với Google </a><br><br>
-
-                            <a href="register.jsp" style="text-decoration: none; margin-left: 30px; color: darkgrey">
-                                Don't have an account? <b style="color: black">Register</b>
-                            </a>
-                        </form>
+    <body class="image-background">
+        <div class="container">
+            <div class="wrapper">
+                <form class="form-login-content" action="MainController" method="POST">
+                    <h1>WELCOME</h1>
+                    <div class="sign-in">
+                        <a class="larger-text">Sign in to</a>
+                        <a>Laundry Middle Plaform</a>
                     </div>
-                </div>
 
+                    <br/>
+                    <div>
+                        <input type="username" id="username" name="txtUsername" placeholder="Username"                               
+                               value="<%= (request.getParameter("txtUsername") == null) ? "" : request.getParameter("txtUsername")%>"   required><br>
+                    </div>
+                    <div class="pass-icon">
+                        <input type="password" name="txtPassword" id="password" placeholder="Password"
+                               value="<%= (request.getParameter("txtPassword") == null) ? "" : request.getParameter("txtPassword")%>" required><br>
+                    </div>
+
+                    <div>
+                        <label>
+                            <input type="checkbox" name="check" value="1"> <a>Remember me</a>
+                            <a href="url" class="forgot-password-link">Forgot password?</a>
+                        </label>
+                    </div>
+
+                    <%
+                        // Lấy giá trị của thẻ radio đã được chọn
+                        if (request.getParameter("check") != null) {
+                            int check = 1;
+                            request.setAttribute("check", check);
+                        }
+                    %>
+                    <br>
+                    <label class="error-label">${ERROR}</label>
+
+                    <input type="submit" id="login-btn" value="Login" name="btAction">
+                    <div class="or">
+                        <hr>
+                        <span>OR</span>
+                        <hr>
+                    </div>
+                    <button class="google-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
+                        <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384
+                              5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 
+                              2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 
+                              3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 
+                              1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
+                        </svg>
+                        Login with Google
+                    </button>
+                    <!--                    <div class="register">
+                                            <p>If you don't have an account</p>
+                                            <button  class="register-btn">Register</button>-->
+                    <a href="register.jsp" class="centered-link">
+                        Don't have an account? <b>Register</b>
+                    </a>
             </div>
-        </div>
-    </body>
+        </form>  
+
+    
+
+    <div class="main-img">
+
+    </div>
+</div>
+</div>
+</body>
 </html>
