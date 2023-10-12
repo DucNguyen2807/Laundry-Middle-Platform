@@ -63,7 +63,9 @@
                               3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 
                               1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
                         </svg>
-                        Login with Google
+                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8080/Laundry_mp/LoginGoogleHandler&response_type=code
+                           &client_id=1029323599721-eau63nt8f9pcta6neg5hehi5vfv6kkue.apps.googleusercontent.com">Login with Google</a>
+                        
                     </button>
                     <!--                    <div class="register">
                                             <p>If you don't have an account</p>
