@@ -122,7 +122,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 .fui-sidbar-navigiation .sidebar li.search-box {
     border-radius: 6px;
-    background-color: var(--fui-sidebar-primary-color-light);
+    background-color: #a7b5b2;
     cursor: pointer;
     transition: var(--tran-05);
 }
@@ -131,7 +131,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     width: 100%;
     outline: none;
     border: none;
-    background-color: var(--fui-sidebar-primary-color-light);
+    background-color: #a7b5b2;
     color: var(--text-color);
     border-radius: 6px;
     font-weight: 500;
@@ -153,7 +153,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     font-weight: 500;
 }
 .fui-sidbar-navigiation .sidebar li a:hover {
-    background-color: var(--fui-sidebar-primary-color-light);
+    background-color: #a7b5b2;
 }
 .fui-sidbar-navigiation .sidebar li a:hover .icon,
 .fui-sidbar-navigiation .sidebar li a:hover .text {
@@ -171,7 +171,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 .fui-sidbar-navigiation .sidebar .menu-bar .mode {
     border-radius: 6px;
-    background-color: var(--fui-sidebar-primary-color-light);
+    background-color: #a7b5b2;
     position: relative;
     transition: var(--tran-05);
 }

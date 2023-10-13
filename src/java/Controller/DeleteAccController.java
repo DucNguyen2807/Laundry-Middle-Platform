@@ -37,8 +37,8 @@ public class DeleteAccController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String pk = request.getParameter("txtStaffID");
-            String searchValue = request.getParameter("txtSearchStaff");
-            //String searchValue = "";
+            //String searchValue = request.getParameter("txtSearchStaff");
+            String searchValue = "";
             try {
                 StaffService staffSer = new StaffService();
                 boolean result = staffSer.deleteStaff(pk);
