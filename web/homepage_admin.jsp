@@ -39,7 +39,7 @@
                                 <li class="active"> <a href="homepage1.html" > <span class="glyphicon glyphicon-home"></span>
                                         Home</a></li>
                                 <li><a href="#" style="color: #ffffff">Profile</a></li>
-                                <li><a href="admin.jsp" style="color: #ffffff">Manage</a></li>
+                                <li><a href="manage_admin.jsp" style="color: #ffffff">Manage</a></li>
                                 <li> <a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope" ></span> Contact</a>
                                 </li>
                             </ul>
