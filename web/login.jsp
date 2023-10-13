@@ -35,7 +35,7 @@
                     <div>
                         <label>
                             <input type="checkbox" name="check" value="1"> <a>Remember me</a>
-                            <a href="url" class="forgot-password-link">Forgot password?</a>
+                            <a href="forgotPassword.jsp" class="forgot-password-link">Forgot password?</a>
                         </label>
                     </div>
 
