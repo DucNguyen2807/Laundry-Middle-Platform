@@ -20,7 +20,7 @@
             <nav class="sidebar close" style="background-color: #22638f">
                 <header>
                     <div class="image-text">
-                        <a class="image" href="#"
+                        <a class="image" href="homepage_admin.jsp"
                            ><img
                                 src="image/logo.png"
                                 alt="Laundry-MP"
