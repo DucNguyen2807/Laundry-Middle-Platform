@@ -160,74 +160,7 @@
 
             </div>
 
-            <div class="row sanpham">
-
-                <div class="col-md-3 ">
-
-                    <div id="sanpham1">
-
-                        <img src="image/b1.jpg" />
-                        <p id="first_line1">COMBO laundry 3 get 1 free</p>
-                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
-                                Branch</span> </p>
-                        <p>Price: <del> 200.000 vn? </del> <span style="color: #F72B2F; margin-left:10px; ">150.000
-                                vn?</span></p>
-
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <div id="sanpham2">
-
-                        <img src="image/b2.png" />
-                        <p id="first_line2">COMBO laundry 3 get 1 free</p>
-                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
-                                Branch</span> </p>
-                        <p>Price: <del>500.000 vn? </del> <span style="color: #F72B2F; margin-left:10px; ">450.000
-                                vn?</span></p>
-
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <div id="sanpham3">
-
-                        <img src="image/b3.jpg"/>
-                        <p id="first_line3">COMBO laundry 3 get 1 free</p>
-                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
-                                Branch</span> </p>
-                        <p>Price: <del>150.000 vn? </del> <span style="color: #F72B2F; margin-left:10px; ">100.000
-                                vn?</span></p>
-
-
-                    </div>
-
-                </div>
-                <div class="col-md-3">
-
-                    <div id="sanpham3">
-
-                        <img src="image/b4.jpg" />
-                        <p id="first_line3">COMBO laundry 3 get 1 free</p>
-                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
-                                Branch</span> </p>
-                        <p>Price: <del>150.000 vn? </del> <span style="color: #F72B2F; margin-left:10px; ">100.000
-                                vn?</span></p>
-
-
-                    </div>
-
-                </div>
-
-
-
-            </div>
+            
 
 
             <div class="row orderonline">

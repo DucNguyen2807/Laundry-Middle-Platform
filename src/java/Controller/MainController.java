@@ -29,7 +29,7 @@ public class MainController extends HttpServlet {
     private static final String VIEWCUSTOMERCONTROLLER = "ViewCustomerController";
 
     private static final String DELETEACCCONTROLLER = "DeleteAccController";
-
+    private static final String CATECONTROLLER = "CateController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -55,6 +55,9 @@ public class MainController extends HttpServlet {
                 url = VIEWCUSTOMERCONTROLLER;
             } else if (button.equals("DeleteStaff")) {
                 url = DELETEACCCONTROLLER;
+            }
+             else if (button.equals("Category")) {
+                url = CATECONTROLLER;
             }
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
