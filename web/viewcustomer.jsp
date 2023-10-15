@@ -1,9 +1,10 @@
-<%--
-    Document   : viewstaff
-    Created on : Oct 11, 2023, 12:18:48 AM
+<%-- 
+    Document   : viewcustomer
+    Created on : Oct 16, 2023, 12:27:35 AM
     Author     : khait
 --%>
 
+<%@page import="Model.Customer"%>
 <%@page import="Model.Staff"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -112,25 +113,25 @@
 
 
             <div class="container mt-4" style="margin-left: 140px;">
-                <h1 class="display-4">Danh sách nhân viên</h1>
+                <h1 class="display-4">Danh sách khách hàng</h1>
 
                 <!-- Search form -->
                 <form action="MainController" method="post" class="mb-3">
                     <div class="input-group">
-                        <input type="text" name="txtSearchStaff" class="form-control" placeholder="Tìm nhân viên...">
-                        <button type="submit" value="ViewStaff" name="btAction" class="btn btn-primary">Tìm kiếm</button>
+                        <input type="text" name="txtSearchCustomer" class="form-control" placeholder="Tìm khách hàng...">
+                        <button type="submit" value="ViewCustomer" name="btAction" class="btn btn-primary">Tìm kiếm</button>
                     </div>
                 </form>
 
                 <form action="MainController" method="post">
-                    <button value="ViewStaff" name="btAction"  class="btn btn-primary">Xem tất cả</button>
-                    <input type="hidden" name="txtSearchStaff" value="" />
+                    <button value="ViewCustomer" name="btAction"  class="btn btn-primary">Xem tất cả</button>
+                    <input type="hidden" name="txtSearchCustomer" value="" />
                 </form>
 
                 <%
-                    String searchvalue = request.getParameter("txtSearchStaff");
+                    String searchvalue = request.getParameter("txtSearchCustomer");
                     if (searchvalue != null) {
-                        List<Staff> result = (List<Staff>) request.getAttribute("SEARCHRESULT");
+                        List<Customer> result = (List<Customer>) request.getAttribute("SEARCHRESULT");
                         if (result != null && !result.isEmpty()) {
                 %>
 
@@ -145,36 +146,27 @@
                             <th scope="col">Full Name</th>
                             <th scope="col">Phone</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Status</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <%
                             int count = 0;
-                            for (Staff staff : result) {
+                            for (Customer customer : result) {
                         %>
                     <form action="MainController">
                         <tr>
                             <td><%= ++count%></td>
                             <td>
-                                <%= staff.getstaffID()%>
-                                <input type="hidden" name="txtStaffID" value="<%= staff.getstaffID()%>" />
+                                <%= customer.getCustomerID()%>
+                                <input type="hidden" name="txtStaffID" value="<%= customer.getCustomerID()%>" />
                             </td>
-                            <td><%= staff.getUsername()%></td>
-                            <td><%= staff.getPassword()%></td>
-                            <td><%= staff.getAddress()%></td>
-                            <td><%= staff.getFullname()%></td>
-                            <td><%= staff.getPhone()%></td>
-                            <td><%= staff.getEmail()%></td>
-                            <td><%= staff.getStatusDetail()%></td>
-                            <td>
-                                <form action="MainController" method="post">
-                                    <input type="hidden" name="staffID" value="<%= staff.getstaffID()%>">
-                                    <button type="submit" value="DeleteStaff" name="btAction" class="btn btn-danger"                                             
-                                            onclick="return confirm('Bạn chắc chắn muốn xóa nhân viên này?');">Delete</button>
-                                </form>
-                            </td>
+                            <td><%= customer.getUsername()%></td>
+                            <td><%= customer.getPassword()%></td>
+                            <td><%= customer.getAddress()%></td>
+                            <td><%= customer.getFullname()%></td>
+                            <td><%= customer.getPhone()%></td>
+                            <td><%= customer.getEmail()%></td>
                         </tr>
                     </form>
 

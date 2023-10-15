@@ -5,8 +5,8 @@
 package Service;
 
 import DBConnect.ConnectDB;
-import Model.Store;
-import java.io.Serializable;
+import Model.Staff;
+import Model.Customer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,48 +18,48 @@ import java.util.List;
  *
  * @author khait
  */
-public class StoreService implements Serializable{
+public class CustomerService {
     
-    public List<Store> listStore;
-    
-    public List<Store> getListStore() {
-        return listStore;
+    private List<Customer> listCustomer;
+
+    public List<Customer> getListCustomer() {
+        return listCustomer;
     }
-    
-    private Store createStoreFromResultSet(ResultSet rs) throws SQLException {
-        String storeID = String.valueOf(rs.getInt("UserID"));
+
+    private Customer createCustomerFromResultSet(ResultSet rs) throws SQLException {
+        String staffID = String.valueOf(rs.getInt("UserID"));
         String username = rs.getString("Username");
         String password = rs.getString("Password");
         String address = rs.getString("Address");
-        String storeName = rs.getString("StoreName");
+        String fullname = rs.getString("Fullname");
         String phone = rs.getString("Phone");
         String email = rs.getString("Email");
 
-        Store store = new Store(Integer.parseInt(storeID), username, password, address, storeName, phone, email);
-        return store;
+        Customer customer = new Customer(Integer.parseInt(staffID), username, password, address, fullname, phone, email);
+        return customer;
     }
-    
-    public void getStoref() throws ClassNotFoundException, SQLException {
+
+    public void getCustomer() throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        listStore = new ArrayList<>();
+        listCustomer = new ArrayList<>();
 
         try {
             con = ConnectDB.getConnection();
 
             if (con != null) {
-                String sql = "SELECT u.UserID, u.Username, u.Password, u.Address, u.Fullname AS StoreName,\n"
+                String sql = "SELECT u.UserID, u.Username, u.Password, u.Address, u.Fullname,\n"
                         + " u.Phone, u.Email\n"
                         + " FROM [Laundry-Middle-Platform].[dbo].[User] u\n"
-                        + " WHERE u.RoleID = 3";
+                        + " WHERE u.RoleID = 1";
 
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
 
                 while (rs.next()) {
-                    Store store = createStoreFromResultSet(rs);
-                    listStore.add(store);
+                    Customer customer = createCustomerFromResultSet(rs);
+                    listCustomer.add(customer);
                 }
             }
         } finally {
@@ -72,31 +72,31 @@ public class StoreService implements Serializable{
             if (con != null) {
                 con.close();
             }
-        }  
+        }
     }
     
-     public void searchStoreByName(String name) throws ClassNotFoundException, SQLException {
+    public void searchCustomerByName(String name) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        listStore = new ArrayList<>();
+        listCustomer = new ArrayList<>();
 
         try {
             con = ConnectDB.getConnection();
 
             if (con != null) {
-                String sql = "SELECT u.UserID, u.Username, u.Password, u.Address, u.Fullname AS StoreName,\n"
+                String sql = "SELECT u.UserID, u.Username, u.Password, u.Address, u.Fullname,\n"
                         + " u.Phone, u.Email\n"
                         + " FROM [Laundry-Middle-Platform].[dbo].[User] u\n"
-                        + " WHERE u.RoleID = 3 AND u.Fullname  LIKE ?";
+                        + " WHERE u.RoleID = 1 AND u.Fullname LIKE ?";
 
                 ps = con.prepareStatement(sql);
                 ps.setString(1, "%" + name + "%");
                 rs = ps.executeQuery();
 
                 while (rs.next()) {
-                    Store store = createStoreFromResultSet(rs);
-                    listStore.add(store);
+                    Customer customer = createCustomerFromResultSet(rs);
+                    listCustomer.add(customer);
                 }
             }
         } finally {

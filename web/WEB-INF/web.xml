@@ -24,6 +24,10 @@
         <servlet-name>DeleteAccController</servlet-name>
         <servlet-class>Controller.DeleteAccController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewCustomerController</servlet-name>
+        <servlet-class>Controller.ViewCustomerController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>DeleteAccController</servlet-name>
         <url-pattern>/DeleteAccController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCustomerController</servlet-name>
+        <url-pattern>/ViewCustomerController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

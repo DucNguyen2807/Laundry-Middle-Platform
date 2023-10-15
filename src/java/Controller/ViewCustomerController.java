@@ -4,8 +4,9 @@
  */
 package Controller;
 
-import Model.Store;
-import Service.StoreService;
+import Model.Customer;
+import Service.CustomerService;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author khait
  */
-public class ViewStoreController extends HttpServlet {
+public class ViewCustomerController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,30 +31,29 @@ public class ViewStoreController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private final String VIEWSTORE = "viewstore.jsp";
-
+    private final String VIEWCUSTOMER = "viewcustomer.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-            String url = VIEWSTORE;
-
-            String searchValue = request.getParameter("txtSearchStore");
+            /* TODO output your page here. You may use following sample code. */
+            String url = VIEWCUSTOMER;
+            String searchValue = request.getParameter("txtSearchCustomer");
             //HttpSession session = request.getSession();
-//            Store store = (Store) request.getSession().getAttribute("store");
-//            String name = store.getStoreName();
+            //Staff staff = (Staff) request.getSession().getAttribute("staff");
+            //String name = staff.getFullname();
 
-            StoreService storeSer = new StoreService();
+            CustomerService customerSer = new CustomerService();
 
             try {
                 if (!searchValue.isEmpty()) {
-                    storeSer.searchStoreByName(searchValue);
+                    customerSer.searchCustomerByName(searchValue);
                 } else {
-                    storeSer.getStoref();
+                    customerSer.getCustomer();
                 }
 
-                List<Store> result = storeSer.getListStore();
+                List<Customer> result = customerSer.getListCustomer();
                 request.setAttribute("SEARCHRESULT", result);
 
             } catch (Exception e) {
