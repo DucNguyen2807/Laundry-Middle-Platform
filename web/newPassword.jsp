@@ -47,7 +47,7 @@
                                 </h1>
                             </div>
                             <div class="pt-3 pb-3">
-                                <form class="form-horizontal" action="newPassword" method="POST">
+                                <form class="form-horizontal" action="ResetPasswordController" method="POST">
                                     <!-- User Name Input -->
                                     <div class="form-group row justify-content-center px-3">
                                         <div class="col-9 px-0">
@@ -62,6 +62,10 @@
                                                    placeholder="&#xf084; &nbsp; Confirm New Password"
                                                    class="form-control border-info placeicon">
                                         </div>
+                                        <% String passwordMismatch = (String) request.getAttribute("passwordMismatch"); %>
+                                        <% if (passwordMismatch != null) {%>
+                                        <div id="error-message" style="color: red;"><%= passwordMismatch%></div>
+                                        <% }%>
                                     </div>
 
                                     <!-- Log in Button -->
@@ -84,7 +88,7 @@
                                 <div class="pt-2">
                                     <div class="row justify-content-center">
                                         <h5>
-                                            Don't have an Account?<span><a href="#"
+                                            Don't have an Account?<span><a href="register2.jsp"
                                                                            class="text-danger"> Register Now!</a></span>
                                         </h5>
                                     </div>

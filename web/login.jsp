@@ -13,6 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body class="image-background">
+
         <div class="container">
             <div class="wrapper">
                 <form class="form-login-content" action="MainController" method="POST">
@@ -65,7 +66,7 @@
                         </svg>
                         <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8080/Laundry_mp/LoginGoogleHandler&response_type=code
                            &client_id=1029323599721-eau63nt8f9pcta6neg5hehi5vfv6kkue.apps.googleusercontent.com">Login with Google</a>
-                        
+
                     </button>
                     <!--                    <div class="register">
                                             <p>If you don't have an account</p>
@@ -76,12 +77,14 @@
             </div>
         </form>  
 
-    
 
-    <div class="main-img">
 
+        <div class="main-img">
+
+        </div>
     </div>
-</div>
 </div>
 </body>
 </html>
+
+
