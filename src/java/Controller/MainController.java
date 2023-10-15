@@ -25,6 +25,9 @@ public class MainController extends HttpServlet {
     private static final String VIEWHISORYCONTROLLER = "ViewHistoryController";
     private static final String UPDATEPROFILECONTROLLER = "UpdateProfileController";
     private static final String VIEWSTAFFCONTROLLER = "ViewStaffController";
+    private static final String VIEWSTORECONTROLLER = "ViewStoreController";
+    private static final String VIEWCUSTOMERCONTROLLER = "ViewCustomerController";
+
     private static final String DELETEACCCONTROLLER = "DeleteAccController";
     private static final String CATECONTROLLER = "CateController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -40,12 +43,16 @@ public class MainController extends HttpServlet {
                 url = LOGINCONTROLLER;
             } else if (button.equals("Register")) {
                 url = REGISTERCONTROLLER;
-            } else if (button.equals("Search")) {
+            } else if (button.equals("ViewOrder")) {
                 url = VIEWHISORYCONTROLLER;
             } else if (button.equals("Update")) {
                 url = UPDATEPROFILECONTROLLER;
             } else if (button.equals("ViewStaff")) {
                 url = VIEWSTAFFCONTROLLER;
+            } else if (button.equals("ViewStore")) {
+                url = VIEWSTORECONTROLLER;
+            } else if (button.equals("ViewCustomer")) {
+                url = VIEWCUSTOMERCONTROLLER;
             } else if (button.equals("DeleteStaff")) {
                 url = DELETEACCCONTROLLER;
             }
@@ -57,7 +64,7 @@ public class MainController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

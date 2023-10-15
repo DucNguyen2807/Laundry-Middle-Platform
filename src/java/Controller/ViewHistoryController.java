@@ -36,7 +36,7 @@ public class ViewHistoryController extends HttpServlet {
 
         try (PrintWriter out = response.getWriter()) {
             String url = SHOWSEARCHCONTROLLER;
-            String searchValue = request.getParameter("txtSearchValue");
+            String searchValue = request.getParameter("txtSearchOrder");
             HttpSession session = request.getSession();
             User user = (User) request.getSession().getAttribute("user");
             int userId = user.getUserId();
@@ -46,7 +46,7 @@ public class ViewHistoryController extends HttpServlet {
             try {
                 if (!searchValue.isEmpty()) {
                     // Nếu có giá trị tìm kiếm, thực hiện tìm kiếm theo OrderID
-                    ord.searchByOrderID(searchValue, userId, roleId);
+                    ord.searchOrderByCustomerStoreStaff(searchValue, userId, roleId);
                 } else {
                     // Nếu không có giá trị tìm kiếm, thực hiện truy vấn để lấy tất cả đơn đặt hàng
                     ord.getAllOrders(userId, roleId);

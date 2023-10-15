@@ -32,7 +32,7 @@ public class StoreService implements Serializable {
         String username = rs.getString("Username");
         String password = rs.getString("Password");
         String address = rs.getString("Address");
-        String storeName = rs.getString("Fullname");
+        String storeName = rs.getString("StoreName");
         String phone = rs.getString("Phone");
         String email = rs.getString("Email");
 
@@ -89,10 +89,10 @@ public class StoreService implements Serializable {
                 String sql = "SELECT u.UserID, u.Username, u.Password, u.Address, u.Fullname AS StoreName,\n"
                         + " u.Phone, u.Email\n"
                         + " FROM [Laundry-Middle-Platform].[dbo].[User] u\n"
-                        + " WHERE u.RoleID = 3 AND u.Fullname LIKE N'%?%'";
+                        + " WHERE u.RoleID = 3 AND u.Fullname  LIKE ?";
 
                 ps = con.prepareStatement(sql);
-                ps.setString(1, name);
+                ps.setString(1, "%" + name + "%");
                 rs = ps.executeQuery();
 
                 while (rs.next()) {

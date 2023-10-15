@@ -54,6 +54,7 @@
                                 <button type="submit" class="btn btn-default">Search</button>
                             </form>
 
+
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container-fluid -->
                 </nav>

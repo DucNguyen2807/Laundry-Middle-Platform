@@ -191,6 +191,73 @@ public class UserService implements Serializable {
         }
     }
 
+    public void searchOrderByCustomerStoreStaff(String searchValue, int userId, int userRole) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        listOrder = new ArrayList<>(); // Đảm bảo listOrder là một danh sách rỗng
+
+        try {
+            con = ConnectDB.getConnection();
+            if (con != null) {
+                String sql;
+
+                if (userRole < 4) {
+                    // Nếu vai trò của người dùng là nhỏ hơn 4 (có quyền xem đơn hàng của chính họ)
+                    sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                            + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
+                            + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
+                            + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
+                            + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
+                            + " WHERE  u.Fullname = ? OR us.Fullname = ? OR uf.Fullname = ?";
+                    stm = con.prepareStatement(sql);
+                    stm.setInt(1, Integer.parseInt(searchValue));
+                    stm.setInt(2, userId);
+                    stm.setInt(3, userId);
+                    stm.setInt(4, userId);
+                } else if (userRole >= 4) {
+                    // Nếu vai trò của người dùng là lớn hơn hoặc bằng 4 (quản trị viên)
+                    sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                            + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
+                            + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
+                            + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
+                            + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
+                            + " WHERE  u.Fullname LIKE ? OR us.Fullname LIKE ? OR uf.Fullname LIKE ?";
+                    stm = con.prepareStatement(sql);
+                    stm.setString(1, "%" + searchValue + "%");
+                    stm.setString(2, "%" + searchValue + "%");
+                    stm.setString(3, "%" + searchValue + "%");
+
+                }
+
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    // Xử lý kết quả và tạo danh sách đơn hàng
+                    Order order = createOrderFromResultSet(rs);
+                    listOrder.add(order);
+                }
+            }
+        } finally {
+            // Đóng tài nguyên
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+   
     public void getAllOrders(int userId, int userRole) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
