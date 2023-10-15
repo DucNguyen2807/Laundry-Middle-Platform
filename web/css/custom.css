@@ -32,3 +32,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .table tbody tr:hover {
     background-color: #cce5ff;
 }
+.vertical-center {
+    display: flex;
+    align-items: center;
+}
+ .rating {
+    color: gold; /* Đặt màu vàng */
+}
+   
