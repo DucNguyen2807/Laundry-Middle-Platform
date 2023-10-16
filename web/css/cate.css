@@ -1,0 +1,47 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 16, 2023, 10:57:56 AM
+    Author     : nguye
+*/
+
+/* CSS cho liên kết phân trang */
+/* CSS cho khung bao liên kết "Next" và "Last" */
+/* CSS cho liên kết phân trang */
+.pagination-container {
+    text-align: center;
+}
+
+.pagination {
+    display: inline-block;
+    margin: 0;
+}
+
+.pagination-link {
+    color: #007bff;
+    text-decoration: none;
+    padding: 8px 16px;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+    display: inline-block;
+    border: 1px solid #ddd;
+    background-color: #f7f7f7;
+    cursor: pointer;
+}
+
+/* Ẩn gạch chân khi bấm vào liên kết */
+.pagination-link:active {
+    text-decoration: none;
+}
+
+.pagination-link:hover {
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none; /* Ẩn gạch chân khi hover */
+}
+
+
+
+
