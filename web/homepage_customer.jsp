@@ -34,31 +34,22 @@
                         </div>
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav" >
-
-                                <li class="active"> <a href="homepage1.html" > <span class="glyphicon glyphicon-home"></span>
-                                        Home</a> </li>
-
-                                <li><a href="#" style="color: #ffffff">Home</a></li>
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="homepage_customer.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                                 <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
-                                <li><a href="admin.jsp" style="color: #ffffff">Manage</a></li>
-                                <li> <a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope" ></span> Contact</a>
-                                </li>
+                                <li><a href="manage_admin.jsp" style="color: #ffffff">Manage</a></li>
+                                <li><a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+                                <form action="MainController" method="post">
+                                    <input type="submit" value="Category" name="btAction" />
+                                </form>
                             </ul>
 
-
-                            <form class="navbar-form navbar-right" role="search">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search">
-                                </div>
-                                <button type="submit" class="btn btn-default">Search</button>
-                            </form>
-
-
-                        </div><!-- /.navbar-collapse -->
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="login.jsp" style="color: #ffffff">Logout</a></li>
+                            </ul>
+                        </div>
                     </div><!-- /.container-fluid -->
                 </nav>
-
             </div>
 
 

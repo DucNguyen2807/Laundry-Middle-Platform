@@ -35,8 +35,8 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="homepage1.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                                <li><a href="#" style="color: #ffffff">Profile</a></li>
+                                <li class="active"><a href="homepage_admin.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                                <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
                                 <li><a href="manage_admin.jsp" style="color: #ffffff">Manage</a></li>
                                 <li><a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
                                 <form action="MainController" method="post">
@@ -299,7 +299,7 @@
 
                 <div>
 
-                    <p>Email : Tiennvse171676</p>
+                    <p>Email : laundrymiddleplatform@gmail.com</p>
                     <p>Address: 100 Vuon Lai, Tan Phu District, HCMC</p>
                     <h5>&copy; Copyright 2023. Laundry Middle Platform</h5>
                 </div>
