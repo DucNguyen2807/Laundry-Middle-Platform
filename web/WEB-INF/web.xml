@@ -28,6 +28,10 @@
         <servlet-name>ViewCustomerController</servlet-name>
         <servlet-class>Controller.ViewCustomerController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewNewOrder_Store</servlet-name>
+        <servlet-class>Controller.ViewNewOrder_Store</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>ViewCustomerController</servlet-name>
         <url-pattern>/ViewCustomerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewNewOrder_Store</servlet-name>
+        <url-pattern>/ViewNewOrder_Store</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
