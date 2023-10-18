@@ -27,7 +27,7 @@ public class MainController extends HttpServlet {
     private static final String VIEWSTAFFCONTROLLER = "ViewStaffController";
     private static final String VIEWSTORECONTROLLER = "ViewStoreController";
     private static final String VIEWCUSTOMERCONTROLLER = "ViewCustomerController";
-        private static final String VIEWNEWORDER_STORECONTROLLER = "ViewCustomerController";
+        private static final String VIEWNEWORDER_STORECONTROLLER = "ViewNewOrder_Store";
 
 
     private static final String DELETEACCCONTROLLER = "DeleteAccController";

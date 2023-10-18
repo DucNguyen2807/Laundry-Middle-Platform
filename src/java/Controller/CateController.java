@@ -49,8 +49,7 @@ public class CateController extends HttpServlet {
             } catch (NumberFormatException e) {
                 // Xử lý ngoại lệ nếu tham số trang không hợp lệ
             }
-        }
-
+        }    
         StoreService store = new StoreService();
         store.getAllStore();
         List<Cate> result = store.getListStoreCate();

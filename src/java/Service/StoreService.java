@@ -123,9 +123,11 @@ public class StoreService implements Serializable {
         cate.setStoreID(Integer.parseInt(rs.getString("UserID")));
         cate.setStoreName(rs.getString("Fullname"));
         cate.setAddress(rs.getString("Address"));
-        cate.setPrice(Integer.parseInt(rs.getString("PriceDetail")));
+        cate.setPriceGiatThuong(Integer.parseInt(rs.getString("giatthuong")));
+        cate.setPriceGiatNhanh(Integer.parseInt(rs.getString("giatnhanh")));
+        cate.setPriceGiatSieuToc(Integer.parseInt(rs.getString("giatsieutoc")));
         cate.setService(rs.getString("ServiceDetail"));
-        cate.setRating(Integer.parseInt(rs.getString("Rating")));
+        cate.setRating(Integer.parseInt(rs.getString("AverageRating")));
         cate.setReview(rs.getString("ReviewText"));
         cate.setImage(rs.getString("ImageDetail"));
         
@@ -142,14 +144,18 @@ public class StoreService implements Serializable {
             con = ConnectDB.getConnection();
 
             if (con != null) {
-                String sql = "SELECT u.UserID, u.Fullname, u.Address, p.PriceDetail, s.ServiceDetail, r.Rating, r.ReviewText, i.ImageDetail "
-                        + "FROM [User] u "
-                        + "INNER JOIN Price p ON p.StoreID = u.UserID "
-                        + "INNER JOIN Service s ON p.ServiceID = s.ServiceID "
-                        + "INNER JOIN Review r ON r.StoreID = u.UserID "
-                        + "INNER JOIN Image i ON i.StoreID = u.UserID "
-                        + "INNER JOIN Favorite f ON f.StoreID = u.UserID "
-                        + "WHERE s.ServiceID = 1";
+                String sql = "SELECT u.UserID, u.Fullname, u.Address, " +
+                             "p.PriceDetail AS giatthuong, p1.PriceDetail AS giatnhanh, p2.PriceDetail AS giatsieutoc, " +
+                             "s.ServiceDetail, AVG(r.Rating) AS AverageRating, r.ReviewText, i.ImageDetail " +
+                             "FROM [User] u " +
+                             "INNER JOIN Price p ON p.StoreID = u.UserID AND p.ServiceID = 1 " +
+                             "INNER JOIN Price p1 ON p1.StoreID = u.UserID AND p1.ServiceID = 2 " +
+                             "INNER JOIN Price p2 ON p2.StoreID = u.UserID AND p2.ServiceID = 3 " +
+                             "INNER JOIN Service s ON s.ServiceID = p.ServiceID " +
+                             "INNER JOIN Review r ON r.StoreID = u.UserID " +
+                             "INNER JOIN Image i ON i.StoreID = u.UserID " +
+                             "INNER JOIN Favorite f ON f.StoreID = u.UserID " +
+                             "GROUP BY u.UserID, u.Fullname, u.Address, p.PriceDetail, p1.PriceDetail, p2.PriceDetail, s.ServiceDetail, r.ReviewText, i.ImageDetail";
 
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
