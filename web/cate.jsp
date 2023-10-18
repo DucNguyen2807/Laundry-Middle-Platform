@@ -50,23 +50,36 @@
                 </nav>
             </div>
         </div>
+
+        <label for="orderBy">Sắp xếp theo:</label>
+        <select id="orderBy" name="orderBy">
+            <option value="favoriteCount">Yêu thích</option>
+            <option value="rating">Rating</option>
+            <option value="review">Review</option>
+        </select>
+        <button type="submit">Sắp xếp</button>
+
+
         <div class="container mt-5">
-            <div class="row" >
+            <div class="row">
                 <c:forEach items="${pagedStores}" var="cat">
-                    <!-- Hiển thị thông tin cửa hàng -->
-                    <div   class="product col-12 col-md-6 col-lg-4">
-                        <div style="margin:25px 20px " class="card-body text-center vertical-center">
+                    <div class="product col-12 col-md-6 col-lg-4">
+                        <div style="margin: 25px 20px" class="card-body text-center vertical-center">
                             <div class="card-body">
                                 <img class="card-img-top" src="<c:out value='${cat.image}'/>" alt="Store Image" style="width: 100%; height: auto;">
-                                <h4 class="card-title show_txt">Store Name: <c:out value='${cat.storeName}'/></h4>
-                                <p class="card-text show_txt">Address: <c:out value='${cat.address}'/></p>
+                                <h4 class="card-title show_txt">Tên cửa hàng: <c:out value='${cat.storeName}'/></h4>
+                                <p class="card-text show_txt">Địa chỉ: <c:out value='${cat.address}'/></p>
                                 <div class="rating">
                                     <c:forEach begin="1" end="${cat.rating}">
                                         <i class="fas fa-star"></i>
                                     </c:forEach>
                                 </div>
-                                <p class="card-text show_txt">Price: <c:out value='${cat.price}'/> vnđ</p>
-                                <a href="#" class="btn btn-success btn-block">Add to cart</a>
+                                <p class="card-text show_txt">Giặt thường: <c:out value='${cat.priceGiatThuong}'/> vnđ</p>
+                                <a href="thanhtoan.jsp?image=<c:out value='${cat.image}' />&priceGiatThuong=<c:out value='${cat.priceGiatThuong}'/>
+                                   &priceGiatNhanh=<c:out value='${cat.priceGiatNhanh}'/>&priceGiatSieuToc=<c:out value='${cat.priceGiatSieuToc}'/>
+                                   &storeName=<c:out value='${cat.storeName}' />&address=<c:out value='${cat.address}' />
+                                   &rating=<c:out value='${cat.rating}' />" class="btn btn-success btn-block">Booking</a>
+                                 
                             </div>
                         </div>
                     </div>

@@ -26,11 +26,11 @@
                     <br/>
                     <div>
                         <input type="username" id="username" name="txtUsername" placeholder="Username"                               
-                               value="<%= (request.getParameter("txtUsername") == null) ? "" : request.getParameter("txtUsername")%>"   required><br>
+                               value="<%= (request.getParameter("txtUsername") == null) ? "" : request.getParameter("txtUsername")%>"required><br>
                     </div>
                     <div class="pass-icon">
                         <input type="password" name="txtPassword" id="password" placeholder="Password"
-                               value="<%= (request.getParameter("txtPassword") == null) ? "" : request.getParameter("txtPassword")%>" required><br>
+                               value="<%= (request.getParameter("txtPassword") == null) ? "" : request.getParameter("txtPassword")%>"required><br>
                     </div>
 
                     <div>

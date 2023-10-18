@@ -24,22 +24,14 @@ import javax.servlet.http.HttpSession;
  */
 public class ViewNewOrder_Store extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
 
     private final String VIEWNEWORDER_STORE = "viewneworder_store.jsp";
     //List<Order> listOrder = new ArrayList<>();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {            
             
             String url = VIEWNEWORDER_STORE;
             String searchValue = request.getParameter("ViewNewOrder");

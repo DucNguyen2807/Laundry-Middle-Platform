@@ -9,6 +9,7 @@ package Model;
  * @author nguye
  */
 public class Cate {
+
     private int storeID;
     private String storeName;
     private String address;
@@ -19,12 +20,9 @@ public class Cate {
     private String image;
     private String phone;
     private String email;
-    
-    
-    
-    
-    
-    
+    private int priceGiatThuong;
+    private int priceGiatNhanh;
+    private int priceGiatSieuToc;
 
     public Cate(String address, String storeName, String phone, String email, int price, int rating, String image, String service, String review, int storeID) {
         this.address = address;
@@ -49,9 +47,32 @@ public class Cate {
         this.review = review;
         this.image = image;
     }
-    
 
     public Cate() {
+    }
+
+    public int getPriceGiatThuong() {
+        return priceGiatThuong;
+    }
+
+    public void setPriceGiatThuong(int priceGiatThuong) {
+        this.priceGiatThuong = priceGiatThuong;
+    }
+
+    public int getPriceGiatNhanh() {
+        return priceGiatNhanh;
+    }
+
+    public void setPriceGiatNhanh(int priceGiatNhanh) {
+        this.priceGiatNhanh = priceGiatNhanh;
+    }
+
+    public int getPriceGiatSieuToc() {
+        return priceGiatSieuToc;
+    }
+
+    public void setPriceGiatSieuToc(int priceGiatSieuToc) {
+        this.priceGiatSieuToc = priceGiatSieuToc;
     }
 
     public int getStoreID() {
@@ -134,6 +155,4 @@ public class Cate {
         this.email = email;
     }
 
-
-    
 }
