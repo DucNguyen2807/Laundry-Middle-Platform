@@ -49,17 +49,17 @@
                                 <li>
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
-                                            <input type="hidden" value="neworder" name="btAction" />
-                                            <button  type="submit" value="ViewNewOrder" name="btAction" class="btn btn-primary">New Order</button>
+                                            <input type="hidden" value="ViewNewOrder" name="btAction" />
+                                            <button  type="submit" class="btn btn-primary">New Order</button>
                                         </form>
                                     </a>
                                 </li>
 
                                 <li>
                                     <a style="background-color:#red; color: #ffffff">
-                                        <form action="MainController" method="post">
-                                            <input type="hidden" value="processing" name="btAction" />
-                                            <button  type="submit" value="ViewProcessing" name="btAction" class="btn btn-primary">Processing</button>
+                                        <form action="ViewNewOrder_Store" method="post">
+                                            <input type="hidden" value="viewNewOrder" name="btAction" />
+                                            <button  type="submit" class="btn btn-primary">Processing</button>
                                         </form>
                                     </a>
                                 </li>
@@ -68,7 +68,7 @@
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
                                             <input type="hidden" value="completed" name="btAction" />
-                                            <button  type="submit" value="ViewCompleted" name="btAction" class="btn btn-primary">Completed</button>
+                                            <button  type="submit" value="ViewCompleted" class="btn btn-primary">Completed</button>
                                         </form>
                                     </a>
                                 </li>
@@ -77,7 +77,7 @@
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
                                             <input type="hidden" value="Archive" name="btAction" />
-                                            <button  type="submit" value="ViewArchive" name="btAction" class="btn btn-primary">Archive</button>
+                                            <button  type="submit" value="ViewArchive" class="btn btn-primary">Archive</button>
                                         </form>
                                     </a>
                                 </li>
