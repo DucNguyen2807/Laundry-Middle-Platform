@@ -53,7 +53,7 @@ public class ViewHistoryController extends HttpServlet {
                 }
 
                 List<Order> result = ord.getListOrder();
-                request.setAttribute("SEARCHRESULT", result); // Sử dụng tên thuộc tính ORDER_RESULT
+                request.setAttribute("SEARCHRESULT", result); 
 
             } catch (Exception e) {
                 e.printStackTrace();
