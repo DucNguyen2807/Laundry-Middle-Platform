@@ -49,17 +49,8 @@
                                 <li>
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
-                                            <input type="hidden" value="ViewNewOrder" name="btAction" />
-                                            <button  type="submit" class="btn btn-primary">New Order</button>
-                                        </form>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a style="background-color:#red; color: #ffffff">
-                                        <form action="ViewNewOrder_Store" method="post">
-                                            <input type="hidden" value="viewNewOrder" name="btAction" />
-                                            <button  type="submit" class="btn btn-primary">Processing</button>
+                                            <input type="hidden" name="btAction" value="1" />
+                                            <button type="submit" class="btn btn-primary">New Order</button>
                                         </form>
                                     </a>
                                 </li>
@@ -67,8 +58,8 @@
                                 <li>
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
-                                            <input type="hidden" value="completed" name="btAction" />
-                                            <button  type="submit" value="ViewCompleted" class="btn btn-primary">Completed</button>
+                                            <input type="hidden" name="btAction" value="4" />
+                                            <button type="submit" class="btn btn-primary">Processing</button>
                                         </form>
                                     </a>
                                 </li>
@@ -76,8 +67,17 @@
                                 <li>
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
-                                            <input type="hidden" value="Archive" name="btAction" />
-                                            <button  type="submit" value="ViewArchive" class="btn btn-primary">Archive</button>
+                                            <input type="hidden" name="btAction" value="5" />
+                                            <button type="submit" class="btn btn-primary">Completed</button>
+                                        </form>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a style="background-color:#red; color: #ffffff">
+                                        <form action="MainController" method="post">
+                                            <input type="hidden" name="btAction" value="2" />
+                                            <button type="submit" class="btn btn-primary">Archive</button>
                                         </form>
                                     </a>
                                 </li>
@@ -131,7 +131,7 @@
                             <td><%= ord.getServiceDetail()%></td>
                             <td><%= ord.getWeight()%></td>
                             <td><%= ord.getTotalPrice()%></td>
-                            <td><%= ord.getNOTE()%></td>
+                            <td><%= ord.getNote()%></td>
                             <td><%= ord.getDateApproved()%></td>
                             <td><%= ord.getDateComplete()%></td>
                             <td><%= ord.getTimeComplete()%></td>
