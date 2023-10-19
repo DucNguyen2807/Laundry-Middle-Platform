@@ -14,9 +14,13 @@ public class Order implements Serializable {
 
     private int OrderID;
     private String ServiceDetail;
-    private int Weight;
-    private int TotalPrice;
-    private String NOTE;
+    private String Weight;
+    private String TotalPrice;
+    private String phoneCus;
+    private String AddressCus;
+    private String AddressSto;
+    private String Note;
+    private String TimeDesired;
     private String DateApproved;
     private String DateComplete;
     private String TimeComplete;
@@ -25,118 +29,170 @@ public class Order implements Serializable {
     private String StaffName;
     private String stOrderDetail;
 
-    public Order(String orderID, String serviceDetail, String weight, String totalPrice, String note, String dateApprove, String dateComplete, String timeComplete, String customerName, String storeName, String staffName, String stOrderDetail) {
-        this.OrderID = Integer.parseInt(orderID);
-        this.ServiceDetail = serviceDetail;
-        this.Weight = (int) Double.parseDouble(weight);
-        this.TotalPrice = (int) Double.parseDouble(totalPrice);
-        this.NOTE = note;
-        this.DateApproved = dateApprove;
-        this.DateComplete = dateComplete;
-        this.TimeComplete = timeComplete;
-        this.CustomerName = customerName;
-        this.StoreName = storeName;
-        this.StaffName = staffName;
-        this.stOrderDetail = stOrderDetail;
-    }
+//    public Order(String orderID, String serviceDetail, String weight, String totalPrice, String note, String dateApprove, String dateComplete, String timeComplete, String customerName, String storeName, String staffName, String stOrderDetail) {
+//        this.OrderID = Integer.parseInt(orderID);
+//        this.ServiceDetail = serviceDetail;
+//        this.Weight = (int) Double.parseDouble(weight);
+//        this.TotalPrice = (int) Double.parseDouble(totalPrice);
+//        this.NOTE = note;
+//        this.DateApproved = dateApprove;
+//        this.DateComplete = dateComplete;
+//        this.TimeComplete = timeComplete;
+//        this.CustomerName = customerName;
+//        this.StoreName = storeName;
+//        this.StaffName = staffName;
+//        this.stOrderDetail = stOrderDetail;
+//    }
 
     public Order() {
+    }
+
+    public Order(int OrderID, String ServiceDetail, String Weight, String TotalPrice, String phoneCus, String AddressCus, String AddressSto, String Note, String TimeDesired, String DateApproved, String DateComplete, String TimeComplete, String CustomerName, String StoreName, String StaffName, String stOrderDetail) {
+        this.OrderID = OrderID;
+        this.ServiceDetail = ServiceDetail;
+        this.Weight = Weight;
+        this.TotalPrice = TotalPrice;
+        this.phoneCus = phoneCus;
+        this.AddressCus = AddressCus;
+        this.AddressSto = AddressSto;
+        this.Note = Note;
+        this.TimeDesired = TimeDesired;
+        this.DateApproved = DateApproved;
+        this.DateComplete = DateComplete;
+        this.TimeComplete = TimeComplete;
+        this.CustomerName = CustomerName;
+        this.StoreName = StoreName;
+        this.StaffName = StaffName;
+        this.stOrderDetail = stOrderDetail;
     }
 
     public int getOrderID() {
         return OrderID;
     }
 
-    public void setOrderID(int OrderID) {
-        this.OrderID = OrderID;
-    }
-
     public String getServiceDetail() {
         return ServiceDetail;
     }
 
-    public void setServiceDetail(String ServiceDetail) {
-        this.ServiceDetail = ServiceDetail;
-    }
-
-    public int getWeight() {
+    public String getWeight() {
         return Weight;
     }
 
-    public void setWeight(int Weight) {
-        this.Weight = Weight;
-    }
-
-    public int getTotalPrice() {
+    public String getTotalPrice() {
         return TotalPrice;
     }
 
-    public void setTotalPrice(int TotalPrice) {
-        this.TotalPrice = TotalPrice;
+    public String getPhoneCus() {
+        return phoneCus;
     }
 
-    public String getNOTE() {
-        return NOTE;
+    public String getAddressCus() {
+        return AddressCus;
     }
 
-    public void setNOTE(String NOTE) {
-        this.NOTE = NOTE;
+    public String getAddressSto() {
+        return AddressSto;
+    }
+
+    public String getNote() {
+        return Note;
+    }
+
+    public String getTimeDesired() {
+        return TimeDesired;
     }
 
     public String getDateApproved() {
         return DateApproved;
     }
 
-    public void setDateApproved(String DateApproved) {
-        this.DateApproved = DateApproved;
-    }
-
     public String getDateComplete() {
         return DateComplete;
-    }
-
-    public void setDateComplete(String DateComplete) {
-        this.DateComplete = DateComplete;
     }
 
     public String getTimeComplete() {
         return TimeComplete;
     }
 
-    public void setTimeComplete(String TimeComplete) {
-        this.TimeComplete = TimeComplete;
-    }
-
     public String getCustomerName() {
         return CustomerName;
-    }
-
-    public void setCustomerName(String CustomerName) {
-        this.CustomerName = CustomerName;
     }
 
     public String getStoreName() {
         return StoreName;
     }
 
-    public void setStoreName(String StoreName) {
-        this.StoreName = StoreName;
-    }
-
     public String getStaffName() {
         return StaffName;
-    }
-
-    public void setStaffName(String StaffName) {
-        this.StaffName = StaffName;
     }
 
     public String getStOrderDetail() {
         return stOrderDetail;
     }
 
+    public void setOrderID(int OrderID) {
+        this.OrderID = OrderID;
+    }
+
+    public void setServiceDetail(String ServiceDetail) {
+        this.ServiceDetail = ServiceDetail;
+    }
+
+    public void setWeight(String Weight) {
+        this.Weight = Weight;
+    }
+
+    public void setTotalPrice(String TotalPrice) {
+        this.TotalPrice = TotalPrice;
+    }
+
+    public void setPhoneCus(String phoneCus) {
+        this.phoneCus = phoneCus;
+    }
+
+    public void setAddressCus(String AddressCus) {
+        this.AddressCus = AddressCus;
+    }
+
+    public void setAddressSto(String AddressSto) {
+        this.AddressSto = AddressSto;
+    }
+
+    public void setNote(String Note) {
+        this.Note = Note;
+    }
+
+    public void setTimeDesired(String TimeDesired) {
+        this.TimeDesired = TimeDesired;
+    }
+
+    public void setDateApproved(String DateApproved) {
+        this.DateApproved = DateApproved;
+    }
+
+    public void setDateComplete(String DateComplete) {
+        this.DateComplete = DateComplete;
+    }
+
+    public void setTimeComplete(String TimeComplete) {
+        this.TimeComplete = TimeComplete;
+    }
+
+    public void setCustomerName(String CustomerName) {
+        this.CustomerName = CustomerName;
+    }
+
+    public void setStoreName(String StoreName) {
+        this.StoreName = StoreName;
+    }
+
+    public void setStaffName(String StaffName) {
+        this.StaffName = StaffName;
+    }
+
     public void setStOrderDetail(String stOrderDetail) {
         this.stOrderDetail = stOrderDetail;
     }
 
+  
 }

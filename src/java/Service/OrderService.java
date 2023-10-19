@@ -28,12 +28,16 @@ public class OrderService implements Serializable{
         return listOrder;
     }
     
-    private Order createOrderFromResultSet(ResultSet rs) throws SQLException {
+   private Order createOrderFromResultSet(ResultSet rs) throws SQLException {
         String orderID = String.valueOf(rs.getInt("OrderID"));
         String serviceDetail = rs.getString("ServiceDetail");
         String weight = String.valueOf(rs.getDouble("Weight"));
         String totalPrice = String.valueOf(rs.getDouble("TotaPrice"));
+        String phoneCus = String.valueOf(rs.getInt("PhoneCus"));
+        String addressCus = rs.getString("AddressCus");
+        String addressSto = rs.getString("AddressSto");
         String note = rs.getString("Note");
+        String timeDesired = rs.getString("TimeDesired");
         String dateApprove = rs.getDate("DateApprove").toString();
         String dateComplete;
         Date dateCompleteValue = rs.getDate("DateCompleted");
@@ -62,7 +66,8 @@ public class OrderService implements Serializable{
 
         String stOrderDetail = rs.getString("StOrderDetail");
 
-        Order order = new Order(orderID, serviceDetail, weight, totalPrice, note, dateApprove, dateComplete, timeComplete, customerName, storeName, staffName, stOrderDetail);
+        Order order = new Order(Integer.parseInt(orderID), serviceDetail, weight, totalPrice, phoneCus, addressCus, addressSto, note, 
+                timeDesired, dateApprove, dateComplete, timeComplete, customerName, storeName, staffName, stOrderDetail);
         return order;
     }
     
