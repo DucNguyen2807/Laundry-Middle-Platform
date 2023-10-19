@@ -1,16 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <%@ page language="java" import="Model.User" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Thanh toán</title>
-        <link rel="stylesheet" href="css/thanhtoan.css"> 
-        <!--<link rel="stylesheet" href="css/cate.css">--> 
-
+        <link rel="stylesheet" href="css/thanhtoan.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     </head>
     <body>
@@ -19,39 +16,53 @@
                 <div class="col-md-6">
                     <!-- Khung bên trái -->
                     <div class="store-details">
-                        <img src="<%= request.getParameter("image")%>" alt="Store Image" style="width: 100%; height: auto;">
-                        <p>Store Name: <span><%= request.getParameter("storeName")%></span></p>
-                        <p>Address: <span><%= request.getParameter("address")%></span></p>
-                        <input type="hidden" name="storeID" value="<%= request.getParameter("storeID")%>">
-                        <input type="hidden" name="storeAddress" value="<%= request.getParameter("storeAddress")%>">
+                        <img id="storeImage" alt="Store Image" style="width: 100%; height: auto;">
+
+                        <p>Store Name: <span><script>document.write(sessionStorage.getItem('catStoreName'));</script></span></p>
+                        <p>Address: <span><script>document.write(sessionStorage.getItem('catAddress'));</script></span></p>
+
+                        <script>
+                            window.onload = function () {
+                                var storeImage = document.getElementById("storeImage");
+                                var catImage = sessionStorage.getItem('catImage');
+
+                                if (catImage) {
+                                    storeImage.src = catImage;
+                                }
+                            };
+
+                        </script>
+
+
+
+
 
                         <div class="rating">
-
-<!--<p>Rating: <span><%= request.getParameter("rating")%></span></p>-->
-                            <p >Rating:
-                                <%
-                                    int rating = Integer.parseInt(request.getParameter("rating"));
-                                    for (int i = 0; i < rating; i++) {
-                                %>
-                                <span class="star">★</span>
-                                <%
+                            <p>Rating:
+                                <script>
+                                    var ratingStr = sessionStorage.getItem('catRating');
+                                    if (ratingStr != null && ratingStr.match(/^\d+$/)) {
+                                        var rating = parseInt(ratingStr);
+                                        for (var i = 0; i < rating; i++) {
+                                            document.write('<span class="star">★</span>');
+                                        }
+                                    } else {
+                                        document.write('Invalid rating value');
                                     }
-                                %>
+                                </script>
                             </p>
                         </div>
-
                     </div>
-                    <c:if test="${not empty errorMessage}">
-                        <div class="alert alert-danger">
-                            <strong>Lỗi:</strong> <c:out value="${errorMessage}" />
-                        </div>
-                    </c:if>
                     <c:if test="${not empty successMessage}">
                         <div class="alert alert-success">
                             <strong>Thông báo:</strong> <c:out value="${successMessage}" />
                         </div>
                     </c:if>
-
+                    <c:if test="${not empty errorMessage}">
+                        <div class="alert alert-danger">
+                            <strong>Lỗi:</strong> <c:out value="${errorMessage}" />
+                        </div>
+                    </c:if>
 
                 </div>
                 <div class="col-md-6">
@@ -72,21 +83,22 @@
                                 <div class="alert alert-danger">
                                     <strong>Lỗi:</strong> <c:out value="${errorMessage3}" />
                                 </div>
-                            </c:if>     
+                            </c:if>
                             <label for="customerAddress">Địa chỉ:</label>
                             <input type="text" id="customerAddress" name="customerAddress" value="${user.address}" required><br>
                             <label for="kilos">Số kg:</label>
                             <input type="number" id="kilos" name="kilos" required><br>
                             <label for="services">Dịch vụ:</label>
                             <select id="services" name="services" required>
-                                <option value="giatthuong">Giặt thường: <%= request.getParameter("priceGiatThuong")%> vnđ</option>
-                                <option value="giatnhanh">Giặt nhanh: <%= request.getParameter("priceGiatNhanh")%> vnđ</option>
-                                <option value="giatsieutoc">Giặt siêu tốc: <%= request.getParameter("priceGiatSieuToc")%> vnđ</option>
+                                <script>
+                                    document.write('<option value="1" data-price="' + sessionStorage.getItem('catPriceGiatThuong') + '">Giặt thường: ' + sessionStorage.getItem('catPriceGiatThuong') + ' vnđ</option>');
+                                    document.write('<option value="2" data-price="' + sessionStorage.getItem('catPriceGiatNhanh') + '">Giặt nhanh: ' + sessionStorage.getItem('catPriceGiatNhanh') + ' vnđ</option>');
+                                    document.write('<option value="3" data-price="' + sessionStorage.getItem('catPriceGiatSieuToc') + '">Giặt siêu tốc: ' + sessionStorage.getItem('catPriceGiatSieuToc') + ' vnđ</option>');
+                                </script>
                             </select>
 
                             <label for="note">Ghi chú:</label>
                             <textarea id="note" name="note" rows="4"></textarea><br>
-
                             <label for="session">Buổi:</label>
                             <select id="session" name="session" required>
                                 <option value="morning">Buổi sáng</option>
@@ -96,56 +108,52 @@
                             </select><br>
 
 
-                            <p>Tổng thanh toán: <span name="totalPrice" id="totalAmount"></span>
-                                <br>
+                            <input type="hidden" name="storeID" id="storeIDField">
+                            <input type="hidden" name="catAddress" id="catAddressField">
 
-                                <button type="submit" name="btAction" value="ConfirmOrder">Xác nhận đặt hàng</button>
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                    var storeID = sessionStorage.getItem('catStoreID');
+                                    var catAddress = sessionStorage.getItem('catAddress');
 
-                                <script type="text/javascript">
-                                    function calculateTotalAmount() {
-                                        // Lấy giá trị dịch vụ và số kg từ các trường input
-                                        var selectedService = document.getElementById("services").value;
+                                    console.log("storeID: " + storeID);
+                                    console.log("catAddress: " + catAddress);
 
-                                        var kilos = parseInt(document.getElementById("kilos").value);
-                                        var selectedSession = document.getElementById("session").value;
+                                    document.getElementById('storeIDField').value = storeID;
+                                    document.getElementById('catAddressField').value = catAddress;
+                                });
 
-                                        // Kiểm tra nếu số kg là NaN hoặc không hợp lệ
-                                        if (isNaN(kilos) || kilos <= 0) {
-                                            document.getElementById("totalAmount").textContent = "0 vnđ";
-                                            return;
-                                        }
+                            </script>
 
-                                        // Khai báo biến để lưu giá tiền
-                                        var price = 0;
 
-                                        // Dựa vào loại dịch vụ, gán giá trị cho price
-                                        if (selectedService === "giatthuong") {
-                                            price = <%= request.getParameter("priceGiatThuong")%>;
-                                        } else if (selectedService === "giatnhanh") {
-                                            price = <%= request.getParameter("priceGiatNhanh")%>;
-                                        } else if (selectedService === "giatsieutoc") {
-                                            price = <%= request.getParameter("priceGiatSieuToc")%>;
-                                        }
 
-                                        // Tính tổng tiền
-                                        var totalAmount = price * kilos;
 
-                                        // Hiển thị tổng tiền lên trang
-                                        document.getElementById("totalAmount").textContent = totalAmount + " vnđ";
-                                    }
-
-                                    // Gọi hàm tính toán khi các trường input thay đổi
-                                    document.getElementById("services").addEventListener("change", calculateTotalAmount);
-                                    document.getElementById("kilos").addEventListener("input", calculateTotalAmount);
-
-                                    // Tính toán tổng tiền khi trang tải lần đầu
-                                    calculateTotalAmount();
-                                </script>
-
+                            <input type="hidden" name="totalPrice" id="totalPrice" value="0" />
+                            <p>Tổng thanh toán: <span id="totalAmount">0 vnđ</span></p>
+                            <br>
+                            <button type="submit" name="btAction" value="ConfirmOrder">Xác nhận đặt hàng</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            function calculateTotalAmount() {
+                var selectedService = document.getElementById("services");
+                var selectedOption = selectedService.options[selectedService.selectedIndex];
+                var price = selectedOption.getAttribute("data-price");
+                var kilos = parseInt(document.getElementById("kilos").value);
+                if (isNaN(kilos) || kilos <= 0) {
+                    document.getElementById("totalAmount").textContent = "0 vnđ";
+                    return;
+                }
+                var totalAmount = price * kilos;
+                document.getElementById("totalAmount").textContent = totalAmount + " vnđ";
+                document.getElementById("totalPrice").value = totalAmount;
+            }
+            document.getElementById("services").addEventListener("change", calculateTotalAmount);
+            document.getElementById("kilos").addEventListener("input", calculateTotalAmount);
+            calculateTotalAmount();
+        </script>
     </body>
 </html>
