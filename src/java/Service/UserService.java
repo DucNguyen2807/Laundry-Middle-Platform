@@ -95,7 +95,11 @@ public class UserService implements Serializable {
         String serviceDetail = rs.getString("ServiceDetail");
         String weight = String.valueOf(rs.getDouble("Weight"));
         String totalPrice = String.valueOf(rs.getDouble("TotaPrice"));
+        String phoneCus = String.valueOf(rs.getInt("PhoneCus"));
+        String addressCus = rs.getString("AddressCus");
+        String addressSto = rs.getString("AddressSto");
         String note = rs.getString("Note");
+        String timeDesired = rs.getString("TimeDesired");
         String dateApprove = rs.getDate("DateApprove").toString();
         String dateComplete;
         Date dateCompleteValue = rs.getDate("DateCompleted");
@@ -124,7 +128,8 @@ public class UserService implements Serializable {
 
         String stOrderDetail = rs.getString("StOrderDetail");
 
-        Order order = new Order(orderID, serviceDetail, weight, totalPrice, note, dateApprove, dateComplete, timeComplete, customerName, storeName, staffName, stOrderDetail);
+        Order order = new Order(Integer.parseInt(orderID), serviceDetail, weight, totalPrice, phoneCus, addressCus, addressSto, note, 
+                timeDesired, dateApprove, dateComplete, timeComplete, customerName, storeName, staffName, stOrderDetail);
         return order;
     }
 
@@ -141,10 +146,13 @@ public class UserService implements Serializable {
 
                 if (userRole < 4) {
                     // Nếu vai trò của người dùng là nhỏ hơn 4 (có quyền xem đơn hàng của chính họ)
-                    sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                    sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight, od.TotaPrice, od.Phone AS PhoneCus,\n"
+                            + " od.AddressCus, od.AddressSto, od.Note,\n"
+                            + " o.TimeDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
                             + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
                             + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
-                            + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
+                            + " LEFT JOIN [OrderDetail] od ON o.OrderDetailID = od.OrderDetailID\n"
+                            + " LEFT JOIN Service se ON se.ServiceID = od.ServiceID\n"
                             + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
@@ -157,10 +165,13 @@ public class UserService implements Serializable {
                     stm.setInt(4, userId);
                 } else if (userRole >= 4) {
                     // Nếu vai trò của người dùng là lớn hơn hoặc bằng 4 (quản trị viên)
-                    sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                    sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight, od.TotaPrice, od.Phone AS PhoneCus,\n"
+                            + " od.AddressCus, od.AddressSto, od.Note,\n"
+                            + " o.TimeDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
                             + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
                             + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
-                            + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
+                            + " LEFT JOIN [OrderDetail] od ON o.OrderDetailID = od.OrderDetailID\n"
+                            + " LEFT JOIN Service se ON se.ServiceID = od.ServiceID\n"
                             + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
@@ -204,10 +215,13 @@ public class UserService implements Serializable {
 
                 if (userRole < 4) {
                     // Nếu vai trò của người dùng là nhỏ hơn 4 (có quyền xem đơn hàng của chính họ)
-                    sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                    sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight, od.TotaPrice, od.Phone AS PhoneCus,\n"
+                            + " od.AddressCus, od.AddressSto, od.Note,\n"
+                            + " o.TimeDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
                             + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
                             + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
-                            + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
+                            + " LEFT JOIN [OrderDetail] od ON o.OrderDetailID = od.OrderDetailID\n"
+                            + " LEFT JOIN Service se ON se.ServiceID = od.ServiceID\n"
                             + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
@@ -220,10 +234,13 @@ public class UserService implements Serializable {
                     stm.setInt(4, userId);
                 } else if (userRole >= 4) {
                     // Nếu vai trò của người dùng là lớn hơn hoặc bằng 4 (quản trị viên)
-                    sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                    sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight, od.TotaPrice, od.Phone AS PhoneCus,\n"
+                            + " od.AddressCus, od.AddressSto, od.Note,\n"
+                            + " o.TimeDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
                             + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
                             + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
-                            + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
+                            + " LEFT JOIN [OrderDetail] od ON o.OrderDetailID = od.OrderDetailID\n"
+                            + " LEFT JOIN Service se ON se.ServiceID = od.ServiceID\n"
                             + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
@@ -257,7 +274,6 @@ public class UserService implements Serializable {
         }
     }
 
-   
     public void getAllOrders(int userId, int userRole) throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement stm = null;
@@ -270,10 +286,13 @@ public class UserService implements Serializable {
                 String sql;
 
                 if (userRole < 4) {
-                    sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                    sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight, od.TotaPrice, od.Phone AS PhoneCus,\n"
+                            + " od.AddressCus, od.AddressSto, od.Note,\n"
+                            + " o.TimeDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
                             + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
                             + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
-                            + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
+                            + " LEFT JOIN [OrderDetail] od ON o.OrderDetailID = od.OrderDetailID\n"
+                            + " LEFT JOIN Service se ON se.ServiceID = od.ServiceID\n"
                             + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
@@ -284,15 +303,17 @@ public class UserService implements Serializable {
                     stm.setInt(2, userId);
                     stm.setInt(3, userId);
                 } else if (userRole >= 4) {
-                    sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                    sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight, od.TotaPrice, od.Phone AS PhoneCus,\n"
+                            + " od.AddressCus, od.AddressSto, od.Note,\n"
+                            + " o.TimeDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
                             + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
                             + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
-                            + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
+                            + " LEFT JOIN [OrderDetail] od ON o.OrderDetailID = od.OrderDetailID\n"
+                            + " LEFT JOIN Service se ON se.ServiceID = od.ServiceID\n"
                             + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n";
-                    stm = con.prepareStatement(sql);
                 }
                 rs = stm.executeQuery();
                 while (rs.next()) {
