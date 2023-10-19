@@ -85,20 +85,43 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
-
-
-                                <p class="card-text show_txt">Giặt thường: <c:out value='${cat.priceGiatThuong}'/> vnđ</p>
-                                <a href="thanhtoan.jsp?image=<c:out value='${cat.image}' />&priceGiatThuong=<c:out value='${cat.priceGiatThuong}'/>
-                                   &priceGiatNhanh=<c:out value='${cat.priceGiatNhanh}'/>&priceGiatSieuToc=<c:out value='${cat.priceGiatSieuToc}'/>
-                                   &storeName=<c:out value='${cat.storeName}' />&address=<c:out value='${cat.address}' />
-                                   &storeID=<c:out value='${cat.storeID}' />
-                                   &rating=<c:out value='${cat.rating}' />" class="btn btn-success btn-block">Booking</a>
                             </div>
+                            <p class="card-text show_txt">Giặt thường: <c:out value='${cat.priceGiatThuong}'/> vnđ</p>
+                            <a href="#" class="btn btn-success btn-block" onclick="saveCatInfo(
+                                            '<c:out value='${cat.image}' />',
+                                            '<c:out value='${cat.priceGiatThuong}' />',
+                                            '<c:out value='${cat.priceGiatNhanh}' />',
+                                            '<c:out value='${cat.priceGiatSieuToc}' />',
+                                            '<c:out value='${cat.storeName}' />',
+                                            '<c:out value='${cat.address}' />',
+                                            '<c:out value='${cat.storeID}' />',
+                                            '<c:out value='${cat.rating}' />'
+                                            )">Booking</a>
                         </div>
                     </div>
                 </c:forEach>
             </div>
         </div>
+        <script>
+            function saveCatInfo(image, priceGiatThuong, priceGiatNhanh, priceGiatSieuToc, storeName, address, storeID, rating) {
+                var session = sessionStorage;
+                session.setItem("catImage", image);
+                session.setItem("catPriceGiatThuong", priceGiatThuong);
+                session.setItem("catPriceGiatNhanh", priceGiatNhanh);
+                session.setItem("catPriceGiatSieuToc", priceGiatSieuToc);
+                session.setItem("catStoreName", storeName);
+                session.setItem("catAddress", address);
+                session.setItem("catStoreID", storeID);
+                session.setItem("catRating", rating);   
+                    window.location.href = "thanhtoan.jsp";
+            }
+        </script>
+
+
+
+
+
+
 
         <c:choose>
             <c:when test="${empty pagedStores}">

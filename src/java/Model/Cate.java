@@ -9,8 +9,8 @@ package Model;
  * @author nguye
  */
 public class Cate {
-
-    private int storeID;
+    private int totalPrice;
+    private String storeID;
     private String storeName;
     private String address;
     private int price;
@@ -24,7 +24,7 @@ public class Cate {
     private int priceGiatNhanh;
     private int priceGiatSieuToc;
 
-    public Cate(String address, String storeName, String phone, String email, int price, int rating, String image, String service, String review, int storeID) {
+    public Cate(String address, String storeName, String phone, String email, int price, int rating, String image, String service, String review, String storeID) {
         this.address = address;
         this.storeName = storeName;
         this.phone = phone;
@@ -37,7 +37,7 @@ public class Cate {
         this.storeID = storeID;
     }
 
-    public Cate(int storeID, String storeName, String address, int price, String service, int rating, String review, String image) {
+    public Cate(String storeID, String storeName, String address, int price, String service, int rating, String review, String image) {
         this.storeID = storeID;
         this.storeName = storeName;
         this.address = address;
@@ -51,6 +51,14 @@ public class Cate {
     public Cate() {
     }
 
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+    
     public int getPriceGiatThuong() {
         return priceGiatThuong;
     }
@@ -75,11 +83,11 @@ public class Cate {
         this.priceGiatSieuToc = priceGiatSieuToc;
     }
 
-    public int getStoreID() {
+    public String getStoreID() {
         return storeID;
     }
 
-    public void setStoreID(int storeID) {
+    public void setStoreID(String storeID) {
         this.storeID = storeID;
     }
 

@@ -121,7 +121,7 @@ public class StoreService implements Serializable {
 
     private Cate createCateFromResultSet(ResultSet rs) throws SQLException {
         Cate cate = new Cate();
-        cate.setStoreID(Integer.parseInt(rs.getString("UserID")));
+        cate.setStoreID(rs.getString("UserID"));
         cate.setStoreName(rs.getString("Fullname"));
         cate.setAddress(rs.getString("Address"));
         cate.setPriceGiatThuong(Integer.parseInt(rs.getString("giatthuong")));
@@ -178,39 +178,38 @@ public class StoreService implements Serializable {
         }
     }
 
-    public boolean BookingOrder(String phone, String fullname, int storeId, int serviceId,
-            int kilos, int totalPrice, String customerAddress, String note, int userId, String session) {
+    public boolean BookingOrder(String phone, String fullname, String storeId, int serviceId,
+            int kilos, String totalPrice, String customerAddress, String AddressSto,String note, int userId, String session) {
         Connection conn = null;
-        PreparedStatement orderPreparedStatement = null;
-        PreparedStatement orderDetailPreparedStatement = null;
+        PreparedStatement pos = null;
+        PreparedStatement posd = null;
 
         try {
             conn = ConnectDB.getConnection();
             if (conn != null) {
                 String insertOrderQuery = "INSERT INTO [Order] (DateApprove, TimeDesired, CustomerID, StoreID, StOrderID) VALUES (?, ?, ?, ?, 1)";
-                orderPreparedStatement = conn.prepareStatement(insertOrderQuery);
-                orderPreparedStatement.setDate(1, new Date(System.currentTimeMillis()));
-                orderPreparedStatement.setString(2, session);
-                orderPreparedStatement.setInt(3, userId);
-                orderPreparedStatement.setInt(4, storeId); // StoreID
-                int rowsInserted = orderPreparedStatement.executeUpdate();
+                pos = conn.prepareStatement(insertOrderQuery);
+                pos.setDate(1, new Date(System.currentTimeMillis()));
+                pos.setString(2, session);
+                pos.setInt(3, userId);
+                pos.setString(4, storeId); 
+                int rowsInserted = pos.executeUpdate();
 
                 if (rowsInserted <= 0) {
                     return false; // Trả về false nếu không thêm dòng nào.
                 }
 
                 String insertOrderDetailQuery = "INSERT INTO OrderDetail (Weight, ServiceID, TotaPrice, Phone, AddressCus, AddressSto, Note) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                orderDetailPreparedStatement = conn.prepareStatement(insertOrderDetailQuery);
-                orderDetailPreparedStatement.setInt(1, kilos); // Weight
-                orderDetailPreparedStatement.setInt(2, serviceId); // ServiceID
-                orderDetailPreparedStatement.setInt(3, totalPrice); // TotaPrice
-                orderDetailPreparedStatement.setString(4, phone); // Phone
-                orderDetailPreparedStatement.setString(5, customerAddress); // AddressCus
-                orderDetailPreparedStatement.setInt(6, storeId); // AddressSto
-                orderDetailPreparedStatement.setString(7, note); // Note
-                rowsInserted = orderDetailPreparedStatement.executeUpdate();
+                posd = conn.prepareStatement(insertOrderDetailQuery);
+                posd.setInt(1, kilos); 
+                posd.setInt(2, serviceId);
+                posd.setString(3, totalPrice); 
+                posd.setString(4, phone);
+                posd.setString(5, customerAddress);
+                posd.setString(6, AddressSto); 
+                posd.setString(7, note); 
+                rowsInserted = posd.executeUpdate();
 
-                // Kiểm tra xem liệu câu truy vấn đã thêm dữ liệu vào bảng OrderDetail chưa
                 return rowsInserted > 0;
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -218,11 +217,11 @@ public class StoreService implements Serializable {
             // Xử lý lỗi
         } finally {
             try {
-                if (orderDetailPreparedStatement != null) {
-                    orderDetailPreparedStatement.close();
+                if (posd != null) {
+                    posd.close();
                 }
-                if (orderPreparedStatement != null) {
-                    orderPreparedStatement.close();
+                if (pos != null) {
+                    pos.close();
                 }
                 if (conn != null) {
                     conn.close();

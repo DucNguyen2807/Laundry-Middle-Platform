@@ -1,6 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+     * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+     * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package Controller;
 
@@ -23,37 +23,40 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "ConfirmOrderController", urlPatterns = {"/ConfirmOrderController"})
 public class ConfirmOrderController extends HttpServlet {
 
+    private final String THANHTOAN = "thanhtoan.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             // Lấy giá trị từ trang JSP
+            String url = THANHTOAN;
+            HttpSession session1 = request.getSession();
             String fullname = request.getParameter("fullname");
             String phone = request.getParameter("phone");
             String customerAddress = request.getParameter("customerAddress");
             int kilos = Integer.parseInt(request.getParameter("kilos"));
-            String serviceId = request.getParameter("services");
+            int serviceId = Integer.parseInt(request.getParameter("services"));
             String note = request.getParameter("note");
             String session = request.getParameter("session");
-            String storeID = request.getParameter("storeID");
-            String storeAddress = request.getParameter("storeAddress");
+            String storeId = request.getParameter("storeID");
+            String storeAddress = request.getParameter("catAddress");
+
+
             String totalPrice = request.getParameter("totalPrice");
-            HttpSession session1 = request.getSession();
             User user = (User) session1.getAttribute("user");
             int userId = user.getUserId();
 
             StoreService store = new StoreService();
-            boolean success = store.BookingOrder(phone, fullname, userId, userId, kilos, userId, customerAddress, note, userId, session);
-
+            boolean success = store.BookingOrder(phone, fullname, storeId, serviceId, kilos, totalPrice, customerAddress, storeAddress, note, userId, session);
             if (success) {
                 request.setAttribute("successMessage", "Đặt hàng thành công!");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("thanhtoan.jsp");
-                dispatcher.forward(request, response);
             } else {
                 request.setAttribute("errorMessage", "Đã xảy ra lỗi khi đặt hàng. Vui lòng thử lại sau!");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("thanhtoan.jsp");
-                dispatcher.forward(request, response);
             }
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+            dispatcher.forward(request, response);
 
         }
     }
