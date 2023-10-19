@@ -58,8 +58,8 @@
                                 <li>
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
-                                            <input type="hidden" value="processing" name="btAction" />
-                                            <button  type="submit" value="ViewProcessing" name="btAction" class="btn btn-primary">Processing</button>
+                                            <input type="hidden" name="btAction" value="4" />
+                                            <button type="submit" class="btn btn-primary">Processing</button>
                                         </form>
                                     </a>
                                 </li>
@@ -67,8 +67,8 @@
                                 <li>
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
-                                            <input type="hidden" value="completed" name="btAction" />
-                                            <button  type="submit" value="ViewCompleted" name="btAction" class="btn btn-primary">Completed</button>
+                                            <input type="hidden" name="btAction" value="5" />
+                                            <button type="submit" class="btn btn-primary">Completed</button>
                                         </form>
                                     </a>
                                 </li>
@@ -76,8 +76,8 @@
                                 <li>
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
-                                            <input type="hidden" value="Archive" name="btAction" />
-                                            <button  type="submit" value="ViewArchive" name="btAction" class="btn btn-primary">Archive</button>
+                                            <input type="hidden" name="btAction" value="2" />
+                                            <button type="submit" class="btn btn-primary">Archive</button>
                                         </form>
                                     </a>
                                 </li>
@@ -97,8 +97,8 @@
                 <h1 class="display-4">Danh sách đơn hàng</h1>
 
                 <%
-                    String searchvalue = request.getParameter("ViewNewOrder");
-                    if (searchvalue != null) {
+                    String button = request.getParameter("btAction");
+                    if (button != null) {
                         List<Order> result = (List<Order>) request.getAttribute("SEARCHRESULT");
                         if (result != null && !result.isEmpty()) {
                 %>
@@ -131,7 +131,7 @@
                             <td><%= ord.getServiceDetail()%></td>
                             <td><%= ord.getWeight()%></td>
                             <td><%= ord.getTotalPrice()%></td>
-                            <td><%= ord.getNOTE()%></td>
+                            <td><%= ord.getNote()%></td>
                             <td><%= ord.getDateApproved()%></td>
                             <td><%= ord.getDateComplete()%></td>
                             <td><%= ord.getTimeComplete()%></td>

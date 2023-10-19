@@ -121,7 +121,6 @@
                         <button type="submit" value="ViewStore" name="btAction" class="btn btn-primary">Tìm kiếm</button>
                     </div>
                 </form>
-
                 <form action="MainController" method="post">
                     <button value="ViewStore" name="btAction"  class="btn btn-primary">Xem tất cả</button>
                     <input type="hidden" name="txtSearchStore" value="" />
