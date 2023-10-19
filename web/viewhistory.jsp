@@ -164,7 +164,7 @@
                 <form action="MainController">
                     <tr>
                         <td><%= ++count%></td>
-                         <td><%= ord.getOrderID()%></td>
+                        <td><%= ord.getOrderID()%></td>
                         <td><%= ord.getServiceDetail()%></td>
                         <td><%= ord.getWeight()%></td>
                         <td><%= ord.getTotalPrice()%></td>

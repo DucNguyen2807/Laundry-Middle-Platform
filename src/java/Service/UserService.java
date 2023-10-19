@@ -314,10 +314,10 @@ public class UserService implements Serializable {
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n";
+                    stm = con.prepareStatement(sql);
                 }
                 rs = stm.executeQuery();
                 while (rs.next()) {
-                    // Xử lý kết quả và tạo danh sách đơn hàng
                     Order order = createOrderFromResultSet(rs);
                     listOrder.add(order);
                 }

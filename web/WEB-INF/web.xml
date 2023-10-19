@@ -30,7 +30,7 @@
     </servlet>
     <servlet>
         <servlet-name>ViewNewOrder_Store</servlet-name>
-        <servlet-class>Controller.ViewNewOrder_Store</servlet-class>
+        <servlet-class>Controller.ViewOrder_Store</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
