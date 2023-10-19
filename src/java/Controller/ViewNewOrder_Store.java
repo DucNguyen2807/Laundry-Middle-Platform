@@ -38,7 +38,7 @@ public class ViewNewOrder_Store extends HttpServlet {
             HttpSession session = request.getSession();
             User user = (User) request.getSession().getAttribute("user");
             int userId = user.getUserId();
-            //int roleId = user.getRoleId();
+            int roleId = user.getRoleId();
             OrderService ord = new OrderService();
 
             try {

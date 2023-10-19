@@ -59,7 +59,7 @@ public class MainController extends HttpServlet {
                 url = DELETEACCCONTROLLER;
             } else if (button.equals("Category")) {
                 url = CATECONTROLLER;
-            } else if (button.equals("ViewNewOrder")) {
+            } else if (button.equals("1")) {
                 url = VIEWNEWORDER_STORE;
             } else if (button.equals("ConfirmOrder")) {
                 url = CONFIRMORDERCONTROLLER;

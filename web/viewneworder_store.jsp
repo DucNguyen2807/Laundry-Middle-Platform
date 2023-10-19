@@ -49,8 +49,8 @@
                                 <li>
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
-                                            <input type="hidden" value="neworder" name="btAction" />
-                                            <button  type="submit" value="ViewNewOrder" name="btAction" class="btn btn-primary">New Order</button>
+                                            <input type="hidden" name="btAction" value="1" />
+                                            <button type="submit" class="btn btn-primary">New Order</button>
                                         </form>
                                     </a>
                                 </li>
