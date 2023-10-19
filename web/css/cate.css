@@ -30,18 +30,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     background-color: #f7f7f7;
     cursor: pointer;
 }
-
-/* Ẩn gạch chân khi bấm vào liên kết */
 .pagination-link:active {
     text-decoration: none;
 }
-
 .pagination-link:hover {
     background-color: #007bff;
     color: #fff;
-    text-decoration: none; /* Ẩn gạch chân khi hover */
+    text-decoration: none;
+}
+.star {
+    font-size: 24px; 
 }
 
+.yellow {
+    color: gold; 
+}
 
-
+.black {
+    color: black; 
+}
 

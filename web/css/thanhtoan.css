@@ -83,3 +83,20 @@ body {
     max-width: 100%;
     height: auto;
 }
+.star-image {
+    display: none;
+}
+.star {
+    color: gold;
+}
+.star {
+    font-size: 24px; 
+}
+
+.yellow {
+    color: gold; 
+}
+
+.black {
+    color: black; 
+}

@@ -69,23 +69,37 @@
                                 <img class="card-img-top" src="<c:out value='${cat.image}'/>" alt="Store Image" style="width: 100%; height: auto;">
                                 <h4 class="card-title show_txt">Tên cửa hàng: <c:out value='${cat.storeName}'/></h4>
                                 <p class="card-text show_txt">Địa chỉ: <c:out value='${cat.address}'/></p>
+
                                 <div class="rating">
-                                    <c:forEach begin="1" end="${cat.rating}">
-                                        <i class="fas fa-star"></i>
-                                    </c:forEach>
+                                    <c:choose>
+                                        <c:when test="${cat.rating == 5}">
+                                            <c:forEach begin="1" end="5">
+                                                <span class="star yellow">★</span>
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:forEach begin="1" end="4">
+                                                <span class="star yellow">★</span>
+                                            </c:forEach>
+                                            <span class="star black">★</span>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
+
+
                                 <p class="card-text show_txt">Giặt thường: <c:out value='${cat.priceGiatThuong}'/> vnđ</p>
                                 <a href="thanhtoan.jsp?image=<c:out value='${cat.image}' />&priceGiatThuong=<c:out value='${cat.priceGiatThuong}'/>
                                    &priceGiatNhanh=<c:out value='${cat.priceGiatNhanh}'/>&priceGiatSieuToc=<c:out value='${cat.priceGiatSieuToc}'/>
                                    &storeName=<c:out value='${cat.storeName}' />&address=<c:out value='${cat.address}' />
+                                   &storeID=<c:out value='${cat.storeID}' />
                                    &rating=<c:out value='${cat.rating}' />" class="btn btn-success btn-block">Booking</a>
-                                 
                             </div>
                         </div>
                     </div>
                 </c:forEach>
             </div>
         </div>
+
         <c:choose>
             <c:when test="${empty pagedStores}">
                 <div class="alert alert-warning mt-3" role="alert">No results found!</div>
