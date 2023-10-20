@@ -18,9 +18,11 @@
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap.css" rel="stylesheet">
-        <link href="css/viewneworder_store.css" rel="stylesheet" >
+        <link rel="stylesheet" href="css/manage_admin.css">
+        <link rel="stylesheet" href="css/viewneworder_store.css">
+
         <style>
-            
+
         </style>
     </head>
 
