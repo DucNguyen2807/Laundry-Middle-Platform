@@ -1,0 +1,35 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 20, 2023, 2:46:35 AM
+    Author     : acer
+*/
+
+
+.table {
+    width: 100%;
+    max-width: 100%; 
+    margin-bottom: 1rem; 
+}
+
+.table thead {
+    background-color: #22638f; 
+    color: white; 
+}
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+.table-striped tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.table th {
+    text-align: center;
+}
+
+.table tbody tr:hover {
+    background-color: #e0e0e0;
+}

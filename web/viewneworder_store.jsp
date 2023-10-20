@@ -18,8 +18,9 @@
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap.css" rel="stylesheet">
-        <link href="css/styleindex.css" rel="stylesheet" >
+        <link href="css/viewneworder_store.css" rel="stylesheet" >
         <style>
+            
         </style>
     </head>
 
@@ -157,8 +158,8 @@
                 %>
             </div>
 
-            <script src="js/Jquery.js"></script>
-            <script src="js/bootstrap.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     </body>
 
