@@ -37,15 +37,17 @@
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="homepage_customer.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                                 <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
-                                <li><a href="manage_admin.jsp" style="color: #ffffff">Manage</a></li>
                                 <li><a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
-                                <form action="MainController" method="post">
-                                    <input type="submit" value="Category" name="btAction" />
-                                </form>
+                                <li>
+                                    <form action="MainController" method="post">
+                                        <input type="submit" value="Category" name="btAction" />
+                                        <input type="submit" value="Favorite" name="btAction" />
+                                    </form>  
+                                </li>
                             </ul>
-
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="login.jsp" style="color: #ffffff">Logout</a></li>
+
                             </ul>
                         </div>
                     </div><!-- /.container-fluid -->
@@ -79,11 +81,89 @@
 
             </div>
 
+            <div class="row sanpham">
+
+                <div class="col-md-3 ">
+
+                    <div id="sanpham1">
+
+                        <img src="image/b1.jpg" />
+                        <p id="first_line1">COMBO laundry 3 get 1 free</p>
+                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
+                                Branch</span> </p>
+                        <p>Price: <del> 200.000 vnd </del> <span style="color: #F72B2F; margin-left:10px; ">150.000
+                                vn?</span></p>
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div id="sanpham2">
+
+                        <img src="image/b2.png" />
+                        <p id="first_line2">COMBO laundry 3 get 1 free</p>
+                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
+                                Branch</span> </p>
+                        <p>Price: <del>500.000 vnd </del> <span style="color: #F72B2F; margin-left:10px; ">450.000
+                                vn?</span></p>
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div id="sanpham3">
+
+                        <img src="image/b3.jpg"/>
+                        <p id="first_line3">COMBO laundry 3 get 1 free</p>
+                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
+                                Branch</span> </p>
+                        <p>Price: <del>150.000 vnd </del> <span style="color: #F72B2F; margin-left:10px; ">100.000
+                                vn?</span></p>
+
+
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+
+                    <div id="sanpham3">
+
+                        <img src="image/b4.jpg" />
+                        <p id="first_line3">COMBO laundry 3 get 1 free</p>
+                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
+                                Branch</span> </p>
+                        <p>Price: <del>150.000 vnd </del> <span style="color: #F72B2F; margin-left:10px; ">100.000
+                                vn?</span></p>
+
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
             <div class="row task1">	
+
+                <div class="row combo">
+
+                    <div class="col-md-12">
+
+                        <h2>Quy trinh 4 buoc</h2>
+                        <p>During the promotion period, let's wash your shoes!</p>
+                    </div>
+
+                </div>
 
                 <div class="col-md-3">
                     <div>
-
                         <img src="image/service.jpg" />
                         <div class="relative">
                             <h3>Cheap Shoe Washing</h3>
@@ -111,17 +191,12 @@
 
                 <div class="col-md-3">
                     <div >
-
                         <img src="image/service.jpg" />
                         <div class="relative">
                             <h3>Cheap shoe sole stickers</h3>
                             <p>Absolute shoe sole protection</p>
-
                         </div>
-
                     </div>
-
-
                 </div>
                 <div class="col-md-3">
                     <div >
@@ -130,28 +205,12 @@
                         <div class="relative">
                             <h3>Glue Shoes</h3>
                             <p>Reliable quality</p>
-
                         </div>
-
                     </div>
-
-
                 </div>
-
-
             </div>
 
-            <div class="row combo">
 
-                <div class="col-md-12">
-
-                    <h2>Quy tri?nh 4 b???c</h2>
-                    <p>During the promotion period, let's wash your shoes!</p>
-                </div>
-
-            </div>
-
-            
 
 
             <div class="row orderonline">

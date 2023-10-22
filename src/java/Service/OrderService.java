@@ -38,7 +38,15 @@ public class OrderService implements Serializable {
         String addressSto = rs.getString("AddressSto");
         String note = rs.getString("Note");
         String timeDesired = rs.getString("TimeDesired");
-        String dateApprove = rs.getDate("DateApprove").toString();
+        String dateApprove ;
+        Date dateApproveValueDate = rs.getDate("DateApprove");
+        if (rs.wasNull()) {
+            dateApprove = "NULL";
+        } else {
+            dateApprove = dateApproveValueDate.toString();
+        }
+        
+        
         String dateComplete;
         Date dateCompleteValue = rs.getDate("DateCompleted");
         if (rs.wasNull()) {
