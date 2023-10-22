@@ -32,6 +32,7 @@ public class MainController extends HttpServlet {
     private static final String DELETEACCCONTROLLER = "DeleteAccController";
     private static final String CATECONTROLLER = "CateController";
     private static final String UPDATEORDERCONTROLLER = "UpdateOrderController";
+    private static final String VIEWFAVORITECONTROLLER = "ViewFavoriteController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -66,6 +67,8 @@ public class MainController extends HttpServlet {
                 url = VIEWORDER_STORE;
             } else if (button.equals("Cancel") || button.equals("Approve") || button.equals("Done")) {
                 url = UPDATEORDERCONTROLLER;
+            } else if (button.equals("Favorite")) {
+                url = VIEWFAVORITECONTROLLER;
             }
 
             RequestDispatcher rd = request.getRequestDispatcher(url);
