@@ -96,7 +96,7 @@
             </div>
 
 
-            <div class="container mt-4" style="position: absolute;">
+            <div class="container mt-4" style="position: absolute; width: 95%">
                 <h1 class="display-4">Danh sách đơn hàng</h1>
 
                 <%
@@ -121,6 +121,8 @@
                             <th scope="col">Store</th>
                             <th scope="col">Staff</th>
                             <th scope="col">Status</th>
+                            <th scope="col"></th> 
+                            <th scope="col"></th> 
                         </tr>
                     </thead>
                     <tbody>
@@ -142,6 +144,13 @@
                             <td><%= ord.getStoreName().toUpperCase()%></td>
                             <td><%= ord.getStaffName()%></td>
                             <td><%= ord.getStOrderDetail()%></td>
+                            <td>
+                                <button type="submit" name="orderId" value="<%= ord.getOrderID()%>" class="btn btn-danger" name="btAction" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel</button>
+                            </td>
+                            <td>
+                                <button type="submit" name="orderId" value="<%= ord.getOrderID()%>" class="btn btn-success" name="btAction" onclick="return confirm('Are you sure you want to approve this order?')">Approve</button>
+
+                            </td>
                         </tr>
                     </form>
 
