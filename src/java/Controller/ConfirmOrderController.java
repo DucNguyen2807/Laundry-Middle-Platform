@@ -41,8 +41,8 @@ public class ConfirmOrderController extends HttpServlet {
             int kilos = Integer.parseInt(request.getParameter("kilos"));
             int serviceId = Integer.parseInt(request.getParameter("services"));
             String note = request.getParameter("note");
-            String timedesired = request.getParameter("date");
-            String datedesired = request.getParameter("time");
+            String TimeDesired = request.getParameter("time");
+            String DateDesired = request.getParameter("date");
 
             String storeId = request.getParameter("storeID");
             String storeAddress = request.getParameter("catAddress");
@@ -53,7 +53,7 @@ public class ConfirmOrderController extends HttpServlet {
 
             StoreService store = new StoreService();
             boolean success = store.BookingOrder(phone, fullname, storeId, serviceId, kilos,
-                    totalPrice, customerAddress, storeAddress, note, userId, datedesired, timedesired);
+                    totalPrice, customerAddress, storeAddress, note, userId, DateDesired, TimeDesired);
             if (success) {
                 request.setAttribute("successMessage", "Đặt hàng thành công!");
             } else {

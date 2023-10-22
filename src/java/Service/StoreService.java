@@ -190,8 +190,9 @@ public class StoreService implements Serializable {
             if (conn != null) {
                 String insertOrderQuery = "INSERT INTO [Order] (DateDesired, TimeDesired, CustomerID, StoreID, StOrderID) VALUES (?, ?, ?, ?, 1)";
                 pos = conn.prepareStatement(insertOrderQuery, Statement.RETURN_GENERATED_KEYS);
-                pos.setString(1, DateDesired);
-                pos.setString(2, TimeDesired);
+                pos.setString(1, DateDesired); 
+                pos.setString(2, TimeDesired); 
+
                 pos.setInt(3, userId);
                 pos.setString(4, storeId);
                 int rowsInserted = pos.executeUpdate();
