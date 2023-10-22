@@ -13,6 +13,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,7 +159,6 @@ public class StoreService implements Serializable {
                         + "INNER JOIN Image i ON i.StoreID = u.UserID "
                         + "INNER JOIN Favorite f ON f.StoreID = u.UserID "
                         + "GROUP BY u.UserID, u.Fullname, u.Address, p.PriceDetail, p1.PriceDetail, p2.PriceDetail, s.ServiceDetail, r.ReviewText, i.ImageDetail";
-
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -179,7 +180,7 @@ public class StoreService implements Serializable {
     }
 
     public boolean BookingOrder(String phone, String fullname, String storeId, int serviceId,
-            int kilos, String totalPrice, String customerAddress, String AddressSto,String note, int userId, String session) {
+            int kilos, String totalPrice, String customerAddress, String AddressSto, String note, int userId, String DateDesired, String TimeDesired) {
         Connection conn = null;
         PreparedStatement pos = null;
         PreparedStatement posd = null;
@@ -187,27 +188,34 @@ public class StoreService implements Serializable {
         try {
             conn = ConnectDB.getConnection();
             if (conn != null) {
-                String insertOrderQuery = "INSERT INTO [Order] (DateApprove, TimeDesired, CustomerID, StoreID, StOrderID) VALUES (?, ?, ?, ?, 1)";
-                pos = conn.prepareStatement(insertOrderQuery);
-                pos.setDate(1, new Date(System.currentTimeMillis()));
-                pos.setString(2, session);
+                String insertOrderQuery = "INSERT INTO [Order] (DateDesired, TimeDesired, CustomerID, StoreID, StOrderID) VALUES (?, ?, ?, ?, 1)";
+                pos = conn.prepareStatement(insertOrderQuery, Statement.RETURN_GENERATED_KEYS);
+                pos.setString(1, DateDesired);
+                pos.setString(2, TimeDesired);
                 pos.setInt(3, userId);
-                pos.setString(4, storeId); 
+                pos.setString(4, storeId);
                 int rowsInserted = pos.executeUpdate();
 
                 if (rowsInserted <= 0) {
                     return false; // Trả về false nếu không thêm dòng nào.
                 }
 
-                String insertOrderDetailQuery = "INSERT INTO OrderDetail (Weight, ServiceID, TotaPrice, Phone, AddressCus, AddressSto, Note) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                ResultSet generatedKeys = pos.getGeneratedKeys();
+                int orderID = -1;
+                if (generatedKeys.next()) {
+                    orderID = generatedKeys.getInt(1);
+                }
+
+                String insertOrderDetailQuery = "INSERT INTO OrderDetail (OrderID, Weight, ServiceID, TotaPrice, Phone, AddressCus, AddressSto, Note) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 posd = conn.prepareStatement(insertOrderDetailQuery);
-                posd.setInt(1, kilos); 
-                posd.setInt(2, serviceId);
-                posd.setString(3, totalPrice); 
-                posd.setString(4, phone);
-                posd.setString(5, customerAddress);
-                posd.setString(6, AddressSto); 
-                posd.setString(7, note); 
+                posd.setInt(1, orderID); // Sử dụng giá trị orderID ở đây
+                posd.setInt(2, kilos);
+                posd.setInt(3, serviceId);
+                posd.setString(4, totalPrice);
+                posd.setString(5, phone);
+                posd.setString(6, customerAddress);
+                posd.setString(7, AddressSto);
+                posd.setString(8, note);
                 rowsInserted = posd.executeUpdate();
 
                 return rowsInserted > 0;
@@ -230,7 +238,7 @@ public class StoreService implements Serializable {
                 e.printStackTrace();
             }
         }
-        return false; // Trả về false nếu có lỗi xảy ra.
+        return false;
     }
 
 }

@@ -33,10 +33,6 @@
 
                         </script>
 
-
-
-
-
                         <div class="rating">
                             <p>Rating:
                                 <script>
@@ -86,26 +82,32 @@
                             </c:if>
                             <label for="customerAddress">Địa chỉ:</label>
                             <input type="text" id="customerAddress" name="customerAddress" value="${user.address}" required><br>
-                            <label for="kilos">Số kg:</label>
-                            <input type="number" id="kilos" name="kilos" required><br>
+                            <label for="kilos">Số kg (từ 1 đến 20):</label>
+                            <input type="number" id="kilos" name="kilos" required min="1" max="20"><br>
+
                             <label for="services">Dịch vụ:</label>
                             <select id="services" name="services" required>
                                 <script>
-                                    document.write('<option value="1" data-price="' + sessionStorage.getItem('catPriceGiatThuong') + '">Giặt thường: ' + sessionStorage.getItem('catPriceGiatThuong') + ' vnđ</option>');
-                                    document.write('<option value="2" data-price="' + sessionStorage.getItem('catPriceGiatNhanh') + '">Giặt nhanh: ' + sessionStorage.getItem('catPriceGiatNhanh') + ' vnđ</option>');
-                                    document.write('<option value="3" data-price="' + sessionStorage.getItem('catPriceGiatSieuToc') + '">Giặt siêu tốc: ' + sessionStorage.getItem('catPriceGiatSieuToc') + ' vnđ</option>');
+                                    document.write('<option value="1" data-price="' + sessionStorage.getItem('catPriceGiatThuong') + '">Giặt thường: ' + sessionStorage.getItem('catPriceGiatThuong') + ' vnđ/1kg</option>');
+                                    document.write('<option value="2" data-price="' + sessionStorage.getItem('catPriceGiatNhanh') + '">Giặt nhanh: ' + sessionStorage.getItem('catPriceGiatNhanh') + ' vnđ/1kg</option>');
+                                    document.write('<option value="3" data-price="' + sessionStorage.getItem('catPriceGiatSieuToc') + '">Giặt siêu tốc: ' + sessionStorage.getItem('catPriceGiatSieuToc') + ' vnđ/1kg</option>');
                                 </script>
                             </select>
 
                             <label for="note">Ghi chú:</label>
                             <textarea id="note" name="note" rows="4"></textarea><br>
-                            <label for="session">Buổi:</label>
-                            <select id="session" name="session" required>
-                                <option value="morning">Buổi sáng</option>
-                                <option value="noon">Buổi trưa</option>
-                                <option value="afternoon">Buổi chiều</option>
-                                <option value="evening">Buổi tối</option>
-                            </select><br>
+                            <div style="display: flex; align-items: center;">
+                                <div>
+                                    <label for="time">Chọn thời gian:</label>
+                                    <input type="time" id="time" name="time" required>
+                                </div>
+                                <div style="margin-left: 50px;">
+
+                                    <label for="date">Chọn ngày:</label>
+                                    <input type="date" id="date" name="date" required>
+                                </div>
+                            </div>
+                            <br>
 
 
                             <input type="hidden" name="storeID" id="storeIDField">
