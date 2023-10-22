@@ -20,6 +20,7 @@ public class Cate {
     private String image;
     private String phone;
     private String email;
+    
     private int priceGiatThuong;
     private int priceGiatNhanh;
     private int priceGiatSieuToc;

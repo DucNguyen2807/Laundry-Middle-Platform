@@ -8,6 +8,9 @@ import Model.User;
 import Service.StoreService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +29,7 @@ public class ConfirmOrderController extends HttpServlet {
     private final String THANHTOAN = "thanhtoan.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             // Lấy giá trị từ trang JSP
@@ -38,17 +41,19 @@ public class ConfirmOrderController extends HttpServlet {
             int kilos = Integer.parseInt(request.getParameter("kilos"));
             int serviceId = Integer.parseInt(request.getParameter("services"));
             String note = request.getParameter("note");
-            String session = request.getParameter("session");
+            String timedesired = request.getParameter("date");
+            String datedesired = request.getParameter("time");
+
             String storeId = request.getParameter("storeID");
             String storeAddress = request.getParameter("catAddress");
-
 
             String totalPrice = request.getParameter("totalPrice");
             User user = (User) session1.getAttribute("user");
             int userId = user.getUserId();
 
             StoreService store = new StoreService();
-            boolean success = store.BookingOrder(phone, fullname, storeId, serviceId, kilos, totalPrice, customerAddress, storeAddress, note, userId, session);
+            boolean success = store.BookingOrder(phone, fullname, storeId, serviceId, kilos,
+                    totalPrice, customerAddress, storeAddress, note, userId, datedesired, timedesired);
             if (success) {
                 request.setAttribute("successMessage", "Đặt hàng thành công!");
             } else {
@@ -73,7 +78,11 @@ public class ConfirmOrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ConfirmOrderController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -87,7 +96,11 @@ public class ConfirmOrderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ConfirmOrderController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
