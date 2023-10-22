@@ -110,19 +110,20 @@
                     <thead>
                         <tr>
                             <th scope="col">No.</th>
+                            <th scope="col">Customer</th>
                             <th scope="col">Service</th>
                             <th scope="col">Weight</th>
                             <th scope="col">TotalPrice</th>
                             <th scope="col">Note</th>
+                            <th scope="col">DateDesired</th>
+                            <th scope="col">TimeDesired</th>
                             <th scope="col">DateApprove</th>
                             <th scope="col">DateCompleted</th>
-                            <th scope="col">TimeComplete</th>
-                            <th scope="col">Customer</th>
-                            <th scope="col">Store</th>
+                            <th scope="col">TimeComplete</th>  
                             <th scope="col">Staff</th>
                             <th scope="col">Status</th>
-                            <th scope="col"></th> 
-                            <th scope="col"></th> 
+<!--                            <th scope="col"></th> 
+                            <th scope="col"></th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -133,24 +134,40 @@
                     <form action="MainController">
                         <tr>
                             <td><%= ++count%></td>
+                            <td><%= ord.getCustomerName()%></td>
                             <td><%= ord.getServiceDetail()%></td>
                             <td><%= ord.getWeight()%></td>
                             <td><%= ord.getTotalPrice()%></td>
                             <td><%= ord.getNote()%></td>
+                            <td><%= ord.getDateDesired()%></td>
+                            <td><%= ord.getTimeDesired()%></td>
                             <td><%= ord.getDateApproved()%></td>
                             <td><%= ord.getDateComplete()%></td>
                             <td><%= ord.getTimeComplete()%></td>
-                            <td><%= ord.getCustomerName()%></td>
-                            <td><%= ord.getStoreName().toUpperCase()%></td>
                             <td><%= ord.getStaffName()%></td>
                             <td><%= ord.getStOrderDetail()%></td>
+                            <%
+                                if (button.equals("1")) {
+                            %>
                             <td>
-                                <button type="submit" name="orderId" value="<%= ord.getOrderID()%>" class="btn btn-danger" name="btAction" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel</button>
+                                <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
+                                <button type="submit" name="btAction" value="Cancel" class="btn btn-danger" name="btAction" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel</button>
                             </td>
                             <td>
-                                <button type="submit" name="orderId" value="<%= ord.getOrderID()%>" class="btn btn-success" name="btAction" onclick="return confirm('Are you sure you want to approve this order?')">Approve</button>
+                                <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
+                                <button type="submit" name="btAction" value="Approve" class="btn btn-success" name="btAction">Approve</button>
+                            </td>
+                            <%
+                                } else if (button.equals("4")) {
+                            %>
+                            <td>
+                                <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
+                                <button type="submit" name="btAction" value="Done" class="btn btn-success" name="btAction">Done</button>
+                            </td>
+                            <%
+                                } 
+                            %>
 
-                            </td>
                         </tr>
                     </form>
 

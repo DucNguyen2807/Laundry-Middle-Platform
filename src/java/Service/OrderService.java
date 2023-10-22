@@ -38,15 +38,20 @@ public class OrderService implements Serializable {
         String addressSto = rs.getString("AddressSto");
         String note = rs.getString("Note");
         String timeDesired = rs.getString("TimeDesired");
-        String dateApprove ;
+        String dateDesired;
+        Date dateDesiredValueDate = rs.getDate("DateDesired");
+        if (rs.wasNull()) {
+            dateDesired = "NULL";
+        } else {
+            dateDesired = dateDesiredValueDate.toString();
+        }
+        String dateApprove;
         Date dateApproveValueDate = rs.getDate("DateApprove");
         if (rs.wasNull()) {
             dateApprove = "NULL";
         } else {
             dateApprove = dateApproveValueDate.toString();
         }
-        
-        
         String dateComplete;
         Date dateCompleteValue = rs.getDate("DateCompleted");
         if (rs.wasNull()) {
@@ -75,7 +80,7 @@ public class OrderService implements Serializable {
         String stOrderDetail = rs.getString("StOrderDetail");
 
         Order order = new Order(Integer.parseInt(orderID), serviceDetail, weight, totalPrice, phoneCus, addressCus, addressSto, note,
-                timeDesired, dateApprove, dateComplete, timeComplete, customerName, storeName, staffName, stOrderDetail);
+                timeDesired, dateDesired, dateApprove, dateComplete, timeComplete, customerName, storeName, staffName, stOrderDetail);
         return order;
     }
 
@@ -91,26 +96,26 @@ public class OrderService implements Serializable {
             if (con != null) {
                 String sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight, od.TotaPrice, od.Phone AS PhoneCus,\n"
                         + " od.AddressCus, od.AddressSto, od.Note,\n"
-                        + " o.TimeDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                        + " o.TimeDesired, o.DateDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
                         + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
                         + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
-                        + " LEFT JOIN [OrderDetail] od ON o.OrderDetailID = od.OrderDetailID\n"
+                        + " LEFT JOIN [OrderDetail] od ON o.OrderID = od.OrderID\n"
                         + " LEFT JOIN Service se ON se.ServiceID = od.ServiceID\n"
                         + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
                         + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
                         + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
                         + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
-                        + " WHERE us.UserID = ? AND o.StOrderID =? ";
+                        + " WHERE us.UserID = ? AND o.StOrderID = ? ";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, userId);
                 ps.setInt(2, Integer.parseInt(btAction));
-           
+
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     Order order = createOrderFromResultSet(rs);
                     listOrder.add(order);
                 }
-                }
+            }
         } finally {
             if (rs != null) {
                 rs.close();
@@ -124,45 +129,33 @@ public class OrderService implements Serializable {
         }
     }
 
-//    public void viewNewOrder(int userId) throws ClassNotFoundException, SQLException {
-//        Connection con = null;
-//        PreparedStatement ps = null;
-//        ResultSet rs = null;
-//        listOrder = new ArrayList<>();
-//
-//        try {
-//            con = ConnectDB.getConnection();
-//
-//            if (con != null) {
-//                String  sql = "SELECT o.OrderID, se.ServiceDetail, o.Weight, o.TotaPrice, o.Note, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
-//                            + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
-//                            + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
-//                            + " LEFT JOIN Service se ON se.ServiceID = o.ServiceID\n"
-//                            + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
-//                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
-//                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
-//                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
-//                            + " WHERE  u.Fullname = ? OR us.Fullname = ? OR uf.Fullname = ?";
-//
-//                ps = con.prepareStatement(sql);
-//                ps.setInt(1, userId);
-//                rs = ps.executeQuery();
-//
-//                while (rs.next()) {
-//                    Order order = createOrderFromResultSet(rs);
-//                    listOrder.add(order);
-//                }
-//            }
-//        } finally {
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (ps != null) {
-//                ps.close();
-//            }
-//            if (con != null) {
-//                con.close();
-//            }
-//        }
-//    }
+    public boolean updateOrder(int orderId, int newStatusId) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = ConnectDB.getConnection();
+            if (con != null) {
+                String sql = "UPDATE [Laundry-Middle-Platform].[dbo].[Order] SET StOrderID = ? WHERE OrderID = ?";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, newStatusId);
+                ps.setInt(2, orderId);
+                
+                int row = ps.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
 }

@@ -18,7 +18,7 @@
     </head>
     <body>
 
-                    <div class="fui-sidbar-navigiation">
+        <div class="fui-sidbar-navigiation">
             <nav class="sidebar close" style="background-color: #22638f">
                 <header>
                     <div class="image-text">
@@ -61,7 +61,7 @@
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M7 7C7 4.23858 9.23858 2 12 2C14.7614 2 17 4.23858 17 7V9C17 9.55228 16.5523 10 16 10C15.4477 10 15 9.55228 15 9V7C15 5.34315 13.6569 4 12 4C10.3431 4 9 5.34315 9 7V9C9 9.55228 8.55228 10 8 10C7.44772 10 7 9.55228 7 9V7Z" fill="currentColor"/>
                                         </svg>
                                     </span>
-                                    
+
                                     <span class="text nav-text" style="color: #ffffff">Store</span>
                                 </a>
                             </li>
@@ -78,7 +78,7 @@
                             </li>
                             <li class="nav-link">
                                 <a href="viewhistory.jsp">
-                                   <span class="icon">
+                                    <span class="icon">
                                         <svg style="color: #ffffff" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M17.5 15C17.0478 15 16.4089 15.0625 15.7438 15.1536C15.4331 15.1962 15.1962 15.4331 15.1536 15.7438C15.0625 16.4089 15 17.0478 15 17.5C15 17.9522 15.0625 18.5911 15.1536 19.2562C15.1962 19.5669 15.4331 19.8038 15.7438 19.8464C16.4089 19.9375 17.0478 20 17.5 20C17.9522 20 18.5911 19.9375 19.2562 19.8464C19.5669 19.8038 19.8038 19.5669 19.8464 19.2562C19.9375 18.5911 20 17.9522 20 17.5C20 17.0478 19.9375 16.4089 19.8464 15.7438C19.8038 15.4331 19.5669 15.1962 19.2562 15.1536C18.5911 15.0625 17.9522 15 17.5 15ZM15.4724 13.1721C14.2725 13.3364 13.3364 14.2725 13.1721 15.4724C13.0778 16.1606 13 16.9082 13 17.5C13 18.0918 13.0778 18.8394 13.1721 19.5276C13.3364 20.7275 14.2725 21.6636 15.4724 21.8279C16.1606 21.9222 16.9082 22 17.5 22C18.0918 22 18.8394 21.9222 19.5276 21.8279C20.7275 21.6636 21.6636 20.7275 21.8279 19.5276C21.9222 18.8394 22 18.0918 22 17.5C22 16.9082 21.9222 16.1606 21.8279 15.4724C21.6636 14.2725 20.7275 13.3364 19.5276 13.1721C18.8394 13.0778 18.0918 13 17.5 13C16.9082 13 16.1606 13.0778 15.4724 13.1721Z" fill="currentColor"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M6.5 15C6.04782 15 5.40893 15.0625 4.74381 15.1536C4.43308 15.1962 4.19615 15.4331 4.15359 15.7438C4.0625 16.4089 4 17.0478 4 17.5C4 17.9522 4.0625 18.5911 4.15359 19.2562C4.19615 19.5669 4.43308 19.8038 4.74381 19.8464C5.40893 19.9375 6.04782 20 6.5 20C6.95218 20 7.59107 19.9375 8.25619 19.8464C8.56692 19.8038 8.80385 19.5669 8.84641 19.2562C8.9375 18.5911 9 17.9522 9 17.5C9 17.0478 8.9375 16.4089 8.84641 15.7438C8.80385 15.4331 8.56692 15.1962 8.25619 15.1536C7.59107 15.0625 6.95218 15 6.5 15ZM4.47244 13.1721C3.27253 13.3364 2.33642 14.2725 2.17209 15.4724C2.07784 16.1606 2 16.9082 2 17.5C2 18.0918 2.07784 18.8394 2.17209 19.5276C2.33642 20.7275 3.27253 21.6636 4.47244 21.8279C5.16065 21.9222 5.90816 22 6.5 22C7.09184 22 7.83935 21.9222 8.52756 21.8279C9.72747 21.6636 10.6636 20.7275 10.8279 19.5276C10.9222 18.8394 11 18.0918 11 17.5C11 16.9082 10.9222 16.1606 10.8279 15.4724C10.6636 14.2725 9.72747 13.3364 8.52756 13.1721C7.83935 13.0778 7.09184 13 6.5 13C5.90816 13 5.16065 13.0778 4.47244 13.1721Z" fill="currentColor"/>
@@ -111,89 +111,105 @@
         </script>
 
 
-            <div class="container mt-4" style="margin-left: 140px;">
-                <h1 class="display-4">Danh sách nhân viên</h1>
+        <div class="container mt-4" style="margin-left: 140px;">
+            <h1 class="display-4">Danh sách nhân viên</h1>
 
-                <!-- Search form -->
-                <form action="MainController" method="post" class="mb-3">
-                    <div class="input-group">
-                        <input type="text" name="txtSearchStaff" class="form-control" placeholder="Tìm nhân viên...">
-                        <button type="submit" value="ViewStaff" name="btAction" class="btn btn-primary">Tìm kiếm</button>
-                    </div>
-                </form>
+            <!-- Search form -->
+            <form action="MainController" method="post" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="txtSearchStaff" class="form-control" placeholder="Tìm nhân viên...">
+                    <button type="submit" value="ViewStaff" name="btAction" class="btn btn-primary">Tìm kiếm</button>
+                </div>
+            </form>
 
-                <form action="MainController" method="post">
-                    <button value="ViewStaff" name="btAction"  class="btn btn-primary">Xem tất cả</button>
-                    <input type="hidden" name="txtSearchStaff" value="" />
-                </form>
+            <form action="MainController" method="post">
+                <button value="ViewStaff" name="btAction"  class="btn btn-primary">Xem tất cả</button>
+                <input type="hidden" name="txtSearchStaff" value="" />
+            </form>
 
-                <%
-                    String searchvalue = request.getParameter("txtSearchStaff");
-                    if (searchvalue != null) {
-                        List<Staff> result = (List<Staff>) request.getAttribute("SEARCHRESULT");
-                        if (result != null && !result.isEmpty()) {
-                %>
+            <%
+                String searchvalue = request.getParameter("txtSearchStaff");
+                if (searchvalue != null) {
+                    List<Staff> result = (List<Staff>) request.getAttribute("SEARCHRESULT");
+                    if (result != null && !result.isEmpty()) {
+            %>
 
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">No.</th>
-                            <th scope="col">Staff ID</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Password</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Full Name</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Status</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <%
-                            int count = 0;
-                            for (Staff staff : result) {
-                        %>
-                    <form action="MainController">
-                        <tr>
-                            <td><%= ++count%></td>
-                            <td>
-                                <%= staff.getstaffID()%>
-                                <input type="hidden" name="txtStaffID" value="<%= staff.getstaffID()%>" />
-                            </td>
-                            <td><%= staff.getUsername()%></td>
-                            <td><%= staff.getPassword()%></td>
-                            <td><%= staff.getAddress()%></td>
-                            <td><%= staff.getFullname()%></td>
-                            <td><%= staff.getPhone()%></td>
-                            <td><%= staff.getEmail()%></td>
-                            <td><%= staff.getStatusDetail()%></td>
-                            <td>
-                                <form action="MainController" method="post">
-                                    <input type="hidden" name="staffID" value="<%= staff.getstaffID()%>">
-                                    <button type="submit" value="DeleteStaff" name="btAction" class="btn btn-danger"                                             
-                                            onclick="return confirm('Bạn chắc chắn muốn xóa nhân viên này?');">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    </form>
-
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Staff ID</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Status</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
                     <%
-                        }
+                        int count = 0;
+                        for (Staff staff : result) {
                     %>
-                    </tbody>
-                </table>
+                <form action="MainController">
+                    <tr>
+                        <td><%= ++count%></td>
+                        <td>
+                            <%= staff.getstaffID()%>
+                            <input type="hidden" name="txtStaffID" value="<%= staff.getstaffID()%>" />
+                        </td>
+                        <td><%= staff.getUsername()%></td>
+                        <td><%= staff.getPassword()%></td>
+                        <td><%= staff.getAddress()%></td>
+                        <td><%= staff.getFullname()%></td>
+                        <td><%= staff.getPhone()%></td>
+                        <td><%= staff.getEmail()%></td>
+                        <td><%= staff.getStatusDetail()%></td>
+                        <%
+                            if (!staff.getStatusDetail().equals("Retired")) {
+                        %>
+                        <td>
+                            <form action="MainController" method="post">
+                                <input type="hidden" name="staffID" value="<%= staff.getstaffID()%>">
+                                <button type="submit" value="DeleteStaff" name="btAction" class="btn btn-danger"                                            
+                                        onclick="return confirm('Bạn chắc chắn muốn xóa nhân viên này?');">Delete</button>
+                            </form>
+                        </td>
+                        <%
+                        } else {
+                        %>
+                        <td>
+                            <form action="MainController" method="post">
+                                <input type="hidden" name="staffID" value="<%= staff.getstaffID()%>">
+                                <button type="submit" value="DeleteStaff" name="btAction" class="btn btn-danger"  disabled                                           
+                                        onclick="return confirm('Bạn chắc chắn muốn xóa nhân viên này?');">Delete</button>
+                            </form>
+                        </td>
+                        <%
+                            }
+                        %>
+                    </tr>
+                </form>
+
                 <%
-                } else {
-                %>
-                <div class="alert alert-warning mt-3" role="alert">Không tìm thấy kết quả!</div>
-                <%
-                        }
                     }
                 %>
-            </div>
-            <!-- Add Bootstrap JS and jQuery scripts here -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                </tbody>
+            </table>
+            <%
+            } else {
+            %>
+            <div class="alert alert-warning mt-3" role="alert">Không tìm thấy kết quả!</div>
+            <%
+                    }
+                }
+            %>
+        </div>
+        <!-- Add Bootstrap JS and jQuery scripts here -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </body>
 </html>
