@@ -5,6 +5,7 @@
 package Service;
 
 import DBConnect.ConnectDB;
+import Model.Cate;
 import Model.Order;
 import Model.User;
 import java.io.Serializable;
@@ -529,6 +530,72 @@ public class UserService implements Serializable {
         }
 
         return password;
+    }
+    
+     public List<Cate> listFavoriteStore;
+
+    public List<Cate> getlistFavoriteStore() {
+        return listFavoriteStore;
+    }
+
+    private Cate createCateFromResultSet(ResultSet rs) throws SQLException {
+        Cate cate = new Cate();
+        cate.setStoreID(rs.getString("UserID"));
+        cate.setStoreName(rs.getString("Fullname"));
+        cate.setAddress(rs.getString("Address"));
+        cate.setPriceGiatThuong(Integer.parseInt(rs.getString("giatthuong")));
+        cate.setPriceGiatNhanh(Integer.parseInt(rs.getString("giatnhanh")));
+        cate.setPriceGiatSieuToc(Integer.parseInt(rs.getString("giatsieutoc")));
+        cate.setService(rs.getString("ServiceDetail"));
+        cate.setRating(Integer.parseInt(rs.getString("AverageRating")));
+        cate.setReview(rs.getString("ReviewText"));
+        cate.setImage(rs.getString("ImageDetail"));
+
+        return cate;
+
+    }
+
+    public void getAllFavorite(int userId) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        listFavoriteStore = new ArrayList<>();
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT u.UserID, u.Fullname, u.Address, "
+                        + "p.PriceDetail AS giatthuong, p1.PriceDetail AS giatnhanh, p2.PriceDetail AS giatsieutoc, "
+                        + "s.ServiceDetail, AVG(r.Rating) AS AverageRating, r.ReviewText, i.ImageDetail "
+                        + "FROM [User] u "
+                        + "INNER JOIN Price p ON p.StoreID = u.UserID AND p.ServiceID = 1 "
+                        + "INNER JOIN Price p1 ON p1.StoreID = u.UserID AND p1.ServiceID = 2 "
+                        + "INNER JOIN Price p2 ON p2.StoreID = u.UserID AND p2.ServiceID = 3 "
+                        + "INNER JOIN Service s ON s.ServiceID = p.ServiceID "
+                        + "INNER JOIN Review r ON r.StoreID = u.UserID "
+                        + "INNER JOIN Image i ON i.StoreID = u.UserID "
+                        + "INNER JOIN Favorite f ON f.StoreID = u.UserID "
+                        + "WHERE f.CustomerID= ? "
+                        + "GROUP BY u.UserID, u.Fullname, u.Address, p.PriceDetail, p1.PriceDetail, p2.PriceDetail, s.ServiceDetail, r.ReviewText, i.ImageDetail";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, userId);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    Cate cate = createCateFromResultSet(rs);
+                    listFavoriteStore.add(cate);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
     }
 
 }
