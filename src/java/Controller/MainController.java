@@ -31,6 +31,7 @@ public class MainController extends HttpServlet {
     private static final String CONFIRMORDERCONTROLLER = "ConfirmOrderController";
     private static final String DELETEACCCONTROLLER = "DeleteAccController";
     private static final String CATECONTROLLER = "CateController";
+    private static final String UPDATEORDERCONTROLLER = "UpdateOrderController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -61,10 +62,12 @@ public class MainController extends HttpServlet {
                 url = CATECONTROLLER;
             } else if (button.equals("ConfirmOrder")) {
                 url = CONFIRMORDERCONTROLLER;
-            }else if (button.equals("1")|| button.equals("4")||button.equals("5")||button.equals("2") ) {
+            } else if (button.equals("1") || button.equals("4") || button.equals("5") || button.equals("2")) {
                 url = VIEWORDER_STORE;
+            } else if (button.equals("Cancel") || button.equals("Approve") || button.equals("Done")) {
+                url = UPDATEORDERCONTROLLER;
             }
-            
+
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         }

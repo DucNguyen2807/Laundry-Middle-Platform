@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import Service.StaffService;
+import Service.OrderService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -14,32 +14,39 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author khait
  */
-public class DeleteAccController extends HttpServlet {
+public class UpdateOrderController extends HttpServlet {
 
-    
-    String url ="";
+    String url = "";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            String pk = request.getParameter("txtStaffID");
-            //String searchValue = request.getParameter("txtSearchStaff");
-            String searchValue = "";
+
+            String button = request.getParameter("btAction");
+            HttpSession session = request.getSession();
+            String orderID = request.getParameter("orderID");
+            // int roleId = user.getRoleId();//
+            OrderService ord = new OrderService();
             try {
-                StaffService staffSer = new StaffService();
-                boolean result = staffSer.deleteStaff(pk);
-                
-                if(result) {
-                    url = "MainController?btAction=ViewStaff&txtSearchStaff="+ searchValue;
-                } 
+                if (button.equals("Cancel")) {
+                    ord.updateOrder(Integer.parseInt(orderID), 3);
+                    url = "MainController?btAction=1";
+                } else if (button.equals("Approve")) {
+                    ord.updateOrder(Integer.parseInt(orderID), 4);
+                     url = "MainController?btAction=1";
+                } else if (button.equals("Done")) {
+                    ord.updateOrder(Integer.parseInt(orderID), 5);
+                     url = "MainController?btAction=4";
+                }
                 response.sendRedirect(url);
-            } catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
                 out.close();
@@ -62,7 +69,7 @@ public class DeleteAccController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DeleteAccController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateOrderController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -80,7 +87,7 @@ public class DeleteAccController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DeleteAccController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UpdateOrderController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

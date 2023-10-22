@@ -122,7 +122,8 @@ public class StaffService implements Serializable {
         try {
             con = ConnectDB.getConnection();
             if (con != null) {
-                String sql = "DELETE FROM [Laundry-Middle-Platform].[dbo].[User] WHERE UserID = ?";
+                //String sql = "DELETE FROM [Laundry-Middle-Platform].[dbo].[User] WHERE UserID = ?";
+                        String sql = "UPDATE [Laundry-Middle-Platform].[dbo].[User] SET Status = 3 WHERE UserID = ?";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, id);
                 int row = stm.executeUpdate();

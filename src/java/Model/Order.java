@@ -21,6 +21,7 @@ public class Order implements Serializable {
     private String AddressSto;
     private String Note;
     private String TimeDesired;
+    private String DateDesired;
     private String DateApproved;
     private String DateComplete;
     private String TimeComplete;
@@ -47,7 +48,7 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(int OrderID, String ServiceDetail, String Weight, String TotalPrice, String phoneCus, String AddressCus, String AddressSto, String Note, String TimeDesired, String DateApproved, String DateComplete, String TimeComplete, String CustomerName, String StoreName, String StaffName, String stOrderDetail) {
+    public Order(int OrderID, String ServiceDetail, String Weight, String TotalPrice, String phoneCus, String AddressCus, String AddressSto, String Note, String TimeDesired, String DateDesired, String DateApproved, String DateComplete, String TimeComplete, String CustomerName, String StoreName, String StaffName, String stOrderDetail) {
         this.OrderID = OrderID;
         this.ServiceDetail = ServiceDetail;
         this.Weight = Weight;
@@ -57,6 +58,7 @@ public class Order implements Serializable {
         this.AddressSto = AddressSto;
         this.Note = Note;
         this.TimeDesired = TimeDesired;
+        this.DateDesired = DateDesired;
         this.DateApproved = DateApproved;
         this.DateComplete = DateComplete;
         this.TimeComplete = TimeComplete;
@@ -88,6 +90,14 @@ public class Order implements Serializable {
 
     public String getAddressCus() {
         return AddressCus;
+    }
+
+    public void setDateDesired(String DateDesired) {
+        this.DateDesired = DateDesired;
+    }
+
+    public String getDateDesired() {
+        return DateDesired;
     }
 
     public String getAddressSto() {
