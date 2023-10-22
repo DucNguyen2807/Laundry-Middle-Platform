@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
  */
 public class ViewOrder_Store extends HttpServlet {
 
-    private final String VIEWORDER_STORE = "viewneworder_store.jsp";
+    private final String VIEWORDER_STORE = "vieworder_store.jsp";
 
     //List<Order> listOrder = new ArrayList<>();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -56,7 +56,7 @@ public class ViewOrder_Store extends HttpServlet {
                 e.printStackTrace();
             } finally {
                 RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
+                    rd.forward(request, response);
             }
         }
     }

@@ -37,7 +37,6 @@
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="homepage_customer.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                                 <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
-                                <li><a href="manage_admin.jsp" style="color: #ffffff">Manage</a></li>
                                 <li><a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
                                 <li>
                                     <form action="MainController" method="post">
