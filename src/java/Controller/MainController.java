@@ -31,6 +31,7 @@ public class MainController extends HttpServlet {
     private static final String CONFIRMORDERCONTROLLER = "ConfirmOrderController";
     private static final String DELETEACCCONTROLLER = "DeleteAccController";
     private static final String CATECONTROLLER = "CateController";
+    private static final String UPDATEORDERCONTROLLER = "UpdateOrderController";
     private static final String VIEWFAVORITECONTROLLER = "ViewFavoriteController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -64,6 +65,8 @@ public class MainController extends HttpServlet {
                 url = CONFIRMORDERCONTROLLER;
             } else if (button.equals("1") || button.equals("4") || button.equals("5") || button.equals("2")) {
                 url = VIEWORDER_STORE;
+             } else if (button.equals("Cancel") || button.equals("Approve") || button.equals("Done")) {
+                 url = UPDATEORDERCONTROLLER;
             } else if (button.equals("Favorite")) {
                 url = VIEWFAVORITECONTROLLER;
             }
