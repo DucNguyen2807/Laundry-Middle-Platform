@@ -39,15 +39,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     text-decoration: none;
 }
 .star {
-    font-size: 24px; 
+    font-size: 24px;
 }
 
 .yellow {
-    color: gold; 
+    color: gold;
 }
 
 .black {
-    color: black; 
+    color: black;
 }
 .card {
     position: relative;
@@ -58,12 +58,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     height: auto;
 }
 
+
 /* CSS cho biểu tượng trái tim */
 .heart-icon {
     position: absolute;
     top: 35px; /* Điều chỉnh khoảng cách từ trên xuống */
     right: 30px; /* Điều chỉnh khoảng cách từ phải qua */
     font-size: 25px;
-    color: red;
+    color: lightgrey;
 }
-
+.heart-icon:hover {
+    color: red; /* Màu khi di chuột vào trái tim */
+}

@@ -101,7 +101,7 @@ public class UserService implements Serializable {
         String addressSto = rs.getString("AddressSto");
         String note = rs.getString("Note");
         String timeDesired = rs.getString("TimeDesired");
-        String dateApprove ;
+        String dateApprove;
         Date dateApproveValueDate = rs.getDate("DateApprove");
         if (rs.wasNull()) {
             dateApprove = "NULL";
@@ -135,7 +135,7 @@ public class UserService implements Serializable {
 
         String stOrderDetail = rs.getString("StOrderDetail");
 
-        Order order = new Order(Integer.parseInt(orderID), serviceDetail, weight, totalPrice, phoneCus, addressCus, addressSto, note, 
+        Order order = new Order(Integer.parseInt(orderID), serviceDetail, weight, totalPrice, phoneCus, addressCus, addressSto, note,
                 timeDesired, dateApprove, dateComplete, timeComplete, customerName, storeName, staffName, stOrderDetail);
         return order;
     }
@@ -524,8 +524,8 @@ public class UserService implements Serializable {
 
         return password;
     }
-    
-     public List<Cate> listFavoriteStore;
+
+    public List<Cate> listFavoriteStore;
 
     public List<Cate> getlistFavoriteStore() {
         return listFavoriteStore;
@@ -591,4 +591,31 @@ public class UserService implements Serializable {
         }
     }
 
+    public boolean addToFavorites(int userID,String storeID) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "INSERT INTO [Favorite] (CustomerID, StoreID) VALUES (?, ?)";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, userID);
+                stm.setString(2, storeID);
+                
+  
+                int rowsInserted = stm.executeUpdate();
+                return rowsInserted > 0;
+            }
+        } finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
 }
