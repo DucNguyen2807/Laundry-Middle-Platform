@@ -157,7 +157,6 @@ public class StoreService implements Serializable {
                         + "INNER JOIN Service s ON s.ServiceID = p.ServiceID "
                         + "INNER JOIN Review r ON r.StoreID = u.UserID "
                         + "INNER JOIN Image i ON i.StoreID = u.UserID "
-                        + "INNER JOIN Favorite f ON f.StoreID = u.UserID "
                         + "GROUP BY u.UserID, u.Fullname, u.Address, p.PriceDetail, p1.PriceDetail, p2.PriceDetail, s.ServiceDetail, r.ReviewText, i.ImageDetail";
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();

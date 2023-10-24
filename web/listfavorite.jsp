@@ -67,7 +67,7 @@
                     <div class="product col-12 col-md-6 col-lg-4">
                         <div style="margin: 25px 20px" class="card-body text-center vertical-center">
                             <div class="card-body">
-                                <a href="listfavorite.jsp" class="fas fa-heart heart-icon"></a>
+                                <i class="fas fa-heart heart-icon" onclick="addToFavorites('<c:out value="${cat.storeID}"/>')"></i>
                                 <img class="card-img-top" src="<c:out value='${cat.image}'/>" alt="Store Image" style="width: 100%; height: auto;">
                                 <h4 class="card-title show_txt">Tên cửa hàng: <c:out value='${cat.storeName}'/></h4>
                                 <p class="card-text show_txt">Địa chỉ: <c:out value='${cat.address}'/></p>
@@ -114,8 +114,25 @@
                 session.setItem("catStoreName", storeName);
                 session.setItem("catAddress", address);
                 session.setItem("catStoreID", storeID);
-                session.setItem("catRating", rating);   
-                    window.location.href = "thanhtoan.jsp";
+                session.setItem("catRating", rating);
+                window.location.href = "thanhtoan.jsp";
+            }
+
+            function addToFavorites(storeID) {
+                // Gửi yêu cầu POST đến máy chủ để thêm cửa hàng vào danh sách yêu thích
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/Laundry_mp/RemoveFavoriteController", // Thay đổi đường dẫn tới endpoint của bạn
+                    data: {storeID: storeID},
+                    success: function (response) {
+                        // Xử lý phản hồi từ máy chủ (nếu cần)
+                        alert("Đã xóa cửa hàng khỏi danh sách yêu thích!");
+                    },
+                    error: function (error) {
+                        // Xử lý lỗi (nếu có)
+                        alert("Có lỗi xảy ra khi thêm cửa hàng vào danh sách yêu thích.");
+                    }
+                });
             }
         </script>
 
@@ -159,6 +176,6 @@
         </div>
         <script src="js/Jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        
+
     </body>
 </html>
