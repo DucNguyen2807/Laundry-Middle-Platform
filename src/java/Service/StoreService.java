@@ -7,6 +7,7 @@ package Service;
 import Model.Cate;
 import DBConnect.ConnectDB;
 import Model.Store;
+import Model.User;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.Date;
@@ -16,7 +17,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -157,8 +162,92 @@ public class StoreService implements Serializable {
                         + "INNER JOIN Service s ON s.ServiceID = p.ServiceID "
                         + "INNER JOIN Review r ON r.StoreID = u.UserID "
                         + "INNER JOIN Image i ON i.StoreID = u.UserID "
-                        + "INNER JOIN Favorite f ON f.StoreID = u.UserID "
                         + "GROUP BY u.UserID, u.Fullname, u.Address, p.PriceDetail, p1.PriceDetail, p2.PriceDetail, s.ServiceDetail, r.ReviewText, i.ImageDetail";
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    Cate cate = createCateFromResultSet(rs);
+                    listCate.add(cate);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void sortByFavoriteCount() throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        listCate = new ArrayList<>();
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT u.UserID, u.Fullname, u.Address, "
+                        + "p.PriceDetail AS giatthuong, p1.PriceDetail AS giatnhanh, p2.PriceDetail AS giatsieutoc, "
+                        + "s.ServiceDetail, AVG(r.Rating) AS AverageRating, r.ReviewText, i.ImageDetail "
+                        + "FROM [User] u "
+                        + "INNER JOIN Price p ON p.StoreID = u.UserID AND p.ServiceID = 1 "
+                        + "INNER JOIN Price p1 ON p1.StoreID = u.UserID AND p1.ServiceID = 2 "
+                        + "INNER JOIN Price p2 ON p2.StoreID = u.UserID AND p2.ServiceID = 3 "
+                        + "INNER JOIN Service s ON s.ServiceID = p.ServiceID "
+                        + "INNER JOIN Review r ON r.StoreID = u.UserID "
+                        + "INNER JOIN Image i ON i.StoreID = u.UserID "
+                        + "INNER JOIN Favorite f ON f.StoreID = u.UserID "
+                        + "GROUP BY u.UserID, u.Fullname, u.Address, p.PriceDetail, p1.PriceDetail, p2.PriceDetail, s.ServiceDetail, r.ReviewText, i.ImageDetail "
+                        + "ORDER BY COUNT(f.StoreID) DESC";
+
+                stm = con.prepareStatement(sql);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    Cate cate = createCateFromResultSet(rs);
+                    listCate.add(cate);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public void sortByRating() throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        listCate = new ArrayList<>();
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT u.UserID, u.Fullname, u.Address, "
+                        + "p.PriceDetail AS giatthuong, p1.PriceDetail AS giatnhanh, p2.PriceDetail AS giatsieutoc, "
+                        + "s.ServiceDetail, AVG(r.Rating) AS AverageRating, r.ReviewText, i.ImageDetail "
+                        + "FROM [User] u "
+                        + "INNER JOIN Price p ON p.StoreID = u.UserID AND p.ServiceID = 1 "
+                        + "INNER JOIN Price p1 ON p1.StoreID = u.UserID AND p1.ServiceID = 2 "
+                        + "INNER JOIN Price p2 ON p2.StoreID = u.UserID AND p2.ServiceID = 3 "
+                        + "INNER JOIN Service s ON s.ServiceID = p.ServiceID "
+                        + "INNER JOIN Review r ON r.StoreID = u.UserID "
+                        + "INNER JOIN Image i ON i.StoreID = u.UserID "
+                        + "GROUP BY u.UserID, u.Fullname, u.Address, p.PriceDetail, p1.PriceDetail, p2.PriceDetail, s.ServiceDetail, r.ReviewText, i.ImageDetail "
+                        + "ORDER BY AverageRating DESC";
+
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -190,8 +279,8 @@ public class StoreService implements Serializable {
             if (conn != null) {
                 String insertOrderQuery = "INSERT INTO [Order] (DateDesired, TimeDesired, CustomerID, StoreID, StOrderID) VALUES (?, ?, ?, ?, 1)";
                 pos = conn.prepareStatement(insertOrderQuery, Statement.RETURN_GENERATED_KEYS);
-                pos.setString(1, DateDesired); 
-                pos.setString(2, TimeDesired); 
+                pos.setString(1, DateDesired);
+                pos.setString(2, TimeDesired);
 
                 pos.setInt(3, userId);
                 pos.setString(4, storeId);
@@ -240,6 +329,52 @@ public class StoreService implements Serializable {
             }
         }
         return false;
+    }
+
+    public List<Cate> getNearestStores(User user, List<Cate> Cates) {
+        String userAddress = user.getaddress();
+        Map<String, Cate> storeMap = new HashMap<>();
+
+        // Phân tách địa chỉ của người dùng thành các phần riêng biệt.
+        String[] userAddressParts = userAddress.split(", ");
+        String userStreet = userAddressParts[0];
+        String userWard = userAddressParts[1];
+        String userDistrict = userAddressParts[2];
+        String userCity = userAddressParts[3];
+
+        for (Cate cate : Cates) {
+            String storeAddress = cate.getAddress();
+            String[] storeAddressParts = storeAddress.split(", ");
+            String storeStreet = storeAddressParts[0];
+            String storeWard = storeAddressParts[1];
+            String storeDistrict = storeAddressParts[2];
+            String storeCity = storeAddressParts[3];
+
+            boolean isMatching = false;  // Biến đánh dấu xem Cate có phù hợp không.
+
+            if (userCity.equals(storeCity)
+                    && userDistrict.equals(storeDistrict))
+//                    || userWard.equals(storeWard)
+//                    || userStreet.equals(storeStreet)) 
+            {
+                isMatching = true;
+            }
+
+            if (isMatching) {
+                storeMap.put(cate.getStoreName(), cate);
+            }
+        }
+
+        List<Cate> nearestStores = new ArrayList<>(storeMap.values());
+
+        Collections.sort(nearestStores, new Comparator<Cate>() {
+            @Override
+            public int compare(Cate cate1, Cate cate2) {
+                return cate1.getStoreName().compareTo(cate2.getStoreName());
+            }
+        });
+
+        return nearestStores;
     }
 
 }

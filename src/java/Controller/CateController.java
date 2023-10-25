@@ -4,18 +4,10 @@
  */
 package Controller;
 
-import Model.Store;
 import Model.Cate;
-import Model.Order;
-import Model.User;
-import Service.StaffService;
 import Service.StoreService;
-import Service.UserService;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +17,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -51,7 +42,7 @@ public class CateController extends HttpServlet {
             }
         }    
         StoreService store = new StoreService();
-        store.getAllStore();
+        store.getAllStore();    
         List<Cate> result = store.getListStoreCate();
         int totalStores = result.size();
         int totalPages = (int) Math.ceil((double) totalStores / itemsPerPage);

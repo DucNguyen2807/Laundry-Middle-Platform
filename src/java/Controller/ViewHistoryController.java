@@ -37,7 +37,6 @@ public class ViewHistoryController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String url = SHOWSEARCHCONTROLLER;
             String searchValue = request.getParameter("txtSearchOrder");
-            HttpSession session = request.getSession();
             User user = (User) request.getSession().getAttribute("user");
             int userId = user.getUserId();
             int roleId = user.getRoleId();
