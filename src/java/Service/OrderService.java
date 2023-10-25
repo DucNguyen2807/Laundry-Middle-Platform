@@ -140,7 +140,38 @@ public class OrderService implements Serializable {
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, newStatusId);
                 ps.setInt(2, orderId);
-                
+
+                int row = ps.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean updateDateApprove(int orderId, Date dateApprove) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "UPDATE [Laundry-Middle-Platform].[dbo].[Order] SET DateApprove = ? WHERE OrderID = ?";
+                ps = con.prepareStatement(sql);
+                ps.setDate(1, dateApprove);
+                ps.setInt(2, orderId);
+
+                // Thực hiện truy vấn UPDATE
                 int row = ps.executeUpdate();
                 if (row > 0) {
                     return true;
