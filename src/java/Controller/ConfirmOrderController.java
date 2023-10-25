@@ -31,6 +31,8 @@ public class ConfirmOrderController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
+
+        request.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             // Lấy giá trị từ trang JSP
             String url = THANHTOAN;
@@ -78,6 +80,8 @@ public class ConfirmOrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
@@ -96,6 +100,8 @@ public class ConfirmOrderController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         try {
             processRequest(request, response);
         } catch (ParseException ex) {

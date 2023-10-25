@@ -70,3 +70,52 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .heart-icon:hover {
     color: red; /* Màu khi di chuột vào trái tim */
 }
+/* Tùy chỉnh giao diện tùy chọn sắp xếp */
+.custom-select-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.custom-select {
+    position: relative;
+    width: 60%;
+}
+
+.custom-select select {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 0;
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.custom-select button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.custom-select-container button {
+    margin-top: 0;
+}
+
+.custom-select {
+    width: 80%; 
+}
+
+
+
+
