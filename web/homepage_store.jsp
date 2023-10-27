@@ -46,6 +46,11 @@
                                 <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
                                 <li><a href="manage_store.jsp" style="color: #ffffff">Order</a></li>
                                 <li><a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+                                <li>
+                                    <form action="MainController" method="post">
+                                        <input type="submit" value="Settings" name="btAction" />
+                                    </form>  
+                                </li>
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">

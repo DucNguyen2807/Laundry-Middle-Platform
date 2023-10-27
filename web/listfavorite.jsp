@@ -7,7 +7,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Favorite Store</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.0.2/js/bootstrap.min.js"></script>
@@ -67,7 +67,7 @@
                     <div class="product col-12 col-md-6 col-lg-4">
                         <div style="margin: 25px 20px" class="card-body text-center vertical-center">
                             <div class="card-body">
-                                <i class="fas fa-heart heart-icon" onclick="addToFavorites('<c:out value="${cat.storeID}"/>')"></i>
+                                <i class="fas fa-heart heart-icon" onclick="removeToFavorites('<c:out value="${cat.storeID}"/>')"></i>
                                 <img class="card-img-top" src="<c:out value='${cat.image}'/>" alt="Store Image" style="width: 100%; height: auto;">
                                 <h4 class="card-title show_txt">Tên cửa hàng: <c:out value='${cat.storeName}'/></h4>
                                 <p class="card-text show_txt">Địa chỉ: <c:out value='${cat.address}'/></p>
@@ -118,7 +118,7 @@
                 window.location.href = "thanhtoan.jsp";
             }
 
-            function addToFavorites(storeID) {
+            function removeToFavorites(storeID) {
                 // Gửi yêu cầu POST đến máy chủ để thêm cửa hàng vào danh sách yêu thích
                 $.ajax({
                     type: "POST",
@@ -127,10 +127,13 @@
                     success: function (response) {
                         // Xử lý phản hồi từ máy chủ (nếu cần)
                         alert("Đã xóa cửa hàng khỏi danh sách yêu thích!");
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
                     },
                     error: function (error) {
                         // Xử lý lỗi (nếu có)
-                        alert("Có lỗi xảy ra khi thêm cửa hàng vào danh sách yêu thích.");
+                        alert("Có lỗi xảy ra khi xóa cửa hàng khỏi danh sách yêu thích.");
                     }
                 });
             }
