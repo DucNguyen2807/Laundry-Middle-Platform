@@ -33,6 +33,8 @@ public class MainController extends HttpServlet {
     private static final String CATECONTROLLER = "CateController";
     private static final String UPDATEORDERCONTROLLER = "UpdateOrderController";
     private static final String VIEWFAVORITECONTROLLER = "ViewFavoriteController";
+    private static final String UPDATESERVICECONTROLLER = "UpdateServiceStoreController";
+    private static final String UPDATEPRICESERVICECONTROLLER = "UpdatePriceServiceStoreController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -65,10 +67,14 @@ public class MainController extends HttpServlet {
                 url = CONFIRMORDERCONTROLLER;
             } else if (button.equals("1") || button.equals("4") || button.equals("5") || button.equals("2")) {
                 url = VIEWORDER_STORE;
-             } else if (button.equals("Cancel") || button.equals("Approve") || button.equals("Done")) {
-                 url = UPDATEORDERCONTROLLER;
+            } else if (button.equals("Cancel") || button.equals("Approve") || button.equals("Done")) {
+                url = UPDATEORDERCONTROLLER;
             } else if (button.equals("Favorite")) {
                 url = VIEWFAVORITECONTROLLER;
+            } else if (button.equals("Settings")) {
+                url = UPDATESERVICECONTROLLER;
+            } else if (button.equals("Update Service")) {
+                url = UPDATEPRICESERVICECONTROLLER;
             }
 
             RequestDispatcher rd = request.getRequestDispatcher(url);

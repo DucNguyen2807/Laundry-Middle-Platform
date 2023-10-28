@@ -124,18 +124,18 @@
 }
 
 .mybody .task1 img{
-    height: 100%;
+    height: 272.5px;
     width: 100%;
     padding: 10px;
 }
 
 .logout-link {
-    color: #ffffff;  /* Màu chữ trắng */
-    text-decoration: none; /* Bỏ gạch chân dưới liên kết */
-    padding: 5px 10px; /* Khoảng cách giữa chữ và viền */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px 10px;
     background-color:#22638f;
-    border-radius: 5px; /* Bo tròn viền */
-    margin-right: 10px; /* Khoảng cách bên phải */
+    border-radius: 5px;
+    margin-right: 10px;
     float: right !important;
 }
 

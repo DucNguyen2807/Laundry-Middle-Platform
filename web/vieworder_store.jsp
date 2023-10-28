@@ -70,8 +70,8 @@
                                 <li>
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
-                                            <input type="hidden" name="btAction" value="5" />
-                                            <button type="submit" class="btn btn-primary">Completed</button>
+                                            <input type="hidden" name="btAction" value="2" />
+                                            <button type="submit" class="btn btn-primary">Waiting</button>
                                         </form>
                                     </a>
                                 </li>
@@ -79,8 +79,8 @@
                                 <li>
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
-                                            <input type="hidden" name="btAction" value="2" />
-                                            <button type="submit" class="btn btn-primary">Archive</button>
+                                            <input type="hidden" name="btAction" value="5" />
+                                            <button type="submit" class="btn btn-primary">Completed</button>
                                         </form>
                                     </a>
                                 </li>
@@ -111,19 +111,30 @@
                         <tr>
                             <th scope="col">No.</th>
                             <th scope="col">Customer</th>
+                            <th scope="col">Address</th>
                             <th scope="col">Service</th>
                             <th scope="col">Weight</th>
                             <th scope="col">TotalPrice</th>
                             <th scope="col">Note</th>
                             <th scope="col">DateDesired</th>
                             <th scope="col">TimeDesired</th>
-                            <th scope="col">DateApprove</th>
+                            <th scope="col">DateApproved</th>
                             <th scope="col">DateCompleted</th>
-                            <th scope="col">TimeComplete</th>  
+                            <th scope="col">TimeCompleted</th>  
                             <th scope="col">Staff</th>
                             <th scope="col">Status</th>
-<!--                            <th scope="col"></th> 
-                            <th scope="col"></th> -->
+                                <%
+                                    if (button.equals("1")) {
+                                %>
+                            <th scope="col"></th> 
+                            <th scope="col"></th> 
+                                <%
+                                } else if (button.equals("4")) {
+                                %>
+                            <th scope="col"></th> 
+                                <%
+                                    }
+                                %>
                         </tr>
                     </thead>
                     <tbody>
@@ -135,6 +146,7 @@
                         <tr>
                             <td><%= ++count%></td>
                             <td><%= ord.getCustomerName()%></td>
+                            <td><%= ord.getAddressCus()%></td>
                             <td><%= ord.getServiceDetail()%></td>
                             <td><%= ord.getWeight()%></td>
                             <td><%= ord.getTotalPrice()%></td>
@@ -155,17 +167,18 @@
                             </td>
                             <td>
                                 <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
+                                <input type="hidden" name="addressCus" value="<%= ord.getAddressCus()%>">
                                 <button type="submit" name="btAction" value="Approve" class="btn btn-success" name="btAction">Approve</button>
                             </td>
                             <%
-                                } else if (button.equals("4")) {
+                            } else if (button.equals("4")) {
                             %>
                             <td>
                                 <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
                                 <button type="submit" name="btAction" value="Done" class="btn btn-success" name="btAction">Done</button>
                             </td>
                             <%
-                                } 
+                                }
                             %>
 
                         </tr>

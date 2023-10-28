@@ -87,7 +87,7 @@
 
                     <div id="sanpham1">
 
-                        <img src="image/b1.jpg" />
+                        <img src="image/service.jpg" />
                         <p id="first_line1">COMBO laundry 3 get 1 free</p>
                         <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
                                 Branch</span> </p>
@@ -103,7 +103,7 @@
 
                     <div id="sanpham2">
 
-                        <img src="image/b2.png" />
+                        <img src="image/service.jpg" />
                         <p id="first_line2">COMBO laundry 3 get 1 free</p>
                         <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
                                 Branch</span> </p>
@@ -119,7 +119,7 @@
 
                     <div id="sanpham3">
 
-                        <img src="image/b3.jpg"/>
+                        <img src="image/service.jpg"/>
                         <p id="first_line3">COMBO laundry 3 get 1 free</p>
                         <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
                                 Branch</span> </p>
@@ -134,7 +134,7 @@
 
                     <div id="sanpham3">
 
-                        <img src="image/b4.jpg" />
+                        <img src="image/service.jpg" />
                         <p id="first_line3">COMBO laundry 3 get 1 free</p>
                         <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
                                 Branch</span> </p>
@@ -164,7 +164,7 @@
 
                 <div class="col-md-3">
                     <div>
-                        <img src="image/service.jpg" />
+                        <img src="image/b1.jpg" />
                         <div class="relative">
                             <h3>Cheap Shoe Washing</h3>
                             <p>Perfect quality</p>
@@ -178,7 +178,7 @@
 
                 <div class="col-md-3">
                     <div>
-                        <img src="image/service.jpg" />
+                        <img src="image/b2.png" />
                         <div class="relative">
                             <h3>Cheap Repaint</h3>
                             <p>The best quality</p>
@@ -191,7 +191,7 @@
 
                 <div class="col-md-3">
                     <div >
-                        <img src="image/service.jpg" />
+                        <img src="image/b3.jpg" />
                         <div class="relative">
                             <h3>Cheap shoe sole stickers</h3>
                             <p>Absolute shoe sole protection</p>
@@ -201,7 +201,7 @@
                 <div class="col-md-3">
                     <div >
 
-                        <img src="image/service.jpg" />
+                        <img src="image/b4.jpg" />
                         <div class="relative">
                             <h3>Glue Shoes</h3>
                             <p>Reliable quality</p>

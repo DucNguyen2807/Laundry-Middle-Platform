@@ -5,7 +5,9 @@
 package Service;
 
 import DBConnect.ConnectDB;
+import Model.Cate;
 import Model.Order;
+import Model.Staff;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.Date;
@@ -14,7 +16,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -140,7 +144,7 @@ public class OrderService implements Serializable {
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, newStatusId);
                 ps.setInt(2, orderId);
-                
+
                 int row = ps.executeUpdate();
                 if (row > 0) {
                     return true;
@@ -158,4 +162,91 @@ public class OrderService implements Serializable {
         return false;
     }
 
+    public boolean updateDateApprove(int orderId, Date dateApprove) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "UPDATE [Laundry-Middle-Platform].[dbo].[Order] SET DateApprove = ? WHERE OrderID = ?";
+                ps = con.prepareStatement(sql);
+                ps.setDate(1, dateApprove);
+                ps.setInt(2, orderId);
+
+                int row = ps.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean updateStaffOrder(int orderId, int staffId) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "UPDATE [Laundry-Middle-Platform].[dbo].[Order] SET StaffID = ? WHERE OrderID = ?";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, staffId);
+                ps.setInt(2, orderId);
+
+                int row = ps.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public int getNearestStaff(String addCus, List<Staff> Staffs) {
+        
+        String CusAddress = addCus;
+        String[] CusAddressParts = CusAddress.split(", ");
+        String cusStreet = CusAddressParts[0];
+        String cusWard = CusAddressParts[1];
+        String cusDistrict = CusAddressParts[2];
+        String cusCity = CusAddressParts[3];
+
+        int staffID = 5;
+
+        for (Staff staff : Staffs) {
+            String stafffAddress = staff.getAddress();
+            String[] staffAddressParts = stafffAddress.split(", ");
+            String staffStreet = staffAddressParts[0];
+            String staffWard = staffAddressParts[1];
+            String staffDistrict = staffAddressParts[2];
+            String staffCity = staffAddressParts[3];
+            
+            if (cusCity.equals(staffCity) && cusDistrict.equals(staffDistrict)) {        
+                         staffID = staff.getstaffID();
+            }
+            
+        }
+        
+        return staffID;
+    }
 }
