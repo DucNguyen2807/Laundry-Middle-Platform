@@ -36,6 +36,10 @@
         <servlet-name>UpdateOrderController</servlet-name>
         <servlet-class>Controller.UpdateOrderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetReviewController</servlet-name>
+        <servlet-class>Controller.GetReviewController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>UpdateOrderController</servlet-name>
         <url-pattern>/UpdateOrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetReviewController</servlet-name>
+        <url-pattern>/GetReviewController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

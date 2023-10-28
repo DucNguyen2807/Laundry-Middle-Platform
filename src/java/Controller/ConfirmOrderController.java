@@ -6,6 +6,7 @@ package Controller;
 
 import Model.User;
 import Service.StoreService;
+import Service.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -61,7 +62,17 @@ public class ConfirmOrderController extends HttpServlet {
             } else {
                 request.setAttribute("errorMessage", "Đã xảy ra lỗi khi đặt hàng. Vui lòng thử lại sau!");
             }
-
+            
+            if (fullname.length() < 6 || fullname.length() > 30) {
+                String errorMessage = "Tên đầy đủ phải có từ 6 đến 30 ký tự.";
+                request.setAttribute("errorMessage", errorMessage);
+                request.getRequestDispatcher("updateacc.jsp").forward(request, response);
+            }if (!phone.matches("^0[0-9]{9,12}")) {
+                    String errorMessage3 = "Số điện thoại không hợp lệ";
+                    request.setAttribute("errorMessage3", errorMessage3);
+            }
+            
+            
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);
             dispatcher.forward(request, response);
 

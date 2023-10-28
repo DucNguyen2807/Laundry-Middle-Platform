@@ -14,14 +14,11 @@
     <body>
         <div class="container mt-5">
             <div class="row">
-                <div class="col-md-6">
-                    <!-- Khung bên trái -->
+                <div class="col-md-5">
                     <div class="store-details">
                         <img id="storeImage" alt="Store Image" style="width: 100%; height: auto;">
-
                         <p>Store Name: <span><script>document.write(sessionStorage.getItem('catStoreName'));</script></span></p>
                         <p>Address: <span><script>document.write(sessionStorage.getItem('catAddress'));</script></span></p>
-
                         <script>
                             window.onload = function () {
                                 var storeImage = document.getElementById("storeImage");
@@ -31,9 +28,7 @@
                                     storeImage.src = catImage;
                                 }
                             };
-
                         </script>
-
                         <div class="rating">
                             <p>Rating:
                                 <script>
@@ -60,10 +55,11 @@
                             <strong>Lỗi:</strong> <c:out value="${errorMessage}" />
                         </div>
                     </c:if>
-
                 </div>
-                <div class="col-md-6">
-                    <!-- Khung bên phải -->
+
+
+
+                <div class="col-md-7">
                     <div class="customer-details">
                         <h2>Thông tin khách hàng</h2>
                         <form action="MainController" method="post">
