@@ -118,23 +118,23 @@
                             <th scope="col">Note</th>
                             <th scope="col">DateDesired</th>
                             <th scope="col">TimeDesired</th>
-                            <th scope="col">DateApprove</th>
+                            <th scope="col">DateApproved</th>
                             <th scope="col">DateCompleted</th>
-                            <th scope="col">TimeComplete</th>  
+                            <th scope="col">TimeCompleted</th>  
                             <th scope="col">Staff</th>
                             <th scope="col">Status</th>
-                            <%
-                                if (button.equals("1")) {
-                            %>
+                                <%
+                                    if (button.equals("1")) {
+                                %>
                             <th scope="col"></th> 
                             <th scope="col"></th> 
                                 <%
                                 } else if (button.equals("4")) {
                                 %>
                             <th scope="col"></th> 
-                            <%
-                                }
-                            %>
+                                <%
+                                    }
+                                %>
                         </tr>
                     </thead>
                     <tbody>
@@ -167,6 +167,7 @@
                             </td>
                             <td>
                                 <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
+                                <input type="hidden" name="addressCus" value="<%= ord.getAddressCus()%>">
                                 <button type="submit" name="btAction" value="Approve" class="btn btn-success" name="btAction">Approve</button>
                             </td>
                             <%
