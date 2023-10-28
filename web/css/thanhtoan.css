@@ -100,3 +100,50 @@ body {
 .black {
     color: black; 
 }
+/* Phần chung cho các phần tử */
+.store-details {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Phần tên cửa hàng */
+.store-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Phần địa chỉ */
+.store-address {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Phần giá và rating */
+.store-price {
+    font-size: 18px;
+    color: #ff5733; /* Màu cam */
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.rating {
+    margin-top: 10px;
+}
+
+.star {
+    color: #ffcc00; /* Màu vàng */
+    font-size: 18px;
+}
+
+/* Phần thẻ card */
+.card-body {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

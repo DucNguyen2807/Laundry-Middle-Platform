@@ -16,7 +16,7 @@ public class Store {
     private String storeName;
     private String phone;
     private String email;
-
+    
     public Store() {
     }
 
