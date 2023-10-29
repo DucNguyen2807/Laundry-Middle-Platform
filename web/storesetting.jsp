@@ -13,6 +13,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <meta charset="UTF-8">
         <link rel="stylesheet" href="css/thanhtoan.css">
         <link href="css/styleindex.css" rel="stylesheet" >
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -20,7 +21,7 @@
     </head>
 
     <body>
-        <form action="MainController" method="POST" accept-charset="UTF-8">
+        <form action="UpdatePriceServiceStoreController" method="POST" accept-charset="UTF-8">
             <c:forEach items="${storeU}" var="storeUp">
 
 
@@ -40,7 +41,6 @@
                                 <div style="margin-bottom: 20px">Giặt Nhanh:<input type="number"" name="giatnhanh" value="${storeUp.priceGiatNhanh}"><br></div>
                                 <div style="margin-bottom: 20px">Giặt Siêu Tốc:<input type="number"" name="giatsieutoc" value="${storeUp.priceGiatSieuToc}"><br></div>
                                 <input type="submit" name="btAction" value="Update Service" >
-
                             </div>
                         </div>
                     </div>

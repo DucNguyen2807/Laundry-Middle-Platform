@@ -70,6 +70,7 @@ public class SortStoreByController extends HttpServlet {
                         break;
                     default:
                         store.getAllStore();
+                        result = store.getListStoreCate();
                         break;
                 }
             }

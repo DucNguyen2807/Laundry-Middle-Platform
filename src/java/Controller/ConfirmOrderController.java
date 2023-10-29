@@ -6,6 +6,7 @@ package Controller;
 
 import Model.User;
 import Service.StoreService;
+import Service.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -34,7 +35,9 @@ public class ConfirmOrderController extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            // Lấy giá trị từ trang JSP
+            
+            request.setCharacterEncoding("UTF-8");
+            
             String url = THANHTOAN;
             HttpSession session1 = request.getSession();
             String fullname = request.getParameter("fullname");
@@ -47,7 +50,7 @@ public class ConfirmOrderController extends HttpServlet {
             String DateDesired = request.getParameter("date");
 
             String storeId = request.getParameter("storeID");
-            String storeAddress = request.getParameter("catAddress");
+            String storeAddress = request.getParameter("storeAddress");
 
             String totalPrice = request.getParameter("totalPrice");
             User user = (User) session1.getAttribute("user");
@@ -60,6 +63,16 @@ public class ConfirmOrderController extends HttpServlet {
                 request.setAttribute("successMessage", "Đặt hàng thành công!");
             } else {
                 request.setAttribute("errorMessage", "Đã xảy ra lỗi khi đặt hàng. Vui lòng thử lại sau!");
+            }
+
+            if (fullname.length() < 6 || fullname.length() > 30) {
+                String errorMessage = "Tên đầy đủ phải có từ 6 đến 30 ký tự.";
+                request.setAttribute("errorMessage", errorMessage);
+                request.getRequestDispatcher("updateacc.jsp").forward(request, response);
+            }
+            if (!phone.matches("^0[0-9]{9,12}")) {
+                String errorMessage3 = "Số điện thoại không hợp lệ";
+                request.setAttribute("errorMessage3", errorMessage3);
             }
 
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);

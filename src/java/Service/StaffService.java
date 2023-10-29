@@ -5,6 +5,7 @@
 package Service;
 
 import DBConnect.ConnectDB;
+import Model.Cate;
 import Model.Staff;
 import Model.User;
 import java.io.Serializable;
@@ -123,7 +124,7 @@ public class StaffService implements Serializable {
             con = ConnectDB.getConnection();
             if (con != null) {
                 //String sql = "DELETE FROM [Laundry-Middle-Platform].[dbo].[User] WHERE UserID = ?";
-                        String sql = "UPDATE [Laundry-Middle-Platform].[dbo].[User] SET Status = 3 WHERE UserID = ?";
+                String sql = "UPDATE [Laundry-Middle-Platform].[dbo].[User] SET Status = 3 WHERE UserID = ?";
                 stm = con.prepareStatement(sql);
                 stm.setString(1, id);
                 int row = stm.executeUpdate();
@@ -140,6 +141,49 @@ public class StaffService implements Serializable {
             }
         }
         return false;
+    }
+
+    public List<Staff> getStaffFree() throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        listStaff = new ArrayList<>();
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT u.UserID, u.Username, u.Password, u.Address, u.Fullname, u.Phone, u.Email, st.StStaffDetail, COUNT(o.OrderID) AS OrderCount\n"
+                        + " FROM dbo.[Order] o\n"
+                        + " LEFT JOIN dbo.[OrderDetail] od ON o.OrderID = od.OrderID\n"
+                        + " LEFT JOIN dbo.[User] u ON o.StaffID = u.UserID\n"
+                        + " LEFT JOIN StatusStaff st ON st.StStaffID = u.Status\n"
+                        + " WHERE (o.StOrderID = 4 OR o.StOrderID = 2) AND u.UserID IS NOT NULL\n"
+                        + " GROUP BY u.UserID, u.Username, u.Password, u.Address, u.Fullname, u.Phone, u.Email, st.StStaffDetail\n"
+                        + " HAVING COUNT(o.OrderID) < 20\n"
+                        + " ORDER BY OrderCount ASC";
+
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    Staff staff = createStaffFromResultSet(rs);
+                    listStaff.add(staff);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return listStaff;
     }
 
 }

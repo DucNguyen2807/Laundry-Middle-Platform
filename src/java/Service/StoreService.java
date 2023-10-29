@@ -6,16 +6,15 @@ package Service;
 
 import Model.Cate;
 import DBConnect.ConnectDB;
+import Model.Review;
 import Model.Store;
 import Model.User;
 import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -120,11 +119,6 @@ public class StoreService implements Serializable {
             }
         }
     }
-    public List<Cate> listCate;
-
-    public List<Cate> getListStoreCate() {
-        return listCate;
-    }
 
     private Cate createCateFromResultSet(ResultSet rs) throws SQLException {
         Cate cate = new Cate();
@@ -141,6 +135,11 @@ public class StoreService implements Serializable {
 
         return cate;
 
+    }
+    public List<Cate> listCate;
+
+    public List<Cate> getListStoreCate() {
+        return listCate;
     }
 
     public void getAllStore() throws ClassNotFoundException, SQLException {
@@ -168,6 +167,106 @@ public class StoreService implements Serializable {
                 while (rs.next()) {
                     Cate cate = createCateFromResultSet(rs);
                     listCate.add(cate);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public List<Review> allReviews;
+
+    public List<Review> getListCate() {
+        return this.allReviews;
+    }
+
+    public void getAllReview(int userId) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        allReviews = new ArrayList<>();
+        try {
+            con = ConnectDB.getConnection();
+            if (con != null) {
+                String sql = "SELECT r.ReviewText, r.Rating, u.Fullname, r.StoreID "
+                        + "FROM Review r "
+                        + "LEFT JOIN [User] u ON r.CustomerID = u.UserID "
+                        + "WHERE r.StoreID = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, userId);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String reviewText = rs.getString("ReviewText");
+                    int rating = rs.getInt("Rating");
+                    String Fullname = rs.getString("Fullname");
+                    String storeID = rs.getString("StoreID");
+                    Review review = new Review(reviewText, rating, Fullname, storeID);
+                    allReviews.add(review);
+                    
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public List<Review> listStoreSale;
+
+    public List<Review> getListStoreSale() {
+        return this.listStoreSale;
+    }
+
+    public void getStoreSale(int userId) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        listStoreSale = new ArrayList<>();
+        try {
+            con = ConnectDB.getConnection();
+            if (con != null) {
+                String sql = "SELECT  u.UserID, u.Fullname,  p.PriceDetail AS giatthuong, p1.PriceDetail AS giatnhanh, p2.PriceDetail AS giatsieutoc, "
+                        + "i.ImageDetail, u.Address,  AVG(r.Rating) AS AverageRating "
+                        + "FROM [Laundry-Middle-Platform].[dbo].[User] u "
+                        + "INNER JOIN Price p ON p.StoreID = u.UserID AND p.ServiceID = 1 "
+                        + "INNER JOIN Price p1 ON p1.StoreID = u.UserID AND p1.ServiceID = 2 "
+                        + "INNER JOIN Price p2 ON p2.StoreID = u.UserID AND p2.ServiceID = 3 "
+                        + "LEFT JOIN Service s ON s.ServiceID = p.ServiceID "
+                        + "INNER JOIN Review r ON r.StoreID = u.UserID "
+                        + "LEFT JOIN Image i ON i.StoreID = u.UserID "
+                        + "WHERE u.UserID = ? "
+                        + "GROUP BY u.UserID, u.Fullname, u.Address, p.PriceDetail, p1.PriceDetail, p2.PriceDetail, s.ServiceDetail, r.ReviewText, i.ImageDetail";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, userId);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String storeID = rs.getString("UserID");
+                    String storeName = rs.getString("Fullname");
+                    int giatthuong = rs.getInt("giatthuong");
+                    int giatnhanh = rs.getInt("giatnhanh");
+                    int giatsieutoc = rs.getInt("giatsieutoc");
+                    String imageDetail = rs.getString("ImageDetail");
+                    String address = rs.getString("Address");
+                    double averageRating = rs.getDouble("AverageRating");
+                    
+                    Review review = new  Review(storeID, storeName, giatthuong, giatnhanh, giatsieutoc, imageDetail, address, averageRating);
+                    listStoreSale.add(review);  
+                    
                 }
             }
         } finally {
@@ -281,13 +380,12 @@ public class StoreService implements Serializable {
                 pos = conn.prepareStatement(insertOrderQuery, Statement.RETURN_GENERATED_KEYS);
                 pos.setString(1, DateDesired);
                 pos.setString(2, TimeDesired);
-
                 pos.setInt(3, userId);
                 pos.setString(4, storeId);
                 int rowsInserted = pos.executeUpdate();
 
                 if (rowsInserted <= 0) {
-                    return false; // Trả về false nếu không thêm dòng nào.
+                    return false; 
                 }
 
                 ResultSet generatedKeys = pos.getGeneratedKeys();
@@ -298,7 +396,7 @@ public class StoreService implements Serializable {
 
                 String insertOrderDetailQuery = "INSERT INTO OrderDetail (OrderID, Weight, ServiceID, TotaPrice, Phone, AddressCus, AddressSto, Note) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 posd = conn.prepareStatement(insertOrderDetailQuery);
-                posd.setInt(1, orderID); // Sử dụng giá trị orderID ở đây
+                posd.setInt(1, orderID); 
                 posd.setInt(2, kilos);
                 posd.setInt(3, serviceId);
                 posd.setString(4, totalPrice);
@@ -311,8 +409,7 @@ public class StoreService implements Serializable {
                 return rowsInserted > 0;
             }
         } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            // Xử lý lỗi
+
         } finally {
             try {
                 if (posd != null) {
@@ -335,7 +432,7 @@ public class StoreService implements Serializable {
         String userAddress = user.getaddress();
         Map<String, Cate> storeMap = new HashMap<>();
 
-        // Phân tách địa chỉ của người dùng thành các phần riêng biệt.
+
         String[] userAddressParts = userAddress.split(", ");
         String userStreet = userAddressParts[0];
         String userWard = userAddressParts[1];
@@ -350,11 +447,12 @@ public class StoreService implements Serializable {
             String storeDistrict = storeAddressParts[2];
             String storeCity = storeAddressParts[3];
 
-            boolean isMatching = false;  // Biến đánh dấu xem Cate có phù hợp không.
+            boolean isMatching = false;
 
             if (userCity.equals(storeCity)
-                    && userDistrict.equals(storeDistrict)) //                    || userWard.equals(storeWard)
-            //                    || userStreet.equals(storeStreet)) 
+                    && userDistrict.equals(storeDistrict))
+                //|| userWard.equals(storeWard)
+            //|| userStreet.equals(storeStreet)) 
             {
                 isMatching = true;
             }

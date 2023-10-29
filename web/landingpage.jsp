@@ -1,9 +1,3 @@
-<%-- 
-    Document   : landingpage
-    Created on : Oct 5, 2023, 2:45:47 AM
-    Author     : khait
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

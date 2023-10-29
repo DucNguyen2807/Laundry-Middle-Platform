@@ -11,7 +11,6 @@ import java.io.Serializable;
  * @author nguye
  */
 public class Order implements Serializable {
-
     private int OrderID;
     private String ServiceDetail;
     private String Weight;

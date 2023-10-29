@@ -34,7 +34,6 @@ public class MainController extends HttpServlet {
     private static final String UPDATEORDERCONTROLLER = "UpdateOrderController";
     private static final String VIEWFAVORITECONTROLLER = "ViewFavoriteController";
     private static final String UPDATESERVICECONTROLLER = "UpdateServiceStoreController";
-    private static final String UPDATEPRICESERVICECONTROLLER = "UpdatePriceServiceStoreController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -73,8 +72,6 @@ public class MainController extends HttpServlet {
                 url = VIEWFAVORITECONTROLLER;
             } else if (button.equals("Settings")) {
                 url = UPDATESERVICECONTROLLER;
-            } else if (button.equals("Update Service")) {
-                url = UPDATEPRICESERVICECONTROLLER;
             }
 
             RequestDispatcher rd = request.getRequestDispatcher(url);
