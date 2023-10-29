@@ -42,13 +42,13 @@ public class GetReviewController extends HttpServlet {
 
             store.getAllReview(storeID);
             store.getStoreSale(storeID);
-
+            store.getAllPrice(storeID);
             List<Review> allReviews = store.getListCate();
             List<Review> storeSale = store.getListStoreSale();
-
+            List<Review> storePrice = store.getListPrice();
             request.setAttribute("allReviews", allReviews);
             request.setAttribute("storeSale", storeSale);
-
+            request.setAttribute("storePrice", storePrice);
             RequestDispatcher dispatcher = request.getRequestDispatcher("detailStore.jsp");
             dispatcher.forward(request, response);
         }

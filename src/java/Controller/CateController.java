@@ -24,42 +24,46 @@ import javax.servlet.http.HttpServletResponse;
  * @author nguye
  */
 @WebServlet(name = "CateController", urlPatterns = {"/CateController"})
-    public class CateController extends HttpServlet {
+public class CateController extends HttpServlet {
 
-        private final String CATE = "cate.jsp";
+    private final String CATE = "cate.jsp";
 
-        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException, ClassNotFoundException, SQLException {
-            response.setContentType("text/html;charset=UTF-8");
-            String url = CATE;
-            int itemsPerPage = 6;
-            int currentPage = 1;
-            String pageParam = request.getParameter("page");
-            if (pageParam != null) {
-                try {
-                    currentPage = Integer.parseInt(pageParam);
-                } catch (NumberFormatException e) {
-                    // Xử lý ngoại lệ nếu tham số trang không hợp lệ
-                }
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
+        response.setContentType("text/html;charset=UTF-8");
+        String url = CATE;
+        int itemsPerPage = 6;
+        int currentPage = 1;
+        String pageParam = request.getParameter("page");
+        if (pageParam != null) {
+            try {
+                currentPage = Integer.parseInt(pageParam);
+            } catch (NumberFormatException e) {
+
             }
-            StoreService store = new StoreService();
-            store.getAllStore();
-            List<Cate> result = store.getListStoreCate();
-            int totalStores = result.size();
-            int totalPages = (int) Math.ceil((double) totalStores / itemsPerPage);
-
-            int startIndex = (currentPage - 1) * itemsPerPage;
-            int endIndex = Math.min(startIndex + itemsPerPage, totalStores);
-
-            List<Cate> pagedStores = result.subList(startIndex, endIndex);
-            
-            request.setAttribute("pagedStores", pagedStores);
-            request.setAttribute("currentPage", currentPage);
-            request.setAttribute("totalPages", totalPages);
-            
-            RequestDispatcher dispatcher = request.getRequestDispatcher("cate.jsp");
-            dispatcher.forward(request, response);
         }
+
+        StoreService store = new StoreService();
+        store.getAllStore();
+        List<Cate> result = store.getListStoreCate();
+        for (Cate cat : result) {
+            System.out.println("AveragePrice: " + cat.getAveragePrice());
+        }
+        int totalStores = result.size();
+        int totalPages = (int) Math.ceil((double) totalStores / itemsPerPage);
+
+        int startIndex = (currentPage - 1) * itemsPerPage;
+        int endIndex = Math.min(startIndex + itemsPerPage, totalStores);
+
+        List<Cate> pagedStores = result.subList(startIndex, endIndex);
+
+        request.setAttribute("pagedStores", pagedStores);
+        request.setAttribute("currentPage", currentPage);
+        request.setAttribute("totalPages", totalPages);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("cate.jsp");
+        dispatcher.forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

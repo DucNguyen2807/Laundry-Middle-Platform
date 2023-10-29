@@ -125,12 +125,8 @@ public class StoreService implements Serializable {
         cate.setStoreID(rs.getString("UserID"));
         cate.setStoreName(rs.getString("Fullname"));
         cate.setAddress(rs.getString("Address"));
-        cate.setPriceGiatThuong(Integer.parseInt(rs.getString("giatthuong")));
-        cate.setPriceGiatNhanh(Integer.parseInt(rs.getString("giatnhanh")));
-        cate.setPriceGiatSieuToc(Integer.parseInt(rs.getString("giatsieutoc")));
-        cate.setService(rs.getString("ServiceDetail"));
         cate.setRating(Integer.parseInt(rs.getString("AverageRating")));
-        cate.setReview(rs.getString("ReviewText"));
+        cate.setAveragePrice(rs.getString("AveragePrice"));
         cate.setImage(rs.getString("ImageDetail"));
 
         return cate;
@@ -151,22 +147,65 @@ public class StoreService implements Serializable {
             con = ConnectDB.getConnection();
 
             if (con != null) {
-                String sql = "SELECT u.UserID, u.Fullname, u.Address, "
-                        + "p.PriceDetail AS giatthuong, p1.PriceDetail AS giatnhanh, p2.PriceDetail AS giatsieutoc, "
-                        + "s.ServiceDetail, AVG(r.Rating) AS AverageRating, r.ReviewText, i.ImageDetail "
-                        + "FROM [User] u "
-                        + "INNER JOIN Price p ON p.StoreID = u.UserID AND p.ServiceID = 1 "
-                        + "INNER JOIN Price p1 ON p1.StoreID = u.UserID AND p1.ServiceID = 2 "
-                        + "INNER JOIN Price p2 ON p2.StoreID = u.UserID AND p2.ServiceID = 3 "
-                        + "INNER JOIN Service s ON s.ServiceID = p.ServiceID "
-                        + "INNER JOIN Review r ON r.StoreID = u.UserID "
-                        + "INNER JOIN Image i ON i.StoreID = u.UserID "
-                        + "GROUP BY u.UserID, u.Fullname, u.Address, p.PriceDetail, p1.PriceDetail, p2.PriceDetail, s.ServiceDetail, r.ReviewText, i.ImageDetail";
+                String sql = "SELECT u.UserID, u.Fullname, u.Address, i.ImageDetail, "
+                        + "AVG(r.Rating) AS AverageRating, "
+                        + "FORMAT(ROUND(AVG(p.PriceDetail), 0), 'N0') AS AveragePrice "
+                        + "FROM [Laundry-Middle-Platform1].[dbo].[User] u "
+                        + "INNER JOIN [Laundry-Middle-Platform1].[dbo].[Price] p ON u.UserID = p.StoreID "
+                        + "INNER JOIN [Laundry-Middle-Platform1].[dbo].[Service] s ON s.ServiceID = p.ServiceID "
+                        + "INNER JOIN [Laundry-Middle-Platform1].[dbo].[Review] r ON r.StoreID = u.UserID "
+                        + "INNER JOIN [Laundry-Middle-Platform1].[dbo].[Image] i ON i.StoreID = u.UserID "
+                        + "GROUP BY u.UserID, u.Fullname, u.Address, i.ImageDetail "
+                        + "ORDER BY AverageRating DESC;";
+
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     Cate cate = createCateFromResultSet(rs);
                     listCate.add(cate);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+    public List<Review> allPrice;
+
+    public List<Review> getListPrice() {
+        return this.allPrice;
+    }
+
+    public void getAllPrice(int userId) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        allPrice = new ArrayList<>();
+        try {
+            con = ConnectDB.getConnection();
+            if (con != null) {
+                String sql = "SELECT p.StoreID, s.ServiceDetail, FORMAT(PriceDetail, 'N0') AS Price "
+                        + "FROM [Price] p "
+                        + "INNER JOIN [Laundry-Middle-Platform1].[dbo].Service s ON s.ServiceID = p.ServiceID "
+                        + "WHERE p.StoreID = ?";
+
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, userId);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String storeID = rs.getString("StoreID");
+                    String serviceDetail = rs.getString("ServiceDetail");
+                    String price = rs.getString("Price");
+                    Review review = new Review(storeID, price, serviceDetail);
+                    allPrice.add(review);
                 }
             }
         } finally {
@@ -210,7 +249,7 @@ public class StoreService implements Serializable {
                     String storeID = rs.getString("StoreID");
                     Review review = new Review(reviewText, rating, Fullname, storeID);
                     allReviews.add(review);
-                    
+
                 }
             }
         } finally {
@@ -240,33 +279,25 @@ public class StoreService implements Serializable {
         try {
             con = ConnectDB.getConnection();
             if (con != null) {
-                String sql = "SELECT  u.UserID, u.Fullname,  p.PriceDetail AS giatthuong, p1.PriceDetail AS giatnhanh, p2.PriceDetail AS giatsieutoc, "
-                        + "i.ImageDetail, u.Address,  AVG(r.Rating) AS AverageRating "
+                String sql = "SELECT u.UserID, u.Fullname, i.ImageDetail, u.Address, AVG(r.Rating) AS AverageRating "
                         + "FROM [Laundry-Middle-Platform].[dbo].[User] u "
-                        + "INNER JOIN Price p ON p.StoreID = u.UserID AND p.ServiceID = 1 "
-                        + "INNER JOIN Price p1 ON p1.StoreID = u.UserID AND p1.ServiceID = 2 "
-                        + "INNER JOIN Price p2 ON p2.StoreID = u.UserID AND p2.ServiceID = 3 "
-                        + "LEFT JOIN Service s ON s.ServiceID = p.ServiceID "
+                        + "INNER JOIN Price p ON p.StoreID = u.UserID "
                         + "INNER JOIN Review r ON r.StoreID = u.UserID "
                         + "LEFT JOIN Image i ON i.StoreID = u.UserID "
                         + "WHERE u.UserID = ? "
-                        + "GROUP BY u.UserID, u.Fullname, u.Address, p.PriceDetail, p1.PriceDetail, p2.PriceDetail, s.ServiceDetail, r.ReviewText, i.ImageDetail";
+                        + "GROUP BY u.UserID, u.Fullname, u.Address, i.ImageDetail";
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, userId);
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String storeID = rs.getString("UserID");
                     String storeName = rs.getString("Fullname");
-                    int giatthuong = rs.getInt("giatthuong");
-                    int giatnhanh = rs.getInt("giatnhanh");
-                    int giatsieutoc = rs.getInt("giatsieutoc");
                     String imageDetail = rs.getString("ImageDetail");
                     String address = rs.getString("Address");
                     double averageRating = rs.getDouble("AverageRating");
-                    
-                    Review review = new  Review(storeID, storeName, giatthuong, giatnhanh, giatsieutoc, imageDetail, address, averageRating);
-                    listStoreSale.add(review);  
-                    
+                    Review review = new Review(storeID, storeName, imageDetail, address, averageRating);
+                    listStoreSale.add(review);
+
                 }
             }
         } finally {
@@ -291,18 +322,14 @@ public class StoreService implements Serializable {
             con = ConnectDB.getConnection();
 
             if (con != null) {
-                String sql = "SELECT u.UserID, u.Fullname, u.Address, "
-                        + "p.PriceDetail AS giatthuong, p1.PriceDetail AS giatnhanh, p2.PriceDetail AS giatsieutoc, "
-                        + "s.ServiceDetail, AVG(r.Rating) AS AverageRating, r.ReviewText, i.ImageDetail "
-                        + "FROM [User] u "
-                        + "INNER JOIN Price p ON p.StoreID = u.UserID AND p.ServiceID = 1 "
-                        + "INNER JOIN Price p1 ON p1.StoreID = u.UserID AND p1.ServiceID = 2 "
-                        + "INNER JOIN Price p2 ON p2.StoreID = u.UserID AND p2.ServiceID = 3 "
-                        + "INNER JOIN Service s ON s.ServiceID = p.ServiceID "
+                String sql = "SELECT u.UserID, u.Fullname, i.ImageDetail, u.Address, AVG(r.Rating) AS AverageRating, "
+                        + "FORMAT(ROUND(AVG(p.PriceDetail), 0), 'N0') AS AveragePrice "
+                        + "FROM [Laundry-Middle-Platform].[dbo].[User] u "
+                        + "INNER JOIN Price p ON p.StoreID = u.UserID "
                         + "INNER JOIN Review r ON r.StoreID = u.UserID "
-                        + "INNER JOIN Image i ON i.StoreID = u.UserID "
+                        + "LEFT JOIN Image i ON i.StoreID = u.UserID "
                         + "INNER JOIN Favorite f ON f.StoreID = u.UserID "
-                        + "GROUP BY u.UserID, u.Fullname, u.Address, p.PriceDetail, p1.PriceDetail, p2.PriceDetail, s.ServiceDetail, r.ReviewText, i.ImageDetail "
+                        + "GROUP BY u.UserID, u.Fullname, u.Address, i.ImageDetail "
                         + "ORDER BY COUNT(f.StoreID) DESC";
 
                 stm = con.prepareStatement(sql);
@@ -334,19 +361,15 @@ public class StoreService implements Serializable {
             con = ConnectDB.getConnection();
 
             if (con != null) {
-                String sql = "SELECT u.UserID, u.Fullname, u.Address, "
-                        + "p.PriceDetail AS giatthuong, p1.PriceDetail AS giatnhanh, p2.PriceDetail AS giatsieutoc, "
-                        + "s.ServiceDetail, AVG(r.Rating) AS AverageRating, r.ReviewText, i.ImageDetail "
-                        + "FROM [User] u "
-                        + "INNER JOIN Price p ON p.StoreID = u.UserID AND p.ServiceID = 1 "
-                        + "INNER JOIN Price p1 ON p1.StoreID = u.UserID AND p1.ServiceID = 2 "
-                        + "INNER JOIN Price p2 ON p2.StoreID = u.UserID AND p2.ServiceID = 3 "
-                        + "INNER JOIN Service s ON s.ServiceID = p.ServiceID "
+                String sql = "SELECT u.UserID, u.Fullname, i.ImageDetail, u.Address, AVG(r.Rating) AS AverageRating, "
+                        + "FORMAT(ROUND(AVG(p.PriceDetail), 0), 'N0') AS AveragePrice "
+                        + "FROM [Laundry-Middle-Platform].[dbo].[User] u "
+                        + "INNER JOIN Price p ON p.StoreID = u.UserID "
                         + "INNER JOIN Review r ON r.StoreID = u.UserID "
-                        + "INNER JOIN Image i ON i.StoreID = u.UserID "
-                        + "GROUP BY u.UserID, u.Fullname, u.Address, p.PriceDetail, p1.PriceDetail, p2.PriceDetail, s.ServiceDetail, r.ReviewText, i.ImageDetail "
+                        + "LEFT JOIN Image i ON i.StoreID = u.UserID "
+                        + "INNER JOIN Favorite f ON f.StoreID = u.UserID "
+                        + "GROUP BY u.UserID, u.Fullname, u.Address, i.ImageDetail "
                         + "ORDER BY AverageRating DESC";
-
                 stm = con.prepareStatement(sql);
                 rs = stm.executeQuery();
                 while (rs.next()) {
@@ -366,7 +389,6 @@ public class StoreService implements Serializable {
             }
         }
     }
-
     public boolean BookingOrder(String phone, String fullname, String storeId, int serviceId,
             int kilos, String totalPrice, String customerAddress, String AddressSto, String note, int userId, String DateDesired, String TimeDesired) {
         Connection conn = null;
@@ -385,7 +407,7 @@ public class StoreService implements Serializable {
                 int rowsInserted = pos.executeUpdate();
 
                 if (rowsInserted <= 0) {
-                    return false; 
+                    return false;
                 }
 
                 ResultSet generatedKeys = pos.getGeneratedKeys();
@@ -396,7 +418,7 @@ public class StoreService implements Serializable {
 
                 String insertOrderDetailQuery = "INSERT INTO OrderDetail (OrderID, Weight, ServiceID, TotaPrice, Phone, AddressCus, AddressSto, Note) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 posd = conn.prepareStatement(insertOrderDetailQuery);
-                posd.setInt(1, orderID); 
+                posd.setInt(1, orderID);
                 posd.setInt(2, kilos);
                 posd.setInt(3, serviceId);
                 posd.setString(4, totalPrice);
@@ -432,7 +454,6 @@ public class StoreService implements Serializable {
         String userAddress = user.getaddress();
         Map<String, Cate> storeMap = new HashMap<>();
 
-
         String[] userAddressParts = userAddress.split(", ");
         String userStreet = userAddressParts[0];
         String userWard = userAddressParts[1];
@@ -450,8 +471,7 @@ public class StoreService implements Serializable {
             boolean isMatching = false;
 
             if (userCity.equals(storeCity)
-                    && userDistrict.equals(storeDistrict))
-                //|| userWard.equals(storeWard)
+                    && userDistrict.equals(storeDistrict)) //|| userWard.equals(storeWard)
             //|| userStreet.equals(storeStreet)) 
             {
                 isMatching = true;
@@ -587,4 +607,5 @@ public class StoreService implements Serializable {
         }
         return false;
     }
+
 }

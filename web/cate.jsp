@@ -59,7 +59,7 @@
                     <input type="hidden" name="orderBy" />
                 </form>
             </div>
-        </nav>  
+        </nav>
         <div class="container mt-5">
             <div class="row">
                 <c:forEach items="${pagedStores}" var="cat">
@@ -77,9 +77,8 @@
                                         <span class="star yellow">★</span>
                                     </c:forEach>
                                 </div>
-
+                                <p class="card-text show_txt">Giá chỉ từ: <c:out value="${cat.averagePrice}" /> vnđ</p>
                             </div>
-                            <p class="card-text show_txt">Giặt thường: <c:out value='${cat.priceGiatThuong}'/> vnđ</p>
                             <a href='<c:url value="/GetReviewController?storeID=${cat.storeID}" />' class="btn btn-success btn-block">Get more information</a>
                         </div>
                     </div>

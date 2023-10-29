@@ -21,6 +21,8 @@ public class Review {
     private String imageDetail;
     private String address;
     double averageRating;
+    private String price;
+    private String serviceDetail;
 
     public Review(String reviewText, int rating, String customerName, String storeID) {
         this.reviewText = reviewText;
@@ -29,6 +31,20 @@ public class Review {
         this.storeID = storeID;
     }
 
+    public Review(String storeID, String price, String serviceDetail) {
+        this.storeID = storeID;
+        this.price = price;
+        this.serviceDetail = serviceDetail;
+    }
+
+    public Review(String storeID, String storeName, String imageDetail, String address, double averageRating) {
+        this.storeID = storeID;
+        this.storeName = storeName;
+        this.imageDetail = imageDetail;
+        this.address = address;
+        this.averageRating = averageRating;
+    }
+                    
 
     public Review(String storeID, String storeName, int giatthuong, int giatnhanh, int giatsieutoc, String imageDetail, String address, double averageRating) {
         this.storeID = storeID;
@@ -39,6 +55,30 @@ public class Review {
         this.imageDetail = imageDetail;
         this.address = address;
         this.averageRating = averageRating;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getServiceDetail() {
+        return serviceDetail;
+    }
+
+    public void setServiceDetail(String serviceDetail) {
+        this.serviceDetail = serviceDetail;
     }
     
     

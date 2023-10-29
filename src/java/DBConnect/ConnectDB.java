@@ -19,7 +19,7 @@ public class ConnectDB {
         try {
             String hostname = "35.240.253.244";
             String sqlInstanceName = "4cf6829aa93728e";
-            String sqlDatabase = "Laundry-Middle-Platform";
+            String sqlDatabase = "Laundry-Middle-Platform1";
             String sqlUser = "sqlserver";
             String sqlPassword = "123456";
             

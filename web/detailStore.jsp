@@ -51,14 +51,16 @@
                         <p>Thông tin cửa hàng</p>
 
                         <c:forEach items="${storeSale}" var="store">
-
                             <div class="card-body">
-                                <p>Tên cửa hàng: ${store.storeName.toUpperCase()    }</p>
+                                <p>Tên cửa hàng: ${store.storeName.toUpperCase()}</p>
                                 <p>Địa chỉ: ${store.address}</p>
-                                <p>Giá thường: ${store.giatthuong} VNĐ</p>
-                                <p>Giá nhanh: ${store.giatnhanh} VNĐ</p>
-                                <p>Giá siêu tốc: ${store.giatsieutoc} VNĐ</p>
-                                <p>Giá siêu tốc: ${store.storeID} VNĐ</p>
+                                <p>Dịch vụ:</p>
+                                <c:forEach items="${storePrice}" var="price">
+                                    <c:if test="${price.storeID eq store.storeID}">
+                                         <p>${price.serviceDetail} : ${price.price} VNĐ</p>
+                                    </c:if>
+                                </c:forEach>
+
                                 <div class="rating">
                                     Rating:
                                     <c:forEach begin="1" end="${store.averageRating}">
@@ -66,14 +68,6 @@
                                     </c:forEach>
                                 </div>
                             </div>
-                            <a href="#" class="btn btn-success btn-block" onclick="saveCatInfo(
-                                            '<c:out value='${store.storeName}' />',
-                                            '<c:out value='${store.address}' />',
-                                            '<c:out value='${store.giatthuong}' />',
-                                            '<c:out value='${store.giatnhanh}' />',
-                                            '<c:out value='${store.giatsieutoc}' />',
-                                            '<c:out value='${store.storeID}' />'
-                                            )">Booking</a>
                         </c:forEach>       
                     </div>
                 </div>
@@ -117,10 +111,6 @@
                 </script>
             </div>
         </div>
-
-
-
-
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
