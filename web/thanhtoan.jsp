@@ -14,37 +14,7 @@
     <body>
         <div class="container mt-5">
             <div class="row">
-                <div class="col-md-5">
-                    <div class="store-details">
-                        <img id="storeImage" alt="Store Image" style="width: 100%; height: auto;">
-                        <p>Store Name: <span><script>document.write(sessionStorage.getItem('catStoreName'));</script></span></p>
-                        <p>Address: <span><script>document.write(sessionStorage.getItem('catAddress'));</script></span></p>
-                        <script>
-                            window.onload = function () {
-                                var storeImage = document.getElementById("storeImage");
-                                var catImage = sessionStorage.getItem('catImage');
-
-                                if (catImage) {
-                                    storeImage.src = catImage;
-                                }
-                            };
-                        </script>
-                        <div class="rating">
-                            <p>Rating:
-                                <script>
-                                    var ratingStr = sessionStorage.getItem('catRating');
-                                    if (ratingStr != null && ratingStr.match(/^\d+$/)) {
-                                        var rating = parseInt(ratingStr);
-                                        for (var i = 0; i < rating; i++) {
-                                            document.write('<span class="star">★</span>');
-                                        }
-                                    } else {
-                                        document.write('Invalid rating value');
-                                    }
-                                </script>
-                            </p>
-                        </div>
-                    </div>
+                <div class="col-md-7 mx-auto">
                     <c:if test="${not empty successMessage}">
                         <div class="alert alert-success">
                             <strong>Thông báo:</strong> <c:out value="${successMessage}" />
@@ -55,14 +25,9 @@
                             <strong>Lỗi:</strong> <c:out value="${errorMessage}" />
                         </div>
                     </c:if>
-                </div>
-
-
-
-                <div class="col-md-7">
-                    <div class="customer-details">
+                    <div class="customer-details mx-auto">
                         <h2>Thông tin khách hàng</h2>
-                        <form action="MainController" method="post">
+                        <form action="ConfirmOrderController" method="post" accept-charset="UTF-8">
                             <label for="fullname">Tên khách hàng:</label>
                             <input type="text" class="bg-light form-control" name="fullname" value="${user.fullname}" >
                             <c:if test="${not empty errorMessage}">
@@ -71,7 +36,7 @@
                                 </div>
                             </c:if>
                             <label for="phone">Số điện thoại:</label>
-                            <input type="tel" id="phone" name="phone" value="${user.phone}" required><br>
+                            <input type="tel" id="phone" name="phone" value="0${user.phone}" required><br>
                             <c:if test="${not empty errorMessage3}">
                                 <div class="alert alert-danger">
                                     <strong>Lỗi:</strong> <c:out value="${errorMessage3}" />
@@ -85,9 +50,9 @@
                             <label for="services">Dịch vụ:</label>
                             <select id="services" name="services" required>
                                 <script>
-                                    document.write('<option value="1" data-price="' + sessionStorage.getItem('catPriceGiatThuong') + '">Giặt thường: ' + sessionStorage.getItem('catPriceGiatThuong') + ' vnđ/1kg</option>');
-                                    document.write('<option value="2" data-price="' + sessionStorage.getItem('catPriceGiatNhanh') + '">Giặt nhanh: ' + sessionStorage.getItem('catPriceGiatNhanh') + ' vnđ/1kg</option>');
-                                    document.write('<option value="3" data-price="' + sessionStorage.getItem('catPriceGiatSieuToc') + '">Giặt siêu tốc: ' + sessionStorage.getItem('catPriceGiatSieuToc') + ' vnđ/1kg</option>');
+                                    document.write('<option value="1" data-price="' + sessionStorage.getItem('storeGiatthuong') + '">Giặt thường: ' + sessionStorage.getItem('storeGiatthuong') + ' vnđ/1kg</option>');
+                                    document.write('<option value="2" data-price="' + sessionStorage.getItem('storeGiatnhanh') + '">Giặt nhanh: ' + sessionStorage.getItem('storeGiatnhanh') + ' vnđ/1kg</option>');
+                                    document.write('<option value="3" data-price="' + sessionStorage.getItem('storeGiatsieutoc') + '">Giặt siêu tốc: ' + sessionStorage.getItem('storeGiatsieutoc') + ' vnđ/1kg</option>');
                                 </script>
                             </select>
 
@@ -108,18 +73,18 @@
 
 
                             <input type="hidden" name="storeID" id="storeIDField">
-                            <input type="hidden" name="catAddress" id="catAddressField">
+                            <input type="hidden" name="storeAddress" id="storeAddressField">
 
                             <script>
                                 document.addEventListener("DOMContentLoaded", function () {
-                                    var storeID = sessionStorage.getItem('catStoreID');
-                                    var catAddress = sessionStorage.getItem('catAddress');
+                                    var storeStoreID = sessionStorage.getItem('storeStoreID');
+                                    var storeAddress = sessionStorage.getItem('storeAddress');
 
-                                    console.log("storeID: " + storeID);
-                                    console.log("catAddress: " + catAddress);
+                                    console.log("storeStoreID " + storeStoreID);
+                                    console.log("storeAddress " + storeAddress);
 
-                                    document.getElementById('storeIDField').value = storeID;
-                                    document.getElementById('catAddressField').value = catAddress;
+                                    document.getElementById('storeIDField').value = storeStoreID;
+                                    document.getElementById('storeAddressField').value = storeAddress;
                                 });
 
                             </script>

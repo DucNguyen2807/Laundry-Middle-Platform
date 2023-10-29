@@ -38,14 +38,13 @@ public class UpdatePriceServiceStoreController extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+           
+            request.setCharacterEncoding("UTF-8");
             String nameStore = request.getParameter("nameStore");
             String addressStore = request.getParameter("addressStore");
             int giatthuong = Integer.parseInt(request.getParameter("giatthuong"));
             int giatnhanh = Integer.parseInt(request.getParameter("giatnhanh"));
             int giatsieutoc = Integer.parseInt(request.getParameter("giatsieutoc"));
-
-            HttpSession session = request.getSession();
             User user = (User) request.getSession().getAttribute("user");
             int userId = user.getUserId();
 

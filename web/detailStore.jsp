@@ -58,6 +58,7 @@
                                 <p>Giá thường: ${store.giatthuong} VNĐ</p>
                                 <p>Giá nhanh: ${store.giatnhanh} VNĐ</p>
                                 <p>Giá siêu tốc: ${store.giatsieutoc} VNĐ</p>
+                                <p>Giá siêu tốc: ${store.storeID} VNĐ</p>
                                 <div class="rating">
                                     Rating:
                                     <c:forEach begin="1" end="${store.averageRating}">
@@ -66,35 +67,27 @@
                                 </div>
                             </div>
                             <a href="#" class="btn btn-success btn-block" onclick="saveCatInfo(
-                                                '<c:out value='${store.storeName}' />',
-                                                '<c:out value='${store.address}' />',
-                                                '<c:out value='${store.giatthuong}' />',
-                                                '<c:out value='${store.giatnhanh}' />',
-                                                '<c:out value='${store.giatsieutoc}' />',
-                                                '<c:out value='${store.averageRating}' />'
-                                                )">Booking</a>
-                        </c:forEach>
+                                            '<c:out value='${store.storeName}' />',
+                                            '<c:out value='${store.address}' />',
+                                            '<c:out value='${store.giatthuong}' />',
+                                            '<c:out value='${store.giatnhanh}' />',
+                                            '<c:out value='${store.giatsieutoc}' />',
+                                            '<c:out value='${store.storeID}' />'
+                                            )">Booking</a>
+                        </c:forEach>       
                     </div>
                 </div>
 
                 <script>
 
-                    function saveCatInfo(storeName, address,giatthuong, giatnhanh, giatsieutoc,averageRating ) {
+                    function saveCatInfo(storeName, address, giatthuong, giatnhanh, giatsieutoc, storeID) {
                         var session = sessionStorage;
-                        session.setItem("catImage", image);
-                        session.setItem("catPriceGiatThuong", priceGiatThuong);
-                        session.setItem("catPriceGiatNhanh", priceGiatNhanh);
-                        session.setItem("catPriceGiatSieuToc", priceGiatSieuToc);
-                        session.setItem("catStoreName", storeName);
-                        session.setItem("catAddress", address);
-                        session.setItem("catStoreID", storeID);
-                        session.setItem("catRating", rating);
-                        window.location.href = "thanhtoan.jsp";
-                    }
-                    function saveCatInfo(image, ) {
-                        var session = sessionStorage;
-                        session.setItem("catImage", image);
-
+                        session.setItem("storeStoreName", storeName);
+                        session.setItem("storeAddress", address);
+                        session.setItem("storeGiatthuong", giatthuong);
+                        session.setItem("storeGiatnhanh", giatnhanh);
+                        session.setItem("storeGiatsieutoc", giatsieutoc);
+                        session.setItem("storeStoreID", storeID);
                         window.location.href = "thanhtoan.jsp";
                     }
 

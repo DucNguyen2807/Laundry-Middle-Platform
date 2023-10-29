@@ -29,7 +29,9 @@ public class Review {
         this.storeID = storeID;
     }
 
-    public Review(String storeName, int giatthuong, int giatnhanh, int giatsieutoc, String imageDetail, String address, double averageRating) {
+
+    public Review(String storeID, String storeName, int giatthuong, int giatnhanh, int giatsieutoc, String imageDetail, String address, double averageRating) {
+        this.storeID = storeID;
         this.storeName = storeName;
         this.giatthuong = giatthuong;
         this.giatnhanh = giatnhanh;
@@ -38,7 +40,8 @@ public class Review {
         this.address = address;
         this.averageRating = averageRating;
     }
-
+    
+    
     public String getstoreName() {
         return storeName;
     }
