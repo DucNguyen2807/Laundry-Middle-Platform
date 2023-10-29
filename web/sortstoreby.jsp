@@ -50,64 +50,56 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <form action="SortStoreByController" method="post" class="custom-select-container">
-                    <label for="btAction" class="navbar-brand">Sắp xếp theo:</label>
+                    <label for="orderBy" class="navbar-brand">Sắp xếp theo:</label>
                     <div class="custom-select">
-                        <select style="font-size: 20px" name="btAction" id="btAction">
+                        <select style="font-size: 20px" name="orderBy" id="orderBy">
                             <option value="Nearest">Các cửa hàng gần nhất</option>
                             <option value="favoriteCount">Nhiều lượt yêu thích nhất</option>
                             <option value="rating">Nhiều lượt rating nhất</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Sắp xếp</button>
-                    <input type="hidden" name="orderBy" />
                 </form>
             </div>
         </nav>
 
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function () {
-                // Lắng nghe sự kiện khi lựa chọn trong dropdown thay đổi
-                $("select[name='btAction']").change(function () {
-                    var selectedValue = $(this).val();
-                    // Cập nhật giá trị cho trường input ẩn
-                    $("input[name='orderBy']").val(selectedValue);
-                });
-
-                // Kiểm tra giá trị của trường "orderBy" và chọn lại option tương ứng
-                var selectedOrderBy = $("input[name='orderBy']").val();
-                $("select[name='btAction']").val(selectedOrderBy);
+                var selectedOrderBy = '<c:out value="${orderBy}" />';
+                $("#orderBy").val(selectedOrderBy);
             });
+
         </script>
+
 
         <div class="container mt-5">
             <div class="row">
-                <c:forEach items="${pagedStores}" var="cat">
+                <c:forEach items="${pagedStores}" var="store">
                     <div class="product col-12 col-md-6 col-lg-4">
                         <div style="margin: 25px 20px" class="card-body text-center vertical-center">
                             <div class="card-body">
-                                <i class="fas fa-heart heart-icon" onclick="addToFavorites('<c:out value="${cat.storeID}"/>')"></i>
-                                <img class="card-img-top" src="<c:out value='${cat.image}'/>" alt="Store Image" style="width: 100%; height: auto;">
-                                <h4 class="card-title show_txt">Tên cửa hàng: <c:out value='${cat.storeName}'/></h4>
-                                <p class="card-text show_txt">Địa chỉ: <c:out value='${cat.address}'/></p>
+                                <i class="fas fa-heart heart-icon" onclick="addToFavorites('<c:out value="${store.storeID}"/>')"></i>
+                                <img class="card-img-top" src="<c:out value='${store.image}'/>" alt="Store Image" style="width: 100%; height: auto;">
+                                <h4 class="card-title show_txt">Tên cửa hàng: <c:out value='${store.storeName}'/></h4>
+                                <p class="card-text show_txt">Địa chỉ: <c:out value='${store.address}'/></p>
 
-<div class="rating">
-    <c:forEach begin="1" end="${cat.rating}">
-        <span class="star yellow">★</span>
-    </c:forEach>
-</div>
+                                <div class="rating">
+                                    <c:forEach begin="1" end="${store.rating}">
+                                        <span class="star yellow">★</span>
+                                    </c:forEach>
+                                </div>
 
                             </div>
-                            <p class="card-text show_txt">Giặt thường: <c:out value='${cat.priceGiatThuong}'/> vnđ</p>
+                            <p class="card-text show_txt">Giặt thường: <c:out value='${store.priceGiatThuong}'/> vnđ</p>
                             <a href="#" class="btn btn-success btn-block" onclick="saveCatInfo(
-                                            '<c:out value='${cat.image}' />',
-                                            '<c:out value='${cat.priceGiatThuong}' />',
-                                            '<c:out value='${cat.priceGiatNhanh}' />',
-                                            '<c:out value='${cat.priceGiatSieuToc}' />',
-                                            '<c:out value='${cat.storeName}' />',
-                                            '<c:out value='${cat.address}' />',
-                                            '<c:out value='${cat.storeID}' />',
-                                            '<c:out value='${cat.rating}' />'
+                                            '<c:out value='${store.priceGiatThuong}' />',
+                                            '<c:out value='${store.priceGiatNhanh}' />',
+                                            '<c:out value='${store.priceGiatSieuToc}' />',
+                                            '<c:out value='${store.storeName}' />',
+                                            '<c:out value='${store.address}' />',
+                                            '<c:out value='${store.storeID}' />'
                                             )">Booking</a>
                         </div>
                     </div>
@@ -115,16 +107,14 @@
             </div>
         </div>
         <script>
-            function saveCatInfo(image, priceGiatThuong, priceGiatNhanh, priceGiatSieuToc, storeName, address, storeID, rating) {
+            function saveCatInfo(priceGiatThuong, priceGiatNhanh, priceGiatSieuToc, storeName, address, storeID) {
                 var session = sessionStorage;
-                session.setItem("catImage", image);
-                session.setItem("catPriceGiatThuong", priceGiatThuong);
-                session.setItem("catPriceGiatNhanh", priceGiatNhanh);
-                session.setItem("catPriceGiatSieuToc", priceGiatSieuToc);
-                session.setItem("catStoreName", storeName);
-                session.setItem("catAddress", address);
-                session.setItem("catStoreID", storeID);
-                session.setItem("catRating", rating);
+                session.setItem("storeGiatthuong", priceGiatThuong);
+                session.setItem("storeGiatnhanh", priceGiatNhanh);
+                session.setItem("storeGiatsieutoc", priceGiatSieuToc);
+                session.setItem("storeStoreName", storeName);
+                session.setItem("storeAddress", address);
+                session.setItem("storeStoreID", storeID);
                 window.location.href = "thanhtoan.jsp";
             }
 

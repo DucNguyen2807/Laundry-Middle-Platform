@@ -240,7 +240,7 @@ public class StoreService implements Serializable {
         try {
             con = ConnectDB.getConnection();
             if (con != null) {
-                String sql = "SELECT  u.Fullname,  p.PriceDetail AS giatthuong, p1.PriceDetail AS giatnhanh, p2.PriceDetail AS giatsieutoc, "
+                String sql = "SELECT  u.UserID, u.Fullname,  p.PriceDetail AS giatthuong, p1.PriceDetail AS giatnhanh, p2.PriceDetail AS giatsieutoc, "
                         + "i.ImageDetail, u.Address,  AVG(r.Rating) AS AverageRating "
                         + "FROM [Laundry-Middle-Platform].[dbo].[User] u "
                         + "INNER JOIN Price p ON p.StoreID = u.UserID AND p.ServiceID = 1 "
@@ -255,6 +255,7 @@ public class StoreService implements Serializable {
                 stm.setInt(1, userId);
                 rs = stm.executeQuery();
                 while (rs.next()) {
+                    String storeID = rs.getString("UserID");
                     String storeName = rs.getString("Fullname");
                     int giatthuong = rs.getInt("giatthuong");
                     int giatnhanh = rs.getInt("giatnhanh");
@@ -263,7 +264,7 @@ public class StoreService implements Serializable {
                     String address = rs.getString("Address");
                     double averageRating = rs.getDouble("AverageRating");
                     
-                    Review review = new Review(storeName, giatthuong, giatnhanh, giatsieutoc, imageDetail, address, averageRating);
+                    Review review = new  Review(storeID, storeName, giatthuong, giatnhanh, giatsieutoc, imageDetail, address, averageRating);
                     listStoreSale.add(review);  
                     
                 }
