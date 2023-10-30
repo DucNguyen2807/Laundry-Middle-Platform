@@ -50,6 +50,11 @@
         <servlet-class>Controller.UpdateStaffOrderController</servlet-class>
 
     </servlet>
+    <servlet>
+        <servlet-name>GetReviewController</servlet-name>
+        <servlet-class>Controller.GetReviewController</servlet-class>
+
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -98,8 +103,14 @@
     <servlet-mapping>
         <servlet-name>UpdateStaffOrderController</servlet-name>
         <url-pattern>/UpdateStaffOrderController</url-pattern>
-
+        
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetReviewController</servlet-name>
+        <url-pattern>/GetReviewController</url-pattern>
+        
+    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
