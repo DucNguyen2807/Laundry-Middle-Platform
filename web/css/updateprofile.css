@@ -88,6 +88,9 @@ select:focus{
     color: #fff;
 }
 .btn-primary{
+    background-color: #e20404;
+}
+.btn-primary1{
     background-color: #0779e4;
 }
 .danger{

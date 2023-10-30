@@ -89,8 +89,12 @@
 
                     <div class="py-3 pb-4 border-bottom">
                         <form action="MainController" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn lưu thay đổi?');">
-                            <button class="btn btn-primary mr-3" value="Update" name="btAction">Save Changes</button>
-                            <a class="btn border button" href="homepage_customer.jsp">Cancel</a>
+                            <button class="btn btn-primary1 mr-3" value="Update" name="btAction">Save Changes</button>
+                        </form>
+                    </div>
+                    <div>
+                        <form action="MainController" method="post">
+                            <button class="btn btn-primary mr-3" value="CancelUppdate" name="btAction">Cancel</button>
                         </form>
                     </div>
                 </div>
