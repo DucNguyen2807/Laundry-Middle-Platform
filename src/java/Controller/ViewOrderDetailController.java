@@ -4,7 +4,9 @@
  */
 package Controller;
 
+import Model.Order;
 import Model.Staff;
+import Service.OrderService;
 import Service.StaffService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,43 +21,31 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author khait
  */
-public class ViewStaffController extends HttpServlet {
+public class ViewOrderDetailController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private final String VIEWSTAFF = "viewstaff.jsp";
+    private final String VIEWORDERDETAIL = "vieworderdetail.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             request.setCharacterEncoding("UTF-8");
+            
+            String url = VIEWORDERDETAIL;
+            String orderID = request.getParameter("orderID");
+            String addcus = request.getParameter("addcus");
 
-            String url = VIEWSTAFF;
-            String searchValue = request.getParameter("txtSearchStaff");
-            //HttpSession session = request.getSession();
-            //Staff staff = (Staff) request.getSession().getAttribute("staff");
-            //String name = staff.getFullname();
-
-            StaffService staffSer = new StaffService();
-
+            OrderService ord = new OrderService();
+            StaffService st = new StaffService();
             try {
-                if (!searchValue.isEmpty()) {
-                    staffSer.searchStaffByName(searchValue);
-                } else {
-                    staffSer.getStaff();
-                }
+                Order orderDetail = ord.getOrderDetail(Integer.parseInt(orderID));
+                request.setAttribute("ordDetail", orderDetail);
 
-                List<Staff> result = staffSer.getListStaff();
-                request.setAttribute("SEARCHRESULT", result);
+                List<Staff> listst = st.getStaffFree();
+                
+                List<Staff> liststnear = ord.getNearestStaff(addcus, listst);
+                request.setAttribute("liststnear", liststnear);
 
             } catch (Exception e) {
                 e.printStackTrace();

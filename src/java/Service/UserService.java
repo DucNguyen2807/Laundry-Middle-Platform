@@ -351,6 +351,69 @@ public class UserService implements Serializable {
         }
     }
 
+    public void getOrderWaiting(int userId, int userRole) throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        listOrder = new ArrayList<>();
+
+        try {
+            con = ConnectDB.getConnection();
+            if (con != null) {
+                String sql;
+
+                if (userRole < 4) {
+                    sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight, od.TotaPrice, od.Phone AS PhoneCus,\n"
+                            + " od.AddressCus, od.AddressSto, od.Note,\n"
+                            + " o.TimeDesired, o.DateDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                            + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
+                            + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
+                            + " LEFT JOIN [OrderDetail] od ON o.OrderID = od.OrderID\n"
+                            + " LEFT JOIN Service se ON se.ServiceID = od.ServiceID\n"
+                            + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
+                            + " WHERE CustomerID = ? OR o.StoreID = ? OR o.StaffID = ?";
+                    stm = con.prepareStatement(sql);
+                    stm.setInt(1, userId);
+                    stm.setInt(2, userId);
+                    stm.setInt(3, userId);
+                } else if (userRole >= 4) {
+                    sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight, od.TotaPrice, od.Phone AS PhoneCus,\n"
+                            + " od.AddressCus, od.AddressSto, od.Note,\n"
+                            + " o.TimeDesired, o.DateDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                            + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
+                            + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
+                            + " LEFT JOIN [OrderDetail] od ON o.OrderID = od.OrderID\n"
+                            + " LEFT JOIN Service se ON se.ServiceID = od.ServiceID\n"
+                            + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
+                            + " WHERE o.StOrderID = 6";
+                    stm = con.prepareStatement(sql);
+                }
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    Order order = createOrderFromResultSet(rs);
+                    listOrder.add(order);
+                }
+            }
+        } finally {
+            // Đóng tài nguyên
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
     public static boolean insert(String username, String password, String phone, String fullname, String roleid) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;

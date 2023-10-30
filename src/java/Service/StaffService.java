@@ -5,9 +5,7 @@
 package Service;
 
 import DBConnect.ConnectDB;
-import Model.Cate;
 import Model.Staff;
-import Model.User;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -153,15 +151,24 @@ public class StaffService implements Serializable {
             con = ConnectDB.getConnection();
 
             if (con != null) {
-                String sql = "SELECT u.UserID, u.Username, u.Password, u.Address, u.Fullname, u.Phone, u.Email, st.StStaffDetail, COUNT(o.OrderID) AS OrderCount\n"
-                        + " FROM dbo.[Order] o\n"
-                        + " LEFT JOIN dbo.[OrderDetail] od ON o.OrderID = od.OrderID\n"
-                        + " LEFT JOIN dbo.[User] u ON o.StaffID = u.UserID\n"
-                        + " LEFT JOIN StatusStaff st ON st.StStaffID = u.Status\n"
-                        + " WHERE (o.StOrderID = 4 OR o.StOrderID = 2) AND u.UserID IS NOT NULL\n"
-                        + " GROUP BY u.UserID, u.Username, u.Password, u.Address, u.Fullname, u.Phone, u.Email, st.StStaffDetail\n"
-                        + " HAVING COUNT(o.OrderID) < 20\n"
-                        + " ORDER BY OrderCount ASC";
+                String sql
+                        = // Những nhân viên có đơn hàng
+                        "SELECT u.UserID, u.Username, u.Password, u.Address, u.Fullname, u.Phone, u.Email, st.StStaffDetail, COUNT(o.OrderID) AS OrderCount "
+                        + "FROM [Order] o "
+                        + "LEFT JOIN [OrderDetail] od ON o.OrderID = od.OrderID "
+                        + "LEFT JOIN [User] u ON o.StaffID = u.UserID "
+                        + "LEFT JOIN StatusStaff st ON st.StStaffID = u.Status "
+                        + "WHERE (o.StOrderID = 4 OR o.StOrderID = 2) AND u.UserID IS NOT NULL "
+                        + "GROUP BY u.UserID, u.Username, u.Password, u.Address, u.Fullname, u.Phone, u.Email, st.StStaffDetail "
+                        + "HAVING COUNT(o.OrderID) < 20 "
+                        + "UNION ALL "
+                        + // Những nhân viên không có đơn hàng
+                        "SELECT u.UserID, u.Username, u.Password, u.Address, u.Fullname, u.Phone, u.Email, st.StStaffDetail, 0 AS OrderCount "
+                        + "FROM [User] u "
+                        + "LEFT JOIN StatusStaff st ON st.StStaffID = u.Status "
+                        + "WHERE u.RoleID = 2 "
+                        + "AND NOT EXISTS (SELECT 1 FROM [Order] o WHERE o.StaffID = u.UserID) "
+                        + "ORDER BY OrderCount ASC";
 
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();

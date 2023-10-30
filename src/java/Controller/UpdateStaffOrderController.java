@@ -4,11 +4,9 @@
  */
 package Controller;
 
-import Model.Staff;
-import Service.StaffService;
+import Service.OrderService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,44 +17,22 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author khait
  */
-public class ViewStaffController extends HttpServlet {
+public class UpdateStaffOrderController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private final String VIEWSTAFF = "viewstaff.jsp";
+    private final String VIEWORDERDETAIL = "vieworderdetail.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            request.setCharacterEncoding("UTF-8");
-
-            String url = VIEWSTAFF;
-            String searchValue = request.getParameter("txtSearchStaff");
-            //HttpSession session = request.getSession();
-            //Staff staff = (Staff) request.getSession().getAttribute("staff");
-            //String name = staff.getFullname();
-
-            StaffService staffSer = new StaffService();
-
+            String url = VIEWORDERDETAIL;
+            String staffID = request.getParameter("staffSelect");   
+            String orderID = request.getParameter("orderID");
+            OrderService ord = new OrderService();
             try {
-                if (!searchValue.isEmpty()) {
-                    staffSer.searchStaffByName(searchValue);
-                } else {
-                    staffSer.getStaff();
-                }
-
-                List<Staff> result = staffSer.getListStaff();
-                request.setAttribute("SEARCHRESULT", result);
-
+                ord.updateStaffOrder(Integer.parseInt(orderID), Integer.parseInt(staffID));
+                ord.updateOrder(Integer.parseInt(orderID), 4);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

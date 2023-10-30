@@ -4,10 +4,12 @@
  */
 package Controller;
 
-import Model.Staff;
-import Service.StaffService;
+import Model.Order;
+import Model.User;
+import Service.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,42 +21,27 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author khait
  */
-public class ViewStaffController extends HttpServlet {
+public class ViewOrderWaitingController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    private final String VIEWSTAFF = "viewstaff.jsp";
+     List<Order> listOrder = new ArrayList<>();
+
+    private final String SHOWSEARCHCONTROLLER = "vieworderwaiting.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            request.setCharacterEncoding("UTF-8");
-
-            String url = VIEWSTAFF;
-            String searchValue = request.getParameter("txtSearchStaff");
-            //HttpSession session = request.getSession();
-            //Staff staff = (Staff) request.getSession().getAttribute("staff");
-            //String name = staff.getFullname();
-
-            StaffService staffSer = new StaffService();
+            String url = SHOWSEARCHCONTROLLER;
+//            String searchValue = request.getParameter("txtSearchOrder");
+            User user = (User) request.getSession().getAttribute("user");
+            int userId = user.getUserId();
+            int roleId = user.getRoleId();
+            UserService ord = new UserService();
 
             try {
-                if (!searchValue.isEmpty()) {
-                    staffSer.searchStaffByName(searchValue);
-                } else {
-                    staffSer.getStaff();
-                }
-
-                List<Staff> result = staffSer.getListStaff();
+                ord.getOrderWaiting(userId, roleId);
+                List<Order> result = ord.getListOrder();
                 request.setAttribute("SEARCHRESULT", result);
 
             } catch (Exception e) {

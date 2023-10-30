@@ -28,7 +28,7 @@ public class ViewHistoryController extends HttpServlet {
 
     List<Order> listOrder = new ArrayList<>();
 
-    private final String SHOWSEARCHCONTROLLER = "viewhistory.jsp";
+    private final String SHOWSEARCHCONTROLLER = "vieworder.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
