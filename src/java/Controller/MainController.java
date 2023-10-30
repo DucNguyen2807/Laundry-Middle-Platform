@@ -27,6 +27,9 @@ public class MainController extends HttpServlet {
     private static final String VIEWSTAFFCONTROLLER = "ViewStaffController";
     private static final String VIEWSTORECONTROLLER = "ViewStoreController";
     private static final String VIEWCUSTOMERCONTROLLER = "ViewCustomerController";
+    private static final String VIEWORDERWAITINGCONTROLLER = "ViewOrderWaitingController";
+    private static final String VIEWORDERDETAILCONTROLLER = "ViewOrderDetailController";
+    private static final String UPDATESTAFFORDERCONTROLLER = "UpdateStaffOrderController";
     private static final String VIEWORDER_STORE = "ViewNewOrder_Store";
     private static final String CONFIRMORDERCONTROLLER = "ConfirmOrderController";
     private static final String DELETEACCCONTROLLER = "DeleteAccController";
@@ -59,6 +62,12 @@ public class MainController extends HttpServlet {
                 url = VIEWSTORECONTROLLER;
             } else if (button.equals("ViewCustomer")) {
                 url = VIEWCUSTOMERCONTROLLER;
+            } else if (button.equals("ViewOrderWaiting")) {
+                url = VIEWORDERWAITINGCONTROLLER;
+            } else if (button.equals("ViewOrderDetail")) {
+                url = VIEWORDERDETAILCONTROLLER;
+            } else if (button.equals("ConfirmStaff")) {
+                url = UPDATESTAFFORDERCONTROLLER;
             } else if (button.equals("DeleteStaff")) {
                 url = DELETEACCCONTROLLER;
             } else if (button.equals("Category")) {

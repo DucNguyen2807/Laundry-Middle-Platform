@@ -4,7 +4,9 @@
     Author     : khait
 --%>
 
-<%@page import="Model.Store"%>
+<%@page import="Service.StaffService"%>
+<%@page import="Model.Staff"%>
+<%@page import="Model.Order"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +17,6 @@
         <!-- Add Bootstrap CSS link here -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/manage_admin.css">
-
     </head>
     <body>
 
@@ -125,75 +126,124 @@
 
 
         <div class="container mt-4" style="margin-left: 140px;">
-            <h1 class="display-4">Danh sách cửa hàng</h1>
+            <h1 class="display-4">Chi tiết đơn hàng</h1>
 
             <!-- Search form -->
-            <form action="ViewStoreController" method="post" class="mb-3">
+            <form action="MainController" method="post" class="mb-3">
                 <div class="input-group">
-                    <input type="text" name="txtSearchStore" class="form-control" placeholder="Tìm cửa hàng...">
-                    <button type="submit" value="ViewStore" name="btAction" class="btn btn-primary">Tìm kiếm</button>
+                    <input type="text" name="txtSearchOrderWaiting" class="form-control" placeholder="Tìm đơn hàng...">
+                    <button type="submit" value="ViewOrderWaiting" name="btAction" class="btn btn-primary">Tìm kiếm</button>
                 </div>
             </form>
+
             <form action="MainController" method="post">
-                <button value="ViewStore" name="btAction"  class="btn btn-primary">Xem tất cả</button>
-                <input type="hidden" name="txtSearchStore" value="" />
+                <button value="ViewOrderWaiting" name="btAction"  class="btn btn-primary">Xem tất cả</button>
+                <input type="hidden" name="txtSearchOrderWaiting" value="" />
             </form>
 
             <%
-                String searchvalue = request.getParameter("txtSearchStore");
-                if (searchvalue != null) {
-                    List<Store> result = (List<Store>) request.getAttribute("SEARCHRESULT");
-                    if (result != null && !result.isEmpty()) {
+                Order result = (Order) request.getAttribute("ordDetail");
+                if (result != null) {
             %>
-
             <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">No.</th>
-                        <th scope="col">Store ID</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Password</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Store's name</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Email</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%
-                        int count = 0;
-                        for (Store store : result) {
-                    %>
+                <%
+                    List<Staff> listStaff = (List<Staff>) request.getAttribute("liststnear");
+                %>
                 <form action="MainController">
                     <tr>
-                        <td><%= ++count%></td>
+                        <th scope="col">Staff</th>
+                    <form action="MainController" method="post">
                         <td>
-                            <%= store.getStoreID()%>
-                            <input type="hidden" name="txtStoreID" value="<%= store.getStoreID()%>" />
+                            <div class="row">
+                                <div class="col-8">
+                                    <select name="staffSelect" class="form-control" style="color: #22638f; background-color: #fff">
+                                        <%
+                                            for (Staff staff : listStaff) {
+                                        %>
+                                        <option  value="<%= staff.getstaffID()%>"  style="color: #22638f; background-color: #fff">
+                                            <%= staff.getFullname()%>
+                                        </option>
+                                        <%
+                                            }
+                                        %>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <button type="submit" value="ConfirmStaff" name="btAction" class="btn btn-success" onclick="return alert('Xác nhận thành công!')">Xác nhận</button>
+                                </div>
+                            </div>
                         </td>
-                        <td><%= store.getUsername()%></td>
-                        <td><%= store.getPassword()%></td>
-                        <td><%= store.getAddress()%></td>
-                        <td><%= store.getStoreName().toUpperCase()%></td>
-                        <td><%= store.getPhone()%></td>
-                        <td><%= store.getEmail()%></td>
+                    </form>
                     </tr>
-                </form>
+                    <tr>
+                        <th scope="col-3">OrderID:</th>
+                        <td><%= result.getOrderID()%></td>
+                        <input type="hidden" name="orderID" value="<%= result.getOrderID()%>" />
+                    </tr>
+                    <tr>
+                        <th scope="col">Service:</th>
+                        <td><%= result.getServiceDetail()%></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Weight:</th>
+                        <td><%= result.getWeight()%></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">TotalPrice:</th>
+                        <td><%= result.getTotalPrice()%></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Phone Customer:</th>
+                        <td><%= result.getPhoneCus()%></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">CustomerAddress:</th>
+                        <td><%= result.getAddressCus()%></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">StoreAddress:</th>
+                        <td><%= result.getAddressSto()%></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Note:</th>
+                        <td><%= result.getNote()%></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">DateApprove:</th>
+                        <td><%= result.getDateApproved()%></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">DateCompleted:</th>
+                        <td><%= result.getDateComplete()%></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">TimeComplete:</th>
+                        <td><%= result.getTimeComplete()%></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Customer:</th>
+                        <td><%= result.getCustomerName()%></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">Store:</th>
+                        <td><%= result.getStoreName()%></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">DateDesired</th>
+                        <td><%= result.getDateDesired()%></td>
+                    </tr>
+                    <tr>
+                        <th scope="col">TimeDesired</th>
+                        <td><%= result.getTimeDesired()%></td>
+                    </tr>
 
-                <%
-                    }
-                %>
-                </tbody>
+                </form>
             </table>
             <%
-            } else {
-            %>
-            <div class="alert alert-warning mt-3" role="alert">Không tìm thấy kết quả!</div>
-            <%
-                    }
                 }
             %>
+
+
         </div>
         <!-- Add Bootstrap JS and jQuery scripts here -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>

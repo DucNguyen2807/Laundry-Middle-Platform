@@ -4,7 +4,7 @@
     Author     : khait
 --%>
 
-<%@page import="Model.Store"%>
+<%@page import="Model.Order"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +15,6 @@
         <!-- Add Bootstrap CSS link here -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/manage_admin.css">
-
     </head>
     <body>
 
@@ -125,24 +124,25 @@
 
 
         <div class="container mt-4" style="margin-left: 140px;">
-            <h1 class="display-4">Danh sách cửa hàng</h1>
+            <h1 class="display-4">Danh sách đơn hàng</h1>
 
             <!-- Search form -->
-            <form action="ViewStoreController" method="post" class="mb-3">
+            <form action="MainController" method="post" class="mb-3">
                 <div class="input-group">
-                    <input type="text" name="txtSearchStore" class="form-control" placeholder="Tìm cửa hàng...">
-                    <button type="submit" value="ViewStore" name="btAction" class="btn btn-primary">Tìm kiếm</button>
+                    <input type="text" name="txtSearchOrderWaiting" class="form-control" placeholder="Tìm đơn hàng...">
+                    <button type="submit" value="ViewOrderWaiting" name="btAction" class="btn btn-primary">Tìm kiếm</button>
                 </div>
             </form>
+
             <form action="MainController" method="post">
-                <button value="ViewStore" name="btAction"  class="btn btn-primary">Xem tất cả</button>
-                <input type="hidden" name="txtSearchStore" value="" />
+                <button value="ViewOrderWaiting" name="btAction"  class="btn btn-primary">Xem tất cả</button>
+                <input type="hidden" name="txtSearchOrderWaiting" value="" />
             </form>
 
             <%
-                String searchvalue = request.getParameter("txtSearchStore");
+                String searchvalue = request.getParameter("txtSearchOrderWaiting");
                 if (searchvalue != null) {
-                    List<Store> result = (List<Store>) request.getAttribute("SEARCHRESULT");
+                    List<Order> result = (List<Order>) request.getAttribute("SEARCHRESULT");
                     if (result != null && !result.isEmpty()) {
             %>
 
@@ -150,34 +150,37 @@
                 <thead>
                     <tr>
                         <th scope="col">No.</th>
-                        <th scope="col">Store ID</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Password</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Store's name</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Email</th>
-                        <th scope="col"></th>
+                        <th scope="col">OrderID</th>
+                        <th scope="col">CustomerAddress</th>
+                        <th scope="col">StoreAddress</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Store</th>
+                        <th scope="col">DateDesired</th>
+                        <th scope="col">TimeDesired</th>
                     </tr>
                 </thead>
                 <tbody>
                     <%
                         int count = 0;
-                        for (Store store : result) {
+                        for (Order ord : result) {
                     %>
                 <form action="MainController">
                     <tr>
                         <td><%= ++count%></td>
+                        <td><%= ord.getOrderID()%></td>
+                        <td><%= ord.getAddressCus()%></td>
+                        <td><%= ord.getAddressSto()%></td>
+                        <td><%= ord.getCustomerName()%></td>
+                        <td><%= ord.getStoreName().toUpperCase()%></td>
+                        <td><%= ord.getDateDesired()%></td>
+                        <td><%= ord.getTimeDesired()%></td>
                         <td>
-                            <%= store.getStoreID()%>
-                            <input type="hidden" name="txtStoreID" value="<%= store.getStoreID()%>" />
+                            <form action="ViewOrderDetailController" method="post">
+                                <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
+                                <input type="hidden" name="addcus" value="<%= ord.getAddressCus()%>">
+                                <button type="submit" name="btAction"  value="ViewOrderDetail" class="btn btn-success">Xem</button>
+                            </form>
                         </td>
-                        <td><%= store.getUsername()%></td>
-                        <td><%= store.getPassword()%></td>
-                        <td><%= store.getAddress()%></td>
-                        <td><%= store.getStoreName().toUpperCase()%></td>
-                        <td><%= store.getPhone()%></td>
-                        <td><%= store.getEmail()%></td>
                     </tr>
                 </form>
 

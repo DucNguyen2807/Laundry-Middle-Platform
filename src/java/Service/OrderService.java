@@ -133,6 +133,49 @@ public class OrderService implements Serializable {
         }
     }
 
+    public Order getOrderDetail(int orderID) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Order orderDetail = new Order();
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight, od.TotaPrice, od.Phone AS PhoneCus,\n"
+                        + " od.AddressCus, od.AddressSto, od.Note,\n"
+                        + " o.TimeDesired, o.DateDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                        + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
+                        + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
+                        + " LEFT JOIN [OrderDetail] od ON o.OrderID = od.OrderID\n"
+                        + " LEFT JOIN Service se ON se.ServiceID = od.ServiceID\n"
+                        + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
+                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
+                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
+                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
+                        + " WHERE o.OrderID = ? ";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, orderID);
+
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    orderDetail = createOrderFromResultSet(rs);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return orderDetail;
+    }
+
     public boolean updateOrder(int orderId, int newStatusId) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
@@ -222,16 +265,16 @@ public class OrderService implements Serializable {
         return false;
     }
 
-    public int getNearestStaff(String addCus, List<Staff> Staffs) {
-        
+    public List<Staff> getNearestStaff(String addCus, List<Staff> Staffs) {
+
         String CusAddress = addCus;
+        Map<String, Staff> storeMap = new HashMap<>();
+
         String[] CusAddressParts = CusAddress.split(", ");
         String cusStreet = CusAddressParts[0];
         String cusWard = CusAddressParts[1];
         String cusDistrict = CusAddressParts[2];
         String cusCity = CusAddressParts[3];
-
-        int staffID = 5;
 
         for (Staff staff : Staffs) {
             String stafffAddress = staff.getAddress();
@@ -240,13 +283,23 @@ public class OrderService implements Serializable {
             String staffWard = staffAddressParts[1];
             String staffDistrict = staffAddressParts[2];
             String staffCity = staffAddressParts[3];
-            
-            if (cusCity.equals(staffCity) && cusDistrict.equals(staffDistrict)) {        
-                         staffID = staff.getstaffID();
+
+            boolean isMatching = false;
+
+            if (cusCity.equals(staffCity)
+                    && cusDistrict.equals(staffDistrict)) 
+            {
+                isMatching = true;
             }
-            
+
+            if (isMatching) {
+                storeMap.put(staff.getFullname(), staff);
+            } 
         }
         
-        return staffID;
+        List<Staff> nearestStaff = new ArrayList<>(storeMap.values());
+
+        return nearestStaff;
     }
 }
+
