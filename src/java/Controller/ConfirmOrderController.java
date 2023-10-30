@@ -6,6 +6,7 @@ package Controller;
 
 import Model.User;
 import Service.StoreService;
+import Service.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
@@ -34,27 +35,38 @@ public class ConfirmOrderController extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            // Lấy giá trị từ trang JSP
+            request.setCharacterEncoding("UTF-8");
+
             String url = THANHTOAN;
             HttpSession session1 = request.getSession();
             String fullname = request.getParameter("fullname");
             String phone = request.getParameter("phone");
             String customerAddress = request.getParameter("customerAddress");
             int kilos = Integer.parseInt(request.getParameter("kilos"));
-            int serviceId = Integer.parseInt(request.getParameter("services"));
             String note = request.getParameter("note");
             String TimeDesired = request.getParameter("time");
             String DateDesired = request.getParameter("date");
 
-            String storeId = request.getParameter("storeID");
-            String storeAddress = request.getParameter("catAddress");
-
             String totalPrice = request.getParameter("totalPrice");
+            String storeId = request.getParameter("storeID");
+            String storeAddress = request.getParameter("storeAddress");
+            String serviceID = request.getParameter("selectedService");
+            
             User user = (User) session1.getAttribute("user");
             int userId = user.getUserId();
 
+            if (fullname.length() < 6 || fullname.length() > 30) {
+                String errorMessage = "Tên đầy đủ phải có từ 6 đến 30 ký tự.";
+                request.setAttribute("errorMessage", errorMessage);
+                request.getRequestDispatcher("updateacc.jsp").forward(request, response);
+            }
+            if (!phone.matches("^0[0-9]{9,12}")) {
+                String errorMessage3 = "Số điện thoại không hợp lệ";
+                request.setAttribute("errorMessage3", errorMessage3);
+            }
+            
             StoreService store = new StoreService();
-            boolean success = store.BookingOrder(phone, fullname, storeId, serviceId, kilos,
+            boolean success = store.BookingOrder(phone, fullname, storeId, serviceID, kilos,
                     totalPrice, customerAddress, storeAddress, note, userId, DateDesired, TimeDesired);
             if (success) {
                 request.setAttribute("successMessage", "Đặt hàng thành công!");
@@ -62,6 +74,8 @@ public class ConfirmOrderController extends HttpServlet {
                 request.setAttribute("errorMessage", "Đã xảy ra lỗi khi đặt hàng. Vui lòng thử lại sau!");
             }
 
+            
+            
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);
             dispatcher.forward(request, response);
 

@@ -32,8 +32,6 @@
                          class="img" alt="Tienngu">
                     <div class="pl-sm-4 pl-2" id="img-section">
                         <input style="border: none" type="text" name="username" value="${user.username}" readonly=""/>
-                        <p>Accepted file type .png. Less than 1MB</p>
-                        <button class="btn button border"><b>Upload</b></button>
                     </div>
                 </div>
                 <div class="py-2">
@@ -91,8 +89,12 @@
 
                     <div class="py-3 pb-4 border-bottom">
                         <form action="MainController" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn lưu thay đổi?');">
-                            <button class="btn btn-primary mr-3" value="Update" name="btAction">Save Changes</button>
-                            <button class="btn border button">Cancel</button>
+                            <button class="btn btn-primary1 mr-3" value="Update" name="btAction">Save Changes</button>
+                        </form>
+                    </div>
+                    <div>
+                        <form action="MainController" method="post">
+                            <button class="btn btn-primary mr-3" value="CancelUppdate" name="btAction">Cancel</button>
                         </form>
                     </div>
                 </div>

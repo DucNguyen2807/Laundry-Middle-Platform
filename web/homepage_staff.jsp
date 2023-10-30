@@ -1,3 +1,10 @@
+<%-- 
+    Document   : homepage_store
+    Created on : Oct 8, 2023, 2:29:13 PM
+    Author     : ducnx
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,19 +42,19 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="homepage_customer.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                                <li class="active"><a href="homepage_staff.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                                 <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
+                                <li><a href="manage_store.jsp" style="color: #ffffff">Order</a></li>
                                 <li><a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
                                 <li>
                                     <form action="MainController" method="post">
-                                        <input type="submit" value="Category" name="btAction" />
-                                        <input type="submit" value="Favorite" name="btAction" />
+                                        <input type="submit" value="Settings" name="btAction" />
                                     </form>  
                                 </li>
                             </ul>
+
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="login.jsp" style="color: #ffffff">Logout</a></li>
-
                             </ul>
                         </div>
                     </div><!-- /.container-fluid -->
@@ -67,16 +74,31 @@
 
 
         </div>
-        <!--K?t thúc container-fluid-->
+        <!--K?t thÃºc container-fluid-->
 
         <div class="container mybody">
 
             <div class="row">
 
+                <!--                <div class="col-md-12" >
+                
+                                    <form class="navbar-form navbar-right" role="search">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Search">
+                                                </div>
+                                        
+                                                <button type="submit" class="btn btn-default">Search</button>
+                                            </form> 
+                                </div>-->
+
+            </div>
+
+            <div class="row combo">
+
                 <div class="col-md-12">
 
-                    <h2>Services</h2>
-
+                    <h2>Quy trinh 4 buoc</h2>
+                    <p>During the promotion period, let's wash your shoes!</p>
                 </div>
 
             </div>
@@ -87,7 +109,7 @@
 
                     <div id="sanpham1">
 
-                        <img src="image/service.jpg" />
+                        <img src="image/b1.jpg" />
                         <p id="first_line1">COMBO laundry 3 get 1 free</p>
                         <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
                                 Branch</span> </p>
@@ -103,7 +125,7 @@
 
                     <div id="sanpham2">
 
-                        <img src="image/service.jpg" />
+                        <img src="image/b2.png" />
                         <p id="first_line2">COMBO laundry 3 get 1 free</p>
                         <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
                                 Branch</span> </p>
@@ -119,7 +141,7 @@
 
                     <div id="sanpham3">
 
-                        <img src="image/service.jpg"/>
+                        <img src="image/b3.jpg"/>
                         <p id="first_line3">COMBO laundry 3 get 1 free</p>
                         <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
                                 Branch</span> </p>
@@ -134,7 +156,7 @@
 
                     <div id="sanpham3">
 
-                        <img src="image/service.jpg" />
+                        <img src="image/b4.jpg" />
                         <p id="first_line3">COMBO laundry 3 get 1 free</p>
                         <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
                                 Branch</span> </p>
@@ -149,6 +171,7 @@
 
 
             </div>
+
 
             <div class="row task1">	
 
@@ -164,7 +187,7 @@
 
                 <div class="col-md-3">
                     <div>
-                        <img src="image/b1.jpg" />
+                        <img src="image/service.jpg" />
                         <div class="relative">
                             <h3>Cheap Shoe Washing</h3>
                             <p>Perfect quality</p>
@@ -178,7 +201,7 @@
 
                 <div class="col-md-3">
                     <div>
-                        <img src="image/b2.png" />
+                        <img src="image/service.jpg" />
                         <div class="relative">
                             <h3>Cheap Repaint</h3>
                             <p>The best quality</p>
@@ -191,28 +214,35 @@
 
                 <div class="col-md-3">
                     <div >
-                        <img src="image/b3.jpg" />
+
+                        <img src="image/service.jpg" />
                         <div class="relative">
                             <h3>Cheap shoe sole stickers</h3>
                             <p>Absolute shoe sole protection</p>
+
                         </div>
+
                     </div>
+
+
                 </div>
                 <div class="col-md-3">
                     <div >
 
-                        <img src="image/b4.jpg" />
+                        <img src="image/service.jpg" />
                         <div class="relative">
                             <h3>Glue Shoes</h3>
                             <p>Reliable quality</p>
+
                         </div>
+
                     </div>
+
+
                 </div>
+
+
             </div>
-
-
-
-
             <div class="row orderonline">
 
                 <div class="col-md-12">
@@ -278,16 +308,13 @@
 
                 <div>
 
-                    <p>Email : Tiennvse171676</p>
+                    <p>Email : laundrymiddleplatform@gmail.com</p>
                     <p>Address: 100 Vuon Lai, Tan Phu District, HCMC</p>
                     <h5>&copy; Copyright 2023. Laundry Middle Platform</h5>
                 </div>
-                 <div>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15674.605125828743!2d106.77246096830015!3d10.837976079031838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752731176b07b1%3A0xb752b24b379bae5e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgVFAuIEhDTQ!5e0!3m2!1svi!2s!4v1698498826609!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
             </div>
-            </div>
-            
-           
+
         </div>
 
         <script src="js/Jquery.js"></script>

@@ -607,9 +607,7 @@ public class UserService implements Serializable {
         cate.setStoreID(rs.getString("UserID"));
         cate.setStoreName(rs.getString("Fullname"));
         cate.setAddress(rs.getString("Address"));
-        cate.setPriceGiatThuong(Integer.parseInt(rs.getString("giatthuong")));
-        cate.setPriceGiatNhanh(Integer.parseInt(rs.getString("giatnhanh")));
-        cate.setPriceGiatSieuToc(Integer.parseInt(rs.getString("giatsieutoc")));
+        
         cate.setService(rs.getString("ServiceDetail"));
         cate.setRating(Integer.parseInt(rs.getString("AverageRating")));
         cate.setReview(rs.getString("ReviewText"));

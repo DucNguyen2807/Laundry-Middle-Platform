@@ -5,16 +5,11 @@
 package Controller;
 
 import Model.User;
-import Service.UserService;
-import static Service.UserService.getUser;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,65 +17,46 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author khait
+ * @author acer
  */
-public class LoginController extends HttpServlet {
+@WebServlet(name = "CancelUpdateController", urlPatterns = {"/CancelUpdateController"})
+public class CancelUpdateController extends HttpServlet {
 
-    private final String LOGINPAGE = "login.jsp";
+    private final String LOGINPAGE = "updateacc.jsp";
     private final String HOMEPAGEADMIN = "homepage_admin.jsp";
     private final String HOMEPAGESTORE = "homepage_store.jsp";
     private final String HOMEPAGECUSTOMER = "homepage_customer.jsp";
     private final String HOMEPAGESTAFF = "homepage_staff.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 
-            String username = request.getParameter("txtUsername");
-            String password = request.getParameter("txtPassword");
-
-            UserService userService = new UserService();
-            boolean result = userService.CheckLogin(username, password);
             String url = LOGINPAGE;
-            if (result == false) {
-                request.setAttribute("ERROR", "Incorrect Username or Password!");
-            } else if (result) {
-                Cookie user = new Cookie("user", username);
-                Cookie pass = new Cookie("pass", password);
+            HttpSession session = request.getSession();
+            User user = (User) request.getSession().getAttribute("user");
+            int userId = user.getUserId();
+            int roleId = user.getRoleId();
 
-                if (request.getAttribute("check") != null) {
-                    user.setMaxAge((60 * 43200));
-                    pass.setMaxAge((60 * 43200));
-
-                    response.addCookie(user);
-                    response.addCookie(pass);
-                }
-
-                int roleid = userService.CheckRole(username, password);
-                switch (roleid) {
-                    case 1:
-                        url = HOMEPAGECUSTOMER;
-                        break;
-                    case 2:
-                        url = HOMEPAGESTAFF;
-                        break;
-                    case 3:
-                        url = HOMEPAGESTORE;
-                        break;
-                    case 4:
-                        url = HOMEPAGEADMIN;
-                        break;
-                    default:
-                        break;
-                }
+            switch (roleId) {
+                case 1:
+                    url = HOMEPAGECUSTOMER;
+                    break;
+                case 2:
+                    url = HOMEPAGESTAFF;
+                    break;
+                case 3:
+                    url = HOMEPAGESTORE;
+                    break;
+                case 4:
+                    url = HOMEPAGEADMIN;
+                    break;
+                default:
+                    break;
             }
-            User user = UserService.getUser(username);
-            request.getSession().setAttribute("user", user);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
     }
 
@@ -96,11 +72,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -114,11 +86,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

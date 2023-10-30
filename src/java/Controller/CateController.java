@@ -5,6 +5,7 @@
 package Controller;
 
 import Model.Cate;
+import Model.Review;
 import Service.StoreService;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -38,11 +39,12 @@ public class CateController extends HttpServlet {
             try {
                 currentPage = Integer.parseInt(pageParam);
             } catch (NumberFormatException e) {
-                // Xử lý ngoại lệ nếu tham số trang không hợp lệ
+
             }
-        }    
+        }
+
         StoreService store = new StoreService();
-        store.getAllStore();    
+        store.getAllStore();
         List<Cate> result = store.getListStoreCate();
         int totalStores = result.size();
         int totalPages = (int) Math.ceil((double) totalStores / itemsPerPage);
@@ -59,60 +61,56 @@ public class CateController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("cate.jsp");
         dispatcher.forward(request, response);
     }
-    
-        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-        /**
-         * Handles the HTTP <code>GET</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doGet
-        (HttpServletRequest request, HttpServletResponse response)
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            try {
-                processRequest(request, response);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CateController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(CateController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CateController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CateController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        /**
-         * Handles the HTTP <code>POST</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doPost
-        (HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            try {
-                processRequest(request, response);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(CateController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(CateController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
-
     }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CateController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CateController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

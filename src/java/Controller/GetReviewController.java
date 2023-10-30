@@ -4,26 +4,25 @@
  */
 package Controller;
 
-import Model.User;
+import Model.Review;
 import Service.StoreService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author acer
+ * @author nguye
  */
-@WebServlet(name = "UpdatePriceServiceStoreController", urlPatterns = {"/UpdatePriceServiceStoreController"})
-public class UpdatePriceServiceStoreController extends HttpServlet {
+public class GetReviewController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,21 +37,21 @@ public class UpdatePriceServiceStoreController extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           
-            request.setCharacterEncoding("UTF-8");
-            String nameStore = request.getParameter("nameStore");
-            String addressStore = request.getParameter("addressStore");
-            int giatthuong = Integer.parseInt(request.getParameter("giatthuong"));
-            int giatnhanh = Integer.parseInt(request.getParameter("giatnhanh"));
-            int giatsieutoc = Integer.parseInt(request.getParameter("giatsieutoc"));
-            User user = (User) request.getSession().getAttribute("user");
-            int userId = user.getUserId();
+            StoreService store = new StoreService();
+            int storeID = Integer.parseInt(request.getParameter("storeID"));
 
-            StoreService.UpdateService(userId, nameStore, addressStore, giatthuong, giatnhanh, giatsieutoc);
-
-            response.sendRedirect("homepage_store.jsp");
+            store.getAllReview(storeID);
+            store.getStoreSale(storeID);
+            store.getAllPrice(storeID);
+            List<Review> allReviews = store.getListCate();
+            List<Review> storeSale = store.getListStoreSale();
+            List<Review> storePrice = store.getListPrice();
+            request.setAttribute("allReviews", allReviews);
+            request.setAttribute("storeSale", storeSale);
+            request.setAttribute("storePrice", storePrice);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("detailStore.jsp");
+            dispatcher.forward(request, response);
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -70,9 +69,9 @@ public class UpdatePriceServiceStoreController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UpdatePriceServiceStoreController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetReviewController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(UpdatePriceServiceStoreController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetReviewController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -90,9 +89,9 @@ public class UpdatePriceServiceStoreController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UpdatePriceServiceStoreController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetReviewController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(UpdatePriceServiceStoreController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GetReviewController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
