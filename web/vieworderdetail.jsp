@@ -170,6 +170,7 @@
                                 </div>
                                 <div class="col-4">
                                     <button type="submit" value="ConfirmStaff" name="btAction" class="btn btn-success" onclick="return alert('Xác nhận thành công!')">Xác nhận</button>
+                                    <input type="hidden" name="orderID" value="<%= result.getOrderID()%>" />
                                 </div>
                             </div>
                         </td>

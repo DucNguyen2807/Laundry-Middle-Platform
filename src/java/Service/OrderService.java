@@ -265,41 +265,31 @@ public class OrderService implements Serializable {
         return false;
     }
 
-    public List<Staff> getNearestStaff(String addCus, List<Staff> Staffs) {
+  public List<Staff> getNearestStaff(String addCus, List<Staff> Staffs) {
+    List<Staff> nearestStaff = new ArrayList<>();
+    
+    // Chia địa chỉ khách hàng thành các phần
+    String[] CusAddressParts = addCus.split(", ");
+    String cusStreet = CusAddressParts[0];
+    String cusWard = CusAddressParts[1];
+    String cusDistrict = CusAddressParts[2];
+    String cusCity = CusAddressParts[3];
 
-        String CusAddress = addCus;
-        Map<String, Staff> storeMap = new HashMap<>();
+    for (Staff staff : Staffs) {
+        // Chia địa chỉ của nhân viên thành các phần
+        String[] staffAddressParts = staff.getAddress().split(", ");
+        String staffStreet = staffAddressParts[0];
+        String staffWard = staffAddressParts[1];
+        String staffDistrict = staffAddressParts[2];
+        String staffCity = staffAddressParts[3];
 
-        String[] CusAddressParts = CusAddress.split(", ");
-        String cusStreet = CusAddressParts[0];
-        String cusWard = CusAddressParts[1];
-        String cusDistrict = CusAddressParts[2];
-        String cusCity = CusAddressParts[3];
-
-        for (Staff staff : Staffs) {
-            String stafffAddress = staff.getAddress();
-            String[] staffAddressParts = stafffAddress.split(", ");
-            String staffStreet = staffAddressParts[0];
-            String staffWard = staffAddressParts[1];
-            String staffDistrict = staffAddressParts[2];
-            String staffCity = staffAddressParts[3];
-
-            boolean isMatching = false;
-
-            if (cusCity.equals(staffCity)
-                    && cusDistrict.equals(staffDistrict)) 
-            {
-                isMatching = true;
-            }
-
-            if (isMatching) {
-                storeMap.put(staff.getFullname(), staff);
-            } 
+        // So sánh thành phố và quận của khách hàng và nhân viên
+        if (cusCity.equalsIgnoreCase(staffCity) && cusDistrict.equalsIgnoreCase(staffDistrict)) {
+            nearestStaff.add(staff);
         }
-        
-        List<Staff> nearestStaff = new ArrayList<>(storeMap.values());
-
-        return nearestStaff;
     }
+
+    return nearestStaff;
+}
 }
 
