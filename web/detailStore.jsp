@@ -48,43 +48,39 @@
                 </div>
                 <div class="col-md-8">
                     <div class="store-details">
-                        <p>Thông tin cửa hàng</p>
+                        <form action="BeforeThanhToanController" method="post">
+                            <p>Thông tin cửa hàng</p>
 
-                        <c:forEach items="${storeSale}" var="store">
-                            <div class="card-body">
-                                <p>Tên cửa hàng: ${store.storeName.toUpperCase()}</p>
-                                <p>Địa chỉ: ${store.address}</p>
-                                <p>Dịch vụ:</p>
-                                <c:forEach items="${storePrice}" var="price">
-                                    <c:if test="${price.storeID eq store.storeID}">
-                                         <p>${price.serviceDetail} : ${price.price} VNĐ</p>
-                                    </c:if>
-                                </c:forEach>
-
-                                <div class="rating">
-                                    Rating:
-                                    <c:forEach begin="1" end="${store.averageRating}">
-                                        <span class="star yellow">★</span>
+                            <c:forEach items="${storeSale}" var="store">
+                                <div class="card-body">
+                                    <p>Tên cửa hàng: ${store.storeName.toUpperCase()}</p>
+                                    <p>Địa chỉ: ${store.address}</p>
+                                    <p>Dịch vụ:</p>
+                                    <c:forEach items="${storePrice}" var="price">
+                                        <c:if test="${price.storeID eq store.storeID}">
+                                            <p>${price.serviceDetail} : ${price.price} đ</p>
+                                            <input type="hidden" name="serviceID" value="${price.serviceID}" />
+                                        </c:if>
                                     </c:forEach>
+
+
+
+                                    <div class="rating">
+                                        Rating:
+                                        <c:forEach begin="1" end="${store.averageRating}">
+                                            <span class="star yellow">★</span>
+                                        </c:forEach>
+                                    </div>
                                 </div>
-                            </div>
-                        </c:forEach>       
+                                <input name="storeID" value="${store.storeID}" />
+                                <button type="submit">Thanh toán</button>
+                            </c:forEach>   
+
+                        </form>
                     </div>
                 </div>
 
                 <script>
-
-                    function saveCatInfo(storeName, address, giatthuong, giatnhanh, giatsieutoc, storeID) {
-                        var session = sessionStorage;
-                        session.setItem("storeStoreName", storeName);
-                        session.setItem("storeAddress", address);
-                        session.setItem("storeGiatthuong", giatthuong);
-                        session.setItem("storeGiatnhanh", giatnhanh);
-                        session.setItem("storeGiatsieutoc", giatsieutoc);
-                        session.setItem("storeStoreID", storeID);
-                        window.location.href = "thanhtoan.jsp";
-                    }
-
                     var reviewIndex = 0;
                     var reviews = document.querySelectorAll('.review');
                     function showReview(index) {

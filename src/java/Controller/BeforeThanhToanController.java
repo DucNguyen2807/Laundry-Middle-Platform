@@ -4,10 +4,10 @@
  */
 package Controller;
 
-import Model.Cate;
 import Model.Review;
 import Service.StoreService;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,43 +23,28 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author nguye
  */
-@WebServlet(name = "CateController", urlPatterns = {"/CateController"})
-public class CateController extends HttpServlet {
-
-    private final String CATE = "cate.jsp";
+@WebServlet(name = "BeforeThanhToanController", urlPatterns = {"/BeforeThanhToanController"})
+public class BeforeThanhToanController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = CATE;
-        int itemsPerPage = 6;
-        int currentPage = 1;
-        String pageParam = request.getParameter("page");
-        if (pageParam != null) {
-            try {
-                currentPage = Integer.parseInt(pageParam);
-            } catch (NumberFormatException e) {
+        try (PrintWriter out = response.getWriter()) {
 
-            }
+            StoreService store = new StoreService();
+            int storeID = Integer.parseInt(request.getParameter("storeID"));
+            System.out.println(storeID);
+            store.getStoreSale(storeID);
+            store.getAllPrice(storeID);
+            
+            List<Review> storeSale = store.getListStoreSale();
+            List<Review> storePrice = store.getListPrice();
+           
+            request.setAttribute("storeSale", storeSale);
+            request.setAttribute("storePrice", storePrice);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("thanhtoan.jsp");
+            dispatcher.forward(request, response);
         }
-
-        StoreService store = new StoreService();
-        store.getAllStore();
-        List<Cate> result = store.getListStoreCate();
-        int totalStores = result.size();
-        int totalPages = (int) Math.ceil((double) totalStores / itemsPerPage);
-
-        int startIndex = (currentPage - 1) * itemsPerPage;
-        int endIndex = Math.min(startIndex + itemsPerPage, totalStores);
-
-        List<Cate> pagedStores = result.subList(startIndex, endIndex);
-
-        request.setAttribute("pagedStores", pagedStores);
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("totalPages", totalPages);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("cate.jsp");
-        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,9 +62,9 @@ public class CateController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CateController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BeforeThanhToanController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(CateController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BeforeThanhToanController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -97,9 +82,9 @@ public class CateController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CateController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BeforeThanhToanController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(CateController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BeforeThanhToanController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

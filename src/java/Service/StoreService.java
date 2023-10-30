@@ -192,7 +192,7 @@ public class StoreService implements Serializable {
         try {
             con = ConnectDB.getConnection();
             if (con != null) {
-                String sql = "SELECT p.StoreID, s.ServiceDetail, FORMAT(PriceDetail, 'N0') AS Price "
+                String sql = "SELECT p.StoreID, s.ServiceID ,s.ServiceDetail, FORMAT(PriceDetail, 'N0') AS Price "
                         + "FROM [Price] p "
                         + "INNER JOIN [Laundry-Middle-Platform1].[dbo].Service s ON s.ServiceID = p.ServiceID "
                         + "WHERE p.StoreID = ?";
@@ -202,9 +202,10 @@ public class StoreService implements Serializable {
                 rs = stm.executeQuery();
                 while (rs.next()) {
                     String storeID = rs.getString("StoreID");
+                    String serviceID = rs.getString("ServiceID");
                     String serviceDetail = rs.getString("ServiceDetail");
                     String price = rs.getString("Price");
-                    Review review = new Review(storeID, price, serviceDetail);
+                    Review review = new Review(storeID, price, serviceDetail, serviceID);
                     allPrice.add(review);
                 }
             }
@@ -389,7 +390,8 @@ public class StoreService implements Serializable {
             }
         }
     }
-    public boolean BookingOrder(String phone, String fullname, String storeId, int serviceId,
+
+    public boolean BookingOrder(String phone, String fullname, String storeId, String serviceID,
             int kilos, String totalPrice, String customerAddress, String AddressSto, String note, int userId, String DateDesired, String TimeDesired) {
         Connection conn = null;
         PreparedStatement pos = null;
@@ -415,13 +417,22 @@ public class StoreService implements Serializable {
                 if (generatedKeys.next()) {
                     orderID = generatedKeys.getInt(1);
                 }
+                System.out.println("OrderID: " + orderID);
+                System.out.println("Kilos: " + kilos);
+                System.out.println("ServiceID: " + serviceID);
+                System.out.println("TotalPrice: " + totalPrice);
+                System.out.println("Phone: " + phone);
+                System.out.println("CustomerAddress: " + customerAddress);
+                System.out.println("AddressSto: " + AddressSto);
+                System.out.println("Note: " + note);
 
                 String insertOrderDetailQuery = "INSERT INTO OrderDetail (OrderID, Weight, ServiceID, TotaPrice, Phone, AddressCus, AddressSto, Note) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 posd = conn.prepareStatement(insertOrderDetailQuery);
                 posd.setInt(1, orderID);
                 posd.setInt(2, kilos);
-                posd.setInt(3, serviceId);
-                posd.setString(4, totalPrice);
+                posd.setString(3, serviceID);
+                totalPrice = totalPrice.replaceAll("\\,", "");  
+                posd.setString(4, totalPrice); 
                 posd.setString(5, phone);
                 posd.setString(6, customerAddress);
                 posd.setString(7, AddressSto);

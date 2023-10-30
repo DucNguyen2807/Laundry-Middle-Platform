@@ -47,19 +47,33 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <form action="SortStoreByController" method="post" class="custom-select-container">
-                    <label for="btAction" class="navbar-brand">Sắp xếp theo:</label>
+                    <label for="orderBy" class="navbar-brand">Sắp xếp theo:</label>
                     <div class="custom-select">
-                        <select style="font-size: 20px" name="btAction" id="btAction">
+                        <select style="font-size: 20px" name="orderBy" id="orderBy">
+                            <option value="">Tất cả cửa hàng</option>
                             <option value="Nearest">Các cửa hàng gần nhất</option>
                             <option value="favoriteCount">Nhiều lượt yêu thích nhất</option>
                             <option value="rating">Nhiều lượt rating nhất</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Sắp xếp</button>
-                    <input type="hidden" name="orderBy" />
                 </form>
             </div>
         </nav>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                var selectedOrderBy = '<c:out value="${orderBy}" />';
+                if (selectedOrderBy) {
+                    $("#orderBy").val(selectedOrderBy);
+                }
+            });
+        </script>
+
+
+
+
         <div class="container mt-5">
             <div class="row">
                 <c:forEach items="${pagedStores}" var="cat">
@@ -77,9 +91,9 @@
                                         <span class="star yellow">★</span>
                                     </c:forEach>
                                 </div>
-                                <p class="card-text show_txt">Giá chỉ từ: <c:out value="${cat.averagePrice}" /> vnđ</p>
+                                <p class="card-text show_txt">Giá chỉ từ: <c:out value="${cat.averagePrice}" /> đ</p>
                             </div>
-                            <a href='<c:url value="/GetReviewController?storeID=${cat.storeID}" />' class="btn btn-success btn-block">Get more information</a>
+                            <a href='<c:url value="/GetReviewController?storeID=${cat.storeID}" />'class="btn btn-success btn-block">Get more information</a>
                         </div>
                     </div>
                 </c:forEach>

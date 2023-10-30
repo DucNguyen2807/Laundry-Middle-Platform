@@ -56,7 +56,7 @@ public class SortStoreByController extends HttpServlet {
                         String addressCus = user.getaddress();
                         List<Cate> nearestStores = store.getNearestStores(user, store.getListStoreCate());
                         result = nearestStores;
-                        break;
+                        break;  
                     case "favoriteCount":
                         store.sortByFavoriteCount();
                         result = store.getListStoreCate();
