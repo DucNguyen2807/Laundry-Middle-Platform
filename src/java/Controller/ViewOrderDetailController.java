@@ -46,7 +46,7 @@ public class ViewOrderDetailController extends HttpServlet {
                 
                 List<Staff> liststnear = ord.getNearestStaff(addcus, listst);
                 request.setAttribute("liststnear", liststnear);
-
+                
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
