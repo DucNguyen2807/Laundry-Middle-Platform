@@ -47,12 +47,13 @@
         </div>
 
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+               <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <form action="SortStoreByController" method="post" class="custom-select-container">
                     <label for="orderBy" class="navbar-brand">Sắp xếp theo:</label>
                     <div class="custom-select">
                         <select style="font-size: 20px" name="orderBy" id="orderBy">
+                            <option value="">Tất cả cửa hàng</option>
                             <option value="Nearest">Các cửa hàng gần nhất</option>
                             <option value="favoriteCount">Nhiều lượt yêu thích nhất</option>
                             <option value="rating">Nhiều lượt rating nhất</option>
@@ -63,44 +64,37 @@
             </div>
         </nav>
 
-
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function () {
                 var selectedOrderBy = '<c:out value="${orderBy}" />';
-                $("#orderBy").val(selectedOrderBy);
+                if (selectedOrderBy) {
+                    $("#orderBy").val(selectedOrderBy);
+                }
             });
-
         </script>
 
 
         <div class="container mt-5">
             <div class="row">
-                <c:forEach items="${pagedStores}" var="store">
+                <c:forEach items="${pagedStores}" var="cat">
+
                     <div class="product col-12 col-md-6 col-lg-4">
                         <div style="margin: 25px 20px" class="card-body text-center vertical-center">
                             <div class="card-body">
-                                <i class="fas fa-heart heart-icon" onclick="addToFavorites('<c:out value="${store.storeID}"/>')"></i>
-                                <img class="card-img-top" src="<c:out value='${store.image}'/>" alt="Store Image" style="width: 100%; height: auto;">
-                                <h4 class="card-title show_txt">Tên cửa hàng: <c:out value='${store.storeName}'/></h4>
-                                <p class="card-text show_txt">Địa chỉ: <c:out value='${store.address}'/></p>
+                                <i class="fas fa-heart heart-icon" onclick="addToFavorites('<c:out value="${cat.storeID}"/>')"></i>
+                                <img class="card-img-top" src="<c:out value='${cat.image}'/>" alt="Store Image" style="width: 100%; height: auto;">
+                                <h4 class="card-title show_txt">Tên cửa hàng: <c:out value='${cat.storeName}'/></h4>
+                                <p class="card-text show_txt">Địa chỉ: <c:out value='${cat.address}'/></p>
 
                                 <div class="rating">
-                                    <c:forEach begin="1" end="${store.rating}">
+                                    <c:forEach begin="1" end="${cat.rating}">
                                         <span class="star yellow">★</span>
                                     </c:forEach>
                                 </div>
-
+                                <p class="card-text show_txt">Giá chỉ từ: <c:out value="${cat.averagePrice}" /> đ</p>
                             </div>
-                            <p class="card-text show_txt">Giặt thường: <c:out value='${store.priceGiatThuong}'/> vnđ</p>
-                            <a href="#" class="btn btn-success btn-block" onclick="saveCatInfo(
-                                            '<c:out value='${store.priceGiatThuong}' />',
-                                            '<c:out value='${store.priceGiatNhanh}' />',
-                                            '<c:out value='${store.priceGiatSieuToc}' />',
-                                            '<c:out value='${store.storeName}' />',
-                                            '<c:out value='${store.address}' />',
-                                            '<c:out value='${store.storeID}' />'
-                                            )">Booking</a>
+                            <a href='<c:url value="/GetReviewController?storeID=${cat.storeID}" />'class="btn btn-success btn-block">Get more information</a>
                         </div>
                     </div>
                 </c:forEach>

@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,34 +23,26 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author nguye
  */
-public class GetReviewController extends HttpServlet {
+@WebServlet(name = "BeforeThanhToanController", urlPatterns = {"/BeforeThanhToanController"})
+public class BeforeThanhToanController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+
             StoreService store = new StoreService();
             int storeID = Integer.parseInt(request.getParameter("storeID"));
-
-            store.getAllReview(storeID);
+            System.out.println(storeID);
             store.getStoreSale(storeID);
             store.getAllPrice(storeID);
-            List<Review> allReviews = store.getListCate();
+            
             List<Review> storeSale = store.getListStoreSale();
             List<Review> storePrice = store.getListPrice();
-            request.setAttribute("allReviews", allReviews);
+           
             request.setAttribute("storeSale", storeSale);
             request.setAttribute("storePrice", storePrice);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("detailStore.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("thanhtoan.jsp");
             dispatcher.forward(request, response);
         }
     }
@@ -69,9 +62,9 @@ public class GetReviewController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GetReviewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BeforeThanhToanController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(GetReviewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BeforeThanhToanController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -89,9 +82,9 @@ public class GetReviewController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GetReviewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BeforeThanhToanController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(GetReviewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BeforeThanhToanController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

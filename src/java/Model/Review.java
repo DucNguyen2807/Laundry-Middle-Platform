@@ -15,13 +15,13 @@ public class Review {
     private String customerName;
     private String storeID;
     private String storeName;
-    private int giatthuong;
-    private int giatnhanh;
-    private int giatsieutoc;
     private String imageDetail;
     private String address;
     double averageRating;
-
+    private String price;
+    private String serviceDetail;
+    private String serviceID;
+    
     public Review(String reviewText, int rating, String customerName, String storeID) {
         this.reviewText = reviewText;
         this.rating = rating;
@@ -29,16 +29,51 @@ public class Review {
         this.storeID = storeID;
     }
 
+    public Review(String storeID, String price, String serviceDetail, String serviceID) {
+        this.storeID = storeID;
+        this.price = price;
+        this.serviceDetail = serviceDetail;
+        this.serviceID = serviceID;
+    }
 
-    public Review(String storeID, String storeName, int giatthuong, int giatnhanh, int giatsieutoc, String imageDetail, String address, double averageRating) {
+    public Review(String storeID, String storeName, String imageDetail, String address, double averageRating) {
         this.storeID = storeID;
         this.storeName = storeName;
-        this.giatthuong = giatthuong;
-        this.giatnhanh = giatnhanh;
-        this.giatsieutoc = giatsieutoc;
         this.imageDetail = imageDetail;
         this.address = address;
         this.averageRating = averageRating;
+    }
+
+    public String getServiceID() {
+        return serviceID;
+    }
+
+    public void setServiceID(String serviceID) {
+        this.serviceID = serviceID;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getServiceDetail() {
+        return serviceDetail;
+    }
+
+    public void setServiceDetail(String serviceDetail) {
+        this.serviceDetail = serviceDetail;
     }
     
     
@@ -49,31 +84,6 @@ public class Review {
     public void setFullname(String storeName) {
         this.storeName = storeName;
     }
-
-    public int getGiatthuong() {
-        return giatthuong;
-    }
-
-    public void setGiatthuong(int giatthuong) {
-        this.giatthuong = giatthuong;
-    }
-
-    public int getGiatnhanh() {
-        return giatnhanh;
-    }
-
-    public void setGiatnhanh(int giatnhanh) {
-        this.giatnhanh = giatnhanh;
-    }
-
-    public int getGiatsieutoc() {
-        return giatsieutoc;
-    }
-
-    public void setGiatsieutoc(int giatsieutoc) {
-        this.giatsieutoc = giatsieutoc;
-    }
-
     public String getImageDetail() {
         return imageDetail;
     }
