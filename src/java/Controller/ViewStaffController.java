@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Model.Cate;
 import Model.Staff;
 import Service.StaffService;
 import java.io.IOException;
@@ -39,6 +40,16 @@ public class ViewStaffController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             request.setCharacterEncoding("UTF-8");
 
+            int itemsPerPage = 10;
+            int currentPage = 1;
+            String pageParam = request.getParameter("page");
+            if (pageParam != null) {
+                try {
+                    currentPage = Integer.parseInt(pageParam);
+                } catch (NumberFormatException e) {
+
+                }
+            }
             String url = VIEWSTAFF;
             String searchValue = request.getParameter("txtSearchStaff");
             //HttpSession session = request.getSession();
@@ -56,6 +67,18 @@ public class ViewStaffController extends HttpServlet {
 
                 List<Staff> result = staffSer.getListStaff();
                 request.setAttribute("SEARCHRESULT", result);
+
+                int totalStores = result.size();
+                int totalPages = (int) Math.ceil((double) totalStores / itemsPerPage);
+
+                int startIndex = (currentPage - 1) * itemsPerPage;
+                int endIndex = Math.min(startIndex + itemsPerPage, totalStores);
+
+                List<Staff> pagedStores = result.subList(startIndex, endIndex);
+
+                request.setAttribute("pagedStores", pagedStores);
+                request.setAttribute("currentPage", currentPage);
+                request.setAttribute("totalPages", totalPages);
 
             } catch (Exception e) {
                 e.printStackTrace();
