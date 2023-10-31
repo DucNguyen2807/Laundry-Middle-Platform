@@ -4,12 +4,17 @@
  */
 package Controller;
 
+import Model.Cate;
+import Model.Review;
+import Model.Store;
 import Model.User;
+import Service.StoreService;
 import Service.UserService;
 import static Service.UserService.getUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -75,8 +80,15 @@ public class LoginController extends HttpServlet {
                         break;
                 }
             }
+            StoreService store = new StoreService();
+            store.sortByFavoriteCount();
+            List<Cate> topStore = store.getListStoreCate();
+            
+
             User user = UserService.getUser(username);
+
             request.getSession().setAttribute("user", user);
+            request.setAttribute("topStore", topStore);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (SQLException ex) {

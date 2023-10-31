@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-md-6 pt-md-0 pt-3">
                             <label for="phone">Phone Number</label>
-                            <input type="tel" class="bg-light form-control" name="phone" value="${user.phone}">
+                            <input type="tel" class="bg-light form-control" name="phone" value="0${user.phone}">
                             <c:if test="${not empty errorMessage3}">
                                 <div class="alert alert-danger">
                                     <strong>Lỗi:</strong> <c:out value="${errorMessage3}" />

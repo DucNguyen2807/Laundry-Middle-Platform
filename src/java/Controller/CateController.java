@@ -42,10 +42,10 @@ public class CateController extends HttpServlet {
 
             }
         }
-
         StoreService store = new StoreService();
         store.getAllStore();
         List<Cate> result = store.getListStoreCate();
+        
         int totalStores = result.size();
         int totalPages = (int) Math.ceil((double) totalStores / itemsPerPage);
 

@@ -46,6 +46,9 @@ public class GetReviewController extends HttpServlet {
             List<Review> allReviews = store.getListCate();
             List<Review> storeSale = store.getListStoreSale();
             List<Review> storePrice = store.getListPrice();
+            
+
+            
             request.setAttribute("allReviews", allReviews);
             request.setAttribute("storeSale", storeSale);
             request.setAttribute("storePrice", storePrice);
