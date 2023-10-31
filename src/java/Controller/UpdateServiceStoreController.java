@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Model.Review;
 import Model.Store;
 import Model.User;
 import Service.StoreService;
@@ -44,9 +45,12 @@ public class UpdateServiceStoreController extends HttpServlet {
             User user = (User) request.getSession().getAttribute("user");
             int userId = user.getUserId();
             StoreService store = new StoreService();
-            store.getAllStoreU(userId);
-            List<Store> allReviews = store.getListStoreU();
-            request.setAttribute("storeU", allReviews);
+            store.getStoreSale(userId);
+            store.getAllPrice(userId);
+            List<Review> storeSale = store.getListStoreSale();
+            List<Review> storePrice = store.getListPrice();
+            request.setAttribute("storeSale", storeSale);
+            request.setAttribute("storePrice", storePrice);
             RequestDispatcher dispatcher = request.getRequestDispatcher("storesetting.jsp");
             dispatcher.forward(request, response);
         }

@@ -18,35 +18,58 @@
         <link href="css/styleindex.css" rel="stylesheet" >
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link href="css/cate.css" rel="stylesheet" >
+        <script>
+            var urlParams = new URLSearchParams(window.location.search);
+            var successMessage = urlParams.get("successMessage");
+
+            if (successMessage) {
+                alert(successMessage);
+            }
+        </script>
     </head>
 
     <body>
         <form action="UpdatePriceServiceStoreController" method="POST" accept-charset="UTF-8">
-            <c:forEach items="${storeU}" var="storeUp">
 
 
-                <div class="container mt-5">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <div class="store-details">
-                                <img class="card-img-top" src="<c:out value='${storeUp.image}'/>" alt="Store Image" style="width: 100%; height: auto;">
-                            </div>
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="customer-details">
+                            <c:choose>
+                                <c:when test="${not empty storeSale}">
+                                    <c:forEach items="${storeSale}" var="store">
+                                        <div><img src="${store.imageDetail}" name="imageStore" alt="Cửa hàng" alt="Store Image" style="width: 100%; height: auto;" /></div>
+                                        </c:forEach>
+                                    </c:when>
+                                </c:choose>
                         </div>
-                        <div class="col-md-7">
-                            <!-- Khung bên phải -->
-                            <div class="customer-details">
-                                <div style="margin-bottom: 20px">Tên cửa hàng:<input type="text" name="nameStore"  value="${storeUp.storeName}" ><br></div>
-                                <div style="margin-bottom: 20px">Địa chỉ:<input type="text" name="addressStore" value="${storeUp.address}" ><br></div>
-                                <div style="margin-bottom: 20px">Giặt thường:<input type="number"" name="giatthuong" value="${storeUp.priceGiatThuong}"><br></div>
-                                <div style="margin-bottom: 20px">Giặt Nhanh:<input type="number"" name="giatnhanh" value="${storeUp.priceGiatNhanh}"><br></div>
-                                <div style="margin-bottom: 20px">Giặt Siêu Tốc:<input type="number"" name="giatsieutoc" value="${storeUp.priceGiatSieuToc}"><br></div>
-                                <input type="submit" name="btAction" value="Update Service" >
-                            </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="store-details">
+                            <p>Thông tin cửa hàng</p>
+                            <c:forEach items="${storeSale}" var="store">
+                                <div class="card-body">
+                                    Tên cửa hàng:<input type="text" name="nameStore"  value="${store.storeName.toUpperCase()}">
+                                    Địa chỉ: <input type="text" name="addressStore" value="${store.address}" >
+                                    <p>Dịch vụ:</p>
+                                    <c:forEach items="${storePrice}" var="price">
+                                        <c:if test="${price.storeID eq store.storeID}">
+                                            <p>${price.serviceDetail}:</p>
+                                            <input name ="priceU" value="${price.price}" đ >
+                                            <input type="hidden" name="serviceID" value="${price.serviceID}" />
+                                        </c:if>
+                                    </c:forEach>
+                                </div>
+                                <input type="hidden" name="storeID" value="${store.storeID}" />
+                                <button type="submit">Update</button>
+                            </c:forEach> 
+
                         </div>
                     </div>
                 </div>
-
-            </c:forEach>
+            </div>
         </form>
     </body>
+
 </html>

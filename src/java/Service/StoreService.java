@@ -431,8 +431,8 @@ public class StoreService implements Serializable {
                 posd.setInt(1, orderID);
                 posd.setInt(2, kilos);
                 posd.setString(3, serviceID);
-                totalPrice = totalPrice.replaceAll("\\,", "");  
-                posd.setString(4, totalPrice); 
+                totalPrice = totalPrice.replaceAll("\\,", "");
+                posd.setString(4, totalPrice);
                 posd.setString(5, phone);
                 posd.setString(6, customerAddress);
                 posd.setString(7, AddressSto);
@@ -505,114 +505,44 @@ public class StoreService implements Serializable {
         return nearestStores;
     }
 
-    public List<Store> listStoreU;
-
-    public List<Store> getListStoreU() {
-        return listStoreU;
-    }
-
-    private Store createStoreUFromResultSet(ResultSet rs) throws SQLException {
-        Store store = new Store();
-        store.setStoreName(rs.getString("Fullname"));
-        store.setAddress(rs.getString("Address"));
-        store.setPriceGiatThuong(Integer.parseInt(rs.getString("giatthuong")));
-        store.setPriceGiatNhanh(Integer.parseInt(rs.getString("giatnhanh")));
-        store.setPriceGiatSieuToc(Integer.parseInt(rs.getString("giatsieutoc")));
-        store.setImage(rs.getString("ImageDetail"));
-
-        return store;
-
-    }
-
-    public void getAllStoreU(int userID) throws ClassNotFoundException, SQLException {
-        Connection con = null;
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        listStoreU = new ArrayList<>();
-        try {
-            con = ConnectDB.getConnection();
-
-            if (con != null) {
-                String sql = "SELECT TOP (1000) Fullname, Address, p.PriceDetail AS giatthuong, p1.PriceDetail AS giatnhanh, p2.PriceDetail AS giatsieutoc, "
-                        + "i.ImageDetail "
-                        + "FROM [Laundry-Middle-Platform].[dbo].[User] u "
-                        + "INNER JOIN Price p ON p.StoreID = u.UserID AND p.ServiceID = 1 "
-                        + "INNER JOIN Price p1 ON p1.StoreID = u.UserID AND p1.ServiceID = 2 "
-                        + "INNER JOIN Price p2 ON p2.StoreID = u.UserID AND p2.ServiceID = 3 "
-                        + "LEFT JOIN Service s ON s.ServiceID = p.ServiceID "
-                        + "LEFT JOIN Image i ON i.StoreID = u.UserID "
-                        + "WHERE RoleID = 3 AND u.UserID = ?";
-
-                stm = con.prepareStatement(sql);
-                stm.setInt(1, userID);
-
-                rs = stm.executeQuery();
-                while (rs.next()) {
-                    Store store = createStoreUFromResultSet(rs);
-                    listStoreU.add(store);
-                }
-            }
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stm != null) {
-                stm.close();
-            }
-            if (con != null) {
-                con.close();
-            }
-        }
-    }
-
-    public static boolean UpdateService(int userId, String newFullname, String newAddress, int service1Price, int service2Price, int service3Price) {
+    public static boolean updateService(int userId, String newFullname, String newAddress, String[] serviceIDs, String[] prices) throws ClassNotFoundException {
         Connection conn = null;
-        PreparedStatement pos = null;
+        PreparedStatement pstmt = null;
 
         try {
             conn = ConnectDB.getConnection();
             if (conn != null) {
-                // Câu truy vấn cập nhật Fullname và Address trong bảng [User]
-                String updateUserQuery = "UPDATE [User] SET Fullname = ?, Address = ? WHERE UserID = ?";
-                pos = conn.prepareStatement(updateUserQuery);
-                pos.setString(1, newFullname);
-                pos.setString(2, newAddress);
-                pos.setInt(3, userId);
-                int rowsUpdated = pos.executeUpdate();
+                // Create the SQL query to update the service prices
+                String sql = "UPDATE [Price] SET PriceDetail = ? WHERE StoreID = ? AND ServiceID = ?";
 
-                if (rowsUpdated <= 0) {
-                    return false;
+                pstmt = conn.prepareStatement(sql);
+
+                for (int i = 0; i < serviceIDs.length; i++) {
+                    int serviceId = Integer.parseInt(serviceIDs[i]);
+                    int price = Integer.parseInt(prices[i]);
+
+                    pstmt.setInt(1, price);
+                    pstmt.setInt(2, userId);
+                    pstmt.setInt(3, serviceId);
+
+                    int rowsUpdated = pstmt.executeUpdate();
+                    if (rowsUpdated <= 0) {
+                        return false;
+                    }
                 }
-
-                // Câu truy vấn cập nhật giá trị dịch vụ trong bảng [Price]
-                String updatePriceQuery = "UPDATE [Price] SET PriceDetail = CASE "
-                        + "WHEN ServiceID = 1 THEN ? "
-                        + "WHEN ServiceID = 2 THEN ? "
-                        + "WHEN ServiceID = 3 THEN ? "
-                        + "ELSE PriceDetail "
-                        + "END WHERE StoreID = ?";
-                pos = conn.prepareStatement(updatePriceQuery);
-                pos.setInt(1, service1Price);
-                pos.setInt(2, service2Price);
-                pos.setInt(3, service3Price);
-                pos.setInt(4, userId);
-                rowsUpdated = pos.executeUpdate();
-
-                return rowsUpdated > 0;
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            // Xử lý lỗi (thay thế bằng việc xử lý lỗi thực tế)
+            return true;
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                if (pos != null) {
-                    pos.close();
+                if (pstmt != null) {
+                    pstmt.close();
                 }
                 if (conn != null) {
                     conn.close();
                 }
             } catch (SQLException e) {
-                // Xử lý lỗi (thay thế bằng việc xử lý lỗi thực tế)
                 e.printStackTrace();
             }
         }
