@@ -6,6 +6,7 @@ package Controller;
 
 import Model.User;
 import Service.StoreService;
+import static Service.StoreService.updateService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -38,21 +39,29 @@ public class UpdatePriceServiceStoreController extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-           
             request.setCharacterEncoding("UTF-8");
+
+            // Verify that the User object retrieved from the session is not null
+            User user = (User) request.getSession().getAttribute("user");
+            if (user == null) {
+                // Handle the case where the user is not logged in
+                response.sendRedirect("login.jsp");
+                return; // Exit the method
+            }
+
             String nameStore = request.getParameter("nameStore");
             String addressStore = request.getParameter("addressStore");
-            int giatthuong = Integer.parseInt(request.getParameter("giatthuong"));
-            int giatnhanh = Integer.parseInt(request.getParameter("giatnhanh"));
-            int giatsieutoc = Integer.parseInt(request.getParameter("giatsieutoc"));
-            User user = (User) request.getSession().getAttribute("user");
-            int userId = user.getUserId();
+            String[] priceUp = request.getParameterValues("priceU");
+            String[] serviceIDs = request.getParameterValues("serviceID");
 
-            StoreService.UpdateService(userId, nameStore, addressStore, giatthuong, giatnhanh, giatsieutoc);
+            boolean updateSuccessful = updateService(user.getUserId(), nameStore, addressStore, serviceIDs, priceUp);
 
-            response.sendRedirect("homepage_store.jsp");
+            if (updateSuccessful) {
+                response.sendRedirect("UpdateServiceStoreController?successMessage=Update%20was%20successful");
+            } else {
+                response.sendRedirect("error.jsp");
+            }
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

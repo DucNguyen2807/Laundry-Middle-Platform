@@ -18,9 +18,6 @@ public class Store {
     private String phone;
     private String email;
     private String image;
-    private int priceGiatThuong;
-    private int priceGiatNhanh;
-    private int priceGiatSieuToc;
     private String serviceName;
 
     public Store() {
@@ -42,30 +39,6 @@ public class Store {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public int getPriceGiatThuong() {
-        return priceGiatThuong;
-    }
-
-    public void setPriceGiatThuong(int priceGiatThuong) {
-        this.priceGiatThuong = priceGiatThuong;
-    }
-
-    public int getPriceGiatNhanh() {
-        return priceGiatNhanh;
-    }
-
-    public void setPriceGiatNhanh(int priceGiatNhanh) {
-        this.priceGiatNhanh = priceGiatNhanh;
-    }
-
-    public int getPriceGiatSieuToc() {
-        return priceGiatSieuToc;
-    }
-
-    public void setPriceGiatSieuToc(int priceGiatSieuToc) {
-        this.priceGiatSieuToc = priceGiatSieuToc;
     }
 
     public String getServiceName() {
