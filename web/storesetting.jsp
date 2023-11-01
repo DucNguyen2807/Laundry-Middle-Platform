@@ -67,46 +67,67 @@
 
             <div class="container mt-5">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="customer-details">
+                    <div class="col-md-8">
+                        <div class="store-details">
                             <c:choose>
                                 <c:when test="${not empty storeSale}">
                                     <c:forEach items="${storeSale}" var="store">
-                                        <div><img src="${store.imageDetail}" name="imageStore" alt="Cửa hàng" alt="Store Image" style="width: 100%; height: auto;" /></div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div><img src="${store.imageDetail}" name="imageStore" alt="Cửa hàng" alt="Store Image" style="width: 100%; height: auto;" /></div>
+                                            </div>
                                         </c:forEach>
                                     </c:when>
                                 </c:choose>
+                                <div class="col-md-6">
+                                    <p>Thông tin cửa hàng</p>
+                                    <c:forEach items="${storeSale}" var="store">
+                                        <div class="card-body">
+                                            Tên cửa hàng:<input type="text" name="nameStore"  value="${store.storeName.toUpperCase()}"><br>
+
+<!--                                            Địa chỉ: <input type="text" name="addressStore" value="${store.address}" >-->
+                                            <p>Dịch vụ:</p>
+                                            <c:forEach items="${storePrice}" var="price">
+                                                <c:if test="${price.storeID eq store.storeID}">
+                                                    <p>${price.serviceDetail}:</p>
+                                                    <input name ="priceU" value="${price.price}" đ >
+                                                    <input type="hidden" name="serviceID" value="${price.serviceID}" />
+                                                </c:if>
+                                            </c:forEach>
+                                        </div>
+                                        <input type="hidden" name="storeID" value="${store.storeID}" />
+                                        <button type="submit">Update</button>
+                                    </c:forEach> 
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-8">
+
+
+                    </form>
+                    <div class="col-md-4">
                         <div class="store-details">
-                            <p>Thông tin cửa hàng</p>
-                            <c:forEach items="${storeSale}" var="store">
-                                <div class="card-body">
-                                    Tên cửa hàng:<input type="text" name="nameStore"  value="${store.storeName.toUpperCase()}">
-                                    Địa chỉ: <input type="text" name="addressStore" value="${store.address}" >
-                                    <p>Dịch vụ:</p>
-                                    <c:forEach items="${storePrice}" var="price">
-                                        <c:if test="${price.storeID eq store.storeID}">
-                                            <p>${price.serviceDetail}:</p>
-                                            <input name ="priceU" value="${price.price}" đ >
-                                            <input type="hidden" name="serviceID" value="${price.serviceID}" />
-                                        </c:if>
-                                    </c:forEach>
+                            <h3>Add Service</h3>
+                            <form action="AddServiceController" method="POST" accept-charset="UTF-8">
+                                <!-- Add service form fields -->
+                                <div class="form-group">
+                                    <label for="serviceDetail">Service Detail:</label>
+                                    <input type="text" class="form-control" name="serviceDetail" id="serviceDetail">
+                                </div>
+                                <div class="form-group">
+                                    <label for="servicePrice">Service Price:</label>
+                                    <input type="text" class="form-control" name="servicePrice" id="servicePrice">
                                 </div>
                                 <input type="hidden" name="storeID" value="${store.storeID}" />
-                                <button type="submit">Update</button>
-                            </c:forEach> 
-
+                                <button type="submit">Add Service</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
-
         <script src="js/Jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
-
     </body>
 
 </html>
