@@ -39,17 +39,13 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-
                         </div>
-
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="homepage_staff.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                                 <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
-                                <li><a href="list_staff.jsp" style="color: #ffffff">Task List</a></li>
-                                
+                                <li><a href="list_task.jsp" style="color: #ffffff">Task List</a></li>               
                             </ul>
-
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="login.jsp" style="color: #ffffff">Logout</a></li>
                             </ul>
@@ -60,15 +56,10 @@
 
 
             <div class="row anh1">
-
                 <div class="col-md-12">
-
                     <img src="image/banner.jpg" />
-
                 </div>
-
             </div>
-
 
         </div>
         <!--K?t thúc container-fluid-->

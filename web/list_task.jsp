@@ -62,7 +62,7 @@
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
                                             <input type="hidden" name="btAction" value="8" />
-                                            <button type="submit" class="btn btn-primary">Processing</button>
+                                            <button type="submit" class="btn btn-primary">Returning</button>
                                         </form>
                                     </a>
                                 </li>
@@ -92,7 +92,8 @@
                         <tr>
                             <th scope="col">No.</th>
                             <th scope="col">Customer</th>
-                            <th scope="col">Address</th>
+                            <th scope="col">Address Customer</th>
+                            <th scope="col">Address Store</th>
                             <th scope="col">Service</th>
                             <th scope="col">Weight</th>
                             <th scope="col">TotalPrice</th>
@@ -113,6 +114,7 @@
                             <td><%= ++count%></td>
                             <td><%= ord.getCustomerName()%></td>
                             <td><%= ord.getAddressCus()%></td>
+                            <td><%= ord.getAddressSto()%></td>
                             <td><%= ord.getServiceDetail()%></td>
                             <td><%= ord.getWeight()%></td>
                             <td><%= ord.getTotalPrice()%></td>
@@ -120,15 +122,23 @@
                             <td><%= ord.getDateDesired()%></td>
                             <td><%= ord.getTimeDesired()%></td>
                             <td><%= ord.getDateApproved()%></td>
-                            
+                            <%
+                                if (button.equals("7")) {
+                            %>
                             <td>
                                 <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
-                                <button type="submit" name="btAction" value="Finish" class="btn btn-success" name="btAction">Done</button>
+                                <button type="submit" name="btAction" value="Finish" class="btn btn-success" name="btAction" onclick="return alert('Xác nhận thành công!')">Done</button>
                             </td>
+                            <%
+                            } else if (button.equals("8")) {
+                            %>
                             <td>
                                 <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
-                                <button type="submit" name="btAction" value="Completed" class="btn btn-success" name="btAction">Done</button>
+                                <button type="submit" name="btAction" value="Completed" class="btn btn-success" name="btAction" onclick="return alert('Xác nhận thành công!')">Done</button>
                             </td>
+                            <%
+                                }
+                            %>
                         </tr>
                     </form>
 

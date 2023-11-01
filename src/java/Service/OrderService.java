@@ -238,7 +238,6 @@ public class OrderService implements Serializable {
                     return true;
                 }
             }
-
         } finally {
             if (ps != null) {
                 ps.close();

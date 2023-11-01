@@ -18,10 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author nguye
  */
-@WebServlet(name = "UpdateStaffFinishController", urlPatterns = {"/UpdateStaffFinishController"})
-public class UpdateStaffFinishController extends HttpServlet {
-
-    
+@WebServlet(name = "UpdateTaskCompleted", urlPatterns = {"/UpdateTaskCompleted"})
+public class UpdateTaskCompletedController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -30,12 +28,11 @@ public class UpdateStaffFinishController extends HttpServlet {
             String orderID = request.getParameter("orderID");
             OrderService ord = new OrderService();
             try {
-                ord.updateOrder(Integer.parseInt(orderID), 4);
-               
+                ord.updateOrder(Integer.parseInt(orderID), 5);       
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                RequestDispatcher rd = request.getRequestDispatcher("list_staff.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("list_task.jsp");
                 rd.forward(request, response);
             }
         }

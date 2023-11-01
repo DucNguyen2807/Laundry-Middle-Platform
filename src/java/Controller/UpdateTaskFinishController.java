@@ -4,12 +4,9 @@
  */
 package Controller;
 
-import Model.Order;
-import Model.User;
 import Service.OrderService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,36 +18,25 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author nguye
  */
-@WebServlet(name = "ListStaffController", urlPatterns = {"/ListStaffController"})
-public class ListStaffController extends HttpServlet {
+@WebServlet(name = "UpdateTaskFinishController", urlPatterns = {"/UpdateTaskFinishController"})
+public class UpdateTaskFinishController extends HttpServlet {
 
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String button = request.getParameter("btAction");
-            User user = (User) request.getSession().getAttribute("user");
-            int userId = user.getUserId();
-           // int roleId = user.getRoleId();//
+            String staffID = request.getParameter("staffSelect");   
+            String orderID = request.getParameter("orderID");
             OrderService ord = new OrderService();
             try {
-                if (button.equals("7")) {
-                    ord.viewTaskOrder(userId, button);
-                } else if (button.equals("8")) {
-                    ord.viewTaskOrder(userId, "2");
-                }
-
-                List<Order> result = ord.getListOrder();
-                request.setAttribute("SEARCHRESULT", result);
-                
-                
-                
-                
+                ord.updateOrder(Integer.parseInt(orderID), 4);
+               
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                RequestDispatcher rd = request.getRequestDispatcher("list_staff.jsp");
-                    rd.forward(request, response);
+                RequestDispatcher rd = request.getRequestDispatcher("list_task.jsp");
+                rd.forward(request, response);
             }
         }
     }
