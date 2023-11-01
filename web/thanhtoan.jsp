@@ -70,7 +70,7 @@
                             <h2>Thông tin khách hàng</h2>
                             <form action="ConfirmOrderController" method="post" accept-charset="UTF-8">
                                 <label for="fullname">Tên khách hàng:</label>
-                                <input type="text" class="bg-light form-control" name="fullname" value="${user.fullname}" >
+                                <input type="text" class="bg-light form-control" name="fullname" value="${user.fullname}" readonly>
                                 <c:if test="${not empty errorMessage}">
                                     <div class="alert alert-danger">
                                         <strong>Lỗi:</strong> <c:out value="${errorMessage}" />
