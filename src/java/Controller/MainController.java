@@ -38,7 +38,9 @@ public class MainController extends HttpServlet {
     private static final String VIEWFAVORITECONTROLLER = "ViewFavoriteController";
     private static final String UPDATESERVICECONTROLLER = "UpdateServiceStoreController";
     private static final String CANCELUPDATECONTROLLER = "CancelUpdateController";
-
+    private static final String LISTSTAFFCONTROLLER = "ListStaffController";
+    private static final String UPDATESTAFFFINISH = "UpdateStaffFinishController";
+    private static final String UPDATESTAFFCOMPLETED = "UpdateStaffCompletedController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -84,6 +86,12 @@ public class MainController extends HttpServlet {
                 url = UPDATESERVICECONTROLLER;
             } else if (button.equals("CancelUppdate")) {
                 url = CANCELUPDATECONTROLLER;
+            } else if (button.equals("7") || button.equals("8")) {
+                url = LISTSTAFFCONTROLLER;
+            } else if (button.equals("Finish")) {
+                url = UPDATESTAFFFINISH;
+            } else if (button.equals("Completed")) {
+                url = UPDATESTAFFCOMPLETED;
             }
 
                 RequestDispatcher rd = request.getRequestDispatcher(url);

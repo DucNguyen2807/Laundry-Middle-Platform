@@ -9,35 +9,33 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author khait
+ * @author nguye
  */
-public class UpdateStaffOrderController extends HttpServlet {
+@WebServlet(name = "UpdateStaffFinishController", urlPatterns = {"/UpdateStaffFinishController"})
+public class UpdateStaffFinishController extends HttpServlet {
 
-    private final String VIEWORDERDETAIL = "vieworderdetail.jsp";
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         try (PrintWriter out = response.getWriter()) {
-            String url = VIEWORDERDETAIL;
             String staffID = request.getParameter("staffSelect");   
             String orderID = request.getParameter("orderID");
             OrderService ord = new OrderService();
             try {
-                ord.updateStaffOrder(Integer.parseInt(orderID), Integer.parseInt(staffID));
-                ord.updateOrder(Integer.parseInt(orderID), 7);
+                ord.updateOrder(Integer.parseInt(orderID), 4);
                
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                RequestDispatcher rd = request.getRequestDispatcher(url);
+                RequestDispatcher rd = request.getRequestDispatcher("list_staff.jsp");
                 rd.forward(request, response);
             }
         }

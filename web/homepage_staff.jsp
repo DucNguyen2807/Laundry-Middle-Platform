@@ -46,13 +46,8 @@
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="homepage_staff.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                                 <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
-                                <li><a href="manage_store.jsp" style="color: #ffffff">Order</a></li>
-                                <li><a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
-                                <li>
-                                    <form action="MainController" method="post">
-                                        <input type="submit" value="Settings" name="btAction" />
-                                    </form>  
-                                </li>
+                                <li><a href="list_staff.jsp" style="color: #ffffff">Task List</a></li>
+                                
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">
