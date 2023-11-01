@@ -49,6 +49,7 @@ public class ViewOrder_Store extends HttpServlet {
                 } else if (button.equals("2")) {
                     ord.viewOrder(userId, button);
                 }
+                
                 List<Order> result = ord.getListOrder();
                 request.setAttribute("SEARCHRESULT", result);
 
