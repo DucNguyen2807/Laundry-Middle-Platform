@@ -1,16 +1,60 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
     <head>
-        <meta charset="UTF-8">
         <title>Chi tiết cửa hàng</title>
-        <link rel="stylesheet" href="css/thanhtoan.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/styleindex.css" rel="stylesheet" >
+        <link href="css/cate.css" rel="stylesheet" >
+        <link href="css/thanhtoan.css" rel="stylesheet" >
+
+        <style>
+        </style>
     </head>
+
     <body>
-        <div class="container mt-5">
+
+        <div class="container-fluid">
+
+            <div class="row" style="background-color: #22638f">
+
+                <nav class="navbar navbar-inverse bg-primary" role="navigation">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="homepage_customer.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                                <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
+                                <li><a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+
+                            </ul>
+                            
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+            
+            
+            
+            <div class="container mt-5">
             <div class="row">
                 <div class="col-md-4">
                     <div class="customer-details">
@@ -72,7 +116,7 @@
                                         </c:forEach>
                                     </div>
                                 </div>
-                                <input name="storeID" value="${store.storeID}" />
+                                    <input type="hidden" name="storeID" value="${store.storeID}" />
                                 <button type="submit">Thanh toán</button>
                             </c:forEach>   
 
@@ -111,5 +155,10 @@
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+
+        <script src="js/Jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+
     </body>
+
 </html>

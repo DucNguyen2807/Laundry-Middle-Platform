@@ -1,23 +1,23 @@
-<%-- 
-    Document   : storesetting.jsp
-    Created on : Oct 26, 2023, 8:31:56 PM
-    Author     : acer
---%>
-
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="css/thanhtoan.css">
+        <title>Laundry Middle Platform</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/styleindex.css" rel="stylesheet" >
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link href="css/cate.css" rel="stylesheet" >
+        <link href="css/thanhtoan.css" rel="stylesheet" >
+
+
+        <style>
+        </style>
         <script>
             var urlParams = new URLSearchParams(window.location.search);
             var successMessage = urlParams.get("successMessage");
@@ -29,6 +29,39 @@
     </head>
 
     <body>
+
+        <div class="container-fluid">
+
+            <div class="row" style="background-color: #22638f">
+
+                <nav class="navbar navbar-inverse bg-primary" role="navigation">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="active"><a href="homepage_store.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                                <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="login.jsp" style="color: #ffffff">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+        </div>
+        <!--K?t thúc container-fluid-->
         <form action="UpdatePriceServiceStoreController" method="POST" accept-charset="UTF-8">
 
 
@@ -92,6 +125,9 @@
                     </div>
                 </div>
             </div>
+        </form>
+        <script src="js/Jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </body>
 
 </html>

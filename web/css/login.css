@@ -76,12 +76,17 @@ form {
 
 
 .main-img {
-    background-image: url(https://cdn.fbsbx.com/v/t59.2708-21/365413369_611555357629930_6491352569871813413_n.gif?_nc_cat=106&ccb=1-7&_nc_sid=cf94fc&_nc_ohc=NodBn8P62x0AX9nFjlD&_nc_pt=1&_nc_ht=cdn.fbsbx.com&oh=03_AdTev9HKpDUK1GYcYP9CkmlurnjOD58aOsTK8dAKSo3PmA&oe=653ECE89);
+    background-image: url(https://cdn.fbsbx.com/v/t59.2708-21/271437849_466532591550430_8255773245782191296_n.gif?_nc_cat=109&ccb=1-7&_nc_sid=cf94fc&_nc_eui2=AeGYOwMC7wQge7__rrsbThQnyqScrCGSXWTKpJysIZJdZLhE5LfGrLULv_DZ5D_alAD08bcjv4MWAnKYJZMIWn2S&_nc_ohc=ztiRm0UCAHwAX8lIUAV&_nc_pt=1&_nc_ht=cdn.fbsbx.com&oh=03_AdTSRCXCZsl8NUwnr2yvnOSTPNK18ACjIPnKLk_lwu4bxQ&oe=654326F6);
     background-size: cover;
     width: 450px;
     height: 600px;
     border-radius: 25px;
 }
+.main-img {
+    background-size: 470px 600px;
+}
+
+
 
 h1 {
     color: #2b2684;

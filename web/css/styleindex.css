@@ -142,3 +142,55 @@
 .logout-link:hover {
     background-color: #22638f;
 }
+.mybody .task1 .rounded-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.mybody .task1 .rounded-image:hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5); /* Màu nền sáng */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.mybody .task1 .rounded-image:hover img {
+    filter: brightness(1.2); /* Tăng độ sáng */
+}
+
+.mybody .task1 .rounded-image:hover .relative {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: white;
+    text-align: left;
+    padding-left: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: auto;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(100%); /* Di chuyển phần nội dung lên */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.mybody .task1 .rounded-image:hover .relative:hover {
+    opacity: 1;
+    transform: translateY(0); /* Hiển thị phần nội dung khi hover */
+}
+/* Đảm bảo rằng các nút trong form có cùng độ rộng */
+.nav-form form input[type="submit"] {
+    width: 100px; /* Điều chỉnh độ rộng theo mong muốn */
+}
+
+/* Đảm bảo rằng các nút trong form và các nút bên ngoài đều được căn giữa */
+.nav-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

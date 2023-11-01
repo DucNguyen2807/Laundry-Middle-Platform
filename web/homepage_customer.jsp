@@ -1,3 +1,6 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +12,8 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/styleindex.css" rel="stylesheet" >
+        <link href="css/cate.css" rel="stylesheet" >
+
         <style>
         </style>
     </head>
@@ -38,18 +43,22 @@
                                 <li class="active"><a href="homepage_customer.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                                 <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
                                 <li><a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
-                                <li>
+                                <li class="nav-form">
                                     <form action="MainController" method="post">
                                         <input type="submit" value="Category" name="btAction" />
+                                    </form>  
+                                </li>
+                                <li class="nav-form">
+                                    <form action="MainController" method="post">
                                         <input type="submit" value="Favorite" name="btAction" />
                                     </form>  
                                 </li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="login.jsp" style="color: #ffffff">Logout</a></li>
-
                             </ul>
                         </div>
+
                     </div><!-- /.container-fluid -->
                 </nav>
             </div>
@@ -62,214 +71,101 @@
                     <img src="image/banner.jpg" />
 
                 </div>
-
             </div>
-
-
         </div>
-        <!--K?t th�c container-fluid-->
+        <!--K?t thúc container-fluid-->
 
         <div class="container mybody">
-
-            <div class="row">
+            <div class="row combo">
 
                 <div class="col-md-12">
-
-                    <h2>Services</h2>
-
+                    <h1>Top các cửa hàng được yêu thích nhất </h1>
                 </div>
-
             </div>
-
-            <div class="row sanpham">
-
-                <div class="col-md-3 ">
-
-                    <div id="sanpham1">
-
-                        <img src="image/service.jpg" />
-                        <p id="first_line1">COMBO laundry 3 get 1 free</p>
-                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
-                                Branch</span> </p>
-                        <p>Price: <del> 200.000 vnd </del> <span style="color: #F72B2F; margin-left:10px; ">150.000
-                                vn?</span></p>
-
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <div id="sanpham2">
-
-                        <img src="image/service.jpg" />
-                        <p id="first_line2">COMBO laundry 3 get 1 free</p>
-                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
-                                Branch</span> </p>
-                        <p>Price: <del>500.000 vnd </del> <span style="color: #F72B2F; margin-left:10px; ">450.000
-                                vn?</span></p>
-
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <div id="sanpham3">
-
-                        <img src="image/service.jpg"/>
-                        <p id="first_line3">COMBO laundry 3 get 1 free</p>
-                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
-                                Branch</span> </p>
-                        <p>Price: <del>150.000 vnd </del> <span style="color: #F72B2F; margin-left:10px; ">100.000
-                                vn?</span></p>
-
-
-                    </div>
-
-                </div>
-                <div class="col-md-3">
-
-                    <div id="sanpham3">
-
-                        <img src="image/service.jpg" />
-                        <p id="first_line3">COMBO laundry 3 get 1 free</p>
-                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
-                                Branch</span> </p>
-                        <p>Price: <del>150.000 vnd </del> <span style="color: #F72B2F; margin-left:10px; ">100.000
-                                vn?</span></p>
-
-
-                    </div>
-
-                </div>
-
-
-
-            </div>
-
-            <div class="row task1">	
-
-                <div class="row combo">
-
-                    <div class="col-md-12">
-
-                        <h2>Quy trinh 4 buoc</h2>
-                        <p>During the promotion period, let's wash your shoes!</p>
-                    </div>
-
-                </div>
-
-                <div class="col-md-3">
-                    <div>
-                        <img src="image/b1.jpg" />
-                        <div class="relative">
-                            <h3>Cheap Shoe Washing</h3>
-                            <p>Perfect quality</p>
-
+            <div class="row">
+                <c:forEach items="${topStore}" var="cat" varStatus="loop">
+                    <c:if test="${loop.index < 3}">
+                        <div class="product col-12 col-md-6 col-lg-4">
+                            <div style="margin: 25px 20px" class="card-body text-center vertical-center">
+                                <div class="card-body">
+                                    <img class="card-img-top" src="<c:out value='${cat.image}'/>" alt="Store Image" style="width: 100%; height: auto;">
+                                    <h4 class="card-title show_txt">Tên cửa hàng: <c:out value='${cat.storeName}'/></h4>
+                                    <p class="card-text show_txt">Địa chỉ: <c:out value='${cat.address}'/></p>
+                                    <div class="rating">
+                                        <c:forEach begin="1" end="${cat.rating}">
+                                            <span class="star yellow">★</span>
+                                        </c:forEach>
+                                    </div>
+                                    <p class="card-text show_txt">Giá chỉ từ: <c:out value="${cat.averagePrice}" /> đ</p>
+                                </div>
+                                <a href='<c:url value="/GetReviewController?storeID=${cat.storeID}" />' class="btn btn-success btn-block">Get more information</a>
+                            </div>
                         </div>
-
+                    </c:if>
+                </c:forEach>
+            </div>
+            <div class="row task1">	
+                <div class="row combo">
+                    <div class="col-md-12">
+                        <h2>Quy trinh 4 buoc</h2>
+                        <p>During the promotion period, let's wash your clothes!</p>
                     </div>
-
-
                 </div>
-
                 <div class="col-md-3">
-                    <div>
+                    <div class="rounded-image">
+                        <img src="image/b1.png" />
+                        <div class="relative">
+                            <h3>Đặt dịch vụ</h3>
+                            <p>Khách hàng sẽ đặt dịch vụ trên các cửa hàng</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="rounded-image">
                         <img src="image/b2.png" />
                         <div class="relative">
-                            <h3>Cheap Repaint</h3>
-                            <p>The best quality</p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-3">
-                    <div >
-                        <img src="image/b3.jpg" />
-                        <div class="relative">
-                            <h3>Cheap shoe sole stickers</h3>
-                            <p>Absolute shoe sole protection</p>
+                            <h3>Nhận đồ từ khách hàng</h3>
+                            <p>Nhân viên sẽ đi giao tới cho cửa hàng</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div >
-
-                        <img src="image/b4.jpg" />
+                    <div class="rounded-image">
+                        <img src="image/b3.png" />
                         <div class="relative">
-                            <h3>Glue Shoes</h3>
-                            <p>Reliable quality</p>
+                            <h3>Giặt và làm sạch</h3>
+                            <p>Cửa hàng sẽ giặt và làm theo yêu cầu</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="rounded-image">
+                        <img src="image/b4.png" />
+                        <div class="relative">
+                            <h3>Trả đồ cho khách hàng</h3>
+                            <p>Nhân viên sẽ giao trả hàng lại cho khách hàng</p>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
+            <br>    
             <div class="row orderonline">
-
                 <div class="col-md-12">
-
-                    <h2>SPECIAL ORDER ONLINE</h2>
-                    <p>Surprisingly cheap and freeship</p>
+                    <h2>The best Laundry Middle Platform</h2>
+                    <p style="color: darkcyan">No more dragging your laundry to the laundromat! With Cleaner, you can have your laundry picked up and delivered to your door.
+                        We offer a variety of convenient pickup and delivery times to fit your schedule.</p>
                 </div>
-
             </div>
-
             <div class="row order">
-
                 <div class="col-md-6">
-
                     <div>
-
                         <img id="image1" src="image/logo.png" />
-
                     </div>
-
                 </div>
-
-                <div class="col-md-3">
-
-                    <div id="class2">
-
-                        <img id="image2" src="image/sale20.png"  />
-                        <p id="first_one1">Order online 20% off</p>
-                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
-                                Branch</span> </p>
-                        <p><del>100% </del> <span style="color: #F72B2F; margin-left:10px; ">80%</span></p>
-
-
-                    </div>
-
+                <div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d582.5042382897573!2d106.80972000195557!3d10.841448543525589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752731176b07b1%3A0xb752b24b379bae5e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgVFAuIEhDTQ!5e0!3m2!1svi!2s!4v1698773108161!5m2!1svi!2s" width="570" height="431.08" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-
-                <div class="col-md-3">
-
-                    <div id="class3">
-
-                        <img id="image3" src="image/camau.jpg" />
-                        <p id="first_one2">Free shipping under 3km</p>
-                        <p>Discount locations:<span style="font-weight: bold;margin-left: 10px;">Tan Phu District
-                                Branch</span> </p>
-                        <p><del>60.000 vn? </del> <span style="color: #F72B2F; margin-left:10px; ">0 vn?</span></p>
-
-
-                    </div>
-
-                </div>
-
-
             </div>
-
-
-
         </div>
 
         <div class="container-fluid" >
@@ -278,16 +174,13 @@
 
                 <div>
 
-                    <p>Email : Tiennvse171676</p>
-                    <p>Address: 100 Vuon Lai, Tan Phu District, HCMC</p>
+                    <p>Email : laundrymiddleplatform@gmail.com</p>
+                    <p>Address: Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</p>
                     <h5>&copy; Copyright 2023. Laundry Middle Platform</h5>
                 </div>
-                 <div>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15674.605125828743!2d106.77246096830015!3d10.837976079031838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752731176b07b1%3A0xb752b24b379bae5e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgVFAuIEhDTQ!5e0!3m2!1svi!2s!4v1698498826609!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
             </div>
-            </div>
-            
-           
+
         </div>
 
         <script src="js/Jquery.js"></script>
