@@ -18,14 +18,14 @@
 
         <style>
         </style>
-        <script>
-            var urlParams = new URLSearchParams(window.location.search);
-            var successMessage = urlParams.get("successMessage");
-
-            if (successMessage) {
-                alert(successMessage);
-            }
-        </script>
+        <!--        <script>
+                    var urlParams = new URLSearchParams(window.location.search);
+                    var successMessage = urlParams.get("successMessage");
+        
+                    if (successMessage) {
+                        alert(successMessage);
+                    }
+                </script>-->
     </head>
 
     <body>
@@ -62,7 +62,7 @@
             </div>
         </div>
         <!--K?t thúc container-fluid-->
-        <form action="UpdatePriceServiceStoreController" method="POST" accept-charset="UTF-8">
+        <form action="MainController" method="POST" accept-charset="UTF-8">
 
 
             <div class="container mt-5">
@@ -85,18 +85,32 @@
                                         <div class="card-body">
                                             Tên cửa hàng:<input type="text" name="nameStore"  value="${store.storeName.toUpperCase()}"><br>
 
-<!--                                            Địa chỉ: <input type="text" name="addressStore" value="${store.address}" >-->
+                                            Địa chỉ: <input type="text" name="addressStore" value="${store.address}" >
                                             <p>Dịch vụ:</p>
                                             <c:forEach items="${storePrice}" var="price">
                                                 <c:if test="${price.storeID eq store.storeID}">
                                                     <p>${price.serviceDetail}:</p>
-                                                    <input name ="priceU" value="${price.price}" đ >
+                                                    <input name ="priceU" value="${price.price}" id="priceU" oninput="validateInput(this)" đ >
                                                     <input type="hidden" name="serviceID" value="${price.serviceID}" />
+                                                    <input type="hidden" name="btAction" value="DeleteServiceStore" />
+                                                    <button type="submit" class="btn btn-danger" onclick="return alert('Bạn có muốn xóa dịch vụ này không?')">Delete</button>
+                                                    <script>
+                                                        function validateInput(inputField) {
+                                                            inputField.value = inputField.value.replace(/[^0-9]/g, '');
+                                                            if (inputField.value === "") {
+                                                                alert("Giá trị nhập vào phải là số từ 0 đến 9.");
+                                                                document.getElementById("submitButton").disabled = true;
+                                                            } else {
+                                                                document.getElementById("submitButton").disabled = false;
+                                                            }
+                                                        }
+                                                    </script>
                                                 </c:if>
                                             </c:forEach>
                                         </div>
-                                        <input type="hidden" name="storeID" value="${store.storeID}" />
-                                        <button type="submit">Update</button>
+<!--                                      <button type="submit" value="UpdatePriceStore" name="btAction">Update</button>-->
+                                        <input type="hidden" name="btAction" value="UpdatePriceStore" />
+                                        <button type="submit" id="submitButton" class="btn btn-primary" onclick="return alert('Cập nhật thành công!')">Update</button>
                                     </c:forEach> 
                                 </div>
                             </div>
@@ -118,7 +132,9 @@
                                     <label for="servicePrice">Service Price:</label>
                                     <input type="text" class="form-control" name="servicePrice" id="servicePrice">
                                 </div>
-                                <input type="hidden" name="storeID" value="${store.storeID}" />
+                                <c:forEach items="${storeSale}" var="store">
+                                    <input type="hidden" name="storeID" value="${store.storeID}" />
+                                </c:forEach>
                                 <button type="submit">Add Service</button>
                             </form>
                         </div>
