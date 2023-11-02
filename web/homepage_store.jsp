@@ -46,7 +46,6 @@
                                 <li class="active"><a href="homepage_store.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                                 <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
                                 <li><a href="manage_store.jsp" style="color: #ffffff">Order</a></li>
-                                <li><a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
                                 <li class="nav-form">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="Settings" name="btAction" class="btn btn-default">Setting</button>

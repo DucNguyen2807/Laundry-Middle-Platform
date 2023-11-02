@@ -42,6 +42,7 @@
                             <ul class="nav navbar-nav">
                                 <li class="active nav-home-profile"><a href="homepage_customer.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                                 <li class="nav-home-profile"><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
+                                <li class="nav-home-profile"><a href="ordercustomer.jsp" style="color: #ffffff">Order</a></li>
                                 <li class="nav-form">
                                     <form action="MainController" method="post">
                                         <button type="submit" value="Category" name="btAction" class="btn btn-default">Category</button>
