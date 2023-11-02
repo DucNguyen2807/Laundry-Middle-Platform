@@ -37,7 +37,6 @@
         <servlet-class>Controller.UpdateOrderController</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>ViewOrderWaitingController</servlet-name>
         <servlet-class>Controller.ViewOrderWaitingController</servlet-class>
     </servlet>
@@ -48,12 +47,14 @@
     <servlet>
         <servlet-name>UpdateStaffOrderController</servlet-name>
         <servlet-class>Controller.UpdateStaffOrderController</servlet-class>
-
     </servlet>
     <servlet>
         <servlet-name>GetReviewController</servlet-name>
         <servlet-class>Controller.GetReviewController</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateTaskCompletedController</servlet-name>
+        <servlet-class>Controller.UpdateTaskCompletedController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -92,7 +93,6 @@
         <url-pattern>/UpdateOrderController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>ViewOrderWaitingController</servlet-name>
         <url-pattern>/ViewOrderWaitingController</url-pattern>
     </servlet-mapping>
@@ -103,14 +103,15 @@
     <servlet-mapping>
         <servlet-name>UpdateStaffOrderController</servlet-name>
         <url-pattern>/UpdateStaffOrderController</url-pattern>
-        
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetReviewController</servlet-name>
         <url-pattern>/GetReviewController</url-pattern>
-        
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>UpdateTaskCompletedController</servlet-name>
+        <url-pattern>/UpdateTaskCompletedController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
