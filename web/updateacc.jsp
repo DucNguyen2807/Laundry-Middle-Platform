@@ -24,7 +24,7 @@
     <body>
 
         <h1 style="text-align: center">Update account</h1>
-        <form action="UpdateProfileController" method="POST">
+        <form action="UpdateProfileController" method="POST" >
             <div class="wrapper bg-white mt-sm-5">
                 <h4 class="pb-4 border-bottom">Account settings</h4>
                 <div class="d-flex align-items-start py-3 border-bottom">
