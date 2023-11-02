@@ -42,6 +42,9 @@ public class MainController extends HttpServlet {
     private static final String UPDATETASKCOMPLETED = "UpdateTaskCompletedController";
     private static final String VIEWORDER_CUSTOMER = "ViewOrderCustomerController";
     private static final String CANCELORDERCUSCONTROLLER = "CancelOrderCusController";
+    private static final String UPDATEPRICESTORECONTROLLER = "UpdatePriceServiceStoreController";
+    private static final String DELETESERVICESTORECONTROLLER = "DeleteServiceStoreController";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -93,59 +96,58 @@ public class MainController extends HttpServlet {
                 url = UPDATETASKFINISH;
             } else if (button.equals("Completed")) {
                 url = UPDATETASKCOMPLETED;
-            } else if (button.equals("NewOrderCus") || button.equals("ProcessingCustomer")|| button.equals("CompletedCustomer")) {
+            } else if (button.equals("NewOrderCus") || button.equals("ProcessingCustomer") || button.equals("CompletedCustomer")) {
                 url = VIEWORDER_CUSTOMER;
             } else if (button.equals("CancelCus")) {
                 url = CANCELORDERCUSCONTROLLER;
+            } else if (button.equals("UpdatePriceStore")) {
+                url = UPDATEPRICESTORECONTROLLER;
+            } else if (button.equals("DeleteServiceStore")) {
+                url = DELETESERVICESTORECONTROLLER;
             }
 
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
-            }
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
+    }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-        /**
-         * Handles the HTTP <code>GET</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doGet
-        (HttpServletRequest request, HttpServletResponse response)
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            processRequest(request, response);
-        }
-
-        /**
-         * Handles the HTTP <code>POST</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doPost
-        (HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            processRequest(request, response);
-        }
-
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
-        
-        
-            () {
-        return "Short description";
-        }// </editor-fold>
-
+        processRequest(request, response);
     }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}

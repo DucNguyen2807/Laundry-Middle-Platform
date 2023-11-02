@@ -194,7 +194,7 @@ public class StoreService implements Serializable {
             if (con != null) {
                 String sql = "SELECT p.StoreID, s.ServiceID ,s.ServiceDetail, FORMAT(PriceDetail, 'N0') AS Price "
                         + "FROM [Price] p "
-                        + "INNER JOIN [Laundry-Middle-Platform1].[dbo].Service s ON s.ServiceID = p.ServiceID "
+                        + "INNER JOIN [Laundry-Middle-Platform].[dbo].Service s ON s.ServiceID = p.ServiceID "
                         + "WHERE p.StoreID = ?";
 
                 stm = con.prepareStatement(sql);
@@ -519,9 +519,10 @@ public class StoreService implements Serializable {
 
                 for (int i = 0; i < serviceIDs.length; i++) {
                     int serviceId = Integer.parseInt(serviceIDs[i]);
-                    int price = Integer.parseInt(prices[i]);
+                    String price = (prices[i]);
 
-                    pstmt.setInt(1, price);
+                    price = price.replaceAll(",", "");
+                    pstmt.setInt(1, Integer.parseInt(price));
                     pstmt.setInt(2, userId);
                     pstmt.setInt(3, serviceId);
 
@@ -547,6 +548,103 @@ public class StoreService implements Serializable {
             }
         }
         return false;
+    }
+
+    public static boolean insertServiceAndPrice(String serviceDetails, String priceUp, int storeID) {
+        Connection conn = null;
+        PreparedStatement insertServiceStatement = null;
+        PreparedStatement insertPriceStatement = null;
+
+        try {
+            conn = ConnectDB.getConnection();
+
+            if (conn != null) {
+                String insertServiceQuery = "INSERT INTO Service (ServiceDetail, StoreID) VALUES (?, ?)";
+                insertServiceStatement = conn.prepareStatement(insertServiceQuery, Statement.RETURN_GENERATED_KEYS);
+
+                insertServiceStatement.setString(1, serviceDetails);
+                insertServiceStatement.setInt(2, storeID);
+
+                int rowsInserted = insertServiceStatement.executeUpdate();
+
+                if (rowsInserted <= 0) {
+                    return false;
+                }
+
+                ResultSet generatedKeys = insertServiceStatement.getGeneratedKeys();
+                int serviceID = -1;
+                if (generatedKeys.next()) {
+                    serviceID = generatedKeys.getInt(1);
+                }
+
+                String insertPriceQuery = "INSERT INTO Price (StoreID, ServiceID, PriceDetail) VALUES (?, ?, ?)";
+                insertPriceStatement = conn.prepareStatement(insertPriceQuery);
+
+                insertPriceStatement.setInt(1, storeID);
+                insertPriceStatement.setInt(2, serviceID);
+                insertPriceStatement.setDouble(3, Double.parseDouble(priceUp));
+
+                rowsInserted = insertPriceStatement.executeUpdate();
+
+                if (rowsInserted <= 0) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (insertPriceStatement != null) {
+                    insertPriceStatement.close();
+                }
+                if (insertServiceStatement != null) {
+                    insertServiceStatement.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public static boolean deleteService(int userId, int serviceId) throws ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = ConnectDB.getConnection();
+            if (conn != null) {
+                
+                String sql = "DELETE FROM [Price] WHERE StoreID = ? AND ServiceID = ?";
+
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setInt(1, userId);
+                pstmt.setInt(2, serviceId);
+
+                int rowsDeleted = pstmt.executeUpdate();
+                if (rowsDeleted > 0) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false; 
     }
 
 }
