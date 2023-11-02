@@ -128,7 +128,7 @@
                 <h1 class="display-4">Danh sách khách hàng</h1>
 
                 <!-- Search form -->
-                <form action="MainController" method="post" class="mb-3">
+                <form action="ViewCustomerController" method="post" class="mb-3">
                     <div class="input-group">
                         <input type="text" name="txtSearchCustomer" class="form-control" placeholder="Tìm khách hàng...">
                         <button type="submit" value="ViewCustomer" name="btAction" class="btn btn-primary">Tìm kiếm</button>

@@ -91,7 +91,7 @@ public class StaffService implements Serializable {
                         + " u.Phone, u.Email, st.StStaffDetail\n"
                         + " FROM [Laundry-Middle-Platform].[dbo].[User] u\n"
                         + " LEFT JOIN StatusStaff st ON st.StStaffID = u.Status\n"
-                        + " WHERE u.RoleID = 2 AND u.Fullname LIKE ?";
+                        + " WHERE u.RoleID = 2 AND u.Fullname LIKE ? ";
 
                 ps = con.prepareStatement(sql);
                 ps.setString(1, "%" + name + "%");
@@ -158,11 +158,11 @@ public class StaffService implements Serializable {
                         + "LEFT JOIN [OrderDetail] od ON o.OrderID = od.OrderID "
                         + "LEFT JOIN [User] u ON o.StaffID = u.UserID "
                         + "LEFT JOIN StatusStaff st ON st.StStaffID = u.Status "
-                        + "WHERE (o.StOrderID = 4 OR o.StOrderID = 2) AND u.UserID IS NOT NULL "
+                        + "WHERE (o.StOrderID = 4 OR o.StOrderID = 2 OR o.StOrderID = 6 OR o.StOrderID = 7) AND u.UserID IS NOT NULL "
                         + "GROUP BY u.UserID, u.Username, u.Password, u.Address, u.Fullname, u.Phone, u.Email, st.StStaffDetail "
                         + "HAVING COUNT(o.OrderID) < 20 "
                         + "UNION ALL "
-                        + // Những nhân viên không có đơn hàng
+                        +// Những nhân viên không có đơn hàng
                         "SELECT u.UserID, u.Username, u.Password, u.Address, u.Fullname, u.Phone, u.Email, st.StStaffDetail, 0 AS OrderCount "
                         + "FROM [User] u "
                         + "LEFT JOIN StatusStaff st ON st.StStaffID = u.Status "
