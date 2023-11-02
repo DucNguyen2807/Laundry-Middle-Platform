@@ -68,8 +68,8 @@
                                 <li>
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
-                                            <input type="hidden" name="btAction" value="5" />
-                                            <button type="submit" class="btn btn-primary">Completed</button>
+                                            <input type="hidden" name="btAction" value="2" />
+                                            <button type="submit" class="btn btn-primary">Waiting</button>
                                         </form>
                                     </a>
                                 </li>
@@ -77,8 +77,8 @@
                                 <li>
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
-                                            <input type="hidden" name="btAction" value="2" />
-                                            <button type="submit" class="btn btn-primary">Archive</button>
+                                            <input type="hidden" name="btAction" value="5" />
+                                            <button type="submit" class="btn btn-primary">Completed</button>
                                         </form>
                                     </a>
                                 </li>
