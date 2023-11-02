@@ -9,7 +9,6 @@ import Model.User;
 import Service.OrderService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,7 +33,6 @@ public class ViewOrder_Store extends HttpServlet {
 
             String url = VIEWORDER_STORE;
             String button = request.getParameter("btAction");
-            HttpSession session = request.getSession();
             User user = (User) request.getSession().getAttribute("user");
             int userId = user.getUserId();
            // int roleId = user.getRoleId();//
