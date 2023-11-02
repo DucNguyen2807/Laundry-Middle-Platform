@@ -133,6 +133,51 @@ public class OrderService implements Serializable {
         }
     }
 
+    public void viewOrderCustomer(int userId, String btAction) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        listOrder = new ArrayList<>();
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight, od.TotaPrice, od.Phone AS PhoneCus,\n"
+                        + " od.AddressCus, od.AddressSto, od.Note,\n"
+                        + " o.TimeDesired, o.DateDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
+                        + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
+                        + " FROM [Laundry-Middle-Platform].[dbo].[Order] o\n"
+                        + " LEFT JOIN [OrderDetail] od ON o.OrderID = od.OrderID\n"
+                        + " LEFT JOIN Service se ON se.ServiceID = od.ServiceID\n"
+                        + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
+                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
+                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
+                        + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
+                        + " WHERE u.UserID = ? AND o.StOrderID = ? ";
+                ps = con.prepareStatement(sql);
+                ps.setInt(1, userId);
+                ps.setInt(2, Integer.parseInt(btAction));
+
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    Order order = createOrderFromResultSet(rs);
+                    listOrder.add(order);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    
     public void viewTaskOrder(int userId, String btAction) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;

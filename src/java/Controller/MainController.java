@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 public class MainController extends HttpServlet {
 
     private static final String LOGINPAGE = "login.jsp";
-    //private static final String HOMEPAGE = "homepage.html";
     private static final String LOGINCONTROLLER = "LoginController";
     private static final String REGISTERCONTROLLER = "RegisterController";
     private static final String VIEWHISORYCONTROLLER = "ViewHistoryController";
@@ -41,6 +40,8 @@ public class MainController extends HttpServlet {
     private static final String LISTTASKCONTROLLER = "ListTaskController";
     private static final String UPDATETASKFINISH = "UpdateTaskFinishController";
     private static final String UPDATETASKCOMPLETED = "UpdateTaskCompletedController";
+    private static final String VIEWORDER_CUSTOMER = "ViewOrderCustomerController";
+    private static final String CANCELORDERCUSCONTROLLER = "CancelOrderCusController";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -92,6 +93,10 @@ public class MainController extends HttpServlet {
                 url = UPDATETASKFINISH;
             } else if (button.equals("Completed")) {
                 url = UPDATETASKCOMPLETED;
+            } else if (button.equals("NewOrderCus") || button.equals("ProcessingCustomer")|| button.equals("CompletedCustomer")) {
+                url = VIEWORDER_CUSTOMER;
+            } else if (button.equals("CancelCus")) {
+                url = CANCELORDERCUSCONTROLLER;
             }
 
                 RequestDispatcher rd = request.getRequestDispatcher(url);

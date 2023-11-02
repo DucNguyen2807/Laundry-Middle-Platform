@@ -35,10 +35,7 @@
                             <ul class="nav navbar-nav" >
                                 <li class="active"> <a href="homepage_customer.jsp" > <span class="glyphicon glyphicon-home"></span>
                                         Home</a> </li>
-                                <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
-                                <li><a href="admin.jsp" style="color: #ffffff">Manage</a></li>
-                                <li> <a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope" ></span> Contact</a>
-                                </li>
+                                <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>                                
                             </ul>
                             <form class="navbar-form navbar-right" role="search">
                                 <div class="form-group">

@@ -60,18 +60,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 
 
-/* CSS cho biểu tượng trái tim */
+
 .heart-icon {
     position: absolute;
-    top: 35px; /* Điều chỉnh khoảng cách từ trên xuống */
-    right: 30px; /* Điều chỉnh khoảng cách từ phải qua */
+    top: 35px; 
+    right: 30px; 
     font-size: 25px;
     color: lightgrey;
 }
 .heart-icon:hover {
-    color: red; /* Màu khi di chuột vào trái tim */
+    color: red; 
 }
-/* Tùy chỉnh giao diện tùy chọn sắp xếp */
+
 .custom-select-container {
     display: flex;
     justify-content: space-between;
