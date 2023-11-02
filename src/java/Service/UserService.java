@@ -101,7 +101,6 @@ public class UserService implements Serializable {
         String addressSto = rs.getString("AddressSto");
         String note = rs.getString("Note");
         String timeDesired = rs.getString("TimeDesired");
-
         String dateDesired;
         Date dateDesiredValueDate = rs.getDate("DateDesired");
         if (rs.wasNull()) {
@@ -125,7 +124,7 @@ public class UserService implements Serializable {
         }
 
         String timeComplete;
-        Time timeCompleteValue = rs.getTime("TimeComplete");
+        String timeCompleteValue = rs.getString("TimeComplete");
         if (rs.wasNull()) {
             timeComplete = "NULL";
         } else {
@@ -328,7 +327,8 @@ public class UserService implements Serializable {
                             + " LEFT JOIN StatusOrder st ON st.StOrderID = o.StOrderID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
-                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID";
+                            + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
+                            + " ORDER BY o.OrderID DESC";
                     stm = con.prepareStatement(sql);
                 }
                 rs = stm.executeQuery();
@@ -391,7 +391,8 @@ public class UserService implements Serializable {
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
                             + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
-                            + " WHERE o.StOrderID = 6";
+                            + " WHERE o.StOrderID = 6\n"
+                            + " ORDER BY o.OrderID DESC";
                     stm = con.prepareStatement(sql);
                 }
                 rs = stm.executeQuery();
@@ -607,7 +608,7 @@ public class UserService implements Serializable {
         cate.setStoreID(rs.getString("UserID"));
         cate.setStoreName(rs.getString("Fullname"));
         cate.setAddress(rs.getString("Address"));
-        
+
         cate.setService(rs.getString("ServiceDetail"));
         cate.setRating(Integer.parseInt(rs.getString("AverageRating")));
         cate.setReview(rs.getString("ReviewText"));
