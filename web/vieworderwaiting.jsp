@@ -150,7 +150,6 @@
                 <thead>
                     <tr>
                         <th scope="col">No.</th>
-                        <th scope="col">OrderID</th>
                         <th scope="col">CustomerAddress</th>
                         <th scope="col">StoreAddress</th>
                         <th scope="col">Customer</th>
@@ -167,7 +166,6 @@
                 <form action="MainController">
                     <tr>
                         <td><%= ++count%></td>
-                        <td><%= ord.getOrderID()%></td>
                         <td><%= ord.getAddressCus()%></td>
                         <td><%= ord.getAddressSto()%></td>
                         <td><%= ord.getCustomerName()%></td>
