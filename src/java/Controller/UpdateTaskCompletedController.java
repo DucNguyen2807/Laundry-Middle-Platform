@@ -7,6 +7,10 @@ package Controller;
 import Service.OrderService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,15 +24,28 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "UpdateTaskCompleted", urlPatterns = {"/UpdateTaskCompleted"})
 public class UpdateTaskCompletedController extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String staffID = request.getParameter("staffSelect");   
             String orderID = request.getParameter("orderID");
             OrderService ord = new OrderService();
             try {
-                ord.updateOrder(Integer.parseInt(orderID), 5);       
+                LocalDate approveDate = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String formattedDate = approveDate.format(formatter);
+                java.sql.Date sqlDate = java.sql.Date.valueOf(formattedDate);
+
+                LocalTime currentTime = LocalTime.now();
+                // Định dạng thời gian chỉ hiển thị giờ và phút
+                DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
+                String timeCompleted = currentTime.format(formatterTime);
+
+                ord.updateDateCompleted(Integer.parseInt(orderID), sqlDate);
+                ord.updateTimeCompleted(Integer.parseInt(orderID), timeCompleted);
+                ord.updateOrder(Integer.parseInt(orderID), 5);
+
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

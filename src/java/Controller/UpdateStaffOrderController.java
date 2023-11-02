@@ -19,26 +19,26 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class UpdateStaffOrderController extends HttpServlet {
 
-    private final String VIEWORDERDETAIL = "vieworderdetail.jsp";
-
+    //private final String VIEWORDERDETAIL = "vieworderdetail.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
         try (PrintWriter out = response.getWriter()) {
-            String url = VIEWORDERDETAIL;
-            String staffID = request.getParameter("staffSelect");   
+            String searchValue = request.getParameter("txtSearchOrderWaiting");
+            String url = "MainController?btAction=ViewOrderWaiting&txtSearchOrderWaiting=" + searchValue;
+
+            String staffID = request.getParameter("staffSelect");
             String orderID = request.getParameter("orderID");
             OrderService ord = new OrderService();
             try {
                 ord.updateStaffOrder(Integer.parseInt(orderID), Integer.parseInt(staffID));
                 ord.updateOrder(Integer.parseInt(orderID), 7);
-               
+
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
+                response.sendRedirect(url);
             }
         }
     }

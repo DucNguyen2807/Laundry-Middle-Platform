@@ -65,7 +65,7 @@ public class OrderService implements Serializable {
         }
 
         String timeComplete;
-        Time timeCompleteValue = rs.getTime("TimeComplete");
+        String timeCompleteValue = rs.getString("TimeComplete");
         if (rs.wasNull()) {
             timeComplete = "NULL";
         } else {
@@ -312,7 +312,64 @@ public class OrderService implements Serializable {
                     return true;
                 }
             }
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+    
+    public boolean updateDateCompleted(int orderId, Date dateCompleted) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
 
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "UPDATE [Laundry-Middle-Platform].[dbo].[Order] SET DateCompleted = ? WHERE OrderID = ?";
+                ps = con.prepareStatement(sql);
+                ps.setDate(1, dateCompleted);
+                ps.setInt(2, orderId);
+
+                int row = ps.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+    
+    public boolean updateTimeCompleted(int orderId, String  timeCompleted) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "UPDATE [Laundry-Middle-Platform].[dbo].[Order] SET TimeComplete = ? WHERE OrderID = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, timeCompleted);
+                ps.setInt(2, orderId);
+
+                int row = ps.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
         } finally {
             if (ps != null) {
                 ps.close();
@@ -359,16 +416,16 @@ public class OrderService implements Serializable {
     
     // Chia địa chỉ khách hàng thành các phần
     String[] CusAddressParts = addCus.split(", ");
-    String cusStreet = CusAddressParts[0];
-    String cusWard = CusAddressParts[1];
+//    String cusStreet = CusAddressParts[0];
+//    String cusWard = CusAddressParts[1];
     String cusDistrict = CusAddressParts[2];
     String cusCity = CusAddressParts[3];
 
     for (Staff staff : Staffs) {
         // Chia địa chỉ của nhân viên thành các phần
         String[] staffAddressParts = staff.getAddress().split(", ");
-        String staffStreet = staffAddressParts[0];
-        String staffWard = staffAddressParts[1];
+//        String staffStreet = staffAddressParts[0];
+//        String staffWard = staffAddressParts[1];
         String staffDistrict = staffAddressParts[2];
         String staffCity = staffAddressParts[3];
 

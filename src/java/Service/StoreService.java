@@ -392,7 +392,7 @@ public class StoreService implements Serializable {
     }
 
     public boolean BookingOrder(String phone, String fullname, String storeId, String serviceID,
-            int kilos, String totalPrice, String customerAddress, String AddressSto, String note, int userId, String DateDesired, String TimeDesired) {
+            int kilos, String totalPrice, String customerAddress, String AddressSto, String note, int userId, String DateDesired, String TimeDesired) { 
         Connection conn = null;
         PreparedStatement pos = null;
         PreparedStatement posd = null;
