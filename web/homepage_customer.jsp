@@ -40,20 +40,20 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
-                                <li class="active"><a href="homepage_customer.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                                <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
-                                <li><a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+                                <li class="active nav-home-profile"><a href="homepage_customer.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                                <li class="nav-home-profile"><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
                                 <li class="nav-form">
                                     <form action="MainController" method="post">
-                                        <input type="submit" value="Category" name="btAction" />
-                                    </form>  
+                                        <button type="submit" value="Category" name="btAction" class="btn btn-default">Category</button>
+                                    </form>
                                 </li>
                                 <li class="nav-form">
                                     <form action="MainController" method="post">
-                                        <input type="submit" value="Favorite" name="btAction" />
-                                    </form>  
+                                        <button type="submit" value="Favorite" name="btAction" class="btn btn-default">Favorite</button>
+                                    </form>
                                 </li>
                             </ul>
+
                             <ul class="nav navbar-nav navbar-right">
                                 <li><a href="login.jsp" style="color: #ffffff">Logout</a></li>
                             </ul>
@@ -63,6 +63,7 @@
                 </nav>
             </div>
 
+            
 
             <div class="row anh1">
 

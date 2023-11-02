@@ -47,10 +47,10 @@
                                 <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
                                 <li><a href="manage_store.jsp" style="color: #ffffff">Order</a></li>
                                 <li><a href="contact.html" style="color: #ffffff"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
-                                <li>
+                                <li class="nav-form">
                                     <form action="MainController" method="post">
-                                        <input type="submit" value="Settings" name="btAction" />
-                                    </form>  
+                                        <button type="submit" value="Settings" name="btAction" class="btn btn-default">Setting</button>
+                                    </form>
                                 </li>
                             </ul>
 
@@ -157,44 +157,29 @@
                         <div class="relative">
                             <h3>Trả đồ cho khách hàng</h3>
                             <p>Nhân viên sẽ giao trả hàng lại cho khách hàng</p>
-
                         </div>
                     </div>
                 </div>
             </div>
             <br>    
             <div class="row orderonline">
-
                 <div class="col-md-12">
                     <h2>The best Laundry Middle Platform</h2>
                     <p style="color: darkcyan">No more dragging your laundry to the laundromat! With Cleaner, you can have your laundry picked up and delivered to your door.
                         We offer a variety of convenient pickup and delivery times to fit your schedule.</p>
                 </div>
-
             </div>
-
             <div class="row order">
-
                 <div class="col-md-6">
-
                     <div>
-
                         <img id="image1" src="image/logo.png" />
-
                     </div>
-
                 </div>
-
                 <div>
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d582.5042382897573!2d106.80972000195557!3d10.841448543525589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752731176b07b1%3A0xb752b24b379bae5e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgVFAuIEhDTQ!5e0!3m2!1svi!2s!4v1698773108161!5m2!1svi!2s" width="570" height="431.08" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
-
-
-
             </div>
-
-
 
         </div>
 
