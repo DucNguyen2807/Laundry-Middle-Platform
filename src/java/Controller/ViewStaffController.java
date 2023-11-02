@@ -37,7 +37,6 @@ public class ViewStaffController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             request.setCharacterEncoding("UTF-8");
 
             int itemsPerPage = 10;

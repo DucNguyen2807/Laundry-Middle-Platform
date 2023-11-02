@@ -38,11 +38,9 @@ public class ViewCustomerController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             request.setCharacterEncoding("UTF-8");
+            
             String url = VIEWCUSTOMER;
             String searchValue = request.getParameter("txtSearchCustomer");
-            //HttpSession session = request.getSession();
-            //Staff staff = (Staff) request.getSession().getAttribute("staff");
-            //String name = staff.getFullname();
 
             CustomerService customerSer = new CustomerService();
 

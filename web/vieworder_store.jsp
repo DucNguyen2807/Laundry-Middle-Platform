@@ -163,19 +163,19 @@
                             %>
                             <td>
                                 <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
-                                <button type="submit" name="btAction" value="Cancel" class="btn btn-danger" name="btAction" onclick="return confirm('Are you sure you want to cancel this order?')">Cancel</button>
+                                <button type="submit" name="btAction" value="Cancel" class="btn btn-danger" name="btAction" onclick="return confirm('Bạn có muốn xóa đơn hàng này không?')">Cancel</button>
                             </td>
                             <td>
                                 <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
                                 <input type="hidden" name="addressCus" value="<%= ord.getAddressCus()%>">
-                                <button type="submit" name="btAction" value="Approve" class="btn btn-success" name="btAction">Approve</button>
+                                <button type="submit" name="btAction" value="Approve" class="btn btn-success" name="btAction" onclick="return alert('Xác nhận thành công!')">Approve</button>
                             </td>
                             <%
                             } else if (button.equals("4")) {
                             %>
                             <td>
                                 <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
-                                <button type="submit" name="btAction" value="Done" class="btn btn-success" name="btAction">Done</button>
+                                <button type="submit" name="btAction" value="Done" class="btn btn-success" name="btAction" onclick="return alert('Xác nhận thành công!')">Done</button>
                             </td>
                             <%
                                 }
