@@ -35,6 +35,7 @@ public class ViewHistoryController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         try (PrintWriter out = response.getWriter()) {
+            request.setCharacterEncoding("UTF-8");
             String url = SHOWSEARCHCONTROLLER;
             String searchValue = request.getParameter("txtSearchOrder");
             User user = (User) request.getSession().getAttribute("user");
