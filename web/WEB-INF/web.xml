@@ -37,7 +37,6 @@
         <servlet-class>Controller.UpdateOrderController</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>ViewOrderWaitingController</servlet-name>
         <servlet-class>Controller.ViewOrderWaitingController</servlet-class>
     </servlet>
@@ -48,12 +47,18 @@
     <servlet>
         <servlet-name>UpdateStaffOrderController</servlet-name>
         <servlet-class>Controller.UpdateStaffOrderController</servlet-class>
-
     </servlet>
     <servlet>
         <servlet-name>GetReviewController</servlet-name>
         <servlet-class>Controller.GetReviewController</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>ViewOrderCustomerController</servlet-name>
+        <servlet-class>Controller.ViewOrderCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CancelOrderCusController</servlet-name>
+        <servlet-class>Controller.CancelOrderCusController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -92,7 +97,6 @@
         <url-pattern>/UpdateOrderController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>ViewOrderWaitingController</servlet-name>
         <url-pattern>/ViewOrderWaitingController</url-pattern>
     </servlet-mapping>
@@ -103,14 +107,19 @@
     <servlet-mapping>
         <servlet-name>UpdateStaffOrderController</servlet-name>
         <url-pattern>/UpdateStaffOrderController</url-pattern>
-        
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetReviewController</servlet-name>
         <url-pattern>/GetReviewController</url-pattern>
-        
     </servlet-mapping>
-    
+    <servlet-mapping>
+        <servlet-name>ViewOrderCustomerController</servlet-name>
+        <url-pattern>/ViewOrderCustomerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelOrderCusController</servlet-name>
+        <url-pattern>/CancelOrderCusController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
