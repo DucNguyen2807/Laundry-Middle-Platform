@@ -24,10 +24,22 @@ public class UserGoogleDto {
 
     private String picture;
 
+    private String username;
+
+    private String password;
+
+    private int roleId;
+
+    private String fullname;
+
+    private String phone;
+
+    private String address;
+
     public UserGoogleDto() {
     }
 
-    public UserGoogleDto(String id, String email, boolean verified_email, String name, String given_name, String family_name, String picture) {
+    public UserGoogleDto(String id, String email, boolean verified_email, String name, String given_name, String family_name, String picture, String password, int roleId, String username) {
         this.id = id;
         this.email = email;
         this.verified_email = verified_email;
@@ -35,6 +47,65 @@ public class UserGoogleDto {
         this.given_name = given_name;
         this.family_name = family_name;
         this.picture = picture;
+        this.password = password;
+        this.roleId = roleId;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+    
+    public String getFullname() {
+        return this.fullname;
+    }
+    
+    
+    
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+    
+    
+    
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public void setUsernamme(String usernamme) {
+        this.username = usernamme;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getId() {
@@ -95,7 +166,7 @@ public class UserGoogleDto {
 
     @Override
     public String toString() {
-        return "UserGoogleDto{" + "id=" + id + ", email=" + email + ", verified_email=" + verified_email + ", name=" + name + ", given_name=" + given_name + ", family_name=" + family_name + ", picture=" + picture + '}';
+        return "UserGoogleDto{" + "id=" + id + ", username=" + username + ", email=" + email + ", verified_email=" + verified_email + ", name=" + name + ", given_name=" + given_name + ", family_name=" + family_name + ", picture=" + picture + ", password=" + password + '}';
     }
 
 }

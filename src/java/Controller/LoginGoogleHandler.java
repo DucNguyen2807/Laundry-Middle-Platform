@@ -4,17 +4,23 @@
  */
 package Controller;
 
+import Model.User;
 import Model.UserGoogleDto;
 import Service.Constants;
+import Service.UserService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
@@ -36,12 +42,28 @@ public class LoginGoogleHandler extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         String code = request.getParameter("code");
-        String accessToken = getToken(code);
-        UserGoogleDto user = getUserInfo(accessToken);
-        System.out.println(user);
-        response.sendRedirect("homepage_customer.jsp");
+    String accessToken = getToken(code);
+    User user = getUserInfo(accessToken);
+
+    try {
+        boolean userExists = UserService.getUserByEmail(user.getEmail());
+
+        if (!userExists) {
+            UserService.insertUser(user);
+        } else {
+            user = UserService.getUserGG(user.getEmail()); 
+        }
+
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
+    } catch (ClassNotFoundException ex) {
+        // Xử lý ngoại lệ
+        ex.printStackTrace();
+    }
+
+    response.sendRedirect("homepage_customer.jsp");
     }
 
     public static String getToken(String code) throws ClientProtocolException, IOException {
@@ -58,11 +80,11 @@ public class LoginGoogleHandler extends HttpServlet {
         return accessToken;
     }
 
-    public static UserGoogleDto getUserInfo(final String accessToken) throws ClientProtocolException, IOException {
+    public static User getUserInfo(final String accessToken) throws ClientProtocolException, IOException {
         String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
         String response = Request.Get(link).execute().returnContent().asString();
 
-        UserGoogleDto googlePojo = new Gson().fromJson(response, UserGoogleDto.class);
+        User googlePojo = new Gson().fromJson(response, User.class);
 
         return googlePojo;
     }
@@ -79,7 +101,11 @@ public class LoginGoogleHandler extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginGoogleHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -93,7 +119,11 @@ public class LoginGoogleHandler extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginGoogleHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
