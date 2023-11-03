@@ -158,7 +158,7 @@ public class StaffService implements Serializable {
                         + "LEFT JOIN [OrderDetail] od ON o.OrderID = od.OrderID "
                         + "LEFT JOIN [User] u ON o.StaffID = u.UserID "
                         + "LEFT JOIN StatusStaff st ON st.StStaffID = u.Status "
-                        + "WHERE (o.StOrderID = 4 OR o.StOrderID = 2 OR o.StOrderID = 6 OR o.StOrderID = 7) AND u.UserID IS NOT NULL "
+                        + "WHERE (o.StOrderID = 4 OR o.StOrderID = 2 OR o.StOrderID = 6 OR o.StOrderID = 7) AND u.Status = 2 AND u.UserID IS NOT NULL "
                         + "GROUP BY u.UserID, u.Username, u.Password, u.Address, u.Fullname, u.Phone, u.Email, st.StStaffDetail "
                         + "HAVING COUNT(o.OrderID) < 20 "
                         + "UNION ALL "
@@ -166,7 +166,7 @@ public class StaffService implements Serializable {
                         "SELECT u.UserID, u.Username, u.Password, u.Address, u.Fullname, u.Phone, u.Email, st.StStaffDetail, 0 AS OrderCount "
                         + "FROM [User] u "
                         + "LEFT JOIN StatusStaff st ON st.StStaffID = u.Status "
-                        + "WHERE u.RoleID = 2 "
+                        + "WHERE u.RoleID = 2 AND u.Status = 2 "
                         + "AND NOT EXISTS (SELECT 1 FROM [Order] o WHERE o.StaffID = u.UserID) "
                         + "ORDER BY OrderCount ASC";
 
