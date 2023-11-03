@@ -65,7 +65,7 @@ public class OrderService implements Serializable {
         }
 
         String timeComplete;
-        Time timeCompleteValue = rs.getTime("TimeComplete");
+        String timeCompleteValue = rs.getString("TimeComplete");
         if (rs.wasNull()) {
             timeComplete = "NULL";
         } else {
@@ -109,7 +109,8 @@ public class OrderService implements Serializable {
                         + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
                         + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
                         + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
-                        + " WHERE us.UserID = ? AND o.StOrderID = ? ";
+                        + " WHERE us.UserID = ? AND o.StOrderID = ? \n"
+                        + " ORDER BY o.OrderID DESC ";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, userId);
                 ps.setInt(2, Integer.parseInt(btAction));
@@ -154,7 +155,8 @@ public class OrderService implements Serializable {
                         + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
                         + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
                         + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
-                        + " WHERE u.UserID = ? AND o.StOrderID = ? ";
+                        + " WHERE u.UserID = ? AND o.StOrderID = ?  \n"
+                        + " ORDER BY o.OrderID DESC";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, userId);
                 ps.setInt(2, Integer.parseInt(btAction));
@@ -177,7 +179,7 @@ public class OrderService implements Serializable {
             }
         }
     }
-    
+
     public void viewTaskOrder(int userId, String btAction) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
@@ -199,7 +201,8 @@ public class OrderService implements Serializable {
                         + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] u ON u.UserID = o.CustomerID\n"
                         + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] us ON us.UserID = o.StoreID\n"
                         + " LEFT JOIN [Laundry-Middle-Platform].[dbo].[User] uf ON uf.UserID = o.StaffID\n"
-                        + " WHERE uf.UserID = ? AND o.StOrderID = ? ";
+                        + " WHERE uf.UserID = ? AND o.StOrderID = ? \n"
+                        + " ORDER BY o.OrderID DESC";
                 ps = con.prepareStatement(sql);
                 ps.setInt(1, userId);
                 ps.setInt(2, Integer.parseInt(btAction));
@@ -222,7 +225,7 @@ public class OrderService implements Serializable {
             }
         }
     }
-    
+
     public Order getOrderDetail(int orderID) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
@@ -312,7 +315,64 @@ public class OrderService implements Serializable {
                     return true;
                 }
             }
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
 
+    public boolean updateDateCompleted(int orderId, Date dateCompleted) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "UPDATE [Laundry-Middle-Platform].[dbo].[Order] SET DateCompleted = ? WHERE OrderID = ?";
+                ps = con.prepareStatement(sql);
+                ps.setDate(1, dateCompleted);
+                ps.setInt(2, orderId);
+
+                int row = ps.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return false;
+    }
+
+    public boolean updateTimeCompleted(int orderId, String timeCompleted) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "UPDATE [Laundry-Middle-Platform].[dbo].[Order] SET TimeComplete = ? WHERE OrderID = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, timeCompleted);
+                ps.setInt(2, orderId);
+
+                int row = ps.executeUpdate();
+                if (row > 0) {
+                    return true;
+                }
+            }
         } finally {
             if (ps != null) {
                 ps.close();
@@ -354,31 +414,30 @@ public class OrderService implements Serializable {
         return false;
     }
 
-  public List<Staff> getNearestStaff(String addCus, List<Staff> Staffs) {
-    List<Staff> nearestStaff = new ArrayList<>();
-    
-    // Chia địa chỉ khách hàng thành các phần
-    String[] CusAddressParts = addCus.split(", ");
-    String cusStreet = CusAddressParts[0];
-    String cusWard = CusAddressParts[1];
-    String cusDistrict = CusAddressParts[2];
-    String cusCity = CusAddressParts[3];
+    public List<Staff> getNearestStaff(String addCus, List<Staff> Staffs) {
+        List<Staff> nearestStaff = new ArrayList<>();
 
-    for (Staff staff : Staffs) {
-        // Chia địa chỉ của nhân viên thành các phần
-        String[] staffAddressParts = staff.getAddress().split(", ");
-        String staffStreet = staffAddressParts[0];
-        String staffWard = staffAddressParts[1];
-        String staffDistrict = staffAddressParts[2];
-        String staffCity = staffAddressParts[3];
+        // Chia địa chỉ khách hàng thành các phần
+        String[] CusAddressParts = addCus.split(", ");
+//    String cusStreet = CusAddressParts[0];
+//    String cusWard = CusAddressParts[1];
+        String cusDistrict = CusAddressParts[2];
+        String cusCity = CusAddressParts[3];
 
-        // So sánh thành phố và quận của khách hàng và nhân viên
-        if (cusCity.equalsIgnoreCase(staffCity) && cusDistrict.equalsIgnoreCase(staffDistrict)) {
-            nearestStaff.add(staff);
+        for (Staff staff : Staffs) {
+            // Chia địa chỉ của nhân viên thành các phần
+            String[] staffAddressParts = staff.getAddress().split(", ");
+//        String staffStreet = staffAddressParts[0];
+//        String staffWard = staffAddressParts[1];
+            String staffDistrict = staffAddressParts[2];
+            String staffCity = staffAddressParts[3];
+
+            // So sánh thành phố và quận của khách hàng và nhân viên
+            if (cusCity.equalsIgnoreCase(staffCity) && cusDistrict.equalsIgnoreCase(staffDistrict)) {
+                nearestStaff.add(staff);
+            }
         }
+
+        return nearestStaff;
     }
-
-    return nearestStaff;
 }
-}
-

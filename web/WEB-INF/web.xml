@@ -116,7 +116,7 @@
         <servlet-name>CancelOrderCusController</servlet-name>
         <url-pattern>/CancelOrderCusController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
+     <servlet-mapping>
         <servlet-name>UpdateTaskCompletedController</servlet-name>
         <url-pattern>/UpdateTaskCompletedController</url-pattern>
     </servlet-mapping>
