@@ -36,10 +36,13 @@ public class BeforeThanhToanController extends HttpServlet {
             System.out.println(storeID);
             store.getStoreSale(storeID);
             store.getAllPrice(storeID);
+            store.getAllReview(storeID);
             
             List<Review> storeSale = store.getListStoreSale();
             List<Review> storePrice = store.getListPrice();
+            List<Review> allReviews = store.getListCate();
            
+            request.setAttribute("allReviews", allReviews);
             request.setAttribute("storeSale", storeSale);
             request.setAttribute("storePrice", storePrice);
             RequestDispatcher dispatcher = request.getRequestDispatcher("thanhtoan.jsp");

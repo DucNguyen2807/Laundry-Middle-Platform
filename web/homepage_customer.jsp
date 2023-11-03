@@ -64,7 +64,7 @@
                 </nav>
             </div>
 
-            
+
 
             <div class="row anh1">
 
@@ -100,7 +100,8 @@
                                     </div>
                                     <p class="card-text show_txt">Giá chỉ từ: <c:out value="${cat.averagePrice}" /> đ</p>
                                 </div>
-                                <a href='<c:url value="/GetReviewController?storeID=${cat.storeID}" />' class="btn btn-success btn-block">Get more information</a>
+                                <a href='<c:url value="/BeforeThanhToanController?storeID=${cat.storeID}" />'class="btn btn-success btn-block">Get more information</a>
+
                             </div>
                         </div>
                     </c:if>

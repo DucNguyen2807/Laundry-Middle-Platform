@@ -49,89 +49,136 @@
                     </div><!-- /.container-fluid -->
                 </nav>
             </div>
+            
             <div class="container mt-5">
-
-                <div class="col-md-3 mx-auto">
-
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-6 mx-auto">
-                        <c:if test="${not empty successMessage}">
-                            <div class="alert alert-success">
-                                <strong>Thông báo:</strong> <c:out value="${successMessage}" />
-                            </div>
-                        </c:if>
-                        <c:if test="${not empty errorMessage}">
-                            <div class="alert alert-danger">
-                                <strong>Lỗi:</strong> <c:out value="${errorMessage}" />
-                            </div>
-                        </c:if>
-                        <div class="customer-details mx-auto">
-                            <h2>Thông tin khách hàng</h2>
-                            <form action="ConfirmOrderController" method="post" accept-charset="UTF-8">
-                                <label for="fullname">Tên khách hàng:</label>
-                                <input type="text" class="bg-light form-control" name="fullname" value="${user.fullname}" readonly>
-                                <c:if test="${not empty errorMessage}">
-                                    <div class="alert alert-danger">
-                                        <strong>Lỗi:</strong> <c:out value="${errorMessage}" />
-                                    </div>
-                                </c:if>
-                                <label for="phone">Số điện thoại:</label>
-                                <input type="tel" id="phone" name="phone" value="0${user.phone}" required><br>
-                                <c:if test="${not empty errorMessage3}">
-                                    <div class="alert alert-danger">
-                                        <strong>Lỗi:</strong> <c:out value="${errorMessage3}" />
-                                    </div>
-                                </c:if>
-                                <label for="customerAddress">Địa chỉ:</label>
-                                <input type="text" id="customerAddress" name="customerAddress" value="${user.address}" required><br>
-
-                                <label for="kilos">Số kg (từ 1 đến 20):</label>
-                                <input type="number" id="kilos" name="kilos" required min="1" max="20" oninput="checkMaxValue(this)">
-
-                                <label for="selectedService">Dịch vụ và giá cả:</label>
-                                <select id="selectedService" name="selectedService">
+                
+                <div class="row">
+                    <c:if test="${not empty successMessage}">
+                                <div class="alert alert-success">
+                                    <strong>Thông báo:</strong> <c:out value="${successMessage}" />
+                                </div>
+                            </c:if>
+                            <c:if test="${not empty errorMessage}">
+                                <div class="alert alert-danger">
+                                    <strong>Lỗi:</strong> <c:out value="${errorMessage}" />
+                                </div>
+                            </c:if>
+                    <div class="col-md-6">
+                        <div class="customer-details">
+                            <c:choose>
+                                <c:when test="${not empty storeSale}">
                                     <c:forEach items="${storeSale}" var="store">
-                                        <c:forEach items="${storePrice}" var="price">
-                                            <c:if test="${price.storeID eq store.storeID}">
-                                                <option value="${price.serviceID}" data-price="${price.price}">
-                                                    ${price.serviceDetail} : ${price.price} đ
-                                                </option>
-                                            </c:if>
-                                        </c:forEach>
+                                        <div class="text-center">
+                                            <img src="${store.imageDetail}" alt="Cửa hàng" alt="Store Image" style="width: 83%; height: auto;" />
+                                        </div>
                                     </c:forEach>
-                                </select>
+                                </c:when>
+                            </c:choose>
 
-                                <c:forEach items="${storeSale}" var="store">
-                                    <input type="hidden" name="storeID" value="${store.storeID}" />
-                                    <input type="hidden" name="storeAddress" value="${store.address}" />
-                                </c:forEach>
-
-
-                                <label for="note">Ghi chú:</label>
-                                <textarea id="note" name="note" rows="4"></textarea><br>
-                                <div style="display: flex; align-items: center;">
-                                    <div>
-                                        <label for="time">Chọn thời gian:</label>
-                                        <input type="time" id="time" name="time" required>
-                                    </div>
-                                    <div style="margin-left: 50px;">
-
-                                        <label for="date">Chọn ngày:</label>
-                                        <input type="date" id="date" name="date" required>
+                            <c:forEach items="${storeSale}" var="store">
+                                <div class="card-body">
+                                    <p>Tên cửa hàng: ${store.storeName.toUpperCase()}</p>
+                                    <p>Địa chỉ: ${store.address}</p>
+                                    <div class="rating">
+                                        Rating:
+                                        <c:forEach begin="1" end="${store.averageRating}">
+                                            <span class="star yellow">★</span>
+                                        </c:forEach>
                                     </div>
                                 </div>
-                                <br>
+                            </c:forEach>   
 
-                                <input type="hidden" name="totalPrice" id="totalPrice" value="0">
-                                <p>Tổng tiền cần thanh toán: <span id="totalAmount">0 VNĐ</span></p>                       
-                                <br>
-                                <button type="submit" name="btAction" value="ConfirmOrder">Xác nhận đặt hàng</button>
-                            </form>
+                            <div class="reviews-section">
+                                <p>Tổng số lượt đánh giá: ${allReviews.size()}</p>
+                                <div id="reviewsContainer">
+                                    <c:forEach items="${allReviews}" var="review">
+
+                                        <div class="review">
+                                            <p>Customer Name: ${review.customerName.toUpperCase()}</p>
+                                            <p>Review Text: ${review.reviewText}</p>
+                                            <div class="rating">
+                                                Rating:
+                                                <c:forEach begin="1" end="${review.rating}">
+                                                    <span class="star yellow">★</span>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+
+                                    </c:forEach>
+                                </div>
+                                <button id="prevReview">Previous</button>
+                                <button id="nextReview">Next</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-3 mx-auto">
 
+                    <div>
+                        <div class="col-md-6">
+                            
+                            <div class="customer-details mx-auto">
+                                <h2>Thông tin khách hàng</h2>
+                                <form action="ConfirmOrderController" method="post" accept-charset="UTF-8">
+                                    <label for="fullname">Tên khách hàng:</label>
+                                    <input type="text" class="bg-light form-control" name="fullname" value="${user.fullname}" readonly>
+                                    <c:if test="${not empty errorMessage}">
+                                        <div class="alert alert-danger">
+                                            <strong>Lỗi:</strong> <c:out value="${errorMessage}" />
+                                        </div>
+                                    </c:if>
+                                    <label for="phone">Số điện thoại:</label>
+                                    <input type="tel" id="phone" name="phone" value="0${user.phone}" required><br>
+                                    <c:if test="${not empty errorMessage3}">
+                                        <div class="alert alert-danger">
+                                            <strong>Lỗi:</strong> <c:out value="${errorMessage3}" />
+                                        </div>
+                                    </c:if>
+                                    <label for="customerAddress">Địa chỉ:</label>
+                                    <input type="text" id="customerAddress" name="customerAddress" value="${user.address}" required><br>
+
+                                    <label for="kilos">Số kg (từ 1 đến 20):</label>
+                                    <input type="number" id="kilos" name="kilos" required min="1" max="20" oninput="checkMaxValue(this)">
+
+                                    <label for="selectedService">Dịch vụ và giá cả:</label>
+                                    <select id="selectedService" name="selectedService">
+                                        <c:forEach items="${storeSale}" var="store">
+                                            <c:forEach items="${storePrice}" var="price">
+                                                <c:if test="${price.storeID eq store.storeID}">
+                                                    <option value="${price.serviceID}" data-price="${price.price}">
+                                                        ${price.serviceDetail} : ${price.price} đ
+                                                    </option>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:forEach>
+                                    </select>
+
+                                    <c:forEach items="${storeSale}" var="store">
+                                        <input type="hidden" name="storeID" value="${store.storeID}" />
+                                        <input type="hidden" name="storeAddress" value="${store.address}" />
+                                    </c:forEach>
+
+
+                                    <label for="note">Ghi chú:</label>
+                                    <textarea id="note" name="note" rows="4"></textarea><br>
+                                    <div style="display: flex; align-items: center;">
+                                        <div>
+                                            <label for="time">Chọn thời gian:</label>
+                                            <input type="time" id="time" name="time" required>
+                                        </div>
+                                        <div style="margin-left: 50px;">
+
+                                            <label for="date">Chọn ngày:</label>
+                                            <input type="date" id="date" name="date" required>
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                    <input type="hidden" name="totalPrice" id="totalPrice" value="0">
+                                    <p>Tổng tiền cần thanh toán: <span id="totalAmount">0 VNĐ</span></p>                       
+                                    <br>
+                                    <button type="submit" name="btAction" value="ConfirmOrder">Xác nhận đặt hàng</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -167,6 +214,30 @@
                 document.getElementById("selectedService").addEventListener("change", calculateTotalAmount);
                 document.getElementById("kilos").addEventListener("input", calculateTotalAmount);
                 calculateTotalAmount();
+
+                var reviewIndex = 0;
+                var reviews = document.querySelectorAll('.review');
+                function showReview(index) {
+                    for (var i = 0; i < reviews.length; i++) {
+                        reviews[i].style.display = 'none';
+                    }
+                    reviews[index].style.display = 'block';
+                }
+                document.getElementById('prevReview').addEventListener('click', function () {
+                    if (reviewIndex > 0) {
+                        reviewIndex--;
+                        showReview(reviewIndex);
+                    }
+                });
+
+                document.getElementById('nextReview').addEventListener('click', function () {
+                    if (reviewIndex < reviews.length - 1) {
+                        reviewIndex++;
+                        showReview(reviewIndex);
+                    }
+                });
+
+                showReview(reviewIndex);
             </script>
             <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
