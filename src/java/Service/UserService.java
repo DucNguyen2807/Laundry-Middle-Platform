@@ -8,6 +8,7 @@ import DBConnect.ConnectDB;
 import Model.Cate;
 import Model.Order;
 import Model.User;
+import Model.UserGoogleDto;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.Date;
@@ -607,7 +608,7 @@ public class UserService implements Serializable {
         cate.setStoreID(rs.getString("UserID"));
         cate.setStoreName(rs.getString("Fullname"));
         cate.setAddress(rs.getString("Address"));
-        
+
         cate.setService(rs.getString("ServiceDetail"));
         cate.setRating(Integer.parseInt(rs.getString("AverageRating")));
         cate.setReview(rs.getString("ReviewText"));
@@ -712,6 +713,119 @@ public class UserService implements Serializable {
             }
         }
         return false;
+    }
+
+    public static boolean insertUser(User user) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "INSERT INTO [User] (Username, FullName, Email, Password, RoleID) VALUES (?, ?, ?, ?, ?)";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, user.getEmail());
+                ps.setString(2, user.getFullname());
+                ps.setString(3, user.getEmail());
+                ps.setString(4, "123456");
+                ps.setInt(5, 1);
+                int row = ps.executeUpdate();
+                
+                
+                
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return false; // Return false if the insertion was not successful
+    }
+
+    public static User getUserGG(String username) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        User user = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT * FROM [User] WHERE Username = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, username);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    user = new User();
+                    user.setUsername(rs.getString("username"));
+                    user.setPhone(rs.getString("phone"));
+                    user.setFullname(rs.getString("fullname"));
+                    user.setEmail(rs.getString("email"));
+                    user.setaddress(rs.getString("address"));
+                    user.setRoleId(Integer.parseInt(rs.getString("roleId")));
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return user;
+    }
+
+    public static boolean getUserByEmail(String email) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet resultSet = null;
+
+        try {
+            con = ConnectDB.getConnection();
+            if (con != null) {
+                // Create an SQL query to check if a user with the given email exists
+                String sql = "SELECT * FROM [User] WHERE Email = ?";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, email);
+
+                resultSet = ps.executeQuery();
+                // If a user with the specified email exists, return true
+                return resultSet.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return false; // If an exception occurs or no user found, return false
     }
 
 }
