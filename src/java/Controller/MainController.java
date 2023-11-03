@@ -96,7 +96,7 @@ public class MainController extends HttpServlet {
                 url = UPDATETASKFINISH;
             } else if (button.equals("Completed")) {
                 url = UPDATETASKCOMPLETED;
-            } else if (button.equals("NewOrderCus") || button.equals("ProcessingCustomer") || button.equals("CompletedCustomer")) {
+            } else if (button.equals("NewOrderCus") || button.equals("ProcessingCustomer")|| button.equals("CompletedCustomer") || button.equals("WaitingCustomer")) {
                 url = VIEWORDER_CUSTOMER;
             } else if (button.equals("CancelCus")) {
                 url = CANCELORDERCUSCONTROLLER;

@@ -41,6 +41,8 @@ public class ViewOrderCustomerController extends HttpServlet {
                     ord.viewOrderCustomer(userId, "4");
                 } else if (button.equals("CompletedCustomer")) {
                     ord.viewOrderCustomer(userId, "5");
+                } else if (button.equals("WaitingCustomer")) {
+                    ord.viewOrderCustomer(userId, "2");
                 }
                 
                 List<Order> result = ord.getListOrder();

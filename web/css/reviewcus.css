@@ -1,0 +1,36 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Nov 2, 2023, 10:06:42 PM
+    Author     : nguye
+*/
+
+.reviews-section {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.review {
+  margin-bottom: 20px;
+}
+
+.review p {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.rating {
+  margin-top: 10px;
+}
+
+.star {
+  font-size: 20px;
+  color: yellow;
+}
+
+#submit-review {
+  margin-top: 20px;
+}

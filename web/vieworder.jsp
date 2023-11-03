@@ -150,23 +150,13 @@
                 <thead>
                     <tr>
                         <th scope="col">No.</th>
-                        <th scope="col">OrderID</th>
-                        <!--                        <th scope="col">Service</th>
-                                                <th scope="col">Weight</th>
-                                                <th scope="col">TotalPrice</th>
-                                                <th scope="col">Phone Customer</th>-->
                         <th scope="col">CustomerAddress</th>
                         <th scope="col">StoreAddress</th>
-<!--                        <th scope="col">Note</th>
-                        <th scope="col">DateApprove</th>
-                        <th scope="col">DateCompleted</th>
-                        <th scope="col">TimeComplete</th>                    -->
                         <th scope="col">Customer</th>
                         <th scope="col">Store</th>
                         <th scope="col">DateDesired</th>
                         <th scope="col">TimeDesired</th>
-                        <th scope="col">Staff</th><!--
-                        <th scope="col">Status</th>-->
+                        <th scope="col">Staff</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -177,23 +167,13 @@
                 <form action="MainController">
                     <tr>
                         <td><%= ++count%></td>
-                        <td><%= ord.getOrderID()%></td>
-<!--                        <td><%= ord.getServiceDetail()%></td>
-                        <td><%= ord.getWeight()%></td>
-                        <td><%= ord.getTotalPrice()%></td>
-                        <td><%= ord.getPhoneCus()%></td>-->
                         <td><%= ord.getAddressCus()%></td>
                         <td><%= ord.getAddressSto()%></td>
                         <td><%= ord.getCustomerName()%></td>
                         <td><%= ord.getStoreName().toUpperCase()%></td>
-<!--                        <td><%= ord.getNote()%></td>-->
                         <td><%= ord.getDateDesired()%></td>
                         <td><%= ord.getTimeDesired()%></td>
-<!--                        <td><%= ord.getDateApproved()%></td>
-                        <td><%= ord.getDateComplete()%></td>
-                        <td><%= ord.getTimeComplete()%></td>-->
                         <td><%= ord.getStaffName()%></td>
-<!--                        <td><%= ord.getStOrderDetail()%></td>-->
                     </tr>
                 </form>
 

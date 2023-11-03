@@ -29,7 +29,6 @@ public class CancelOrderCusController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String button = request.getParameter("btAction");
             String orderID = request.getParameter("orderID");
-            String addressCus = request.getParameter("addressCus");
             
             OrderService ord = new OrderService();
 

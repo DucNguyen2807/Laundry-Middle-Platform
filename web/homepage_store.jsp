@@ -92,7 +92,7 @@
                             <div style="margin: 25px 20px" class="card-body text-center vertical-center">
                                 <div class="card-body">
                                     <img class="card-img-top" src="<c:out value='${cat.image}'/>" alt="Store Image" style="width: 100%; height: auto;">
-                                    <h4 class="card-title show_txt">Tên cửa hàng: <c:out value='${cat.storeName}'/></h4>
+                                    <h4 class="card-title show_txt">Tên cửa hàng: <c:out value='${cat.storeName.toUpperCase()}'/></h4>
                                     <p class="card-text show_txt">Địa chỉ: <c:out value='${cat.address}'/></p>
                                     <div class="rating">
                                         <c:forEach begin="1" end="${cat.rating}">
@@ -101,7 +101,8 @@
                                     </div>
                                     <p class="card-text show_txt">Giá chỉ từ: <c:out value="${cat.averagePrice}" /> đ</p>
                                 </div>
-                                <a href='<c:url value="/GetReviewController?storeID=${cat.storeID}" />' class="btn btn-success btn-block">Get more information</a>
+                                <a href='<c:url value="/BeforeThanhToanController?storeID=${cat.storeID}" />'class="btn btn-success btn-block">Get more information</a>
+
                             </div>
                         </div>
                     </c:if>
