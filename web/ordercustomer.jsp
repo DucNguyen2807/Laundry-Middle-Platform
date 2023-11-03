@@ -67,7 +67,16 @@
                                         </form>
                                     </a>
                                 </li>
-
+                                
+                                <li>
+                                    <a style="background-color:#red; color: #ffffff">
+                                        <form action="MainController" method="post">
+                                            <input type="hidden" name="btAction" value="WaitingCustomer" />
+                                            <button type="submit" class="btn btn-primary">Waiting for a return</button>
+                                        </form>
+                                    </a>
+                                </li>
+                                
                                 <li>
                                     <a style="background-color:#red; color: #ffffff">
                                         <form action="MainController" method="post">
@@ -167,6 +176,7 @@
                                 <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
                                 <button type="submit" name="btAction" value="Review" class="btn btn-success" name="btAction">Review</button>
                             </td>
+                            <li><a href="reviewforcus.jsp" style="color: #ffffff">Profile</a></li>
                             <%
                                 }
                             %>

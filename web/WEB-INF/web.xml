@@ -49,18 +49,16 @@
         <servlet-class>Controller.UpdateStaffOrderController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GetReviewController</servlet-name>
-        <servlet-class>Controller.GetReviewController</servlet-class>
-    </servlet>
-    <servlet>
-
         <servlet-name>ViewOrderCustomerController</servlet-name>
         <servlet-class>Controller.ViewOrderCustomerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CancelOrderCusController</servlet-name>
         <servlet-class>Controller.CancelOrderCusController</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateTaskCompletedController</servlet-name>
+        <servlet-class>Controller.UpdateTaskCompletedController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
@@ -111,18 +109,16 @@
         <url-pattern>/UpdateStaffOrderController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>GetReviewController</servlet-name>
-        <url-pattern>/GetReviewController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-
         <servlet-name>ViewOrderCustomerController</servlet-name>
         <url-pattern>/ViewOrderCustomerController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CancelOrderCusController</servlet-name>
         <url-pattern>/CancelOrderCusController</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateTaskCompletedController</servlet-name>
+        <url-pattern>/UpdateTaskCompletedController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -132,4 +128,7 @@
     <welcome-file-list>
         <welcome-file>MainController</welcome-file>
     </welcome-file-list>
+    <servlet-name>UpdateTaskCompletedController</servlet-name>
+    <url-pattern>/UpdateTaskCompletedController</url-pattern>
+    <servlet-class>Controller.UpdateTaskCompletedController</servlet-class>
 </web-app>

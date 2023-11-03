@@ -150,11 +150,11 @@ public class StoreService implements Serializable {
                 String sql = "SELECT u.UserID, u.Fullname, u.Address, i.ImageDetail, "
                         + "AVG(r.Rating) AS AverageRating, "
                         + "FORMAT(ROUND(AVG(p.PriceDetail), 0), 'N0') AS AveragePrice "
-                        + "FROM [Laundry-Middle-Platform1].[dbo].[User] u "
-                        + "INNER JOIN [Laundry-Middle-Platform1].[dbo].[Price] p ON u.UserID = p.StoreID "
-                        + "INNER JOIN [Laundry-Middle-Platform1].[dbo].[Service] s ON s.ServiceID = p.ServiceID "
-                        + "INNER JOIN [Laundry-Middle-Platform1].[dbo].[Review] r ON r.StoreID = u.UserID "
-                        + "INNER JOIN [Laundry-Middle-Platform1].[dbo].[Image] i ON i.StoreID = u.UserID "
+                        + "FROM [Laundry-Middle-Platform].[dbo].[User] u "
+                        + "INNER JOIN [Laundry-Middle-Platform].[dbo].[Price] p ON u.UserID = p.StoreID "
+                        + "INNER JOIN [Laundry-Middle-Platform].[dbo].[Service] s ON s.ServiceID = p.ServiceID "
+                        + "INNER JOIN [Laundry-Middle-Platform].[dbo].[Review] r ON r.StoreID = u.UserID "
+                        + "INNER JOIN [Laundry-Middle-Platform].[dbo].[Image] i ON i.StoreID = u.UserID "
                         + "GROUP BY u.UserID, u.Fullname, u.Address, i.ImageDetail "
                         + "ORDER BY AverageRating DESC;";
 
@@ -194,7 +194,7 @@ public class StoreService implements Serializable {
             if (con != null) {
                 String sql = "SELECT p.StoreID, s.ServiceID ,s.ServiceDetail, FORMAT(PriceDetail, 'N0') AS Price "
                         + "FROM [Price] p "
-                        + "INNER JOIN [Laundry-Middle-Platform1].[dbo].Service s ON s.ServiceID = p.ServiceID "
+                        + "INNER JOIN [Laundry-Middle-Platform].[dbo].Service s ON s.ServiceID = p.ServiceID "
                         + "WHERE p.StoreID = ?";
 
                 stm = con.prepareStatement(sql);
@@ -417,14 +417,6 @@ public class StoreService implements Serializable {
                 if (generatedKeys.next()) {
                     orderID = generatedKeys.getInt(1);
                 }
-                System.out.println("OrderID: " + orderID);
-                System.out.println("Kilos: " + kilos);
-                System.out.println("ServiceID: " + serviceID);
-                System.out.println("TotalPrice: " + totalPrice);
-                System.out.println("Phone: " + phone);
-                System.out.println("CustomerAddress: " + customerAddress);
-                System.out.println("AddressSto: " + AddressSto);
-                System.out.println("Note: " + note);
 
                 String insertOrderDetailQuery = "INSERT INTO OrderDetail (OrderID, Weight, ServiceID, TotaPrice, Phone, AddressCus, AddressSto, Note) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
                 posd = conn.prepareStatement(insertOrderDetailQuery);

@@ -607,12 +607,9 @@ public class UserService implements Serializable {
         cate.setStoreID(rs.getString("UserID"));
         cate.setStoreName(rs.getString("Fullname"));
         cate.setAddress(rs.getString("Address"));
-        
-        cate.setService(rs.getString("ServiceDetail"));
         cate.setRating(Integer.parseInt(rs.getString("AverageRating")));
-        cate.setReview(rs.getString("ReviewText"));
         cate.setImage(rs.getString("ImageDetail"));
-
+        cate.setAveragePrice(rs.getString("AveragePrice"));
         return cate;
 
     }
@@ -626,19 +623,17 @@ public class UserService implements Serializable {
             con = ConnectDB.getConnection();
 
             if (con != null) {
-                String sql = "SELECT u.UserID, u.Fullname, u.Address, "
-                        + "p.PriceDetail AS giatthuong, p1.PriceDetail AS giatnhanh, p2.PriceDetail AS giatsieutoc, "
-                        + "s.ServiceDetail, AVG(r.Rating) AS AverageRating, r.ReviewText, i.ImageDetail "
-                        + "FROM [User] u "
-                        + "INNER JOIN Price p ON p.StoreID = u.UserID AND p.ServiceID = 1 "
-                        + "INNER JOIN Price p1 ON p1.StoreID = u.UserID AND p1.ServiceID = 2 "
-                        + "INNER JOIN Price p2 ON p2.StoreID = u.UserID AND p2.ServiceID = 3 "
+                String sql = "SELECT u.UserID, u.Fullname, i.ImageDetail, u.Address, AVG(r.Rating) AS AverageRating, "
+                        + "FORMAT(ROUND(AVG(p.PriceDetail), 0), 'N0') AS AveragePrice "
+                        + "FROM [Laundry-Middle-Platform].[dbo].[User] u "
+                        + "INNER JOIN Price p ON p.StoreID = u.UserID "
                         + "INNER JOIN Service s ON s.ServiceID = p.ServiceID "
                         + "INNER JOIN Review r ON r.StoreID = u.UserID "
-                        + "INNER JOIN Image i ON i.StoreID = u.UserID "
+                        + "LEFT JOIN Image i ON i.StoreID = u.UserID "
                         + "INNER JOIN Favorite f ON f.StoreID = u.UserID "
-                        + "WHERE f.CustomerID= ? "
-                        + "GROUP BY u.UserID, u.Fullname, u.Address, p.PriceDetail, p1.PriceDetail, p2.PriceDetail, s.ServiceDetail, r.ReviewText, i.ImageDetail";
+                        + "WHERE f.CustomerID = ? "
+                        + "GROUP BY u.UserID, u.Fullname, u.Address, i.ImageDetail";
+
                 stm = con.prepareStatement(sql);
                 stm.setInt(1, userId);
                 rs = stm.executeQuery();

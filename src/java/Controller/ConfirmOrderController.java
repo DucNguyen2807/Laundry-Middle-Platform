@@ -4,12 +4,15 @@
  */
 package Controller;
 
+import Model.Review;
 import Model.User;
 import Service.StoreService;
 import Service.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -30,7 +33,7 @@ public class ConfirmOrderController extends HttpServlet {
     private final String THANHTOAN = "thanhtoan.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException, ParseException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
 
         request.setCharacterEncoding("UTF-8");
@@ -73,8 +76,18 @@ public class ConfirmOrderController extends HttpServlet {
             } else {
                 request.setAttribute("errorMessage", "Đã xảy ra lỗi khi đặt hàng. Vui lòng thử lại sau!");
             }
-
+            int storeID = Integer.parseInt(request.getParameter("storeID"));
+            store.getStoreSale(storeID);
+            store.getAllPrice(storeID);
+            store.getAllReview(storeID);
             
+            List<Review> storeSale = store.getListStoreSale();
+            List<Review> storePrice = store.getListPrice();
+            List<Review> allReviews = store.getListCate();
+           
+            request.setAttribute("allReviews", allReviews);
+            request.setAttribute("storeSale", storeSale);
+            request.setAttribute("storePrice", storePrice);
             
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);
             dispatcher.forward(request, response);
@@ -100,6 +113,10 @@ public class ConfirmOrderController extends HttpServlet {
             processRequest(request, response);
         } catch (ParseException ex) {
             Logger.getLogger(ConfirmOrderController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ConfirmOrderController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConfirmOrderController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -119,6 +136,10 @@ public class ConfirmOrderController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
+            Logger.getLogger(ConfirmOrderController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ConfirmOrderController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(ConfirmOrderController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

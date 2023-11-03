@@ -86,9 +86,9 @@ public class LoginController extends HttpServlet {
             
 
             User user = UserService.getUser(username);
-
+            
             request.getSession().setAttribute("user", user);
-            request.setAttribute("topStore", topStore);
+            request.getSession().setAttribute("topStore", topStore);
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
         } catch (SQLException ex) {
