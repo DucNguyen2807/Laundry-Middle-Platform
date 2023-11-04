@@ -144,7 +144,7 @@
                                             <c:forEach items="${storePrice}" var="price">
                                                 <c:if test="${price.storeID eq store.storeID}">
                                                     <option value="${price.serviceID}" data-price="${price.price}">
-                                                        ${price.serviceDetail} : ${price.price} đ
+                                                        ${price.serviceDetail} : ${price.price} /1kg
                                                     </option>
                                                 </c:if>
                                             </c:forEach>

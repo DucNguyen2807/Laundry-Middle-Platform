@@ -84,7 +84,8 @@ public class LoginController extends HttpServlet {
             store.sortByFavoriteCount();
             List<Cate> topStore = store.getListStoreCate();
             
-
+            
+            
             User user = UserService.getUser(username);
             
             request.getSession().setAttribute("user", user);

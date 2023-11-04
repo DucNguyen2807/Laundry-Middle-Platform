@@ -90,7 +90,7 @@
                                         <span class="star yellow">★</span>
                                     </c:forEach>
                                 </div>
-                                <p class="card-text show_txt">Giá chỉ từ: <c:out value="${cat.averagePrice}" /> đ</p>
+                                <p class="card-text show_txt">Giá chỉ từ: <c:out value="${cat.averagePrice}" /> đ/1kg</p>
                             </div>
                             <a href='<c:url value="/BeforeThanhToanController?storeID=${cat.storeID}" />'class="btn btn-success btn-block">Get more information</a>
                         </div>
