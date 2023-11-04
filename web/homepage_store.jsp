@@ -77,39 +77,6 @@
         <!--K?t thúc container-fluid-->
 
         <div class="container mybody">
-            <div class="row combo">
-
-                <div class="col-md-12">
-
-                    <h1>Top các cửa hàng được yêu thích nhất </h1>
-                </div>
-            </div>
-
-            <div class="row">
-                <c:forEach items="${topStore}" var="cat" varStatus="loop">
-                    <c:if test="${loop.index < 3}">
-                        <div class="product col-12 col-md-6 col-lg-4">
-                            <div style="margin: 25px 20px" class="card-body text-center vertical-center">
-                                <div class="card-body">
-                                    <img class="card-img-top" src="<c:out value='${cat.image}'/>" alt="Store Image" style="width: 100%; height: auto;">
-                                    <h4 class="card-title show_txt">Tên cửa hàng: <c:out value='${cat.storeName.toUpperCase()}'/></h4>
-                                    <p class="card-text show_txt">Địa chỉ: <c:out value='${cat.address}'/></p>
-                                    <div class="rating">
-                                        <c:forEach begin="1" end="${cat.rating}">
-                                            <span style="color: gold" class="star yellow">★</span>
-                                        </c:forEach>
-                                    </div>
-                                    <p class="card-text show_txt">Giá chỉ từ: <c:out value="${cat.averagePrice}" /> đ</p>
-                                </div>
-                                <a href='<c:url value="/BeforeThanhToanController?storeID=${cat.storeID}" />'class="btn btn-success btn-block">Get more information</a>
-
-                            </div>
-                        </div>
-                    </c:if>
-                </c:forEach>
-            </div>
-
-
             <div class="row task1">	
 
                 <div class="row combo">
