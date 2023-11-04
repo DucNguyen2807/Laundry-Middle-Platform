@@ -4,15 +4,18 @@
  */
 package Controller;
 
+import Model.Cate;
 import Model.User;
 import Model.UserGoogleDto;
 import Service.Constants;
+import Service.StoreService;
 import Service.UserService;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -44,26 +47,31 @@ public class LoginGoogleHandler extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         String code = request.getParameter("code");
-    String accessToken = getToken(code);
-    User user = getUserInfo(accessToken);
+        String accessToken = getToken(code);
+        User user = getUserInfo(accessToken);
 
-    try {
-        boolean userExists = UserService.getUserByEmail(user.getEmail());
+        try {
+            boolean userExists = UserService.getUserByEmail(user.getEmail());
 
-        if (!userExists) {
-            UserService.insertUser(user);
-        } else {
-            user = UserService.getUserGG(user.getEmail()); 
+            if (!userExists) {
+                UserService.insertUser(user);
+            } else {
+                user = UserService.getUserGG(user.getEmail());
+            }
+
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+
+            StoreService store = new StoreService();
+            store.sortByFavoriteCount();
+            List<Cate> topStore = store.getListStoreCate();
+            request.getSession().setAttribute("topStore", topStore);
+        } catch (ClassNotFoundException ex) {
+            // Xử lý ngoại lệ
+            ex.printStackTrace();
         }
 
-        HttpSession session = request.getSession();
-        session.setAttribute("user", user);
-    } catch (ClassNotFoundException ex) {
-        // Xử lý ngoại lệ
-        ex.printStackTrace();
-    }
-
-    response.sendRedirect("homepage_customer.jsp");
+        response.sendRedirect("homepage_customer.jsp");
     }
 
     public static String getToken(String code) throws ClientProtocolException, IOException {

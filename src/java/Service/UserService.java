@@ -727,9 +727,7 @@ public class UserService implements Serializable {
                 ps.setString(4, "123456");
                 ps.setInt(5, 1);
                 int row = ps.executeUpdate();
-                
-                
-                
+
                 if (row > 0) {
                     return true;
                 }
@@ -763,6 +761,7 @@ public class UserService implements Serializable {
 
                 if (rs.next()) {
                     user = new User();
+                    user.setUserId(Integer.parseInt(rs.getString("userId")));
                     user.setUsername(rs.getString("username"));
                     user.setPhone(rs.getString("phone"));
                     user.setFullname(rs.getString("fullname"));
