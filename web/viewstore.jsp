@@ -150,7 +150,7 @@
                 <thead>
                     <tr>
                         <th scope="col">No.</th>
-                        <th scope="col">Store ID</th>
+                        <th scope="col">ID</th>
                         <th scope="col">Username</th>
                         <th scope="col">Password</th>
                         <th scope="col">Address</th>
