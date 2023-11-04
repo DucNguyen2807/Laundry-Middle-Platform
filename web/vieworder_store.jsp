@@ -145,19 +145,19 @@
                     <form action="MainController">
                         <tr>
                             <td><%= ++count%></td>
-                            <td><%= ord.getCustomerName()%></td>
-                            <td><%= ord.getAddressCus()%></td>
-                            <td><%= ord.getServiceDetail()%></td>
-                            <td><%= ord.getWeight()%></td>
-                            <td><%= ord.getTotalPrice()%></td>
-                            <td><%= ord.getNote()%></td>
-                            <td><%= ord.getDateDesired()%></td>
-                            <td><%= ord.getTimeDesired()%></td>
-                            <td><%= ord.getDateApproved()%></td>
-                            <td><%= ord.getDateComplete()%></td>
-                            <td><%= ord.getTimeComplete()%></td>
-                            <td><%= ord.getStaffName()%></td>
-                            <td><%= ord.getStOrderDetail()%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getCustomerName())) ? ord.getCustomerName() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getAddressCus())) ? ord.getAddressCus() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getServiceDetail())) ? ord.getServiceDetail() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getWeight())) ? ord.getWeight() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getTotalPrice())) ? ord.getTotalPrice() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getNote())) ? ord.getNote() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getDateDesired())) ? ord.getDateDesired() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getTimeDesired())) ? ord.getTimeDesired() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getDateApproved())) ? ord.getDateApproved() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getDateComplete())) ? ord.getDateComplete() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getTimeComplete())) ? ord.getTimeComplete() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getStaffName())) ? ord.getStaffName() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getStOrderDetail())) ? ord.getStOrderDetail() : ""%></td>
                             <%
                                 if (button.equals("1")) {
                             %>
