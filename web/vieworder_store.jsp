@@ -18,6 +18,7 @@
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/styleindex.css" rel="stylesheet" >
         <link rel="stylesheet" href="css/manage_admin.css">
         <link rel="stylesheet" href="css/viewneworder_store.css">
 
@@ -45,44 +46,36 @@
                             </button>
 
                         </div>
-
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="homepage_store.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                                <li>
-                                    <a style="background-color:#red; color: #ffffff">
-                                        <form action="MainController" method="post">
-                                            <input type="hidden" name="btAction" value="1" />
-                                            <button type="submit" class="btn btn-primary">New Order</button>
-                                        </form>
-                                    </a>
+
+                                <li class="nav-form">
+                                    <form action="MainController" method="post">
+                                        <input type="hidden" name="btAction" value="1" />
+                                        <button type="submit" class="btn btn-primary">New Order</button>
+                                    </form>
                                 </li>
 
-                                <li>
-                                    <a style="background-color:#red; color: #ffffff">
-                                        <form action="MainController" method="post">
-                                            <input type="hidden" name="btAction" value="4" />
-                                            <button type="submit" class="btn btn-primary">Processing</button>
-                                        </form>
-                                    </a>
+                                <li class="nav-form">
+                                    <form action="MainController" method="post">
+                                        <input type="hidden" name="btAction" value="4" />
+                                        <button type="submit" class="btn btn-primary">Processing</button>
+                                    </form>                        
                                 </li>
 
-                                <li>
-                                    <a style="background-color:#red; color: #ffffff">
-                                        <form action="MainController" method="post">
-                                            <input type="hidden" name="btAction" value="2" />
-                                            <button type="submit" class="btn btn-primary">Waiting</button>
-                                        </form>
-                                    </a>
+                                <li class="nav-form">
+                                    <form action="MainController" method="post">
+                                        <input type="hidden" name="btAction" value="2" />
+                                        <button type="submit" class="btn btn-primary">Waiting</button>
+                                    </form>
                                 </li>
 
-                                <li>
-                                    <a style="background-color:#red; color: #ffffff">
-                                        <form action="MainController" method="post">
-                                            <input type="hidden" name="btAction" value="5" />
-                                            <button type="submit" class="btn btn-primary">Completed</button>
-                                        </form>
-                                    </a>
+                                <li class="nav-form">
+                                    <form action="MainController" method="post">
+                                        <input type="hidden" name="btAction" value="5" />
+                                        <button type="submit" class="btn btn-primary">Completed</button>
+                                    </form>
                                 </li>
 
                             </ul>
@@ -91,6 +84,7 @@
                                 <li><a href="login.jsp" style="color: #ffffff">Logout</a></li>
                             </ul>
                         </div>
+                        
                     </div><!-- /.container-fluid -->
                 </nav>
             </div>

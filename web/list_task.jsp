@@ -18,6 +18,7 @@
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap.css" rel="stylesheet">
+       <link href="css/styleindex.css" rel="stylesheet" >
         <link rel="stylesheet" href="css/manage_admin.css">
         <link rel="stylesheet" href="css/viewneworder_store.css">
 
@@ -49,22 +50,18 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="homepage_staff.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                                <li>
-                                    <a style="background-color:#red; color: #ffffff">
+                                 <li class="nav-form">
                                         <form action="MainController" method="post">
                                             <input type="hidden" name="btAction" value="7" />
                                             <button type="submit" class="btn btn-primary">Receiving</button>
                                         </form>
-                                    </a>
                                 </li>
 
-                                <li>
-                                    <a style="background-color:#red; color: #ffffff">
+                                 <li class="nav-form">
                                         <form action="MainController" method="post">
                                             <input type="hidden" name="btAction" value="8" />
                                             <button type="submit" class="btn btn-primary">Returning</button>
                                         </form>
-                                    </a>
                                 </li>
                             </ul>
 
@@ -159,6 +156,7 @@
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            
 
     </body>
 

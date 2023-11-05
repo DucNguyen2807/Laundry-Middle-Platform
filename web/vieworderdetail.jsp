@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View Staff Account</title>
+        <title>View Order Detail</title>
         <!-- Add Bootstrap CSS link here -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/manage_admin.css">
@@ -179,7 +179,7 @@
                     <tr>
                         <th scope="col-3">OrderID:</th>
                         <td><%= result.getOrderID()%></td>
-                        <input type="hidden" name="orderID" value="<%= result.getOrderID()%>" />
+                    <input type="hidden" name="orderID" value="<%= result.getOrderID()%>" />
                     </tr>
                     <tr>
                         <th scope="col">Service:</th>
@@ -207,7 +207,7 @@
                     </tr>
                     <tr>
                         <th scope="col">Note:</th>
-                        <td><%= result.getNote()%></td>
+                        <td><%= (!"NULL".equalsIgnoreCase(result.getNote())) ? result.getNote() : ""%></td>
                     </tr>
                     <tr>
                         <th scope="col">DateApprove:</th>
@@ -215,11 +215,11 @@
                     </tr>
                     <tr>
                         <th scope="col">DateCompleted:</th>
-                        <td><%= result.getDateComplete()%></td>
+                        <td><%= (!"NULL".equalsIgnoreCase((result.getDateComplete())) ? result.getDateComplete() : "")%></td>
                     </tr>
                     <tr>
                         <th scope="col">TimeComplete:</th>
-                        <td><%= result.getTimeComplete()%></td>
+                        <td><%= (!"NULL".equalsIgnoreCase((result.getTimeComplete())) ? result.getTimeComplete() : "")%></td>
                     </tr>
                     <tr>
                         <th scope="col">Customer:</th>

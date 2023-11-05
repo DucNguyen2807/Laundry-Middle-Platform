@@ -23,7 +23,7 @@
     </head>
     <body>
 
-        <h1 style="text-align: center">Update account</h1>
+        <h1 style="text-align: center; padding-top: 50px;">Update Account</h1>
         <form action="UpdateProfileController" method="POST" >
             <div class="wrapper bg-white mt-sm-5">
                 <h4 class="pb-4 border-bottom">Account settings</h4>

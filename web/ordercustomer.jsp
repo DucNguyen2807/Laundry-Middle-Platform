@@ -19,6 +19,7 @@
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/styleindex.css" rel="stylesheet" >
         <link rel="stylesheet" href="css/manage_admin.css">
         <link rel="stylesheet" href="css/viewneworder_store.css">
 
@@ -50,40 +51,32 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="homepage_customer.jsp"><span class="glyphicon glyphicon-home"></span>Home</a></li>
-                                <li>
-                                    <a style="background-color:#red; color: #ffffff">
+                                <li class="nav-form">
                                         <form action="MainController" method="post">
                                             <input type="hidden" name="btAction" value="NewOrderCus" />
                                             <button type="submit" class="btn btn-primary">New Order</button>
                                         </form>
-                                    </a>
                                 </li>
 
-                                <li>
-                                    <a style="background-color:#red; color: #ffffff">
+                                <li class="nav-form">
                                         <form action="MainController" method="post">
                                             <input type="hidden" name="btAction" value="ProcessingCustomer" />
                                             <button type="submit" class="btn btn-primary">Processing</button>
                                         </form>
-                                    </a>
                                 </li>
-                                
-                                <li>
-                                    <a style="background-color:#red; color: #ffffff">
+
+                                <li class="nav-form">
                                         <form action="MainController" method="post">
                                             <input type="hidden" name="btAction" value="WaitingCustomer" />
                                             <button type="submit" class="btn btn-primary">Waiting for a return</button>
                                         </form>
-                                    </a>
                                 </li>
-                                
-                                <li>
-                                    <a style="background-color:#red; color: #ffffff">
+
+                                 <li class="nav-form">
                                         <form action="MainController" method="post">
                                             <input type="hidden" name="btAction" value="CompletedCustomer" />
                                             <button type="submit" class="btn btn-primary">Completed</button>
                                         </form>
-                                    </a>
                                 </li>
 
                             </ul>
@@ -111,7 +104,6 @@
                     <thead>
                         <tr>
                             <th scope="col">No.</th>
-                            <th scope="col">Customer</th>
                             <th scope="col">AddressCus</th>
                             <th scope="col">Store</th>
                             <th scope="col">AddressSto</th>
@@ -147,21 +139,20 @@
                     <form action="MainController">
                         <tr>
                             <td><%= ++count%></td>
-                            <td><%= ord.getCustomerName()%></td>
-                            <td><%= ord.getAddressCus()%></td>
-                            <td><%= ord.getStoreName()%></td>
-                            <td><%= ord.getAddressSto()%></td>
-                            <td><%= ord.getServiceDetail()%></td>
-                            <td><%= ord.getWeight()%></td>
-                            <td><%= ord.getTotalPrice()%></td>
-                            <td><%= ord.getNote()%></td>
-                            <td><%= ord.getDateDesired()%></td>
-                            <td><%= ord.getTimeDesired()%></td>
-                            <td><%= ord.getDateApproved()%></td>
-                            <td><%= ord.getDateComplete()%></td>
-                            <td><%= ord.getTimeComplete()%></td>
-                            <td><%= ord.getStaffName()%></td>
-                            <td><%= ord.getStOrderDetail()%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getAddressCus())) ? ord.getAddressCus() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getStoreName())) ? ord.getStoreName() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getAddressSto())) ? ord.getAddressSto() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getServiceDetail())) ? ord.getServiceDetail() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getWeight())) ? ord.getWeight() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getTotalPrice())) ? ord.getTotalPrice() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getNote())) ? ord.getNote() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getDateDesired())) ? ord.getDateDesired() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getTimeDesired())) ? ord.getTimeDesired() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getDateApproved())) ? ord.getDateApproved() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getDateComplete())) ? ord.getDateComplete() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getTimeComplete())) ? ord.getTimeComplete() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getStaffName())) ? ord.getStaffName() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getStOrderDetail())) ? ord.getStOrderDetail() : ""%></td>
                             <%
                                 if (button.equals("NewOrderCus")) {
                             %>
@@ -176,8 +167,7 @@
                                 <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
                                 <button type="submit" name="btAction" value="Review" class="btn btn-success" name="btAction">Review</button>
                             </td>
-                            
-                            <li><a href="reviewforcus.jsp" style="color: #ffffff">Profile</a></li>
+
                             <%
                                 }
                             %>
