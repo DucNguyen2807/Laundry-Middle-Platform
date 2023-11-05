@@ -110,7 +110,7 @@
             <div class="row task1">	
                 <div class="row combo">
                     <div class="col-md-12">
-                        <h2>Quy trinh 4 buoc</h2>
+                        <h2>Quy trình 4 bước</h2>
                         <p>During the promotion period, let's wash your clothes!</p>
                     </div>
                 </div>
