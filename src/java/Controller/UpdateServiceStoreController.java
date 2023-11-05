@@ -45,11 +45,16 @@ public class UpdateServiceStoreController extends HttpServlet {
             User user = (User) request.getSession().getAttribute("user");
             int userId = user.getUserId();
             StoreService store = new StoreService();
-            store.getStoreSale(userId);
+
+            store.getStorewithNoImage(userId);
+            store.getImage(userId);
             store.getAllPrice(userId);
-            List<Review> storeSale = store.getListStoreSale();
+
+            List<Review> storeNoImage = store.getListStorewithNoImage();
+            List<Review> storeImage = store.getListImage();
             List<Review> storePrice = store.getListPrice();
-            request.setAttribute("storeSale", storeSale);
+            request.setAttribute("storeImage", storeImage);
+            request.setAttribute("storeSale", storeNoImage);
             request.setAttribute("storePrice", storePrice);
             RequestDispatcher dispatcher = request.getRequestDispatcher("storesetting.jsp");
             dispatcher.forward(request, response);

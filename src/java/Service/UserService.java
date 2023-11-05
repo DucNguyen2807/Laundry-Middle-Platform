@@ -15,6 +15,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -416,7 +417,7 @@ public class UserService implements Serializable {
         }
     }
 
-    public static boolean insert(String username, String password, String phone, String fullname, String roleid) throws ClassNotFoundException, SQLException {
+    public static boolean insert(String username, String password, String phone, String fullname, String roleid) {
         Connection con = null;
         PreparedStatement ps = null;
 
@@ -425,24 +426,43 @@ public class UserService implements Serializable {
 
             if (con != null) {
                 String sql = "INSERT INTO [User](Username, Password, Phone, Fullname, RoleID) VALUES (?,?,?,?,?)";
-                ps = con.prepareStatement(sql);
+                ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setString(1, username);
                 ps.setString(2, password);
                 ps.setString(3, phone);
                 ps.setString(4, fullname);
                 ps.setString(5, roleid);
 
-                int row = ps.executeUpdate();
-                if (row > 0) {
-                    return true;
+                int rowsInserted = ps.executeUpdate();
+
+                if (rowsInserted > 0) {
+                    ResultSet generatedKeys = ps.getGeneratedKeys();
+                    if (generatedKeys.next()) {
+                        int userID = generatedKeys.getInt(1);
+
+                        String insert5star = "INSERT INTO [Review](Rating, StoreID) VALUES (?, ?)";
+                        PreparedStatement pos = con.prepareStatement(insert5star);
+                        pos.setInt(1, 5);
+                        pos.setInt(2, userID);
+
+                        int row = pos.executeUpdate();
+
+                        return row > 0;
+                    }
                 }
             }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace(); // Xử lý lỗi hoặc ghi log tại đây
         } finally {
-            if (ps != null) {
-                ps.close();
-            }
-            if (con != null) {
-                con.close();
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
         return false;

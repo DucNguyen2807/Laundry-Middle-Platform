@@ -55,6 +55,8 @@ public class LoginGoogleHandler extends HttpServlet {
 
             if (!userExists) {
                 UserService.insertUser(user);
+                user = UserService.getUserGG(user.getEmail());
+                
             } else {
                 user = UserService.getUserGG(user.getEmail());
             }

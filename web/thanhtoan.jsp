@@ -206,7 +206,7 @@
 
 
                 function checkMaxValue(input) {
-                    if (input.value > 20) {
+                    if (input.value > 20 && input.value < 20) {
                         input.value = 20;
                     }
                 }

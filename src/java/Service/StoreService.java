@@ -313,6 +313,100 @@ public class StoreService implements Serializable {
             }
         }
     }
+    public List<Review> listStorewithNoImage;
+
+    public List<Review> getListStorewithNoImage() {
+        return this.listStorewithNoImage;
+    }
+    
+    public void getStorewithNoImage(int userId) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        listStorewithNoImage = new ArrayList<>();
+        try {
+            con = ConnectDB.getConnection();
+            if (con != null) {
+                String sql = "SELECT u.UserID, u.Fullname, u.Address, AVG(r.Rating) AS AverageRating "
+                        + "FROM [Laundry-Middle-Platform].[dbo].[User] u "
+                        + "INNER JOIN Price p ON p.StoreID = u.UserID "
+                        + "INNER JOIN Review r ON r.StoreID = u.UserID "
+                        + "WHERE u.UserID = ? "
+                        + "GROUP BY u.UserID, u.Fullname, u.Address";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, userId);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String storeID = rs.getString("UserID");
+                    String storeName = rs.getString("Fullname");
+                    String address = rs.getString("Address");
+                    double averageRating = rs.getDouble("AverageRating");
+                    Review review = new Review(storeID, storeName, address, averageRating);
+                    listStorewithNoImage.add(review);
+
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+    public List<Review> listImage;
+
+    public List<Review> getListImage() {
+        return this.listImage;
+    }
+
+    public List<Review> getImage(int userId) {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        listImage = new ArrayList<>();
+
+        try {
+            con = ConnectDB.getConnection();
+            if (con != null) {
+                String sql = "SELECT i.ImageDetail "
+                        + "FROM [Laundry-Middle-Platform].[dbo].[User] u "
+                        + "LEFT JOIN Image i ON i.StoreID = u.UserID "
+                        + "WHERE u.UserID = ? ";
+                stm = con.prepareStatement(sql);
+                stm.setInt(1, userId);
+                rs = stm.executeQuery();
+                while (rs.next()) {
+                    String imageDetail = rs.getString("ImageDetail");
+                    Review review = new Review(imageDetail);
+                    listImage.add(review);
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace(); // Xử lý lỗi hoặc ghi log tại đây
+            return null; // Trả về null khi có lỗi
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace(); // Xử lý lỗi hoặc ghi log tại đây
+            }
+        }
+
+        return listStoreSale;
+    }
 
     public void sortByFavoriteCount() throws ClassNotFoundException, SQLException {
         Connection con = null;
@@ -392,7 +486,7 @@ public class StoreService implements Serializable {
     }
 
     public boolean BookingOrder(String phone, String fullname, String storeId, String serviceID,
-            int kilos, String totalPrice, String customerAddress, String AddressSto, String note, int userId, String DateDesired, String TimeDesired) { 
+            int kilos, String totalPrice, String customerAddress, String AddressSto, String note, int userId, String DateDesired, String TimeDesired) {
         Connection conn = null;
         PreparedStatement pos = null;
         PreparedStatement posd = null;
@@ -610,7 +704,7 @@ public class StoreService implements Serializable {
         try {
             conn = ConnectDB.getConnection();
             if (conn != null) {
-                
+
                 String sql = "DELETE FROM [Price] WHERE StoreID = ? AND ServiceID = ?";
 
                 pstmt = conn.prepareStatement(sql);
@@ -636,7 +730,103 @@ public class StoreService implements Serializable {
                 e.printStackTrace();
             }
         }
-        return false; 
+        return false;
+    }
+
+    public boolean checkImage(int storeID) throws ClassNotFoundException {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = ConnectDB.getConnection();
+            if (conn != null) {
+                String sql = "SELECT ImageID FROM [Image] WHERE StoreID = ?";
+                pstmt = conn.prepareStatement(sql);
+                pstmt.setInt(1, storeID);
+                ResultSet resultSet = pstmt.executeQuery();
+                return resultSet.next(); // Trả về true nếu cửa hàng đã có ảnh, ngược lại trả về false
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public boolean updateImage(int storeID, String imageDetail) throws ClassNotFoundException {
+        if (checkImage(storeID)) {
+            Connection conn = null;
+            PreparedStatement pstmt = null;
+
+            try {
+                conn = ConnectDB.getConnection();
+                if (conn != null) {
+                    String sql = "UPDATE [Image] SET ImageDetail = ? WHERE StoreID = ?";
+                    pstmt = conn.prepareStatement(sql);
+                    pstmt.setString(1, imageDetail);
+                    pstmt.setInt(2, storeID);
+                    int rowsUpdated = pstmt.executeUpdate();
+                    return rowsUpdated > 0; // Trả về true nếu cập nhật thành công, ngược lại trả về false
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (pstmt != null) {
+                        pstmt.close();
+                    }
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false; // Trả về false nếu cửa hàng chưa có ảnh
+    }
+
+    public boolean insertImage(int storeID, String imageDetail) throws ClassNotFoundException {
+        if (!checkImage(storeID)) {
+            Connection conn = null;
+            PreparedStatement pstmt = null;
+
+            try {
+                conn = ConnectDB.getConnection();
+                if (conn != null) {
+                    String sql = "INSERT INTO [Image] (ImageDetail, StoreID) VALUES (?, ?)";
+                    pstmt = conn.prepareStatement(sql);
+                    pstmt.setString(1, imageDetail);
+                    pstmt.setInt(2, storeID);
+                    int rowsInserted = pstmt.executeUpdate();
+                    return rowsInserted > 0; // Trả về true nếu thêm mới thành công, ngược lại trả về false
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (pstmt != null) {
+                        pstmt.close();
+                    }
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false; // Trả về false nếu cửa hàng đã có ảnh
     }
 
 }
