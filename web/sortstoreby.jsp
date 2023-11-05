@@ -35,7 +35,6 @@
                                 <li class="active"> <a href="homepage_customer.jsp" > <span class="glyphicon glyphicon-home"></span>
                                         Home</a> </li>
                                 <li><a href="updateacc.jsp" style="color: #ffffff">Profile</a></li>
-                                    </li>
                             </ul>
 
                         </div>
@@ -45,7 +44,7 @@
         </div>
 
 
-               <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <form action="SortStoreByController" method="post" class="custom-select-container">
                     <label for="orderBy" class="navbar-brand">Sắp xếp theo:</label>
@@ -81,7 +80,7 @@
                         <div style="margin: 25px 20px" class="card-body text-center vertical-center">
                             <div class="card-body">
                                 <i class="fas fa-heart heart-icon" onclick="addToFavorites('<c:out value="${cat.storeID}"/>')"></i>
-                                <img class="card-img-top" src="<c:out value='${cat.image}'/>" alt="Store Image" style="width: 100%; height: auto;">
+                                <img class="card-img-top" src="<c:out value='${cat.image}'/>" alt="Store Image" style="width: 350px; height: 350px;">
                                 <h4 class="card-title show_txt">Tên cửa hàng: <c:out value='${cat.storeName}'/></h4>
                                 <p class="card-text show_txt">Địa chỉ: <c:out value='${cat.address}'/></p>
 
@@ -159,8 +158,8 @@
         <div class="container-fluid" >
             <div class="row footer">
                 <div>
-                    <p>Email : Tiennvse171676</p>
-                    <p>Address: 100 Vuon Lai, Tan Phu District, HCMC</p>
+                    <p>Email : laundrymiddleplatform@gmail.com</p>
+                    <p>Address: Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</p>
                     <h5>&copy; Copyright 2023. Laundry Middle Platform</h5>
                 </div>
             </div>  
