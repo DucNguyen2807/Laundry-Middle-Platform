@@ -33,68 +33,63 @@ public class RegisterController extends HttpServlet {
             String url = CREATENEWACCOUNT;
             InsertError err = new InsertError();
             boolean bErrors = false;
-            try {
-                String username = request.getParameter("username");
-                String fullName = request.getParameter("fname");
-                String password = request.getParameter("password");
-                String confirmPassword = request.getParameter("cfpassword");
-                String phone = request.getParameter("phone");
-                String roleid = request.getParameter("role_id");
-                
-                if (!bErrors) {
-                    try {
-                        if (UserService.checkExistUsername(username)) {
-                            err.setUsernameDuplicateErr("Đã tồn tại");
-                            bErrors = true;
-                        }
-                    } catch (SQLException | ClassNotFoundException e) {
-                        e.printStackTrace();
+            String username = request.getParameter("username"); 
+            String fullName = request.getParameter("fname");
+            String password = request.getParameter("password");
+            String confirmPassword = request.getParameter("cfpassword");
+            String phone = request.getParameter("phone");
+            String roleid = request.getParameter("role_id");
+            if (!bErrors) {
+                try {
+                    if (UserService.checkExistUsername(username)) {
+                        err.setUsernameDuplicateErr("Đã tồn tại");
+                        bErrors = true;
                     }
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
                 }
-                if(password.trim().length()<6 || username.trim().length() >24){
-                    err.setPasswordLengthErr("Độ dài từ 6 đến 20 kí tự");
-                    bErrors = true;
-                }
-                if(!confirmPassword.trim().equals(password)){
-                    err.setConfirmNotMatch("Not match");
-                    bErrors = true;
-                }
-                if(fullName.trim().length()<6 || fullName.trim().length() >30){
-                    err.setFullNameLengthErr("Độ dài từ 2 đến 30 kí tự");
-                    bErrors = true;
-                }
-                 if (phone.matches("^0[0-9]{9,12}")) {
-                    // Đúng, chuỗi chỉ chứa số và có độ dài hợp lệ
-                } else {
-                    // Sai, chuỗi chứa ký tự đặc biệt hoặc chữ cái hoặc có độ dài không hợp lệ
-                    err.setPhoneLengthErr("Số điện thoại không hợp lệ");
-                    bErrors = true;
-                }
-                if (!bErrors) {
-                    try {
-                        if (UserService.checkExisPhone(phone)) {
-                            err.setPhoneDuplicateErr("Đã tồn tại");
-                            bErrors = true;
-                        }
-                    } catch (SQLException | ClassNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (bErrors) {
-                    request.setAttribute("INSERTERROR", err);
-                } else {
-                    boolean result = UserService.insert(username, password, phone, fullName, roleid);
-                    if (result) {
-                        url = LOGINPAGE;
-                    }
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                // Xử lý lỗi nếu có lỗi xảy ra trong quá trình thực hiện các thao tác với cơ sở dữ liệu
-            } finally {
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
             }
+            
+            if(password.trim().length()<6 || username.trim().length() >24){
+                err.setPasswordLengthErr("Độ dài từ 6 đến 20 kí tự");
+                bErrors = true;
+            }
+            if(!confirmPassword.trim().equals(password)){
+                err.setConfirmNotMatch("Not match");
+                bErrors = true;
+            }
+            if(fullName.trim().length()<6 || fullName.trim().length() >30){
+                err.setFullNameLengthErr("Độ dài từ 2 đến 30 kí tự");
+                bErrors = true;
+            }
+            if (phone.matches("^0[0-9]{9,12}")) {
+                // Đúng, chuỗi chỉ chứa số và có độ dài hợp lệ
+            } else {
+                // Sai, chuỗi chứa ký tự đặc biệt hoặc chữ cái hoặc có độ dài không hợp lệ
+                err.setPhoneLengthErr("Số điện thoại không hợp lệ");
+                bErrors = true;
+            }
+            if (!bErrors) {
+                try {
+                    if (UserService.checkExisPhone(phone)) {
+                        err.setPhoneDuplicateErr("Đã tồn tại");
+                        bErrors = true;
+                    }
+                } catch (SQLException | ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (bErrors) {
+                request.setAttribute("INSERTERROR", err);
+            } else {
+                boolean result = UserService.insert(username, password, phone, fullName, roleid);
+                
+                if (result) {
+                    url = LOGINPAGE;
+                }
+            }
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
         }
     }
 

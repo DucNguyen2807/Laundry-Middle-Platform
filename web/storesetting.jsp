@@ -67,57 +67,70 @@
 
             <div class="container mt-5">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-4">
                         <div class="store-details">
                             <c:choose>
-                                <c:when test="${not empty storeSale}">
-                                    <c:forEach items="${storeSale}" var="store">
+                                <c:when test="${not empty storeImage}">
+                                    <c:forEach items="${storeImage}" var="storeImage">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <div><img src="${store.imageDetail}" name="imageStore" alt="Cửa hàng" alt="Store Image" style="width: 100%; height: auto;" /></div>
+                                                <div><img src="${storeImage.imageDetail}" name="imageStore" alt="Cửa hàng" alt="Store Image" style="width: 100%; height: auto;" /></div>
+                                                <label for="imageURL">Đường dẫn URL ảnh:</label>
+                                                <input type="text" id="imageURL" name="imageURL" required>
+                                                <input type="hidden" name="btAction" value="ChangePhoto">
+                                                <button type="submit" id="submitButton" class="btn btn-primary" onclick="return alert('Thay đổi ảnh thành công!')">Change photo</button>
                                             </div>
-                                        </c:forEach>
-                                    </c:when>
-                                </c:choose>
-                                <div class="col-md-6">
-                                    <p>Thông tin cửa hàng</p>
-                                    <c:forEach items="${storeSale}" var="store">
-                                        <div class="card-body">
-                                            Tên cửa hàng:<input type="text" name="nameStore"  value="${store.storeName.toUpperCase()}"><br>
-
-                                            Địa chỉ: <input type="text" name="addressStore" value="${store.address}" >
-                                            <p>Dịch vụ:</p>
-                                            <c:forEach items="${storePrice}" var="price">
-                                                <c:if test="${price.storeID eq store.storeID}">
-                                                    <p>${price.serviceDetail}:</p>
-                                                    <input name ="priceU" value="${price.price}" id="priceU" oninput="validateInput(this)" đ >
-                                                    <input type="hidden" name="serviceID" value="${price.serviceID}" />
-                                                    <input type="hidden" name="btAction" value="DeleteServiceStore" />
-                                                    <button type="submit" class="btn btn-danger" onclick="return alert('Bạn có muốn xóa dịch vụ này không?')">Delete</button>
-                                                    <script>
-                                                        function validateInput(inputField) {
-                                                            inputField.value = inputField.value.replace(/[^0-9]/g, '');
-                                                            if (inputField.value === "") {
-                                                                alert("Giá trị nhập vào phải là số từ 0 đến 9.");
-                                                                document.getElementById("submitButton").disabled = true;
-                                                            } else {
-                                                                document.getElementById("submitButton").disabled = false;
-                                                            }
-                                                        }
-                                                    </script>
-                                                </c:if>
-                                            </c:forEach>
                                         </div>
-<!--                                      <button type="submit" value="UpdatePriceStore" name="btAction">Update</button>-->
-                                        <input type="hidden" name="btAction" value="UpdatePriceStore" />
-                                        <button type="submit" id="submitButton" class="btn btn-primary" onclick="return alert('Cập nhật thành công!')">Update</button>
-                                    </c:forEach> 
-                                </div>
-                            </div>
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise>
+                                    <p>Không có ảnh cửa hàng nào.</p>
+                                    <label for="imageURL">Đường dẫn URL ảnh:</label>
+                                    <input type="text" id="imageURL" name="imageURL" required>
+                                    <input type="hidden" name="btAction" value="ChangePhoto">
+                                    <button type="submit" id="submitButton" class="btn btn-primary" onclick="return alert('Thay đổi ảnh thành công!')">Change photo</button>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
+                    </div>  
+                    
+
+                    
+                    <div class="col-md-4">
+                        <p>Thông tin cửa hàng</p>
+                        <c:forEach items="${storeSale}" var="store">
+                            <div class="card-body">
+                                Tên cửa hàng:<input type="text" name="nameStore"  value="${store.storeName.toUpperCase()}"><br>
+
+                                Địa chỉ: <input type="text" name="addressStore" value="${store.address}" >
+                                <p>Dịch vụ:</p>
+                                <c:forEach items="${storePrice}" var="price">
+                                    <c:if test="${price.storeID eq store.storeID}">
+                                        <p>${price.serviceDetail}:</p>
+                                        <input name ="priceU" value="${price.price}" id="priceU" oninput="validateInput(this)" đ >
+                                        <input type="hidden" name="serviceID" value="${price.serviceID}" />
+                                        <input type="hidden" name="btAction" value="DeleteServiceStore" />
+                                        <button type="submit" class="btn btn-danger" onclick="return alert('Bạn có muốn xóa dịch vụ này không?')">Delete</button>
+                                        <script>
+                                            function validateInput(inputField) {
+                                                inputField.value = inputField.value.replace(/[^0-9]/g, '');
+                                                if (inputField.value === "") {
+                                                    alert("Giá trị nhập vào phải là số từ 0 đến 9.");
+                                                    document.getElementById("submitButton").disabled = true;
+                                                } else {
+                                                    document.getElementById("submitButton").disabled = false;
+                                                }
+                                            }
+                                        </script>
+                                    </c:if>
+                                </c:forEach>
+                            </div>
+                            <!--                                      <button type="submit" value="UpdatePriceStore" name="btAction">Update</button>-->
+                            <input type="hidden" name="btAction" value="UpdatePriceStore" />
+                            <button type="submit" id="submitButton" class="btn btn-primary" onclick="return alert('Cập nhật thành công!')">Update</button>
+                        </c:forEach> 
                     </div>
-
-
+                    
                     </form>
                     <div class="col-md-4">
                         <div class="store-details">

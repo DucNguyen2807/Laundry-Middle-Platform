@@ -43,7 +43,19 @@ public class Review {
         this.address = address;
         this.averageRating = averageRating;
     }
-
+public Review(String storeID, String storeName, String address, double averageRating) {
+        this.storeID = storeID;
+        this.storeName = storeName;
+        this.address = address;
+        this.averageRating = averageRating;
+    }
+    
+    
+    public Review(String imageDetail) {
+       
+        this.imageDetail = imageDetail;
+        
+    }
     public String getServiceID() {
         return serviceID;
     }

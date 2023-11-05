@@ -4,28 +4,24 @@
  */
 package Controller;
 
-import Model.Review;
+import Model.Store;
 import Model.User;
 import Service.StoreService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author acer
+ * @author nguye
  */
-@WebServlet(name = "AddServiceController", urlPatterns = {"/AddServiceController"})
-public class AddServiceController extends HttpServlet {
+public class InsertImageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,27 +33,37 @@ public class AddServiceController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
+            throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            String imageDetail = request.getParameter("imageURL");
+            String url;
+            
             User user = (User) request.getSession().getAttribute("user");
-            int userId = user.getUserId();
-            StoreService store = new StoreService();
-            store.getStoreSale(userId);
-            store.getAllPrice(userId);
-            List<Review> storeSale = store.getListStoreSale();
-            List<Review> storePrice = store.getListPrice();
-            request.setAttribute("storeSale", storeSale);
-            request.setAttribute("storePrice", storePrice);
-            String serviceDetail = request.getParameter("serviceDetail");
-            String servicePrice = request.getParameter("servicePrice");
-//            int storeID = Integer.parseInt(request.getParameter("storeID"));
+            int userID = user.getUserId();
 
-            if (serviceDetail != null && servicePrice != null && userId != 0) {
-                boolean insertSuccessful = StoreService.insertServiceAndPrice(serviceDetail, servicePrice, userId);
+            
+            StoreService imageModel = new StoreService();
 
+           
+            if (imageModel.checkImage(userID)) {
+
+                if (imageModel.updateImage(userID, imageDetail)) {
+                    
+                    url= "MainController?btAction=Settings";
+                } else {
+                     url= "MainController?btAction=Settings";
+                }
+            } else {
+
+                if (imageModel.insertImage(userID, imageDetail)) {
+                     url= "MainController?btAction=Settings";
+                } else {
+                     url= "MainController?btAction=Settings";
+                }
             }
-            response.sendRedirect("MainController?btAction=Settings");
+            RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+                    dispatcher.forward(request, response);
         }
     }
 
@@ -76,9 +82,7 @@ public class AddServiceController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AddServiceController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(AddServiceController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertImageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -96,9 +100,7 @@ public class AddServiceController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AddServiceController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(AddServiceController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertImageController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

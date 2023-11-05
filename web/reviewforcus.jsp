@@ -53,6 +53,15 @@
 
         <!-- Include your JavaScript if needed -->
 
+        <h1>Upload Your Image</h1>
+
+        <form action="your-upload-servlet-url" method="post" enctype="multipart/form-data">
+            <label for="image">Choose an image:</label>
+            <input type="file" name="image" id="image" accept="image/*" required><br><br>
+
+            <input type="submit" value="Upload">
+        </form>
+
     </body>
 </html>
 
