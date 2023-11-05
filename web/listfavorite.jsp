@@ -42,7 +42,7 @@
                 </nav>
             </div>
         </div>
-        
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <div class="container mt-5">
@@ -52,8 +52,8 @@
                     <div class="product col-12 col-md-6 col-lg-4">
                         <div style="margin: 25px 20px" class="card-body text-center vertical-center">
                             <div class="card-body">
-                                <i class="fas fa-heart heart-icon" onclick="addToFavorites('<c:out value="${cat.storeID}"/>')"></i>
-                                <img class="card-img-top" src="<c:out value='${cat.image}'/>" alt="Store Image" style="width: 100%; height: auto;">
+                                <i class="fas fa-heart heart-icon" onclick="removeFavorites('<c:out value="${cat.storeID}"/>')"></i>
+                                <img class="card-img-top" src="<c:out value='${cat.image}'/>" alt="Store Image" style="width: 350px; height: 350px;">
                                 <h4 class="card-title show_txt">Tên cửa hàng: <c:out value='${cat.storeName}'/></h4>
                                 <p class="card-text show_txt">Địa chỉ: <c:out value='${cat.address}'/></p>
 
@@ -87,14 +87,32 @@
                 </c:if>
             </div>
         </div>
-
+        <script>
+            function removeFavorites(storeID) {
+                // Gửi yêu cầu POST đến máy chủ để thêm cửa hàng vào danh sách yêu thích
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost:8080/Laundry_mp/RemoveFavoriteController", // Thay đổi đường dẫn tới endpoint của bạn
+                    data: {storeID: storeID},
+                    success: function (response) {
+                        // Xử lý phản hồi từ máy chủ (nếu cần)
+                        alert("Đã xóa cửa hàng khỏi danh sách yêu thích!");
+                        location.reload();
+                    },
+                    error: function (error) {
+                        // Xử lý lỗi (nếu có)
+                        alert("Có lỗi xảy ra khi bỏ yêu thích cửa hàng khỏi danh sách yêu thích.");
+                    }
+                });
+            }
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <div class="container-fluid" >
             <div class="row footer">
                 <div>
-                    <p>Email : Tiennvse171676</p>
-                    <p>Address: 100 Vuon Lai, Tan Phu District, HCMC</p>
+                    <p>Email : laundrymiddleplatform@gmail.com</p>
+                    <p>Address: Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</p>
                     <h5>&copy; Copyright 2023. Laundry Middle Platform</h5>
                 </div>
             </div>  

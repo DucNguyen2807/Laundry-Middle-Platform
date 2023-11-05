@@ -697,7 +697,7 @@ public class StoreService implements Serializable {
         return false;
     }
 
-    public static boolean deleteService(int userId, int serviceId) throws ClassNotFoundException {
+    public static boolean deleteService(int serviceId) throws ClassNotFoundException {
         Connection conn = null;
         PreparedStatement pstmt = null;
 
@@ -705,11 +705,10 @@ public class StoreService implements Serializable {
             conn = ConnectDB.getConnection();
             if (conn != null) {
 
-                String sql = "DELETE FROM [Price] WHERE StoreID = ? AND ServiceID = ?";
+                String sql = "DELETE [Price] WHERE ServiceID = ?";
 
                 pstmt = conn.prepareStatement(sql);
-                pstmt.setInt(1, userId);
-                pstmt.setInt(2, serviceId);
+                pstmt.setInt(1, serviceId);
 
                 int rowsDeleted = pstmt.executeUpdate();
                 if (rowsDeleted > 0) {
