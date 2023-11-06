@@ -90,9 +90,9 @@
                     <div>
                         <label for="role">Select a role:</label>
                         <div class="radio-options">
-                            <input type="radio" id="customer" name="role_id" value="1">
+                            <input type="radio" id="customer" name="role_id" value="1" required>
                             <label for="customer">Customer</label>
-                            <input type="radio" id="store" name="role_id" value="3">
+                            <input type="radio" id="store" name="role_id" value="3" required>
                             <label for="store">Store</label>
                         </div>
                     </div>

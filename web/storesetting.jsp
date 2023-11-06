@@ -69,10 +69,9 @@
 
 
             <div class="container mt-5">
-                <div class="col-md-3">
-                    <form action="MainController" method="POST" accept-charset="UTF-8">
-                        <div class="row">
-
+                <div class="row">
+                    <div class="col-md-6">
+                        <form action="MainController" method="POST" accept-charset="UTF-8">
                             <div class="store-details">
                                 <c:choose>
                                     <c:when test="${not empty storeImage}">
@@ -81,7 +80,7 @@
                                                 <div class="col-md-6">
                                                     <div><img src="${storeImage.imageDetail}" name="imageStore" alt="Cửa hàng" alt="Store Image" style="width: 100%; height: auto;" /></div>
                                                     <label for="imageURL">Đường dẫn URL ảnh:</label>
-                                                    <input type="text" id="imageURL" name="imageURL">
+                                                    <input type="text" id="imageURL" name="imageURL" required>
                                                     <input type="hidden" name="btAction" value="ChangePhoto">
                                                     <button type="submit" class="btn btn-primary" onclick="return alert('Thay đổi ảnh thành công!')">Change photo</button>
                                                 </div>
@@ -96,62 +95,58 @@
                                         <button type="submit" class="btn btn-primary" onclick="return alert('Thay đổi ảnh thành công!')">Change photo</button>
                                     </c:otherwise>
                                 </c:choose>
-
-
                             </div>  
-                        </div>
-                    </form>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="store-details">
-                        <h3>Add Service</h3>
-                        <form action="AddServiceController" method="POST" accept-charset="UTF-8">
-                            <!-- Add service form fields -->
-                            <div class="form-group">
-                                <label for="serviceDetail">Service Detail:</label>
-                                <input type="text" class="form-control" name="serviceDetail" id="serviceDetail">
-                            </div>
-                            <div class="form-group">
-                                <label for="servicePrice">Service Price:</label>
-                                <input type="text" class="form-control" name="servicePrice" id="servicePrice">
-                            </div>
-                            <c:forEach items="${storeSale}" var="store">
-                                <input type="hidden" name="storeID" value="${store.storeID}" />
-                            </c:forEach>
-                            <button type="submit">Add Service</button>
                         </form>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card-body">
-                        <p>Thông tin cửa hàng</p>
-                        <form action="MainController" method="POST" accept-charset="UTF-8">
-                            <c:forEach items="${storeSale}" var="store">
-                                Tên cửa hàng:<input type="text" name="nameStore" value="${store.storeName.toUpperCase()}"><br>
-                                Địa chỉ: <input type="text" name="addressStore" value="${store.address}" >
-                                <p>Dịch vụ:</p>
-                                <c:forEach items="${storePrice}" var="price">
-                                    <c:if test="${price.storeID eq store.storeID}">
-                                        <p>${price.serviceDetail}:</p>
-                                        <input name="priceU" value="${price.price}" id="priceU" oninput="validateInput(this)">
-                                        <input type="hidden" name="serviceID" value="${price.serviceID}" />
-                                        <button type="submit" name="btAction" value="DeleteServiceStore" class="btn btn-danger" onclick="return alert('Bạn có muốn xóa dịch vụ này không?')">Delete</button>
-                                    </c:if>
-                                </c:forEach>
-                                <br>
-                                <div class="action-buttons">
-                                    <button type="submit" class="btn btn-primary" name="btAction" value="UpdatePriceStore" onclick="return alert('Cập nhật thành công!')">Update</button>
+
+                        <div class="store-details">
+                            <h3>Add Service</h3>
+                            <form action="AddServiceController" method="POST" accept-charset="UTF-8">
+                                <!-- Add service form fields -->
+                                <div class="form-group">
+                                    <label for="serviceDetail">Service Detail:</label>
+                                    <input type="text" class="form-control" name="serviceDetail" id="serviceDetail" required>
                                 </div>
-                            </c:forEach>
-                        </form>
-                    </div>
+                                <div class="form-group">
+                                    <label for="servicePrice">Service Price:</label>
+                                    <input type="text" class="form-control" name="servicePrice" id="servicePrice" required>
+                                </div>
+                                <c:forEach items="${storeSale}" var="store">
+                                    <input type="hidden" name="storeID" value="${store.storeID}" />
+                                </c:forEach>
+                                <button type="submit">Add Service</button>
+                            </form>
+                        </div>
 
-                </div>
-            </div>  
-        </div>
-        <script src="js/Jquery.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="store-details">
+                            <p>Thông tin cửa hàng</p>
+                            <form action="MainController" method="POST" accept-charset="UTF-8">
+                                <c:forEach items="${storeSale}" var="store">
+                                    Tên cửa hàng:<input type="text" name="nameStore" value="${store.storeName.toUpperCase()}"><br>
+                                    Địa chỉ: <input type="text" name="addressStore" value="${store.address}" >
+                                    <p>Dịch vụ:</p>
+                                    <c:forEach items="${storePrice}" var="price">
+                                        <c:if test="${price.storeID eq store.storeID}">
+                                            <p>${price.serviceDetail}:</p>
+                                            <input name="priceU" value="${price.price}" id="priceU" oninput="validateInput(this)">
+                                            <input type="hidden" name="serviceID" value="${price.serviceID}" />
+                                            <button type="submit" name="btAction" value="DeleteServiceStore" class="btn btn-danger" onclick="return alert('Bạn có muốn xóa dịch vụ này không?')">Delete</button>
+                                        </c:if>
+                                    </c:forEach>
+                                    <br>
+                                    <div class="action-buttons">
+                                        <button type="submit" class="btn btn-primary" name="btAction" value="UpdatePriceStore" onclick="return alert('Cập nhật thành công!')">Update</button>
+                                    </div>
+                                </c:forEach>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>  
+            </div>
+            <script src="js/Jquery.js"></script>
+            <script src="js/bootstrap.min.js"></script>
     </body>
 
 </html>
