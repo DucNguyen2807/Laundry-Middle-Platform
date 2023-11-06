@@ -448,9 +448,9 @@ public class UserService implements Serializable {
                             int row = pos.executeUpdate();
 
                             return row > 0;
-                        }
                     }
                 }
+            }
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace(); // Xử lý lỗi hoặc ghi log tại đây
