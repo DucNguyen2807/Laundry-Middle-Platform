@@ -36,7 +36,7 @@ public class OrderService implements Serializable {
         String orderID = String.valueOf(rs.getInt("OrderID"));
         String serviceDetail = rs.getString("ServiceDetail");
         String weight = String.valueOf(rs.getDouble("Weight"));
-        String totalPrice = String.valueOf(rs.getDouble("TotaPrice"));
+        String totalPrice = rs.getString("Price");
         String phoneCus = String.valueOf(rs.getInt("PhoneCus"));
         String addressCus = rs.getString("AddressCus");
         String addressSto = rs.getString("AddressSto");
@@ -98,7 +98,7 @@ public class OrderService implements Serializable {
             con = ConnectDB.getConnection();
 
             if (con != null) {
-                String sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight, od.TotaPrice, od.Phone AS PhoneCus,\n"
+                String sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight,  FORMAT(od.TotaPrice, 'N0') AS Price, od.Phone AS PhoneCus,\n"
                         + " od.AddressCus, od.AddressSto, od.Note,\n"
                         + " o.TimeDesired, o.DateDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
                         + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
@@ -144,7 +144,7 @@ public class OrderService implements Serializable {
             con = ConnectDB.getConnection();
 
             if (con != null) {
-                String sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight, od.TotaPrice, od.Phone AS PhoneCus,\n"
+                String sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight,  FORMAT(od.TotaPrice, 'N0') AS Price, od.Phone AS PhoneCus,\n"
                         + " od.AddressCus, od.AddressSto, od.Note,\n"
                         + " o.TimeDesired, o.DateDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
                         + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
@@ -190,7 +190,7 @@ public class OrderService implements Serializable {
             con = ConnectDB.getConnection();
 
             if (con != null) {
-                String sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight, od.TotaPrice, od.Phone AS PhoneCus,\n"
+                String sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight,  FORMAT(od.TotaPrice, 'N0') AS Price, od.Phone AS PhoneCus,\n"
                         + " od.AddressCus, od.AddressSto, od.Note,\n"
                         + " o.TimeDesired, o.DateDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
                         + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
@@ -235,7 +235,7 @@ public class OrderService implements Serializable {
             con = ConnectDB.getConnection();
 
             if (con != null) {
-                String sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight, od.TotaPrice, od.Phone AS PhoneCus,\n"
+                String sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight,  FORMAT(od.TotaPrice, 'N0') AS Price, od.Phone AS PhoneCus,\n"
                         + " od.AddressCus, od.AddressSto, od.Note,\n"
                         + " o.TimeDesired, o.DateDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
                         + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
