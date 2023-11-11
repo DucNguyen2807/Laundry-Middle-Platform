@@ -64,6 +64,10 @@
         <servlet-name>InsertImageController</servlet-name>
         <servlet-class>Controller.InsertImageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewReportController</servlet-name>
+        <servlet-class>Controller.ViewReportController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>InsertImageController</servlet-name>
         <url-pattern>/InsertImageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewReportController</servlet-name>
+        <url-pattern>/ViewReportController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

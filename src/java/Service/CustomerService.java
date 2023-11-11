@@ -111,4 +111,36 @@ public class CustomerService {
             }
         }
     }
+    
+    public int getTotalCustomers() throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT COUNT(*) AS TotalCustomers FROM [Laundry-Middle-Platform].[dbo].[User] u WHERE u.RoleID = 1;";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    return rs.getInt("TotalCustomers");
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0; 
+    }
 }
