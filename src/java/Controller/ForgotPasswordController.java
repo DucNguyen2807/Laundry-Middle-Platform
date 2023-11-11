@@ -92,7 +92,7 @@ public class ForgotPasswordController extends HttpServlet {
                 mySession.setAttribute("email", email);
                 dispatcher.forward(request, response);
             } else {
-                dispatcher = request.getRequestDispatcher("YourErrorPage.jsp");
+                dispatcher = request.getRequestDispatcher("forgotPassword.jsp");
                 request.setAttribute("errorMessage", "Email not registered. Please sign up.");
                 dispatcher.forward(request, response);
             }
