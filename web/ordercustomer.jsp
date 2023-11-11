@@ -125,7 +125,6 @@
                                 <%
                                 } else if (button.equals("CompletedCustomer")) {
                                 %>
-                            <th scope="col"></th> 
                                 <%
                                     }
                                 %>
@@ -163,10 +162,10 @@
                             <%
                             } else if (button.equals("CompletedCustomer")) {
                             %>
-                            <td>
+<!--                            <td>
                                 <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
-                                <button type="submit" name="btAction" value="Review" class="btn btn-success" name="btAction">Review</button>
-                            </td>
+                                <button type="submit" name="btAction" value="Review" class="btn btn-success"">Review</button>
+                            </td>-->
 
                             <%
                                 }

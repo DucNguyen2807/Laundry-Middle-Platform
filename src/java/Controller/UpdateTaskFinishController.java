@@ -26,6 +26,7 @@ public class UpdateTaskFinishController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            String url = "MainController?btAction=7";
             String staffID = request.getParameter("staffSelect");   
             String orderID = request.getParameter("orderID");
             OrderService ord = new OrderService();
@@ -35,8 +36,7 @@ public class UpdateTaskFinishController extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                RequestDispatcher rd = request.getRequestDispatcher("list_task.jsp");
-                rd.forward(request, response);
+                response.sendRedirect(url);
             }
         }
     }

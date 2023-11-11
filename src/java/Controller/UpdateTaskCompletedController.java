@@ -7,7 +7,6 @@ package Controller;
 import Service.OrderService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -29,6 +28,7 @@ public class UpdateTaskCompletedController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            String url = "MainController?btAction=8";
             String orderID = request.getParameter("orderID");
             OrderService ord = new OrderService();
             try {
@@ -49,8 +49,7 @@ public class UpdateTaskCompletedController extends HttpServlet {
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                RequestDispatcher rd = request.getRequestDispatcher("list_task.jsp");
-                rd.forward(request, response);
+               response.sendRedirect(url);
             }
         }
     }
