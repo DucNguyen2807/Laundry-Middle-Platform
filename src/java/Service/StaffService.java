@@ -169,6 +169,20 @@ public class StaffService implements Serializable {
                         + "WHERE u.RoleID = 2 AND u.Status = 2 "
                         + "AND NOT EXISTS (SELECT 1 FROM [Order] o WHERE o.StaffID = u.UserID) "
                         + "ORDER BY OrderCount ASC";
+                
+//                "SELECT * FROM dbo.[User] WHERE UserID in(select StaffID) "
+//                        + " FROM [Laundry-Middle-Platform].[dbo].[Order] \n"
+//                        + "  where StOrderID=5\n"
+//                        + "  group by StaffID \n"
+//                        + "  having count(StaffID)<20)"
+//+ "UNION ALL "
+//                        +// Những nhân viên không có đơn hàng
+//                        "SELECT u.UserID, u.Username, u.Password, u.Address, u.Fullname, u.Phone, u.Email, st.StStaffDetail, 0 AS OrderCount "
+//                        + "FROM [User] u "
+//                        + "LEFT JOIN StatusStaff st ON st.StStaffID = u.Status "
+//                        + "WHERE u.RoleID = 2 AND u.Status = 2 "
+//                        + "AND NOT EXISTS (SELECT 1 FROM [Order] o WHERE o.StaffID = u.UserID) "
+//                        + "ORDER BY OrderCount ASC";
 
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();

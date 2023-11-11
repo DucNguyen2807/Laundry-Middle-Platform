@@ -184,7 +184,7 @@
                         <td><%= staff.getEmail()%></td>
                         <td><%= staff.getStatusDetail()%></td>
                         <%
-                            if (!staff.getStatusDetail().equals("Retired")) {
+                            if (!staff.getStatusDetail().equals("Retire")) {
                         %>
                         <td>
                             <form action="MainController" method="post">
