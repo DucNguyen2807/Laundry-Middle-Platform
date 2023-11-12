@@ -4,15 +4,14 @@
  */
 package Controller;
 
-import Model.Review;
+import Model.User;
 import Service.StoreService;
+import Service.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,39 +20,25 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author acer
+ * @author nguye
  */
-@WebServlet(name = "ReviewStoreController", urlPatterns = {"/ReviewStoreController"})
-public class ReviewStoreController extends HttpServlet {
+@WebServlet(name = "InsertReviewController", urlPatterns = {"/InsertReviewController"})
+public class InsertReviewController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            User user = (User) request.getSession().getAttribute("user");
 
-            StoreService store = new StoreService();
-            
+            int userId = user.getUserId();
+            String rating = request.getParameter("rating2");
+            String reviewText = request.getParameter("comment");
             String storeID = request.getParameter("storeID");
-            
-            store.getStoreSale(Integer.parseInt(storeID));
-            store.getAllPrice(Integer.parseInt(storeID));
 
-            List<Review> storeSale = store.getListStoreSale();
-            List<Review> storePrice = store.getListPrice();
+            boolean insertSuccessful = UserService.insertRating(reviewText, Integer.parseInt(rating), Integer.parseInt(storeID), userId);
 
-            request.setAttribute("storeSale", storeSale);
-            request.setAttribute("storePrice", storePrice);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("reviewforcus.jsp");
-            dispatcher.forward(request, response);
+            response.sendRedirect("MainController?btAction=CompletedCustomer");
 
         }
     }
@@ -73,9 +58,9 @@ public class ReviewStoreController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ReviewStoreController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertReviewController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(ReviewStoreController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertReviewController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -93,9 +78,9 @@ public class ReviewStoreController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ReviewStoreController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertReviewController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(ReviewStoreController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertReviewController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

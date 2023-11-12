@@ -28,6 +28,7 @@ public class Order implements Serializable {
     private String StoreName;
     private String StaffName;
     private String stOrderDetail;
+    private int StoreID;
 
 //    public Order(String orderID, String serviceDetail, String weight, String totalPrice, String note, String dateApprove, String dateComplete, String timeComplete, String customerName, String storeName, String staffName, String stOrderDetail) {
 //        this.OrderID = Integer.parseInt(orderID);
@@ -66,6 +67,36 @@ public class Order implements Serializable {
         this.StaffName = StaffName;
         this.stOrderDetail = stOrderDetail;
     }
+
+    public Order(int OrderID, String ServiceDetail, String Weight, String TotalPrice, String phoneCus, String AddressCus, String AddressSto, String Note, String TimeDesired, String DateDesired, String DateApproved, String DateComplete, String TimeComplete, String CustomerName, String StoreName, String StaffName, String stOrderDetail, int StoreID) {
+        this.OrderID = OrderID;
+        this.ServiceDetail = ServiceDetail;
+        this.Weight = Weight;
+        this.TotalPrice = TotalPrice;
+        this.phoneCus = phoneCus;
+        this.AddressCus = AddressCus;
+        this.AddressSto = AddressSto;
+        this.Note = Note;
+        this.TimeDesired = TimeDesired;
+        this.DateDesired = DateDesired;
+        this.DateApproved = DateApproved;
+        this.DateComplete = DateComplete;
+        this.TimeComplete = TimeComplete;
+        this.CustomerName = CustomerName;
+        this.StoreName = StoreName;
+        this.StaffName = StaffName;
+        this.stOrderDetail = stOrderDetail;
+        this.StoreID = StoreID;
+    }
+
+    public int getStoreID() {
+        return StoreID;
+    }
+
+    public void setStoreID(int StoreID) {
+        this.StoreID = StoreID;
+    }
+    
 
     public int getOrderID() {
         return OrderID;
