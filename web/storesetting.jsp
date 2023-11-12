@@ -20,12 +20,22 @@
         </style>
         <script>
             function validateInput(inputField) {
-                inputField.value = inputField.value.replace(/[^0-9]/g, '');
+                inputField.value = inputField.value.replace(/[^0-9]/g, ''); // Chỉ cho phép nhập số
+
+                var maxPrice = 50000;
+                var price = parseInt(inputField.value);
+
+                if (price > maxPrice) {
+                    alert("Giá trị không thể lớn hơn 50,000đ.");
+                    inputField.value = maxPrice;
+                }
+
+                var submitButton = document.querySelector('button[type="submit"]');
                 if (inputField.value === "") {
                     alert("Giá trị nhập vào phải là số từ 0 đến 9.");
-                    document.getElementById("submitButton").disabled = true;
+                    submitButton.disabled = true;
                 } else {
-                    document.getElementById("submitButton").disabled = false;
+                    submitButton.disabled = false;
                 }
             }
         </script>
@@ -100,7 +110,7 @@
 
                         <div class="store-details">
                             <h3>Add Service</h3>
-                            <form action="AddServiceController" method="POST" accept-charset="UTF-8">
+                            <form action="AddServiceController" method="POST" accept-charset="UTF-8" onsubmit="return validateForm()">
                                 <!-- Add service form fields -->
                                 <div class="form-group">
                                     <label for="serviceDetail">Service Detail:</label>
@@ -124,19 +134,21 @@
                             <form action="MainController" method="POST" accept-charset="UTF-8">
                                 <c:forEach items="${storeSale}" var="store">
                                     Tên cửa hàng:<input type="text" name="nameStore" value="${store.storeName.toUpperCase()}"><br>
-                                    Địa chỉ: <input type="text" name="addressStore" value="${store.address}" >
+                                    Địa chỉ: <input type="text" name="addressStore" value="${store.address}">
                                     <p>Dịch vụ:</p>
                                     <c:forEach items="${storePrice}" var="price">
                                         <c:if test="${price.storeID eq store.storeID}">
                                             <p>${price.serviceDetail}:</p>
                                             <input name="priceU" value="${price.price}" id="priceU" oninput="validateInput(this)">
                                             <input type="hidden" name="serviceID" value="${price.serviceID}" />
-                                            <button type="submit" name="btAction" value="DeleteServiceStore" class="btn btn-danger" onclick="return alert('Bạn có muốn xóa dịch vụ này không?')">Delete</button>
+                                            <button type="submit" name="btAction" value="DeleteServiceStore" class="btn btn-danger"
+                                                    onclick="return confirm('Bạn có muốn xóa dịch vụ này không?')">Delete</button>
                                         </c:if>
                                     </c:forEach>
                                     <br>
                                     <div class="action-buttons">
-                                        <button type="submit" class="btn btn-primary" name="btAction" value="UpdatePriceStore" onclick="return alert('Cập nhật thành công!')">Update</button>
+                                        <button type="submit" class="btn btn-primary" name="btAction" value="UpdatePriceStore"
+                                                onclick="return alert('Cập nhật thành công!')">Update</button>
                                     </div>
                                 </c:forEach>
                             </form>
@@ -145,6 +157,28 @@
                     </div>
                 </div>  
             </div>
+            <script>
+                function validateForm() {
+                    var servicePriceInput = document.getElementById("servicePrice");
+                    var servicePrice = parseFloat(servicePriceInput.value);
+
+                    // Kiểm tra xem giá trị có phải là số không âm và không quá 50000 VNĐ
+                    if (isNaN(servicePrice) || servicePrice < 0 || servicePrice > 50000) {
+                        alert("Service Price phải là số không âm và không quá 50000 VNĐ.");
+                        servicePriceInput.value = ''; // Xóa giá trị nhập nếu không hợp lệ
+                        return false;
+                    }
+
+                    // Kiểm tra xem giá trị có chứa chữ cái hoặc ký tự đặc biệt
+                    if (/[^0-9.]/.test(servicePriceInput.value)) {
+                        alert("Service Price chỉ được nhập số và dấu chấm.");
+                        servicePriceInput.value = ''; // Xóa giá trị nhập nếu không hợp lệ
+                        return false;
+                    }
+
+                    return true; // Cho phép form submission
+                }
+            </script>
             <script src="js/Jquery.js"></script>
             <script src="js/bootstrap.min.js"></script>
     </body>
