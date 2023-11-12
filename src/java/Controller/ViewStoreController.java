@@ -21,15 +21,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ViewStoreController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     private final String VIEWSTORE = "viewstore.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -40,9 +31,6 @@ public class ViewStoreController extends HttpServlet {
             String url = VIEWSTORE;
 
             String searchValue = request.getParameter("txtSearchStore");
-            //HttpSession session = request.getSession();
-//            Store store = (Store) request.getSession().getAttribute("store");
-//            String name = store.getStoreName();
 
             StoreService storeSer = new StoreService();
 

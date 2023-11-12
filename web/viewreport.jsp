@@ -1,19 +1,19 @@
 <%-- 
-    Document   : donhang
-    Created on : Oct 11, 2023, 3:25:42 PM
-    Author     : acer
+    Document   : viewreport
+    Created on : Nov 11, 2023, 9:20:54 PM
+    Author     : khait
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title> Management Admin </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Report</title>
+        <!-- Add Bootstrap CSS link here -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="css/manage_admin.css">
-        <!-- Boxicons CDN Link -->
-        <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/report.css">
     </head>
     <body>
         <div class="fui-sidbar-navigiation">
@@ -75,7 +75,7 @@
                             </li>
                             <li class="nav-link">
                                 <a href="vieworder.jsp">
-                                   <span class="icon">
+                                    <span class="icon">
                                         <svg style="color: #ffffff" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M17.5 15C17.0478 15 16.4089 15.0625 15.7438 15.1536C15.4331 15.1962 15.1962 15.4331 15.1536 15.7438C15.0625 16.4089 15 17.0478 15 17.5C15 17.9522 15.0625 18.5911 15.1536 19.2562C15.1962 19.5669 15.4331 19.8038 15.7438 19.8464C16.4089 19.9375 17.0478 20 17.5 20C17.9522 20 18.5911 19.9375 19.2562 19.8464C19.5669 19.8038 19.8038 19.5669 19.8464 19.2562C19.9375 18.5911 20 17.9522 20 17.5C20 17.0478 19.9375 16.4089 19.8464 15.7438C19.8038 15.4331 19.5669 15.1962 19.2562 15.1536C18.5911 15.0625 17.9522 15 17.5 15ZM15.4724 13.1721C14.2725 13.3364 13.3364 14.2725 13.1721 15.4724C13.0778 16.1606 13 16.9082 13 17.5C13 18.0918 13.0778 18.8394 13.1721 19.5276C13.3364 20.7275 14.2725 21.6636 15.4724 21.8279C16.1606 21.9222 16.9082 22 17.5 22C18.0918 22 18.8394 21.9222 19.5276 21.8279C20.7275 21.6636 21.6636 20.7275 21.8279 19.5276C21.9222 18.8394 22 18.0918 22 17.5C22 16.9082 21.9222 16.1606 21.8279 15.4724C21.6636 14.2725 20.7275 13.3364 19.5276 13.1721C18.8394 13.0778 18.0918 13 17.5 13C16.9082 13 16.1606 13.0778 15.4724 13.1721Z" fill="currentColor"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M6.5 15C6.04782 15 5.40893 15.0625 4.74381 15.1536C4.43308 15.1962 4.19615 15.4331 4.15359 15.7438C4.0625 16.4089 4 17.0478 4 17.5C4 17.9522 4.0625 18.5911 4.15359 19.2562C4.19615 19.5669 4.43308 19.8038 4.74381 19.8464C5.40893 19.9375 6.04782 20 6.5 20C6.95218 20 7.59107 19.9375 8.25619 19.8464C8.56692 19.8038 8.80385 19.5669 8.84641 19.2562C8.9375 18.5911 9 17.9522 9 17.5C9 17.0478 8.9375 16.4089 8.84641 15.7438C8.80385 15.4331 8.56692 15.1962 8.25619 15.1536C7.59107 15.0625 6.95218 15 6.5 15ZM4.47244 13.1721C3.27253 13.3364 2.33642 14.2725 2.17209 15.4724C2.07784 16.1606 2 16.9082 2 17.5C2 18.0918 2.07784 18.8394 2.17209 19.5276C2.33642 20.7275 3.27253 21.6636 4.47244 21.8279C5.16065 21.9222 5.90816 22 6.5 22C7.09184 22 7.83935 21.9222 8.52756 21.8279C9.72747 21.6636 10.6636 20.7275 10.8279 19.5276C10.9222 18.8394 11 18.0918 11 17.5C11 16.9082 10.9222 16.1606 10.8279 15.4724C10.6636 14.2725 9.72747 13.3364 8.52756 13.1721C7.83935 13.0778 7.09184 13 6.5 13C5.90816 13 5.16065 13.0778 4.47244 13.1721Z" fill="currentColor"/>
@@ -88,7 +88,7 @@
                             </li>
                             <li class="nav-link">
                                 <a href="vieworderwaiting.jsp">
-                                   <span class="icon">
+                                    <span class="icon">
                                         <svg style="color: #ffffff" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M17.5 15C17.0478 15 16.4089 15.0625 15.7438 15.1536C15.4331 15.1962 15.1962 15.4331 15.1536 15.7438C15.0625 16.4089 15 17.0478 15 17.5C15 17.9522 15.0625 18.5911 15.1536 19.2562C15.1962 19.5669 15.4331 19.8038 15.7438 19.8464C16.4089 19.9375 17.0478 20 17.5 20C17.9522 20 18.5911 19.9375 19.2562 19.8464C19.5669 19.8038 19.8038 19.5669 19.8464 19.2562C19.9375 18.5911 20 17.9522 20 17.5C20 17.0478 19.9375 16.4089 19.8464 15.7438C19.8038 15.4331 19.5669 15.1962 19.2562 15.1536C18.5911 15.0625 17.9522 15 17.5 15ZM15.4724 13.1721C14.2725 13.3364 13.3364 14.2725 13.1721 15.4724C13.0778 16.1606 13 16.9082 13 17.5C13 18.0918 13.0778 18.8394 13.1721 19.5276C13.3364 20.7275 14.2725 21.6636 15.4724 21.8279C16.1606 21.9222 16.9082 22 17.5 22C18.0918 22 18.8394 21.9222 19.5276 21.8279C20.7275 21.6636 21.6636 20.7275 21.8279 19.5276C21.9222 18.8394 22 18.0918 22 17.5C22 16.9082 21.9222 16.1606 21.8279 15.4724C21.6636 14.2725 20.7275 13.3364 19.5276 13.1721C18.8394 13.0778 18.0918 13 17.5 13C16.9082 13 16.1606 13.0778 15.4724 13.1721Z" fill="currentColor"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M6.5 15C6.04782 15 5.40893 15.0625 4.74381 15.1536C4.43308 15.1962 4.19615 15.4331 4.15359 15.7438C4.0625 16.4089 4 17.0478 4 17.5C4 17.9522 4.0625 18.5911 4.15359 19.2562C4.19615 19.5669 4.43308 19.8038 4.74381 19.8464C5.40893 19.9375 6.04782 20 6.5 20C6.95218 20 7.59107 19.9375 8.25619 19.8464C8.56692 19.8038 8.80385 19.5669 8.84641 19.2562C8.9375 18.5911 9 17.9522 9 17.5C9 17.0478 8.9375 16.4089 8.84641 15.7438C8.80385 15.4331 8.56692 15.1962 8.25619 15.1536C7.59107 15.0625 6.95218 15 6.5 15ZM4.47244 13.1721C3.27253 13.3364 2.33642 14.2725 2.17209 15.4724C2.07784 16.1606 2 16.9082 2 17.5C2 18.0918 2.07784 18.8394 2.17209 19.5276C2.33642 20.7275 3.27253 21.6636 4.47244 21.8279C5.16065 21.9222 5.90816 22 6.5 22C7.09184 22 7.83935 21.9222 8.52756 21.8279C9.72747 21.6636 10.6636 20.7275 10.8279 19.5276C10.9222 18.8394 11 18.0918 11 17.5C11 16.9082 10.9222 16.1606 10.8279 15.4724C10.6636 14.2725 9.72747 13.3364 8.52756 13.1721C7.83935 13.0778 7.09184 13 6.5 13C5.90816 13 5.16065 13.0778 4.47244 13.1721Z" fill="currentColor"/>
@@ -101,7 +101,7 @@
                             </li>
                             <li class="nav-link">
                                 <a href="viewreport.jsp">
-                                   <span class="icon">
+                                    <span class="icon">
                                         <svg style="color: #ffffff" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M17.5 15C17.0478 15 16.4089 15.0625 15.7438 15.1536C15.4331 15.1962 15.1962 15.4331 15.1536 15.7438C15.0625 16.4089 15 17.0478 15 17.5C15 17.9522 15.0625 18.5911 15.1536 19.2562C15.1962 19.5669 15.4331 19.8038 15.7438 19.8464C16.4089 19.9375 17.0478 20 17.5 20C17.9522 20 18.5911 19.9375 19.2562 19.8464C19.5669 19.8038 19.8038 19.5669 19.8464 19.2562C19.9375 18.5911 20 17.9522 20 17.5C20 17.0478 19.9375 16.4089 19.8464 15.7438C19.8038 15.4331 19.5669 15.1962 19.2562 15.1536C18.5911 15.0625 17.9522 15 17.5 15ZM15.4724 13.1721C14.2725 13.3364 13.3364 14.2725 13.1721 15.4724C13.0778 16.1606 13 16.9082 13 17.5C13 18.0918 13.0778 18.8394 13.1721 19.5276C13.3364 20.7275 14.2725 21.6636 15.4724 21.8279C16.1606 21.9222 16.9082 22 17.5 22C18.0918 22 18.8394 21.9222 19.5276 21.8279C20.7275 21.6636 21.6636 20.7275 21.8279 19.5276C21.9222 18.8394 22 18.0918 22 17.5C22 16.9082 21.9222 16.1606 21.8279 15.4724C21.6636 14.2725 20.7275 13.3364 19.5276 13.1721C18.8394 13.0778 18.0918 13 17.5 13C16.9082 13 16.1606 13.0778 15.4724 13.1721Z" fill="currentColor"/>
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M6.5 15C6.04782 15 5.40893 15.0625 4.74381 15.1536C4.43308 15.1962 4.19615 15.4331 4.15359 15.7438C4.0625 16.4089 4 17.0478 4 17.5C4 17.9522 4.0625 18.5911 4.15359 19.2562C4.19615 19.5669 4.43308 19.8038 4.74381 19.8464C5.40893 19.9375 6.04782 20 6.5 20C6.95218 20 7.59107 19.9375 8.25619 19.8464C8.56692 19.8038 8.80385 19.5669 8.84641 19.2562C8.9375 18.5911 9 17.9522 9 17.5C9 17.0478 8.9375 16.4089 8.84641 15.7438C8.80385 15.4331 8.56692 15.1962 8.25619 15.1536C7.59107 15.0625 6.95218 15 6.5 15ZM4.47244 13.1721C3.27253 13.3364 2.33642 14.2725 2.17209 15.4724C2.07784 16.1606 2 16.9082 2 17.5C2 18.0918 2.07784 18.8394 2.17209 19.5276C2.33642 20.7275 3.27253 21.6636 4.47244 21.8279C5.16065 21.9222 5.90816 22 6.5 22C7.09184 22 7.83935 21.9222 8.52756 21.8279C9.72747 21.6636 10.6636 20.7275 10.8279 19.5276C10.9222 18.8394 11 18.0918 11 17.5C11 16.9082 10.9222 16.1606 10.8279 15.4724C10.6636 14.2725 9.72747 13.3364 8.52756 13.1721C7.83935 13.0778 7.09184 13 6.5 13C5.90816 13 5.16065 13.0778 4.47244 13.1721Z" fill="currentColor"/>
@@ -132,5 +132,90 @@
                 sidebar.classList.remove("close");
             });
         </script>
+
+
+        <div class="container mt-4" style="margin-left: 140px;">
+            <h1 class="display-4">Thống kê</h1>
+            <form action="MainController" method="post">
+                <button value="ViewReport" name="btAction"  class="btn btn-primary">Xem tất cả</button>
+                <!--                                <input type="hidden" name="txtSearchStore" value="" />-->
+            </form>
+            <br>
+
+            <%
+                int totalCus = (request.getAttribute("TOTALCUSTOMER") != null) ? (int) request.getAttribute("TOTALCUSTOMER") : 0;
+                int totalSto = (request.getAttribute("TOTALSTORE") != null) ? (int) request.getAttribute("TOTALSTORE") : 0;
+                int totalSta = (request.getAttribute("TOTALSTAFF") != null) ? (int) request.getAttribute("TOTALSTAFF") : 0;
+                int totalOrd = (request.getAttribute("TOTALORDER") != null) ? (int) request.getAttribute("TOTALORDER") : 0;
+                int totalOrdPro = (request.getAttribute("TOTALORDERPRO") != null) ? (int) request.getAttribute("TOTALORDERPRO") : 0;
+                int totalOrdCom = (request.getAttribute("TOTALORDERCOM") != null) ? (int) request.getAttribute("TOTALORDERCOM") : 0;
+            %>
+
+            <div class="section">
+                <h2>Tài khoản</h2>
+                <div class="account">
+                    <div class="detail" style="background-color: #4e73df">
+                        <h4>Khách hàng</h4>
+                        <h1 id="totalCusDisplay"><%=totalCus%></h1>
+                    </div>
+                    <div class="detail" style="background-color: #f6c23e">
+                        <h4>Cửa hàng</h4>
+                        <h1 id="totalStoDisplay"><%=totalSto%></h1>
+                    </div>
+                    <div class="detail" style="background-color: #36b9cc">
+                        <h4>Nhân viên</h4>
+                        <h1 id="totalStaDisplay"><%=totalSta%></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Đơn hàng</h2>
+                <div class="order">
+                    <div class="detail"  style="background-color: #4e73df">
+                        <h4>Tất cả</h4>
+                        <h1 id="totalOrdDisplay"><%=totalOrd%></h1>
+                    </div>
+                    <div class="detail"  style="background-color:#858796">
+                        <h4>Đang xử lí</h4>
+                        <h1 id="totalOrdProDisplay"><%=totalOrdPro%></h1>
+                    </div>
+                    <div class="detail" style="background-color: #1cc88a">
+                        <h4>Đã hoàn thành</h4>
+                        <h1 id="totalOrdComDisplay"><%=totalOrdCom%></h1>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    startCounting("totalCusDisplay", <%=totalCus%>);
+                    startCounting("totalStoDisplay", <%=totalSto%>);
+                    startCounting("totalStaDisplay", <%=totalSta%>);
+                    startCounting("totalOrdDisplay", <%=totalOrd%>);
+                    startCounting("totalOrdProDisplay", <%=totalOrdPro%>);
+                    startCounting("totalOrdComDisplay", <%=totalOrdCom%>);
+                });
+
+                function startCounting(elementId, targetValue) {
+                    var currentCount = 0;
+                    var intervalId = setInterval(function () {
+                        document.getElementById(elementId).innerText = currentCount;
+
+                        if (currentCount >= targetValue) {
+                            clearInterval(intervalId);
+                            document.getElementById(elementId).innerText = targetValue;
+                        } else {
+                            currentCount++;
+                        }
+                    }, 30);
+                }
+            </script>
+
+
+        </div>
+
+
+
     </body>
 </html>

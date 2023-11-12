@@ -5,7 +5,6 @@
 package Service;
 
 import DBConnect.ConnectDB;
-import Model.Cate;
 import Model.Order;
 import Model.Staff;
 import java.io.Serializable;
@@ -14,11 +13,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -497,4 +493,102 @@ public class OrderService implements Serializable {
 
         return nearestStaff;
     }
+
+    public int getTotalOrders() throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT COUNT(*) AS TotalOrders FROM [Laundry-Middle-Platform].[dbo].[Order];";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    return rs.getInt("TotalOrders");
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0; 
+    }
+    
+    public int getTotalOrderCompleteds() throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT COUNT(*) AS TotalOrderCompleteds FROM [Laundry-Middle-Platform].[dbo].[Order] o WHERE o.StOrderID = 5;";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    return rs.getInt("TotalOrderCompleteds");
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0; 
+    }
+    
+    public int getTotalOrderProcessings() throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT COUNT(*) AS TotalOrderProcessings FROM [Laundry-Middle-Platform].[dbo].[Order] o "
+                                      + " WHERE o.StOrderID IN (1, 2, 4, 6, 7);";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    return rs.getInt("TotalOrderProcessings");
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0; 
+    }
+
 }

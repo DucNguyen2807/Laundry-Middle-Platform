@@ -125,7 +125,6 @@
                                 <%
                                 } else if (button.equals("CompletedCustomer")) {
                                 %>
-                            <th scope="col"></th> 
                                 <%
                                     }
                                 %>

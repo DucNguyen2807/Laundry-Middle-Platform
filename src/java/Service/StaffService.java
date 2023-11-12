@@ -169,6 +169,20 @@ public class StaffService implements Serializable {
                         + "WHERE u.RoleID = 2 AND u.Status = 2 "
                         + "AND NOT EXISTS (SELECT 1 FROM [Order] o WHERE o.StaffID = u.UserID) "
                         + "ORDER BY OrderCount ASC";
+                
+//                "SELECT * FROM dbo.[User] WHERE UserID in(select StaffID) "
+//                        + " FROM [Laundry-Middle-Platform].[dbo].[Order] \n"
+//                        + "  where StOrderID=5\n"
+//                        + "  group by StaffID \n"
+//                        + "  having count(StaffID)<20)"
+//+ "UNION ALL "
+//                        +// Những nhân viên không có đơn hàng
+//                        "SELECT u.UserID, u.Username, u.Password, u.Address, u.Fullname, u.Phone, u.Email, st.StStaffDetail, 0 AS OrderCount "
+//                        + "FROM [User] u "
+//                        + "LEFT JOIN StatusStaff st ON st.StStaffID = u.Status "
+//                        + "WHERE u.RoleID = 2 AND u.Status = 2 "
+//                        + "AND NOT EXISTS (SELECT 1 FROM [Order] o WHERE o.StaffID = u.UserID) "
+//                        + "ORDER BY OrderCount ASC";
 
                 ps = con.prepareStatement(sql);
                 rs = ps.executeQuery();
@@ -191,6 +205,39 @@ public class StaffService implements Serializable {
         }
 
         return listStaff;
+    }
+    
+    public int getTotalStaffs() throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT COUNT(*) AS TotalStaffs FROM [Laundry-Middle-Platform].[dbo].[User] u WHERE u.RoleID = 2;";
+                
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    return rs.getInt("TotalStaffs");
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0; 
     }
 
 }

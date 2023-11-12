@@ -43,9 +43,6 @@ public class ListTaskController extends HttpServlet {
                 List<Order> result = ord.getListOrder();
                 request.setAttribute("SEARCHRESULT", result);
                 
-                
-                
-                
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

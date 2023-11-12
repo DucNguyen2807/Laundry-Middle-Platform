@@ -4,57 +4,64 @@
  */
 package Controller;
 
+import Service.CustomerService;
 import Service.OrderService;
+import Service.StaffService;
+import Service.StoreService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author nguye
+ * @author khait
  */
-@WebServlet(name = "UpdateTaskCompleted", urlPatterns = {"/UpdateTaskCompleted"})
-public class UpdateTaskCompletedController extends HttpServlet {
+public class ViewReportController extends HttpServlet {
+
+    private final String VIEWREPORT = "viewreport.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String url = "MainController?btAction=8";
-            String orderID = request.getParameter("orderID");
-            OrderService ord = new OrderService();
+        try {
+            request.setCharacterEncoding("UTF-8");
+
+            CustomerService cusService = new CustomerService();
+            StoreService stoService = new StoreService();
+            StaffService staService = new StaffService();
+            OrderService ordService = new OrderService();
+
             try {
-                LocalDate approveDate = LocalDate.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                String formattedDate = approveDate.format(formatter);
-                java.sql.Date sqlDate = java.sql.Date.valueOf(formattedDate);
+                int totalCus = cusService.getTotalCustomers();
+                int totalSto = stoService.getTotalStores();
+                int totalSta = staService.getTotalStaffs();
+                int totalOrd = ordService.getTotalOrders();
+                int totalOrdPro = ordService.getTotalOrderProcessings();
+                int totalOrdCom = ordService.getTotalOrderCompleteds();
 
-                LocalTime currentTime = LocalTime.now();
-                // Định dạng thời gian chỉ hiển thị giờ và phút
-                DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("HH:mm");
-                String timeCompleted = currentTime.format(formatterTime);
-
-                ord.updateDateCompleted(Integer.parseInt(orderID), sqlDate);
-                ord.updateTimeCompleted(Integer.parseInt(orderID), timeCompleted);
-                ord.updateOrder(Integer.parseInt(orderID), 5);
+                request.setAttribute("TOTALCUSTOMER", totalCus);
+                request.setAttribute("TOTALSTORE", totalSto);
+                request.setAttribute("TOTALSTAFF", totalSta);
+                request.setAttribute("TOTALORDER", totalOrd);
+                request.setAttribute("TOTALORDERPRO", totalOrdPro);
+                request.setAttribute("TOTALORDERCOM", totalOrdCom);
 
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-               response.sendRedirect(url);
+                RequestDispatcher rd = request.getRequestDispatcher(VIEWREPORT);
+                rd.forward(request, response);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
