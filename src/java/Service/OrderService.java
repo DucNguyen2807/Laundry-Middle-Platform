@@ -5,7 +5,6 @@
 package Service;
 
 import DBConnect.ConnectDB;
-import Model.Cate;
 import Model.Order;
 import Model.Staff;
 import java.io.Serializable;
@@ -14,11 +13,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -134,6 +130,63 @@ public class OrderService implements Serializable {
         }
     }
 
+    private Order createOrderFromResultSetCus(ResultSet rs) throws SQLException {
+        String orderID = String.valueOf(rs.getInt("OrderID"));
+        String storeID = String.valueOf(rs.getInt("StoreID"));
+        String serviceDetail = rs.getString("ServiceDetail");
+        String weight = String.valueOf(rs.getDouble("Weight"));
+        String totalPrice = rs.getString("Price");
+        String phoneCus = String.valueOf(rs.getInt("PhoneCus"));
+        String addressCus = rs.getString("AddressCus");
+        String addressSto = rs.getString("AddressSto");
+        String note = rs.getString("Note");
+        String timeDesired = rs.getString("TimeDesired");
+        String dateDesired;
+        Date dateDesiredValueDate = rs.getDate("DateDesired");
+        if (rs.wasNull()) {
+            dateDesired = "NULL";
+        } else {
+            dateDesired = dateDesiredValueDate.toString();
+        }
+        String dateApprove;
+        Date dateApproveValueDate = rs.getDate("DateApprove");
+        if (rs.wasNull()) {
+            dateApprove = "NULL";
+        } else {
+            dateApprove = dateApproveValueDate.toString();
+        }
+        String dateComplete;
+        Date dateCompleteValue = rs.getDate("DateCompleted");
+        if (rs.wasNull()) {
+            dateComplete = "NULL";
+        } else {
+            dateComplete = dateCompleteValue.toString();
+        }
+
+        String timeComplete;
+        String timeCompleteValue = rs.getString("TimeComplete");
+        if (rs.wasNull()) {
+            timeComplete = "NULL";
+        } else {
+            timeComplete = timeCompleteValue.toString();
+        }
+        String customerName = rs.getString("CustomerName");
+        String storeName = rs.getString("StoreName");
+        String staffName;
+        String staffNameValue = rs.getString("StaffName");
+        if (rs.wasNull()) {
+            staffName = "NULL";
+        } else {
+            staffName = staffNameValue;
+        }
+
+        String stOrderDetail = rs.getString("StOrderDetail");
+
+        Order order = new Order(Integer.parseInt(orderID), serviceDetail, weight, totalPrice, phoneCus, addressCus, addressSto, note,
+                timeDesired, dateDesired, dateApprove, dateComplete, timeComplete, customerName, storeName, staffName, stOrderDetail, Integer.parseInt(storeID));
+        return order;
+    }
+    
     public void viewOrderCustomer(int userId, String btAction) throws ClassNotFoundException, SQLException {
         Connection con = null;
         PreparedStatement ps = null;
@@ -144,7 +197,7 @@ public class OrderService implements Serializable {
             con = ConnectDB.getConnection();
 
             if (con != null) {
-                String sql = "SELECT o.OrderID, se.ServiceDetail, od.Weight,  FORMAT(od.TotaPrice, 'N0') AS Price, od.Phone AS PhoneCus,\n"
+                String sql = "SELECT o.OrderID, o.StoreID ,se.ServiceDetail, od.Weight,  FORMAT(od.TotaPrice, 'N0') AS Price, od.Phone AS PhoneCus,\n"
                         + " od.AddressCus, od.AddressSto, od.Note,\n"
                         + " o.TimeDesired, o.DateDesired, o.DateApprove, o.DateCompleted, o.TimeComplete,\n"
                         + " u.Fullname AS CustomerName, us.Fullname AS StoreName, uf.Fullname AS StaffName, StOrderDetail\n"
@@ -163,7 +216,7 @@ public class OrderService implements Serializable {
 
                 rs = ps.executeQuery();
                 while (rs.next()) {
-                    Order order = createOrderFromResultSet(rs);
+                    Order order = createOrderFromResultSetCus(rs);
                     listOrder.add(order);
                 }
             }
@@ -440,4 +493,102 @@ public class OrderService implements Serializable {
 
         return nearestStaff;
     }
+
+    public int getTotalOrders() throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT COUNT(*) AS TotalOrders FROM [Laundry-Middle-Platform].[dbo].[Order];";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    return rs.getInt("TotalOrders");
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0; 
+    }
+    
+    public int getTotalOrderCompleteds() throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT COUNT(*) AS TotalOrderCompleteds FROM [Laundry-Middle-Platform].[dbo].[Order] o WHERE o.StOrderID = 5;";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    return rs.getInt("TotalOrderCompleteds");
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0; 
+    }
+    
+    public int getTotalOrderProcessings() throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT COUNT(*) AS TotalOrderProcessings FROM [Laundry-Middle-Platform].[dbo].[Order] o "
+                                      + " WHERE o.StOrderID IN (1, 2, 4, 6, 7);";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    return rs.getInt("TotalOrderProcessings");
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0; 
+    }
+
 }

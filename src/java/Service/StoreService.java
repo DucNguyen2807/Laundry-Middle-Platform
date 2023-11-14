@@ -827,5 +827,37 @@ public class StoreService implements Serializable {
         }
         return false; // Trả về false nếu cửa hàng đã có ảnh
     }
+    
+    public int getTotalStores() throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "SELECT COUNT(*) AS TotalStores FROM [Laundry-Middle-Platform].[dbo].[User] u WHERE u.RoleID = 3;";
+                ps = con.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    return rs.getInt("TotalStores");
+                }
+            }
+
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return 0; 
+    }
 
 }

@@ -42,7 +42,7 @@ public class SortStoreByController extends HttpServlet {
                 try {
                     currentPage = Integer.parseInt(pageParam);
                 } catch (NumberFormatException e) {
-                    // Xử lý ngoại lệ nếu tham số trang không hợp lệ
+                   
                 }
             }
 

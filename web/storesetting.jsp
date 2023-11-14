@@ -20,12 +20,22 @@
         </style>
         <script>
             function validateInput(inputField) {
-                inputField.value = inputField.value.replace(/[^0-9]/g, '');
+                inputField.value = inputField.value.replace(/[^0-9]/g, ''); 
+
+                var maxPrice = 40000;
+                var price = parseInt(inputField.value);
+
+                if (price > maxPrice) {
+                    alert("Giá trị không thể lớn hơn 40,000đ.");
+                    inputField.value = maxPrice;
+                }
+
+                var submitButton = document.querySelector('button[type="submit"]');
                 if (inputField.value === "") {
                     alert("Giá trị nhập vào phải là số từ 0 đến 9.");
-                    document.getElementById("submitButton").disabled = true;
+                    submitButton.disabled = true;
                 } else {
-                    document.getElementById("submitButton").disabled = false;
+                    submitButton.disabled = false;
                 }
             }
         </script>
@@ -80,9 +90,11 @@
                                                 <div class="col-md-6">
                                                     <div><img src="${storeImage.imageDetail}" name="imageStore" alt="Cửa hàng" alt="Store Image" style="width: 100%; height: auto;" /></div>
                                                     <label for="imageURL">Đường dẫn URL ảnh:</label>
+                                                    
                                                     <input type="text" id="imageURL" name="imageURL" required>
                                                     <input type="hidden" name="btAction" value="ChangePhoto">
-                                                    <button type="submit" class="btn btn-primary" onclick="return alert('Thay đổi ảnh thành công!')">Change photo</button>
+                                                    <br>
+                                                    <button type="submit" class="btn btn-primary" onclick="return alert('Thay đổi ảnh thành công!')">Thay đổi ảnh</button>
                                                 </div>
                                             </div>
                                         </c:forEach>
@@ -90,53 +102,57 @@
                                     <c:otherwise>
                                         <p>Không có ảnh cửa hàng nào.</p>
                                         <label for="imageURL">Đường dẫn URL ảnh:</label>
+                                        
                                         <input type="text" id="imageURL" name="imageURL" required>
                                         <input type="hidden" name="btAction" value="ChangePhoto">
-                                        <button type="submit" class="btn btn-primary" onclick="return alert('Thay đổi ảnh thành công!')">Change photo</button>
+                                        <br>
+                                        <button type="submit" class="btn btn-primary" onclick="return alert('Thay đổi ảnh thành công!')">Thay đổi ảnh</button>
                                     </c:otherwise>
                                 </c:choose>
                             </div>  
                         </form>
 
                         <div class="store-details">
-                            <h3>Add Service</h3>
-                            <form action="AddServiceController" method="POST" accept-charset="UTF-8">
+                            <h3>Thêm dịch vụ</h3>
+                            <form action="AddServiceController" method="POST" accept-charset="UTF-8" onsubmit="return validateForm()">
                                 <!-- Add service form fields -->
                                 <div class="form-group">
-                                    <label for="serviceDetail">Service Detail:</label>
+                                    <label for="serviceDetail">Tên dịch vụ:</label>
                                     <input type="text" class="form-control" name="serviceDetail" id="serviceDetail" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="servicePrice">Service Price:</label>
+                                    <label for="servicePrice">Giá tiền dịch vụ:</label>
                                     <input type="text" class="form-control" name="servicePrice" id="servicePrice" required>
                                 </div>
                                 <c:forEach items="${storeSale}" var="store">
                                     <input type="hidden" name="storeID" value="${store.storeID}" />
                                 </c:forEach>
-                                <button type="submit">Add Service</button>
+                                <button type="submit">Thêm dịch vụ</button>
                             </form>
                         </div>
 
                     </div>
                     <div class="col-md-6">
                         <div class="store-details">
-                            <p>Thông tin cửa hàng</p>
                             <form action="MainController" method="POST" accept-charset="UTF-8">
                                 <c:forEach items="${storeSale}" var="store">
-                                    Tên cửa hàng:<input type="text" name="nameStore" value="${store.storeName.toUpperCase()}"><br>
-                                    Địa chỉ: <input type="text" name="addressStore" value="${store.address}" >
                                     <p>Dịch vụ:</p>
                                     <c:forEach items="${storePrice}" var="price">
                                         <c:if test="${price.storeID eq store.storeID}">
-                                            <p>${price.serviceDetail}:</p>
-                                            <input name="priceU" value="${price.price}" id="priceU" oninput="validateInput(this)">
-                                            <input type="hidden" name="serviceID" value="${price.serviceID}" />
-                                            <button type="submit" name="btAction" value="DeleteServiceStore" class="btn btn-danger" onclick="return alert('Bạn có muốn xóa dịch vụ này không?')">Delete</button>
+                                            <form action="MainController" method="POST" accept-charset="UTF-8">
+                                                <p>${price.serviceDetail}:</p>
+                                                <input name="priceU" value="${price.price}" id="priceU${price.serviceID}" oninput="validateInput(this)">
+                                                <input type="hidden" name="serviceID" value="${price.serviceID}" />
+                                                <button type="submit" name="btAction" value="DeleteServiceStore" class="btn btn-danger"
+                                                        onclick="return confirm('Bạn có muốn xóa dịch vụ này không?')">Delete</button>
+                                            </form>
                                         </c:if>
                                     </c:forEach>
+
                                     <br>
                                     <div class="action-buttons">
-                                        <button type="submit" class="btn btn-primary" name="btAction" value="UpdatePriceStore" onclick="return alert('Cập nhật thành công!')">Update</button>
+                                        <button type="submit" class="btn btn-primary" name="btAction" value="UpdatePriceStore"
+                                                onclick="return alert('Cập nhật thành công!')">Update</button>
                                     </div>
                                 </c:forEach>
                             </form>
@@ -160,6 +176,26 @@
                 </div>
 
             </div>
+            <script>
+                function validateForm() {
+                    var servicePriceInput = document.getElementById("servicePrice");
+                    var servicePrice = parseFloat(servicePriceInput.value);
+
+                    if (isNaN(servicePrice) || servicePrice < 0 || servicePrice > 40000) {
+                        alert("Giá của dịch vụ phải là số không âm và không quá 40,000 VNĐ.");
+                        return false;
+                    }
+
+                    if (/[^0-9.]/.test(servicePriceInput.value)) {
+                        alert("Giá của dịch vụ chỉ được nhập số");
+                        servicePriceInput.value = '';
+                        return false;
+                    }
+
+                    return true; 
+                }
+            </script>
+
             <script src="js/Jquery.js"></script>
             <script src="js/bootstrap.min.js"></script>
     </body>

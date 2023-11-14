@@ -764,6 +764,39 @@ public class UserService implements Serializable {
 
         return false; // Return false if the insertion was not successful
     }
+        public static boolean insertRating(String reviewText, int rating, int storeID, int customerID) throws ClassNotFoundException, SQLException {
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        try {
+            con = ConnectDB.getConnection();
+
+            if (con != null) {
+                String sql = "INSERT INTO [Laundry-Middle-Platform].[dbo].[Review] (ReviewText, Rating, CustomerID, StoreID) VALUES (?, ?, ?, ?)";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, reviewText);
+                ps.setInt(2, rating);
+                ps.setInt(3, customerID);
+                ps.setInt(4, storeID);
+
+                int row = ps.executeUpdate();
+
+                if (row > 0) {
+                    return true;
+                }
+            }
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+
+        return false; 
+    }
+    
 
     public static User getUserGG(String username) throws ClassNotFoundException, SQLException {
         Connection con = null;

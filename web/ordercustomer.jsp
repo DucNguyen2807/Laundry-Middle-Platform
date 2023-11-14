@@ -162,10 +162,10 @@
                             <%
                             } else if (button.equals("CompletedCustomer")) {
                             %>
-<!--                            <td>
-                                <input type="hidden" name="orderID" value="<%= ord.getOrderID()%>">
-                                <button type="submit" name="btAction" value="Review" class="btn btn-success"">Review</button>
-                            </td>-->
+                            <td>
+                                <input type="hidden" name="storeID" value="<%= ord.getStoreID()%>">
+                                <button type="submit" name="btAction" value="Review" class="btn btn-success" name="btAction">Review</button>
+                            </td>
 
                             <%
                                 }
