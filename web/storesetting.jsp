@@ -161,6 +161,21 @@
                     </div>
                 </div>  
             </div>
+
+            <div class="container-fluid" style="margin-left: -15px; margin-right: -15px;margin-top: -15px;">
+
+                <div class="row footer">
+
+                    <div>
+
+                        <p>Email : laundrymiddleplatform@gmail.com</p>
+                        <p>Address: Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh</p>
+                        <h5>&copy; Copyright 2023. Laundry Middle Platform</h5>
+                    </div>
+
+                </div>
+
+            </div>
             <script>
                 function validateForm() {
                     var servicePriceInput = document.getElementById("servicePrice");
@@ -180,6 +195,7 @@
                     return true; 
                 }
             </script>
+
             <script src="js/Jquery.js"></script>
             <script src="js/bootstrap.min.js"></script>
     </body>
