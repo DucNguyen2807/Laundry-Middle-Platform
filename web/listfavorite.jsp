@@ -89,18 +89,16 @@
         </div>
         <script>
             function removeFavorites(storeID) {
-                // Gửi yêu cầu POST đến máy chủ để thêm cửa hàng vào danh sách yêu thích
+
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8080/Laundry_mp/RemoveFavoriteController", // Thay đổi đường dẫn tới endpoint của bạn
+                    url: "http://localhost:8080/Laundry_mp/RemoveFavoriteController",
                     data: {storeID: storeID},
                     success: function (response) {
-                        // Xử lý phản hồi từ máy chủ (nếu cần)
                         alert("Đã xóa cửa hàng khỏi danh sách yêu thích!");
                         location.reload();
                     },
                     error: function (error) {
-                        // Xử lý lỗi (nếu có)
                         alert("Có lỗi xảy ra khi bỏ yêu thích cửa hàng khỏi danh sách yêu thích.");
                     }
                 });
