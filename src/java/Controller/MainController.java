@@ -21,32 +21,37 @@ public class MainController extends HttpServlet {
     private static final String LOGINPAGE = "login.jsp";
     private static final String LOGINCONTROLLER = "LoginController";
     private static final String REGISTERCONTROLLER = "RegisterController";
+
     private static final String VIEWHISORYCONTROLLER = "ViewHistoryController";
-    private static final String UPDATEPROFILECONTROLLER = "UpdateProfileController";
     private static final String VIEWSTAFFCONTROLLER = "ViewStaffController";
     private static final String VIEWSTORECONTROLLER = "ViewStoreController";
     private static final String VIEWCUSTOMERCONTROLLER = "ViewCustomerController";
     private static final String VIEWORDERWAITINGCONTROLLER = "ViewOrderWaitingController";
     private static final String VIEWORDERDETAILCONTROLLER = "ViewOrderDetailController";
     private static final String VIEWREPORTCONTROLLER = "ViewReportController";
-    private static final String UPDATESTAFFORDERCONTROLLER = "UpdateStaffOrderController";
     private static final String VIEWORDER_STORE = "ViewNewOrder_Store";
-    private static final String CONFIRMORDERCONTROLLER = "ConfirmOrderController";
-    private static final String DELETEACCCONTROLLER = "DeleteAccController";
-    private static final String CATECONTROLLER = "CateController";
-    private static final String UPDATEORDERCONTROLLER = "UpdateOrderController";
     private static final String VIEWFAVORITECONTROLLER = "ViewFavoriteController";
+    private static final String VIEWORDER_CUSTOMER = "ViewOrderCustomerController";
+
+    private static final String UPDATEPROFILECONTROLLER = "UpdateProfileController";
+    private static final String UPDATESTAFFORDERCONTROLLER = "UpdateStaffOrderController";
+    private static final String UPDATEORDERCONTROLLER = "UpdateOrderController";
     private static final String UPDATESERVICECONTROLLER = "UpdateServiceStoreController";
-    private static final String CANCELUPDATECONTROLLER = "CancelUpdateController";
-    private static final String LISTTASKCONTROLLER = "ListTaskController";
     private static final String UPDATETASKFINISH = "UpdateTaskFinishController";
     private static final String UPDATETASKCOMPLETED = "UpdateTaskCompletedController";
-    private static final String VIEWORDER_CUSTOMER = "ViewOrderCustomerController";
-    private static final String CANCELORDERCUSCONTROLLER = "CancelOrderCusController";
     private static final String UPDATEPRICESTORECONTROLLER = "UpdatePriceServiceStoreController";
+
+    private static final String CONFIRMORDERCONTROLLER = "ConfirmOrderController";
+    private static final String CANCELORDERCUSCONTROLLER = "CancelOrderCusController";
+    private static final String CANCELUPDATECONTROLLER = "CancelUpdateController";
+    private static final String CATECONTROLLER = "CateController";
+
+    private static final String DELETEACCCONTROLLER = "DeleteAccController";
     private static final String DELETESERVICESTORECONTROLLER = "DeleteServiceStoreController";
+
+    private static final String LISTTASKCONTROLLER = "ListTaskController";
     private static final String REVIEWSTORECONTROLLER = "ReviewStoreController";
-     private static final String INSERTIMAGECONTROLLER = "InsertImageController";
+    private static final String INSERTIMAGECONTROLLER = "InsertImageController";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -77,7 +82,7 @@ public class MainController extends HttpServlet {
                 url = VIEWORDERDETAILCONTROLLER;
             } else if (button.equals("ViewReport")) {
                 url = VIEWREPORTCONTROLLER;
-            }else if (button.equals("ConfirmStaff")) {
+            } else if (button.equals("ConfirmStaff")) {
                 url = UPDATESTAFFORDERCONTROLLER;
             } else if (button.equals("DeleteStaff")) {
                 url = DELETEACCCONTROLLER;
@@ -101,7 +106,7 @@ public class MainController extends HttpServlet {
                 url = UPDATETASKFINISH;
             } else if (button.equals("Completed")) {
                 url = UPDATETASKCOMPLETED;
-            } else if (button.equals("NewOrderCus") || button.equals("ProcessingCustomer")|| button.equals("CompletedCustomer") || button.equals("WaitingCustomer")) {
+            } else if (button.equals("NewOrderCus") || button.equals("ProcessingCustomer") || button.equals("CompletedCustomer") || button.equals("WaitingCustomer")) {
                 url = VIEWORDER_CUSTOMER;
             } else if (button.equals("CancelCus")) {
                 url = CANCELORDERCUSCONTROLLER;
@@ -111,10 +116,9 @@ public class MainController extends HttpServlet {
                 url = DELETESERVICESTORECONTROLLER;
             } else if (button.equals("Review")) {
                 url = REVIEWSTORECONTROLLER;
-            }else if (button.equals("ChangePhoto")) {
+            } else if (button.equals("ChangePhoto")) {
                 url = INSERTIMAGECONTROLLER;
             }
-            
 
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
