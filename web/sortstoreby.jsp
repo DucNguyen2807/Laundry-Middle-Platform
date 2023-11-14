@@ -98,29 +98,19 @@
             </div>
         </div>
         <script>
-            function saveCatInfo(priceGiatThuong, priceGiatNhanh, priceGiatSieuToc, storeName, address, storeID) {
-                var session = sessionStorage;
-                session.setItem("storeGiatthuong", priceGiatThuong);
-                session.setItem("storeGiatnhanh", priceGiatNhanh);
-                session.setItem("storeGiatsieutoc", priceGiatSieuToc);
-                session.setItem("storeStoreName", storeName);
-                session.setItem("storeAddress", address);
-                session.setItem("storeStoreID", storeID);
-                window.location.href = "thanhtoan.jsp";
-            }
 
             function addToFavorites(storeID) {
-                // Gửi yêu cầu POST đến máy chủ để thêm cửa hàng vào danh sách yêu thích
+               
                 $.ajax({
                     type: "POST",
-                    url: "http://localhost:8080/Laundry_mp/AddFavoriteController", // Thay đổi đường dẫn tới endpoint của bạn
+                    url: "http://localhost:8080/Laundry_mp/AddFavoriteController", 
                     data: {storeID: storeID},
                     success: function (response) {
-                        // Xử lý phản hồi từ máy chủ (nếu cần)
+                        
                         alert("Đã thêm cửa hàng vào danh sách yêu thích!");
                     },
                     error: function (error) {
-                        // Xử lý lỗi (nếu có)
+                        
                         alert("Có lỗi xảy ra khi thêm cửa hàng vào danh sách yêu thích.");
                     }
                 });
