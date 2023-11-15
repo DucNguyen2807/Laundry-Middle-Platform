@@ -145,11 +145,12 @@
                                                 <input type="hidden" name="serviceID" value="${price.serviceID}" />
                                                 <button type="submit" name="btAction" value="DeleteServiceStore" class="btn btn-danger"
                                                         onclick="return confirm('Bạn có muốn xóa dịch vụ này không?')">Delete</button>
-                                            </form>
+                                            
                                         </c:if>
                                     </c:forEach>
 
                                     <br>
+                                    
                                     <div class="action-buttons">
                                         <button type="submit" class="btn btn-primary" name="btAction" value="UpdatePriceStore"
                                                 onclick="return alert('Cập nhật thành công!')">Update</button>

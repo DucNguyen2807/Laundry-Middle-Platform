@@ -49,20 +49,20 @@
                     </div><!-- /.container-fluid -->
                 </nav>
             </div>
-            
+
             <div class="container mt-5">
-                
+
                 <div class="row">
                     <c:if test="${not empty successMessage}">
-                                <div class="alert alert-success">
-                                    <strong>Thông báo:</strong> <c:out value="${successMessage}" />
-                                </div>
-                            </c:if>
-                            <c:if test="${not empty errorMessage}">
-                                <div class="alert alert-danger">
-                                    <strong>Lỗi:</strong> <c:out value="${errorMessage}" />
-                                </div>
-                            </c:if>
+                        <div class="alert alert-success">
+                            <strong>Thông báo:</strong> <c:out value="${successMessage}" />
+                        </div>
+                    </c:if>
+                    <c:if test="${not empty errorMessage}">
+                        <div class="alert alert-danger">
+                            <strong>Lỗi:</strong> <c:out value="${errorMessage}" />
+                        </div>
+                    </c:if>
                     <div class="col-md-6">
                         <div class="customer-details">
                             <c:choose>
@@ -114,7 +114,7 @@
 
                     <div>
                         <div class="col-md-6">
-                            
+
                             <div class="customer-details mx-auto">
                                 <h2>Thông tin khách hàng</h2>
                                 <form action="ConfirmOrderController" method="post" accept-charset="UTF-8">
@@ -206,7 +206,7 @@
 
 
                 function checkMaxValue(input) {
-                    if (input.value > 20 && input.value < 20) {
+                    if (input.value > 20 || input.value === "0") {
                         input.value = 20;
                     }
                 }
