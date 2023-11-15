@@ -18,7 +18,7 @@
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/bootstrap.css" rel="stylesheet">
-       <link href="css/styleindex.css" rel="stylesheet" >
+        <link href="css/styleindex.css" rel="stylesheet" >
         <link rel="stylesheet" href="css/manage_admin.css">
         <link rel="stylesheet" href="css/viewneworder_store.css">
 
@@ -50,18 +50,18 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li class="active"><a href="homepage_staff.jsp"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                                 <li class="nav-form">
-                                        <form action="MainController" method="post">
-                                            <input type="hidden" name="btAction" value="7" />
-                                            <button type="submit" class="btn btn-primary">Receiving</button>
-                                        </form>
+                                <li class="nav-form">
+                                    <form action="MainController" method="post">
+                                        <input type="hidden" name="btAction" value="7" />
+                                        <button type="submit" class="btn btn-primary">Receiving</button>
+                                    </form>
                                 </li>
 
-                                 <li class="nav-form">
-                                        <form action="MainController" method="post">
-                                            <input type="hidden" name="btAction" value="8" />
-                                            <button type="submit" class="btn btn-primary">Returning</button>
-                                        </form>
+                                <li class="nav-form">
+                                    <form action="MainController" method="post">
+                                        <input type="hidden" name="btAction" value="8" />
+                                        <button type="submit" class="btn btn-primary">Returning</button>
+                                    </form>
                                 </li>
                             </ul>
 
@@ -91,6 +91,7 @@
                             <th scope="col">Customer</th>
                             <th scope="col">Address Customer</th>
                             <th scope="col">Address Store</th>
+                            <th scope="col">Phone Customer</th>
                             <th scope="col">Service</th>
                             <th scope="col">Weight</th>
                             <th scope="col">TotalPrice</th>
@@ -112,9 +113,10 @@
                             <td><%= ord.getCustomerName()%></td>
                             <td><%= ord.getAddressCus()%></td>
                             <td><%= ord.getAddressSto()%></td>
+                            <td>0<%= ord.getPhoneCus()%></td>
                             <td><%= ord.getServiceDetail()%></td>
-                            <td><%= ord.getWeight()%></td>
-                            <td><%= ord.getTotalPrice()%></td>
+                            <td><%= ord.getWeight()%>kg</td>
+                            <td><%= ord.getTotalPrice()%>đ</td>
                             <td><%= ord.getNote()%></td>
                             <td><%= ord.getDateDesired()%></td>
                             <td><%= ord.getTimeDesired()%></td>
@@ -156,7 +158,7 @@
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-            
+
 
     </body>
 

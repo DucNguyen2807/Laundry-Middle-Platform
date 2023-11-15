@@ -189,8 +189,9 @@
                         <td><%= store.getUsername()%></td>
                         <td><%= store.getPassword()%></td>
                         <td><%= store.getAddress()%></td>
+<!--                         <td><%= (!"NULL".equalsIgnoreCase(store.getAddress())) ? store.getAddress() : ""%></td>-->
                         <td><%= store.getStoreName().toUpperCase()%></td>
-                        <td><%= store.getPhone()%></td>
+                        <td>0<%= store.getPhone()%></td>
                         <td><%= store.getEmail()%></td>
                     </tr>
                 </form>

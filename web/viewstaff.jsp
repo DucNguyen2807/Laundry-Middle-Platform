@@ -193,7 +193,7 @@
                         <td><%= staff.getPassword()%></td>
                         <td><%= staff.getAddress()%></td>
                         <td><%= staff.getFullname()%></td>
-                        <td><%= staff.getPhone()%></td>
+                        <td>0<%= staff.getPhone()%></td>
                         <td><%= staff.getEmail()%></td>
                         <td><%= staff.getStatusDetail()%></td>
                         <%
