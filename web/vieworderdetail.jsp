@@ -200,15 +200,15 @@
                     </tr>
                     <tr>
                         <th scope="col">Weight:</th>
-                        <td><%= result.getWeight()%></td>
+                        <td><%= result.getWeight()%>kg</td>
                     </tr>
                     <tr>
                         <th scope="col">TotalPrice:</th>
-                        <td><%= result.getTotalPrice()%></td>
+                        <td><%= result.getTotalPrice()%>đ</td>
                     </tr>
                     <tr>
                         <th scope="col">Phone Customer:</th>
-                        <td><%= result.getPhoneCus()%></td>
+                        <td>0<%= result.getPhoneCus()%></td>
                     </tr>
                     <tr>
                         <th scope="col">CustomerAddress:</th>

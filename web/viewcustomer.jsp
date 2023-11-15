@@ -190,7 +190,7 @@
                             <td><%= customer.getPassword()%></td>
                             <td><%= customer.getAddress()%></td>
                             <td><%= customer.getFullname()%></td>
-                            <td><%= customer.getPhone()%></td>
+                            <td>0<%= customer.getPhone()%></td>
                             <td><%= customer.getEmail()%></td>
                         </tr>
                     </form>

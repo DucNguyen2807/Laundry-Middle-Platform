@@ -142,8 +142,8 @@
                             <td><%= (!"NULL".equalsIgnoreCase(ord.getStoreName())) ? ord.getStoreName() : ""%></td>
                             <td><%= (!"NULL".equalsIgnoreCase(ord.getAddressSto())) ? ord.getAddressSto() : ""%></td>
                             <td><%= (!"NULL".equalsIgnoreCase(ord.getServiceDetail())) ? ord.getServiceDetail() : ""%></td>
-                            <td><%= (!"NULL".equalsIgnoreCase(ord.getWeight())) ? ord.getWeight() : ""%></td>
-                            <td><%= (!"NULL".equalsIgnoreCase(ord.getTotalPrice())) ? ord.getTotalPrice() : ""%></td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getWeight())) ? ord.getWeight() : ""%>kg</td>
+                            <td><%= (!"NULL".equalsIgnoreCase(ord.getTotalPrice())) ? ord.getTotalPrice() : ""%>đ</td>
                             <td><%= (!"NULL".equalsIgnoreCase(ord.getNote())) ? ord.getNote() : ""%></td>
                             <td><%= (!"NULL".equalsIgnoreCase(ord.getDateDesired())) ? ord.getDateDesired() : ""%></td>
                             <td><%= (!"NULL".equalsIgnoreCase(ord.getTimeDesired())) ? ord.getTimeDesired() : ""%></td>
